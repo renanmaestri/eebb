@@ -6,12 +6,14 @@ site: bookdown::bookdown_site
 documentclass: book
 bibliography: [book.bib, packages.bib]
 url: https://renanmaestri.github.io/eebb/
-cover-image: images/Slogan_oficial_sologo.png
+cover-image: images/Slogan_oficial_sologo.jpg
 description: |
   Manual de Ecologia Evolutiva, Biometria e Biogeografia.
 biblio-style: apalike
 csl: chicago-fullnote-bibliography.csl
 ---
+
+<img src="images/Slogan_oficial_sologo.jpg" alt="Landmarks na mandibula de um roedor sigmodontíneo" width="80%" style="display: block; margin: auto;" />
 
 # Prefácio {-}
 
