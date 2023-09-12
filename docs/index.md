@@ -13,7 +13,7 @@ biblio-style: apalike
 csl: chicago-fullnote-bibliography.csl
 ---
 
-<img src="images/Slogan_oficial_sologo.jpg" alt="Landmarks na mandibula de um roedor sigmodontíneo" width="80%" style="display: block; margin: auto;" />
+[![eebb](images/Slogan_oficial_sologo.jpg){.cover width="250"}]
 
 # Prefácio {-}
 
