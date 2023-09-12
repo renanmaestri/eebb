@@ -1,8 +1,4 @@
 fig:unnamed-chunk-1
-about
-usage
-render-book
-preview-book
 conceitos-básicos
 processos-evolutivos
 seleção-natural
