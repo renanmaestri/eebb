@@ -1,0 +1,8 @@
+output_dir: "docs"
+book_filename: "testebs4"
+new_session: true
+before_chapter_script: _common.R
+delete_merged_file: true
+language:
+  ui:
+    chapter_name: "Chapter "
