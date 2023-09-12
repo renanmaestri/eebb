@@ -13,7 +13,10 @@ biblio-style: apalike
 csl: chicago-fullnote-bibliography.csl
 ---
 
-[![eebb](images/Slogan_oficial_sologo.jpg){.cover width="250"}]
+
+# Manual de Ecologia Evolutiva, Biometria e Biogeografia {-}
+
+![](images/Slogan_oficial_sologo.jpg){.cover width="100%"}
 
 # Prefácio {-}
 

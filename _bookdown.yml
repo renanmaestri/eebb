@@ -4,5 +4,8 @@ new_session: true
 before_chapter_script: _common.R
 delete_merged_file: true
 language:
+  label:
+    fig: "Figura "
+    tab: "Tabela "
   ui:
     chapter_name: "Capítulo "
