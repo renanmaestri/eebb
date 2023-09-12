@@ -1,0 +1,718 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>Chapter 4 Morfometria Geométrica | A Minimal Book Example</title>
+<meta name="author" content="John Doe">
+<meta name="description" content="Em construção.  4.1 Digitalização de landmarks  4.1.1 Criação de arquivo .tps com as imagens bi-dimensionais Esse roteiro é para a manipulação de imagens digitais (2D) e a digitalização de marcos...">
+<meta name="generator" content="bookdown 0.35 with bs4_book()">
+<meta property="og:title" content="Chapter 4 Morfometria Geométrica | A Minimal Book Example">
+<meta property="og:type" content="book">
+<meta property="og:description" content="Em construção.  4.1 Digitalização de landmarks  4.1.1 Criação de arquivo .tps com as imagens bi-dimensionais Esse roteiro é para a manipulação de imagens digitais (2D) e a digitalização de marcos...">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Chapter 4 Morfometria Geométrica | A Minimal Book Example">
+<meta name="twitter:description" content="Em construção.  4.1 Digitalização de landmarks  4.1.1 Criação de arquivo .tps com as imagens bi-dimensionais Esse roteiro é para a manipulação de imagens digitais (2D) e a digitalização de marcos...">
+<!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.5.1/transition.js"></script><script src="libs/bs3compat-0.5.1/tabs.js"></script><script src="libs/bs3compat-0.5.1/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><style type="text/css">
+    
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  </style>
+<link rel="stylesheet" href="style.css">
+</head>
+<body data-spy="scroll" data-target="#toc">
+
+<div class="container-fluid">
+<div class="row">
+  <header class="col-sm-12 col-lg-3 sidebar sidebar-book"><a class="sr-only sr-only-focusable" href="#content">Skip to main content</a>
+
+    <div class="d-flex align-items-start justify-content-between">
+      <h1>
+        <a href="index.html" title="">A Minimal Book Example</a>
+      </h1>
+      <button class="btn btn-outline-primary d-lg-none ml-2 mt-1" type="button" data-toggle="collapse" data-target="#main-nav" aria-expanded="true" aria-controls="main-nav"><i class="fas fa-bars"></i><span class="sr-only">Show table of contents</span></button>
+    </div>
+
+    <div id="main-nav" class="collapse-lg">
+      <form role="search">
+        <input id="search" class="form-control" type="search" placeholder="Search" aria-label="Search">
+</form>
+
+      <nav aria-label="Table of contents"><h2>Table of contents</h2>
+        <ul class="book-toc list-unstyled">
+<li><a class="" href="index.html"><span class="header-section-number">1</span> About</a></li>
+<li><a class="" href="conceitos-b%C3%A1sicos.html"><span class="header-section-number">2</span> Conceitos básicos</a></li>
+<li><a class="" href="uma-breve-introdu%C3%A7%C3%A3o-ao-r.html"><span class="header-section-number">3</span> Uma breve introdução ao R</a></li>
+<li><a class="active" href="morfometria-geom%C3%A9trica.html"><span class="header-section-number">4</span> Morfometria Geométrica</a></li>
+<li><a class="" href="macroevolu%C3%A7%C3%A3o.html"><span class="header-section-number">5</span> Macroevolução</a></li>
+<li><a class="" href="biogeografia-e-macroecologia.html"><span class="header-section-number">6</span> Biogeografia e Macroecologia</a></li>
+<li><a class="" href="considera%C3%A7%C3%B5es-finais.html"><span class="header-section-number">7</span> Considerações finais</a></li>
+<li><a class="" href="refer%C3%AAncias.html">Referências</a></li>
+</ul>
+
+        <div class="book-extra">
+          <p><a id="book-repo" href="https://github.com/rstudio/bookdown-demo">View book source <i class="fab fa-github"></i></a></p>
+        </div>
+      </nav>
+</div>
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="morfometria-geométrica" class="section level1" number="4">
+<h1>
+<span class="header-section-number">4</span> Morfometria Geométrica<a class="anchor" aria-label="anchor" href="#morfometria-geom%C3%A9trica"><i class="fas fa-link"></i></a>
+</h1>
+<p>Em construção.</p>
+
+<div id="digitalização-de-landmarks" class="section level2" number="4.1">
+<h2>
+<span class="header-section-number">4.1</span> Digitalização de landmarks<a class="anchor" aria-label="anchor" href="#digitaliza%C3%A7%C3%A3o-de-landmarks"><i class="fas fa-link"></i></a>
+</h2>
+<div id="criação-de-arquivo-.tps-com-as-imagens-bi-dimensionais" class="section level3" number="4.1.1">
+<h3>
+<span class="header-section-number">4.1.1</span> Criação de arquivo .tps com as imagens bi-dimensionais<a class="anchor" aria-label="anchor" href="#cria%C3%A7%C3%A3o-de-arquivo-.tps-com-as-imagens-bi-dimensionais"><i class="fas fa-link"></i></a>
+</h3>
+<p>Esse roteiro é para a manipulação de imagens digitais (2D) e a digitalização de marcos anatômicos (landmarks) nas imagens usando softwares TPS (<a href="http://life.bio.sunysb.edu/ee/rohlf/software.html" class="uri">http://life.bio.sunysb.edu/ee/rohlf/software.html</a>). As imagens, previamente capturadas de maneira padronizada, devem estar individualizadas, todas em uma mesma pasta no computador.</p>
+<p>No TPSUtil, selecione a operação ‘Build tps file from images’. Clique em ‘Input’ e selecione a pasta (selecione qualquer imagem dentro da pasta) contendo as fotos. No nosso caso, a pasta se chama ‘Atividade 1 – Imagens’. Clique em ‘Output’ e atribua um nome para o arquivo (use mandibula.tps). Clique em ‘Setup’. Todas as imagens da pasta estarão listadas. É possível conferir os nomes dos arquivos e modificar a ordem ou deletar imagens se necessário. Clique em ‘Create’ para criar o arquivo .tps com a lista de imagens. Vá até o mesmo diretório (pasta) com as imagens e verifique o arquivo mandibula.tps (abra com o bloco de notas).</p>
+</div>
+<div id="digitalização-de-landmarks-no-tpsdig2" class="section level3" number="4.1.2">
+<h3>
+<span class="header-section-number">4.1.2</span> Digitalização de landmarks no TPSDig2<a class="anchor" aria-label="anchor" href="#digitaliza%C3%A7%C3%A3o-de-landmarks-no-tpsdig2"><i class="fas fa-link"></i></a>
+</h3>
+<p>No TPSDig2, para carregar as imagens clique em ‘File&gt;Input source&gt;File’. Selecione o arquivo .tps contendo a lista de imagens, no nosso caso ‘mandibula.tps’. Após clicar em ‘Abrir’, a primeira foto do arquivo será exibida. As setas vermelhas na barra de ferramentas permitem navegar pelas fotos, que serão exibidas uma por vez. A barra de ferramentas também permite ajustar o zoom das imagens, e inúmeras outras configurações de nitidez da imagem e cores/tamanho dos landmarks.</p>
+<p>Um passo importante é definir a escala da imagem. Para isso, clique em ‘Options&gt;Image tools’. Na aba ‘Measure’ defina o comprimento de referência e a unidade que desejar para o comprimento. Clique em ‘Set scale’, minimize a aba de ferramentas, vá até a escala de referência na imagem (no nosso caso, o papel milimetrado) e defina, com dois pontos (cliques), o mesmo comprimento atribuído na barra de ferramentas. Volte para a aba ‘Measure’ e clique em ‘Ok’. A calibração estará definida para esta imagem (o fator de escala será o valor de referência dividido pelo número de pixels necessários para obter a referência). Futuros valores de tamanho do centroide para esta imagem estarão na unidade definida como referência (e.g., cm, mm, etc.). O procedimento precisa ser repetido para cada imagem.</p>
+<p>Para digitalizar os landmarks, i.e., atribuir uma coodenada x,y para cada um, selecione a ferramenta ‘Digitize landmarks’ no menu ‘Modes’ ou clicando na figura com o formato de alvo na barra de ferramentas. Atribua os landmarks clicando na imagem, na posição desejada. Os landmarks vão aparecer em sequência numérica a partir do 1, e em todas as imagens a sequência de digitalização dos landmarks (a ordem) deve ser a mesma (e.g., o landmark 8 estará na mesma posição anatômica em todas as imagens).</p>
+<p>Após o término da digitalização clique em ‘File&gt;Save data’ e salve os dados. É extremamente recomendável repetir o salvamento após a digitalização de cada imagem; use o mesmo nome e clique em ‘Overwrite’ para que os dados atualizados sejam gravados sobre os antigos, gerando um único arquivo ao final. Vá até a pasta de trabalho e visualize o arquivo abrindo-o com o bloco de notas.</p>
+Para a atividade, atribua os landmarks conforme a imagem abaixo:
+<div class="figure" style="text-align: center">
+<span style="display:block;" id="fig:unnamed-chunk-1"></span>
+<img src="images/mandibula.png" alt="Landmarks na mandibula de um roedor sigmodontíneo" width="80%"><p class="caption">
+Figure 4.1: Landmarks na mandibula de um roedor sigmodontíneo.
+</p>
+</div>
+<p>Descrição dos landmarks:
+L1: Borda anterior do alvéolo incisivo; L2: Extremo anterior superior da borda do alvéolo incisive; L3: Posição de maior inflexão do diastema; L4: Borda anterior do álveolo no primeiro molar; L5: Interseção entre a linha de molars e o processo coronóide em vista lateral; L6: Ponta do processo coronóide; L7: Ponto de máxima curvatura entre o processo coronóide e o condilar; L8: Margem dorsal da borda anterior da supercífie articular do processo condilar; L9: Borda ventral da superfície articular do processo condilar; L10: Ponto de máxima curvatura entre o processo condilar e o angular; L11: Ponta do processo angular; L12: Interseção entre o corpo da mandíbula e a crista massetérica; L13: Limite ventral da sínfise mandibular.</p>
+</div>
+<div id="digitalização-de-landmarks-em-3d" class="section level3" number="4.1.3">
+<h3>
+<span class="header-section-number">4.1.3</span> Digitalização de landmarks em 3D<a class="anchor" aria-label="anchor" href="#digitaliza%C3%A7%C3%A3o-de-landmarks-em-3d"><i class="fas fa-link"></i></a>
+</h3>
+<p>O software MeshLab permite a digitalização de landmarks em superfícies, além de outras operações. Após abrir o software, selecione ‘File&gt;Import Mesh’ e carregue o arquivo chamado ‘exemplo3d.ply’ de dentro da pasta ‘R Dados’.</p>
+<p>Para digitalizar landmarks na superfície clique em ‘Edit&gt;PickPoints’ ou no ícone PP. Ao clicar com o botão esquerdo do mouse (pode demorar um pouco), as coordenadas são capturadas. Após o término da digitalização é possível salvar um arquivo em formato xml (.pp) com as coordenadas em 3D, que poderá ser aberto no R para análises posteriores.</p>
+
+</div>
+</div>
+<div id="análise-de-procrustes" class="section level2" number="4.2">
+<h2>
+<span class="header-section-number">4.2</span> Análise de Procrustes<a class="anchor" aria-label="anchor" href="#an%C3%A1lise-de-procrustes"><i class="fas fa-link"></i></a>
+</h2>
+<p>O passo primário fundamental em morfometria geométrica é a análise generalizada de Procrustes, que remove os efeitos de rotação, translação e tamanho dos objetos. O resultado é uma matriz com as variáveis de forma.</p>
+<div id="o-objeto-.tps-no-r" class="section level3" number="4.2.1">
+<h3>
+<span class="header-section-number">4.2.1</span> O objeto .tps no R<a class="anchor" aria-label="anchor" href="#o-objeto-.tps-no-r"><i class="fas fa-link"></i></a>
+</h3>
+<p>O arquivo .tps criado no TPSDig2 pode ser lido no R com a função readland.tps do pacote geomorph. Antes, lembre-se de colocar o arquivo .tps na pasta dadosmg e definir essa pasta como diretório de trabalho no R.</p>
+<div class="sourceCode" id="cb21"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Carregar geomorph </span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">require</a></span><span class="op">(</span><span class="va"><a href="https://github.com/geomorphR/geomorph">geomorph</a></span><span class="op">)</span> </span>
+<span><span class="co">#&gt; Carregando pacotes exigidos: geomorph</span></span>
+<span><span class="co">#&gt; Carregando pacotes exigidos: RRPP</span></span>
+<span><span class="co">#&gt; Carregando pacotes exigidos: rgl</span></span>
+<span><span class="co">#&gt; Carregando pacotes exigidos: Matrix</span></span>
+<span><span class="co"># Importar arquivo .tps </span></span>
+<span><span class="co"># lembre-se de substituir por "nomequevocêdeu.tps"</span></span>
+<span><span class="va">tps</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/pkg/geomorph/man/readland.tps.html">readland.tps</a></span><span class="op">(</span><span class="st">"dadosmg/mandibula.dig_curso.tps"</span>,specID <span class="op">=</span> <span class="st">"ID"</span>, readcurves <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span> </span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/dim.html">dim</a></span><span class="op">(</span><span class="va">tps</span><span class="op">)</span> </span>
+<span><span class="va">tps</span></span></code></pre></div>
+<p>Podemos visualizar os dados brutos com a função plotAllSpecimens.</p>
+<div class="sourceCode" id="cb22"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/geomorph/man/plotAllSpecimens.html">plotAllSpecimens</a></span><span class="op">(</span><span class="va">tps</span><span class="op">)</span></span></code></pre></div>
+<div class="inline-figure"><img src="03.2-mggpa_files/figure-html/unnamed-chunk-2-1.png" width="672"></div>
+<p>Os círculos maiores representam a posição média do landmark, e os círculos menores representam a posição de cada landmark.</p>
+<p>Use indexação com [] para localizar certos landmarks ou indivíduos. Por exemplo.</p>
+<div class="sourceCode" id="cb23"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Deletar espécimes</span></span>
+<span><span class="va">tps.new</span><span class="op">&lt;-</span><span class="va">tps</span><span class="op">[</span>,,<span class="op">-</span><span class="fl">7</span><span class="op">]</span> <span class="co"># deleta espécime n 7</span></span>
+<span><span class="co"># Deletar landmarks</span></span>
+<span><span class="va">tps.new</span><span class="op">&lt;-</span><span class="va">tps</span><span class="op">[</span><span class="op">-</span><span class="fl">5</span>,,<span class="op">]</span> <span class="co"># deleta landmark n 5</span></span></code></pre></div>
+</div>
+<div id="estimar-landmarks-faltantes" class="section level3" number="4.2.2">
+<h3>
+<span class="header-section-number">4.2.2</span> Estimar landmarks faltantes<a class="anchor" aria-label="anchor" href="#estimar-landmarks-faltantes"><i class="fas fa-link"></i></a>
+</h3>
+<p>A função estimate.missing do pacote <em>geomorph</em> implementa dois métodos para estimar landmarks faltantes.</p>
+<div class="sourceCode" id="cb24"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">tps.missing</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/pkg/geomorph/man/readland.tps.html">readland.tps</a></span><span class="op">(</span><span class="st">"dadosmg/mandibula.dig_curso_missing.tps"</span>,specID<span class="op">=</span><span class="st">"ID"</span>,readcurves<span class="op">=</span><span class="cn">FALSE</span><span class="op">)</span></span>
+<span><span class="va">tps.missing</span></span>
+<span><span class="va">tps.estimated</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/pkg/geomorph/man/estimate.missing.html">estimate.missing</a></span><span class="op">(</span><span class="va">tps.missing</span>, method <span class="op">=</span> <span class="st">"TPS"</span><span class="op">)</span></span>
+<span><span class="va">tps.estimated</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/pkg/geomorph/man/writeland.tps.html">writeland.tps</a></span><span class="op">(</span><span class="va">tps.estimated</span>, <span class="st">"dadosmg/tps.estimated.tps"</span><span class="op">)</span> <span class="co"># exportar arquivo tps com landmarks estimados</span></span></code></pre></div>
+</div>
+<div id="análise-generalizada-de-procrustes" class="section level3" number="4.2.3">
+<h3>
+<span class="header-section-number">4.2.3</span> Análise Generalizada de Procrustes<a class="anchor" aria-label="anchor" href="#an%C3%A1lise-generalizada-de-procrustes"><i class="fas fa-link"></i></a>
+</h3>
+<p>Aqui, faremos a análise de Procrustes (GPA) em dados sem simetria de objeto e atribuiremos nomes para os outputs de forma e tamanho do centróide.</p>
+<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb25-1"><a href="morfometria-geom%C3%A9trica.html#cb25-1" tabindex="-1"></a>gpa.object<span class="ot">&lt;-</span><span class="fu">gpagen</span>(tps)</span>
+<span id="cb25-2"><a href="morfometria-geom%C3%A9trica.html#cb25-2" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb25-3"><a href="morfometria-geom%C3%A9trica.html#cb25-3" tabindex="-1"></a><span class="co">#&gt; Performing GPA</span></span>
+<span id="cb25-4"><a href="morfometria-geom%C3%A9trica.html#cb25-4" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb25-5"><a href="morfometria-geom%C3%A9trica.html#cb25-5" tabindex="-1"></a>  <span class="sc">|</span>                                                        </span>
+<span id="cb25-6"><a href="morfometria-geom%C3%A9trica.html#cb25-6" tabindex="-1"></a>  <span class="er">|</span>                                                  <span class="er">|</span>   <span class="dv">0</span>%</span>
+<span id="cb25-7"><a href="morfometria-geom%C3%A9trica.html#cb25-7" tabindex="-1"></a>  <span class="sc">|</span>                                                        </span>
+<span id="cb25-8"><a href="morfometria-geom%C3%A9trica.html#cb25-8" tabindex="-1"></a>  <span class="er">|============</span>                                      <span class="er">|</span>  <span class="dv">25</span>%</span>
+<span id="cb25-9"><a href="morfometria-geom%C3%A9trica.html#cb25-9" tabindex="-1"></a>  <span class="sc">|</span>                                                        </span>
+<span id="cb25-10"><a href="morfometria-geom%C3%A9trica.html#cb25-10" tabindex="-1"></a>  <span class="er">|=========================</span>                         <span class="er">|</span>  <span class="dv">50</span>%</span>
+<span id="cb25-11"><a href="morfometria-geom%C3%A9trica.html#cb25-11" tabindex="-1"></a>  <span class="sc">|</span>                                                        </span>
+<span id="cb25-12"><a href="morfometria-geom%C3%A9trica.html#cb25-12" tabindex="-1"></a>  <span class="er">|==================================================|</span> <span class="dv">100</span>%</span>
+<span id="cb25-13"><a href="morfometria-geom%C3%A9trica.html#cb25-13" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb25-14"><a href="morfometria-geom%C3%A9trica.html#cb25-14" tabindex="-1"></a><span class="co">#&gt; Making projections... Finished!</span></span>
+<span id="cb25-15"><a href="morfometria-geom%C3%A9trica.html#cb25-15" tabindex="-1"></a>gpa.object</span>
+<span id="cb25-16"><a href="morfometria-geom%C3%A9trica.html#cb25-16" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb25-17"><a href="morfometria-geom%C3%A9trica.html#cb25-17" tabindex="-1"></a><span class="co">#&gt; Call:</span></span>
+<span id="cb25-18"><a href="morfometria-geom%C3%A9trica.html#cb25-18" tabindex="-1"></a><span class="co">#&gt; gpagen(A = tps) </span></span>
+<span id="cb25-19"><a href="morfometria-geom%C3%A9trica.html#cb25-19" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb25-20"><a href="morfometria-geom%C3%A9trica.html#cb25-20" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb25-21"><a href="morfometria-geom%C3%A9trica.html#cb25-21" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb25-22"><a href="morfometria-geom%C3%A9trica.html#cb25-22" tabindex="-1"></a><span class="co">#&gt; Generalized Procrustes Analysis</span></span>
+<span id="cb25-23"><a href="morfometria-geom%C3%A9trica.html#cb25-23" tabindex="-1"></a><span class="co">#&gt; with Partial Procrustes Superimposition</span></span>
+<span id="cb25-24"><a href="morfometria-geom%C3%A9trica.html#cb25-24" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb25-25"><a href="morfometria-geom%C3%A9trica.html#cb25-25" tabindex="-1"></a><span class="co">#&gt; 13 fixed landmarks</span></span>
+<span id="cb25-26"><a href="morfometria-geom%C3%A9trica.html#cb25-26" tabindex="-1"></a><span class="co">#&gt; 0 semilandmarks (sliders)</span></span>
+<span id="cb25-27"><a href="morfometria-geom%C3%A9trica.html#cb25-27" tabindex="-1"></a><span class="co">#&gt; 2-dimensional landmarks</span></span>
+<span id="cb25-28"><a href="morfometria-geom%C3%A9trica.html#cb25-28" tabindex="-1"></a><span class="co">#&gt; 2 GPA iterations to converge</span></span>
+<span id="cb25-29"><a href="morfometria-geom%C3%A9trica.html#cb25-29" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb25-30"><a href="morfometria-geom%C3%A9trica.html#cb25-30" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb25-31"><a href="morfometria-geom%C3%A9trica.html#cb25-31" tabindex="-1"></a><span class="co">#&gt; Consensus (mean) Configuration</span></span>
+<span id="cb25-32"><a href="morfometria-geom%C3%A9trica.html#cb25-32" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb25-33"><a href="morfometria-geom%C3%A9trica.html#cb25-33" tabindex="-1"></a><span class="co">#&gt;                X           Y</span></span>
+<span id="cb25-34"><a href="morfometria-geom%C3%A9trica.html#cb25-34" tabindex="-1"></a><span class="co">#&gt; 1  -0.3600904084 -0.03209176</span></span>
+<span id="cb25-35"><a href="morfometria-geom%C3%A9trica.html#cb25-35" tabindex="-1"></a><span class="co">#&gt; 2  -0.3838537500  0.08920190</span></span>
+<span id="cb25-36"><a href="morfometria-geom%C3%A9trica.html#cb25-36" tabindex="-1"></a><span class="co">#&gt; 3  -0.2678074781  0.01674324</span></span>
+<span id="cb25-37"><a href="morfometria-geom%C3%A9trica.html#cb25-37" tabindex="-1"></a><span class="co">#&gt; 4  -0.2101661423  0.05684845</span></span>
+<span id="cb25-38"><a href="morfometria-geom%C3%A9trica.html#cb25-38" tabindex="-1"></a><span class="co">#&gt; 5  -0.0001796958  0.03565707</span></span>
+<span id="cb25-39"><a href="morfometria-geom%C3%A9trica.html#cb25-39" tabindex="-1"></a><span class="co">#&gt; 6   0.1873051760  0.14767796</span></span>
+<span id="cb25-40"><a href="morfometria-geom%C3%A9trica.html#cb25-40" tabindex="-1"></a><span class="co">#&gt; 7   0.1660719417  0.08697077</span></span>
+<span id="cb25-41"><a href="morfometria-geom%C3%A9trica.html#cb25-41" tabindex="-1"></a><span class="co">#&gt; 8   0.2984433258  0.09285954</span></span>
+<span id="cb25-42"><a href="morfometria-geom%C3%A9trica.html#cb25-42" tabindex="-1"></a><span class="co">#&gt; 9   0.3486394512  0.01069463</span></span>
+<span id="cb25-43"><a href="morfometria-geom%C3%A9trica.html#cb25-43" tabindex="-1"></a><span class="co">#&gt; 10  0.2335846883 -0.07886796</span></span>
+<span id="cb25-44"><a href="morfometria-geom%C3%A9trica.html#cb25-44" tabindex="-1"></a><span class="co">#&gt; 11  0.2889938410 -0.17663723</span></span>
+<span id="cb25-45"><a href="morfometria-geom%C3%A9trica.html#cb25-45" tabindex="-1"></a><span class="co">#&gt; 12 -0.0281091968 -0.13445727</span></span>
+<span id="cb25-46"><a href="morfometria-geom%C3%A9trica.html#cb25-46" tabindex="-1"></a><span class="co">#&gt; 13 -0.2728317526 -0.11459935</span></span>
+<span id="cb25-47"><a href="morfometria-geom%C3%A9trica.html#cb25-47" tabindex="-1"></a>shape<span class="ot">&lt;-</span>gpa.object<span class="sc">$</span>coords</span>
+<span id="cb25-48"><a href="morfometria-geom%C3%A9trica.html#cb25-48" tabindex="-1"></a>size<span class="ot">&lt;-</span>gpa.object<span class="sc">$</span>Csize</span></code></pre></div>
+<p>Podemos visualizar a distribuição dos dados de tamanho e forma. Note a diferença no gráfico da forma antes e depois da análise de Procrustes.</p>
+<div class="sourceCode" id="cb26"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/hist.html">hist</a></span><span class="op">(</span><span class="va">size</span><span class="op">)</span></span></code></pre></div>
+<div class="sourceCode" id="cb27"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/geomorph/man/plotAllSpecimens.html">plotAllSpecimens</a></span><span class="op">(</span><span class="va">shape</span><span class="op">)</span></span></code></pre></div>
+<div class="inline-figure"><img src="03.2-mggpa_files/figure-html/unnamed-chunk-7-1.png" width="672"></div>
+</div>
+<div id="espaço-tangente" class="section level3" number="4.2.4">
+<h3>
+<span class="header-section-number">4.2.4</span> Espaço tangente<a class="anchor" aria-label="anchor" href="#espa%C3%A7o-tangente"><i class="fas fa-link"></i></a>
+</h3>
+<p>A correlação do espaço de forma com o espaço tangente quase sempre será muito alta em dados de morfometria geométrica, justificando o uso de estatística Euclidiana.</p>
+<div class="sourceCode" id="cb28"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">require</a></span><span class="op">(</span><span class="va"><a href="https://github.com/zarquon42b/Morpho">Morpho</a></span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/pkg/Morpho/man/regdist.html">regdist</a></span><span class="op">(</span><span class="va">shape</span><span class="op">)</span></span></code></pre></div>
+<div class="inline-figure"><img src="03.2-mggpa_files/figure-html/unnamed-chunk-8-1.png" width="672"></div>
+<pre><code>#&gt; $cor
+#&gt; [1] 0.9999991
+#&gt; 
+#&gt; $procSS
+#&gt; [1] 0.1789463
+#&gt; 
+#&gt; $tanSS
+#&gt; [1] 0.1788539
+#&gt; 
+#&gt; $rhoSS
+#&gt; [1] 0.1791391</code></pre>
+</div>
+<div id="formato-array-e-matrix" class="section level3" number="4.2.5">
+<h3>
+<span class="header-section-number">4.2.5</span> Formato array e matrix<a class="anchor" aria-label="anchor" href="#formato-array-e-matrix"><i class="fas fa-link"></i></a>
+</h3>
+<p>Os dados de forma estão em formato array. Podemos nos mover facilmente entre os formatos array e matrix. Ambos carregam a mesma informação, mas algumas análises/operações só aceitam um dos dois formatos.</p>
+</div>
+<div id="gpa-com-simetria-de-objeto" class="section level3" number="4.2.6">
+<h3>
+<span class="header-section-number">4.2.6</span> GPA com simetria de objeto<a class="anchor" aria-label="anchor" href="#gpa-com-simetria-de-objeto"><i class="fas fa-link"></i></a>
+</h3>
+<p>Quando os dados tiverem simetria e objeto, vamos informar isso ao R com uma matriz contendo os pares de landmarks simétricos e realizar uma GPA considerando a simetria.</p>
+<div class="sourceCode" id="cb30"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Carregar dados</span></span>
+<span><span class="va">tps.sim</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/pkg/geomorph/man/readland.tps.html">readland.tps</a></span><span class="op">(</span><span class="st">"dadosmg/Lista tuco dig 2.tps"</span>,specID <span class="op">=</span> <span class="st">"ID"</span>, readcurves <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/dim.html">dim</a></span><span class="op">(</span><span class="va">tps.sim</span><span class="op">)</span></span>
+<span><span class="co"># Matriz com landmarks simétricos</span></span>
+<span><span class="va">pairs.matrix</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">2</span>,<span class="fl">3</span>,<span class="fl">5</span>,<span class="fl">6</span>,<span class="fl">7</span>,<span class="fl">8</span>,<span class="fl">10</span>,<span class="fl">11</span>,<span class="fl">12</span>,<span class="fl">13</span>,<span class="fl">14</span>,<span class="fl">15</span>,<span class="fl">16</span>,<span class="fl">17</span>,<span class="fl">18</span>,<span class="fl">19</span>,<span class="fl">20</span>,<span class="fl">21</span>,<span class="fl">23</span>,<span class="fl">24</span>,<span class="fl">25</span>,<span class="fl">26</span>,<span class="fl">27</span>,<span class="fl">28</span><span class="op">)</span>,nrow<span class="op">=</span><span class="fl">12</span>,ncol<span class="op">=</span><span class="fl">2</span>,byrow<span class="op">=</span><span class="cn">T</span><span class="op">)</span></span>
+<span><span class="va">pairs.matrix</span></span>
+<span><span class="co"># Construir vetor com rótulo de indivíduos (neste caso, uma marcação por indivíduo)</span></span>
+<span><span class="va">ind</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fu"><a href="https://rdrr.io/r/base/dim.html">dim</a></span><span class="op">(</span><span class="va">tps.sim</span><span class="op">)</span><span class="op">[</span><span class="fl">3</span><span class="op">]</span><span class="op">)</span></span>
+<span><span class="co"># GPA com simetria bilateral</span></span>
+<span><span class="va">b.s</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/pkg/geomorph/man/bilat.symmetry.html">bilat.symmetry</a></span><span class="op">(</span><span class="va">tps.sim</span>,ind<span class="op">=</span><span class="va">ind</span>,object.sym<span class="op">=</span><span class="cn">TRUE</span>,land.pairs<span class="op">=</span><span class="va">pairs.matrix</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">shape.sym</span><span class="op">&lt;-</span><span class="va">b.s</span><span class="op">$</span><span class="va">symm.shape</span> <span class="co"># componente simétrico da forma</span></span>
+<span><span class="fu"><a href="https://rdrr.io/pkg/geomorph/man/plotAllSpecimens.html">plotAllSpecimens</a></span><span class="op">(</span><span class="va">shape.sym</span><span class="op">)</span></span></code></pre></div>
+<div class="inline-figure"><img src="03.2-mggpa_files/figure-html/unnamed-chunk-10-1.png" width="672"></div>
+</div>
+<div id="encontrando-outliers" class="section level3" number="4.2.7">
+<h3>
+<span class="header-section-number">4.2.7</span> Encontrando outliers<a class="anchor" aria-label="anchor" href="#encontrando-outliers"><i class="fas fa-link"></i></a>
+</h3>
+<p>Podemos encontrar indivíduos muito diferentes dos demais observando sua distância em relação à forma média da amostra. Em morfometria geométrica, é comum a marcação de landmarks trocados em alguns indivíduos, o que vai gerar óbvios outliers.</p>
+<div class="sourceCode" id="cb31"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/geomorph/man/plotOutliers.html">plotOutliers</a></span><span class="op">(</span><span class="va">shape</span><span class="op">)</span></span></code></pre></div>
+<div class="inline-figure"><img src="03.2-mggpa_files/figure-html/unnamed-chunk-11-1.png" width="672"></div>
+</div>
+</div>
+<div id="visualização-da-forma" class="section level2" number="4.3">
+<h2>
+<span class="header-section-number">4.3</span> Visualização da forma<a class="anchor" aria-label="anchor" href="#visualiza%C3%A7%C3%A3o-da-forma"><i class="fas fa-link"></i></a>
+</h2>
+<p>Existem várias maneiras de visualizar mudanças de forma com dados de Morfometria Geométrica (ver Klingenberg 2013 Hystrix 24:15-14). Aliás, essa é uma das vantagens da morfometria geométrica em comparação com a morfometria tradicional. As formas mais comuns de visualização são por grids de deformação, vetores (ou lollipops), e através da construção de links entre os landmarks e extrapolação da forma via <em>outlines</em> e <em>surfaces</em>. Em qualquer caso, é importante perceber que a diferença de forma está contida apenas entre os landmarks/semilandmarks; as extrapolações de forma além dos landmarks (via grids e outlines, por exemplo) podem ser úteis para visualização, mas devem ser interpretadas com bastante cautela. É também importante perceber que a interpretação das mudanças de forma não deve considerar os landmarks individualmente, mas sim a sua mudança relativa a todos os outros landmarks.</p>
+<p>Construção de forma média da amostra para comparação.</p>
+<div class="sourceCode" id="cb32"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">ref</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/pkg/geomorph/man/mshape.html">mshape</a></span><span class="op">(</span><span class="va">shape</span><span class="op">)</span></span></code></pre></div>
+<p>Construção de links entre os landmarks.</p>
+<div class="sourceCode" id="cb33"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">links</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">2</span>,<span class="fl">2</span>,<span class="fl">3</span>,<span class="fl">3</span>,<span class="fl">4</span>,<span class="fl">4</span>,<span class="fl">5</span>,<span class="fl">5</span>,<span class="fl">6</span>,<span class="fl">6</span>,<span class="fl">7</span>,<span class="fl">7</span>,<span class="fl">8</span>,<span class="fl">8</span>,<span class="fl">9</span>,<span class="fl">9</span>,<span class="fl">10</span>,<span class="fl">10</span>,<span class="fl">11</span>,<span class="fl">11</span>,<span class="fl">12</span>,<span class="fl">12</span>,<span class="fl">13</span>,<span class="fl">13</span>,<span class="fl">1</span><span class="op">)</span>,nrow<span class="op">=</span><span class="fl">13</span>,ncol<span class="op">=</span><span class="fl">2</span>,byrow<span class="op">=</span><span class="cn">T</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/pkg/geomorph/man/plotAllSpecimens.html">plotAllSpecimens</a></span><span class="op">(</span><span class="va">shape</span>,mean<span class="op">=</span><span class="cn">TRUE</span>,links<span class="op">=</span><span class="va">links</span><span class="op">)</span></span></code></pre></div>
+<div class="inline-figure"><img src="03.2-mggpa_files/figure-html/unnamed-chunk-13-1.png" width="672"></div>
+<p>Os links entre os landmarks também podem ser definidos interativamente com a função define.links do pacote <em>geomorph</em>.</p>
+<div id="método-de-grid-de-deformação." class="section level3" number="4.3.1">
+<h3>
+<span class="header-section-number">4.3.1</span> Método de grid de deformação.<a class="anchor" aria-label="anchor" href="#m%C3%A9todo-de-grid-de-deforma%C3%A7%C3%A3o."><i class="fas fa-link"></i></a>
+</h3>
+<div class="sourceCode" id="cb34"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Definir cor dos landmarks e links</span></span>
+<span><span class="va">GP1</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/pkg/geomorph/man/gridPar.html">gridPar</a></span><span class="op">(</span>pt.bg<span class="op">=</span><span class="st">"gray"</span>,link.col<span class="op">=</span><span class="st">"gray"</span>,link.lty<span class="op">=</span><span class="fl">1</span><span class="op">)</span> <span class="co"># cor dos landmarks e links</span></span>
+<span><span class="co"># Gráfico de mudança de forma</span></span>
+<span><span class="fu"><a href="https://rdrr.io/pkg/geomorph/man/plotRefToTarget.html">plotRefToTarget</a></span><span class="op">(</span><span class="va">ref</span>,<span class="va">shape</span><span class="op">[</span>,,<span class="fl">8</span><span class="op">]</span>,links<span class="op">=</span><span class="va">links</span>,method<span class="op">=</span><span class="st">"TPS"</span><span class="op">)</span></span></code></pre></div>
+<div class="inline-figure"><img src="03.2-mggpa_files/figure-html/unnamed-chunk-14-1.png" width="672"></div>
+</div>
+<div id="método-de-vetores." class="section level3" number="4.3.2">
+<h3>
+<span class="header-section-number">4.3.2</span> Método de vetores.<a class="anchor" aria-label="anchor" href="#m%C3%A9todo-de-vetores."><i class="fas fa-link"></i></a>
+</h3>
+<div class="sourceCode" id="cb35"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/geomorph/man/plotRefToTarget.html">plotRefToTarget</a></span><span class="op">(</span><span class="va">ref</span>,<span class="va">shape</span><span class="op">[</span>,,<span class="fl">8</span><span class="op">]</span>,links<span class="op">=</span><span class="va">links</span>,method<span class="op">=</span><span class="st">"vector"</span><span class="op">)</span></span></code></pre></div>
+<div class="inline-figure"><img src="03.2-mggpa_files/figure-html/unnamed-chunk-15-1.png" width="672"></div>
+</div>
+<div id="método-de-linhas." class="section level3" number="4.3.3">
+<h3>
+<span class="header-section-number">4.3.3</span> Método de linhas.<a class="anchor" aria-label="anchor" href="#m%C3%A9todo-de-linhas."><i class="fas fa-link"></i></a>
+</h3>
+<div class="sourceCode" id="cb36"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/geomorph/man/plotRefToTarget.html">plotRefToTarget</a></span><span class="op">(</span><span class="va">ref</span>,<span class="va">shape</span><span class="op">[</span>,,<span class="fl">8</span><span class="op">]</span>,links<span class="op">=</span><span class="va">links</span>,method<span class="op">=</span><span class="st">"points"</span>,gridPars<span class="op">=</span><span class="va">GP1</span><span class="op">)</span></span></code></pre></div>
+<div class="inline-figure"><img src="03.2-mggpa_files/figure-html/unnamed-chunk-16-1.png" width="672"></div>
+<p>Aqui, o alvo está em preto e a referência(média) está em cinza.</p>
+</div>
+<div id="método-de-outlines." class="section level3" number="4.3.4">
+<h3>
+<span class="header-section-number">4.3.4</span> Método de outlines.<a class="anchor" aria-label="anchor" href="#m%C3%A9todo-de-outlines."><i class="fas fa-link"></i></a>
+</h3>
+<div class="sourceCode" id="cb37"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Carregando outline</span></span>
+<span><span class="va">outline</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/pkg/geomorph/man/warpRefOutline.html">warpRefOutline</a></span><span class="op">(</span><span class="st">"dadosmg/outline.mandibula.R.tps"</span>, <span class="va">tps</span><span class="op">[</span>,,<span class="fl">11</span><span class="op">]</span>, <span class="va">ref</span><span class="op">)</span></span></code></pre></div>
+<div class="sourceCode" id="cb38"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Gráfico de mudança de forma</span></span>
+<span><span class="va">GP1</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/pkg/geomorph/man/gridPar.html">gridPar</a></span><span class="op">(</span>pt.bg<span class="op">=</span><span class="st">"gray"</span>,tar.out.col <span class="op">=</span> <span class="st">"red"</span>,tar.out.cex <span class="op">=</span> <span class="fl">0.5</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/pkg/geomorph/man/plotRefToTarget.html">plotRefToTarget</a></span><span class="op">(</span><span class="va">ref</span>,<span class="va">shape</span><span class="op">[</span>,,<span class="fl">8</span><span class="op">]</span>,outline<span class="op">=</span><span class="va">outline</span><span class="op">$</span><span class="va">outline</span>,method<span class="op">=</span><span class="st">"TPS"</span><span class="op">)</span></span></code></pre></div>
+<div class="inline-figure"><img src="03.2-mggpa_files/figure-html/unnamed-chunk-18-1.png" width="672"></div>
+<div class="sourceCode" id="cb39"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/geomorph/man/plotRefToTarget.html">plotRefToTarget</a></span><span class="op">(</span><span class="va">ref</span>,<span class="va">shape</span><span class="op">[</span>,,<span class="fl">8</span><span class="op">]</span>,outline<span class="op">=</span><span class="va">outline</span><span class="op">$</span><span class="va">outline</span>,method<span class="op">=</span><span class="st">"points"</span>,gridPars<span class="op">=</span><span class="va">GP1</span><span class="op">)</span></span></code></pre></div>
+<div class="inline-figure"><img src="03.2-mggpa_files/figure-html/unnamed-chunk-18-2.png" width="672"></div>
+<p>Com um número suficiente de pontos, dá-se a impressão de um desenho. Veja o exemplo do pacote <em>geomorph</em>.</p>
+<div class="sourceCode" id="cb40"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span><span class="op">(</span><span class="st">"plethodon"</span><span class="op">)</span> </span>
+<span><span class="va">Y.gpa</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/pkg/geomorph/man/gpagen.html">gpagen</a></span><span class="op">(</span><span class="va">plethodon</span><span class="op">$</span><span class="va">land</span>, print.progress <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span> </span>
+<span><span class="va">ref.y</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/pkg/geomorph/man/mshape.html">mshape</a></span><span class="op">(</span><span class="va">Y.gpa</span><span class="op">$</span><span class="va">coords</span><span class="op">)</span> </span>
+<span><span class="va">GP4</span><span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/geomorph/man/gridPar.html">gridPar</a></span><span class="op">(</span>tar.out.col <span class="op">=</span> <span class="st">"red"</span>, tar.out.cex <span class="op">=</span> <span class="fl">0.3</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/pkg/geomorph/man/plotRefToTarget.html">plotRefToTarget</a></span><span class="op">(</span><span class="va">ref.y</span>,<span class="va">Y.gpa</span><span class="op">$</span><span class="va">coords</span><span class="op">[</span>,,<span class="fl">39</span><span class="op">]</span>, gridPars<span class="op">=</span><span class="va">GP4</span>, mag<span class="op">=</span><span class="fl">3</span>, outline<span class="op">=</span><span class="va">plethodon</span><span class="op">$</span><span class="va">outline</span>, method<span class="op">=</span><span class="st">"TPS"</span><span class="op">)</span></span></code></pre></div>
+<div class="inline-figure"><img src="03.2-mggpa_files/figure-html/unnamed-chunk-19-1.png" width="672"></div>
+</div>
+<div id="magnificação-da-forma" class="section level3" number="4.3.5">
+<h3>
+<span class="header-section-number">4.3.5</span> Magnificação da forma<a class="anchor" aria-label="anchor" href="#magnifica%C3%A7%C3%A3o-da-forma"><i class="fas fa-link"></i></a>
+</h3>
+<p>Às vezes quando as diferenças de forma são muito sútis, podemos aumentar as diferenças para visualizar melhor. Use com cuidado.</p>
+<div class="sourceCode" id="cb41"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/geomorph/man/plotRefToTarget.html">plotRefToTarget</a></span><span class="op">(</span><span class="va">ref</span>,<span class="va">shape</span><span class="op">[</span>,,<span class="fl">8</span><span class="op">]</span>,outline<span class="op">=</span><span class="va">outline</span><span class="op">$</span><span class="va">outline</span>, method<span class="op">=</span><span class="st">"points"</span>,gridPars<span class="op">=</span><span class="va">GP1</span>,mag<span class="op">=</span><span class="fl">3</span><span class="op">)</span></span></code></pre></div>
+<div class="inline-figure"><img src="03.2-mggpa_files/figure-html/unnamed-chunk-20-1.png" width="672"></div>
+
+</div>
+</div>
+<div id="assimetria-e-quantificação-de-erro" class="section level2" number="4.4">
+<h2>
+<span class="header-section-number">4.4</span> Assimetria e quantificação de erro<a class="anchor" aria-label="anchor" href="#assimetria-e-quantifica%C3%A7%C3%A3o-de-erro"><i class="fas fa-link"></i></a>
+</h2>
+<p>Duas fontes de adicionais de variação, normalmente bem pequenas, podem ser quantificadas: a assimetria e os erros oridundos da obtenção de dados e da medição de indivíduos.
+A assimetria é o menor dos efeitos biológicos, e pode ser quantificada através da diferença entre os lados direito e esquerdo de estruturas com simetria bilateral, ou entre estruturas correspondentes em outras formas de simetria, como em asas de insetos ou pétalas de flores.
+Erros oriundos da obtenção de dados ou de medição dos espécimes (colocação de landmarks) devem também ser muito pequenos para que possam ser ignorados com confiança. Espera-se que esses erros sejam várias vezes menores do que variação entre indivíduos, e mesmo que sejam bastante menores do que a variação vinda da assimetria flutuante.</p>
+<div id="assimetria-de-objeto" class="section level3" number="4.4.1">
+<h3>
+<span class="header-section-number">4.4.1</span> Assimetria de objeto<a class="anchor" aria-label="anchor" href="#assimetria-de-objeto"><i class="fas fa-link"></i></a>
+</h3>
+<p>Estruturas biológicas com assimetria de objeto, por exemplo, os lados direito e esquerdo do crânio.</p>
+<div class="sourceCode" id="cb42"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Carregar dados com landmarks no crânio de tuco-tucos</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">require</a></span><span class="op">(</span><span class="va"><a href="https://github.com/geomorphR/geomorph">geomorph</a></span><span class="op">)</span></span>
+<span><span class="co">#&gt; Carregando pacotes exigidos: geomorph</span></span>
+<span><span class="co">#&gt; Carregando pacotes exigidos: RRPP</span></span>
+<span><span class="co">#&gt; Carregando pacotes exigidos: rgl</span></span>
+<span><span class="co">#&gt; Carregando pacotes exigidos: Matrix</span></span>
+<span><span class="va">tps.sim</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/pkg/geomorph/man/readland.tps.html">readland.tps</a></span><span class="op">(</span><span class="st">"dadosmg/Lista tuco dig 2.tps"</span>,specID <span class="op">=</span> <span class="st">"ID"</span>, readcurves <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/dim.html">dim</a></span><span class="op">(</span><span class="va">tps.sim</span><span class="op">)</span></span>
+<span><span class="co"># Matriz com landmarks simétricos</span></span>
+<span><span class="va">pairs.matrix</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">2</span>,<span class="fl">3</span>,<span class="fl">5</span>,<span class="fl">6</span>,<span class="fl">7</span>,<span class="fl">8</span>,<span class="fl">10</span>,<span class="fl">11</span>,<span class="fl">12</span>,<span class="fl">13</span>,<span class="fl">14</span>,<span class="fl">15</span>,<span class="fl">16</span>,<span class="fl">17</span>,<span class="fl">18</span>,<span class="fl">19</span>,<span class="fl">20</span>,<span class="fl">21</span>,<span class="fl">23</span>,<span class="fl">24</span>,<span class="fl">25</span>,<span class="fl">26</span>,<span class="fl">27</span>,<span class="fl">28</span><span class="op">)</span>,nrow<span class="op">=</span><span class="fl">12</span>,ncol<span class="op">=</span><span class="fl">2</span>,byrow<span class="op">=</span><span class="cn">T</span><span class="op">)</span></span>
+<span><span class="va">pairs.matrix</span></span>
+<span><span class="co"># Construir vetor com rótulo de indivíduos (neste caso, uma marcação por indivíduo)</span></span>
+<span><span class="va">ind</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fu"><a href="https://rdrr.io/r/base/dim.html">dim</a></span><span class="op">(</span><span class="va">tps.sim</span><span class="op">)</span><span class="op">[</span><span class="fl">3</span><span class="op">]</span><span class="op">)</span></span>
+<span><span class="co"># GPA com simetria bilateral</span></span>
+<span><span class="va">b.s</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/pkg/geomorph/man/bilat.symmetry.html">bilat.symmetry</a></span><span class="op">(</span><span class="va">tps.sim</span>,ind<span class="op">=</span><span class="va">ind</span>,object.sym<span class="op">=</span><span class="cn">TRUE</span>,land.pairs<span class="op">=</span><span class="va">pairs.matrix</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Componente assimétrico da forma</span></span>
+<span><span class="va">shape.asym</span><span class="op">&lt;-</span><span class="va">b.s</span><span class="op">$</span><span class="va">asymm.shape</span></span>
+<span><span class="fu"><a href="https://rdrr.io/pkg/geomorph/man/plotAllSpecimens.html">plotAllSpecimens</a></span><span class="op">(</span><span class="va">shape.asym</span><span class="op">)</span></span></code></pre></div>
+<div class="inline-figure"><img src="03.3-mgerro_files/figure-html/unnamed-chunk-1-1.png" width="672"></div>
+</div>
+<div id="assimetria-de-correspondência" class="section level3" number="4.4.2">
+<h3>
+<span class="header-section-number">4.4.2</span> Assimetria de correspondência<a class="anchor" aria-label="anchor" href="#assimetria-de-correspond%C3%AAncia"><i class="fas fa-link"></i></a>
+</h3>
+<p>Estruturas biológicas com simetria de correspondência, por exemplo, asas de insetos.</p>
+<div class="sourceCode" id="cb43"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Carregar arquivo com landmarks em asas de *Drosophila*</span></span>
+<span><span class="va">fly</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/utils/read.table.html">read.table</a></span><span class="op">(</span><span class="st">"dadosmg/fly wing replicates Proc.txt"</span>,h<span class="op">=</span><span class="cn">T</span>,row.names <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">fly</span><span class="op">)</span></span>
+<span><span class="co"># Transformar coordenadas em array</span></span>
+<span><span class="va">fly.tps</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/pkg/geomorph/man/arrayspecs.html">arrayspecs</a></span><span class="op">(</span><span class="va">fly</span><span class="op">[</span>,<span class="fl">5</span><span class="op">:</span><span class="fl">34</span><span class="op">]</span>,<span class="fl">15</span>,<span class="fl">2</span><span class="op">)</span> </span>
+<span><span class="va">fly.tps</span> </span>
+<span><span class="fu"><a href="https://rdrr.io/pkg/geomorph/man/plotAllSpecimens.html">plotAllSpecimens</a></span><span class="op">(</span><span class="va">fly.tps</span><span class="op">)</span></span></code></pre></div>
+<div class="inline-figure"><img src="03.3-mgerro_files/figure-html/unnamed-chunk-2-1.png" width="672"></div>
+<div class="sourceCode" id="cb44"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Vetor com os indivíduos da amostra</span></span>
+<span><span class="va">fly.ind</span><span class="op">&lt;-</span><span class="va">fly</span><span class="op">$</span><span class="va">fly</span> </span>
+<span><span class="va">fly.ind</span></span>
+<span><span class="co"># Vetor informando quais estruturas são asas do lado direito ou do esquerdo</span></span>
+<span><span class="va">fly.side</span><span class="op">&lt;-</span><span class="va">fly</span><span class="op">$</span><span class="va">side</span> </span>
+<span><span class="va">fly.side</span></span>
+<span><span class="co"># GPA com simetria de correspondência</span></span>
+<span><span class="va">fly.b.s</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/pkg/geomorph/man/bilat.symmetry.html">bilat.symmetry</a></span><span class="op">(</span><span class="va">fly.tps</span>,ind<span class="op">=</span><span class="va">fly.ind</span>,side<span class="op">=</span><span class="va">fly.side</span><span class="op">)</span></span>
+<span><span class="co"># Componente simétrico da forma</span></span>
+<span><span class="fu"><a href="https://rdrr.io/pkg/geomorph/man/plotAllSpecimens.html">plotAllSpecimens</a></span><span class="op">(</span><span class="va">fly.b.s</span><span class="op">$</span><span class="va">symm.shape</span><span class="op">)</span> </span></code></pre></div>
+<div class="inline-figure"><img src="03.3-mgerro_files/figure-html/unnamed-chunk-2-2.png" width="672"></div>
+<div class="sourceCode" id="cb45"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Componente assimétrico da forma</span></span>
+<span><span class="fu"><a href="https://rdrr.io/pkg/geomorph/man/plotAllSpecimens.html">plotAllSpecimens</a></span><span class="op">(</span><span class="va">fly.b.s</span><span class="op">$</span><span class="va">asymm.shape</span><span class="op">)</span></span></code></pre></div>
+<div class="inline-figure"><img src="03.3-mgerro_files/figure-html/unnamed-chunk-2-3.png" width="672"></div>
+</div>
+<div id="assimetria-direcional" class="section level3" number="4.4.3">
+<h3>
+<span class="header-section-number">4.4.3</span> Assimetria direcional<a class="anchor" aria-label="anchor" href="#assimetria-direcional"><i class="fas fa-link"></i></a>
+</h3>
+<p>A forma média dos lados direito e esquerdo.</p>
+<div class="sourceCode" id="cb46"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">fly.b.s</span><span class="op">$</span><span class="va">DA.component</span></span></code></pre></div>
+</div>
+<div id="assimetria-flutuante" class="section level3" number="4.4.4">
+<h3>
+<span class="header-section-number">4.4.4</span> Assimetria flutuante<a class="anchor" aria-label="anchor" href="#assimetria-flutuante"><i class="fas fa-link"></i></a>
+</h3>
+<p>O desvio específico de cada espécime e índices quantificando o desvio esperado da simetria.</p>
+<div class="sourceCode" id="cb47"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">fly.b.s</span><span class="op">$</span><span class="va">FA.component</span></span>
+<span><span class="va">fly.b.s</span><span class="op">$</span><span class="va">signed.AI</span></span></code></pre></div>
+</div>
+<div id="quantificação-de-erro" class="section level3" number="4.4.5">
+<h3>
+<span class="header-section-number">4.4.5</span> Quantificação de erro<a class="anchor" aria-label="anchor" href="#quantifica%C3%A7%C3%A3o-de-erro"><i class="fas fa-link"></i></a>
+</h3>
+<p>A “Procrustes ANOVA” (Goodall 1991; Klingengerg &amp; McIntyre 1998), usada para quantificar diversas fontes de erro em morfometria geométrica, é uma análise multivariada de variância onde as fontes de erro são aninhadas uma dentro da outra. Por exemplo, podemos ter os lados direito/esquerdo de cada indivíduo, mais de uma marcação de landmarks para cada indivíduo, e mais de uma obtenção de imagem para cada indivíduo. A quantificação de variação em cada nível pode ser feita e comparada.
+No exemplo abaixo, vamos quantificar o erro de medição através de marcações de landmarks repetidas duas vezes em cada indivíduo da amostra. Queremos obter uma medida que represente a confiabilidade da marcação de landmarks por um operador, obtida através da repetição da colocação de landmarks em imagens idênticas, por esse operador; em teoria, os landmarks deveriam estar extamente na mesma posição.</p>
+<div class="sourceCode" id="cb48"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Carregar arquivo tps com todos os indivíduos marcados 2 vezes</span></span>
+<span><span class="va">tps.rep</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/pkg/geomorph/man/readland.tps.html">readland.tps</a></span><span class="op">(</span><span class="st">"dadosmg/ventral.dig_curso_rep1_2.tps"</span>,specID <span class="op">=</span> <span class="st">"ID"</span>, readcurves <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span> </span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/dim.html">dim</a></span><span class="op">(</span><span class="va">tps.rep</span><span class="op">)</span></span>
+<span><span class="co"># Matriz com os pares de landmarks simétricos</span></span>
+<span><span class="va">pairs.matrix.rep</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">2</span>,<span class="fl">3</span>,<span class="fl">4</span>,<span class="fl">5</span>,<span class="fl">6</span>,<span class="fl">7</span>,<span class="fl">8</span>,<span class="fl">9</span>,<span class="fl">10</span>,<span class="fl">11</span>,<span class="fl">12</span>,<span class="fl">13</span>,<span class="fl">14</span>,<span class="fl">15</span>,<span class="fl">16</span>,<span class="fl">17</span>,<span class="fl">18</span>,<span class="fl">24</span>,<span class="fl">22</span>,<span class="fl">28</span>,<span class="fl">23</span>,<span class="fl">29</span>,<span class="fl">19</span>,<span class="fl">25</span>,<span class="fl">20</span>,<span class="fl">26</span>,<span class="fl">21</span>,<span class="fl">27</span>,<span class="fl">30</span>,<span class="fl">31</span>,<span class="fl">33</span>,<span class="fl">34</span>,<span class="fl">35</span>,<span class="fl">36</span>,<span class="fl">37</span>,<span class="fl">38</span>,<span class="fl">39</span>,<span class="fl">40</span>,<span class="fl">41</span>,<span class="fl">42</span>,<span class="fl">43</span>,<span class="fl">44</span>,<span class="fl">45</span>,<span class="fl">46</span>,<span class="fl">47</span>,<span class="fl">48</span>,<span class="fl">49</span>,<span class="fl">50</span>,<span class="fl">51</span>,<span class="fl">52</span>,<span class="fl">55</span>,<span class="fl">56</span><span class="op">)</span>,nrow<span class="op">=</span><span class="fl">26</span>,ncol<span class="op">=</span><span class="fl">2</span>,byrow<span class="op">=</span><span class="cn">T</span><span class="op">)</span> </span>
+<span><span class="va">pairs.matrix.rep</span></span>
+<span><span class="co"># Extração dos rótulos de indivíduos e repetições a partir do ID</span></span>
+<span><span class="va">categories</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/base/strsplit.html">strsplit</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/dimnames.html">dimnames</a></span><span class="op">(</span><span class="va">tps.rep</span><span class="op">)</span><span class="op">[[</span><span class="fl">3</span><span class="op">]</span><span class="op">]</span>, <span class="st">"_"</span><span class="op">)</span> <span class="co"># separa os nomes pelo underline</span></span>
+<span><span class="va">classifiers</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/unlist.html">unlist</a></span><span class="op">(</span><span class="va">categories</span><span class="op">)</span>,ncol<span class="op">=</span><span class="fl">5</span>,byrow<span class="op">=</span><span class="cn">T</span><span class="op">)</span> <span class="co"># transforma em matriz</span></span>
+<span><span class="va">classifiers</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/base/cbind.html">cbind</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/dimnames.html">dimnames</a></span><span class="op">(</span><span class="va">tps.rep</span><span class="op">)</span><span class="op">[[</span><span class="fl">3</span><span class="op">]</span><span class="op">]</span>,<span class="va">classifiers</span><span class="op">)</span> <span class="co"># adiciona o ID na primeira coluna</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/colnames.html">colnames</a></span><span class="op">(</span><span class="va">classifiers</span><span class="op">)</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"FileID"</span>,<span class="st">"Species"</span>,<span class="st">"Sex"</span>,<span class="st">"View"</span>,<span class="st">"Ind"</span>,<span class="st">"Rep"</span><span class="op">)</span> <span class="co"># renomeia as colunas</span></span>
+<span><span class="va">classifiers</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/base/as.data.frame.html">as.data.frame</a></span><span class="op">(</span><span class="va">classifiers</span><span class="op">)</span></span>
+<span><span class="co"># Indivíduos</span></span>
+<span><span class="va">ind.rep</span><span class="op">&lt;-</span><span class="va">classifiers</span><span class="op">$</span><span class="va">Ind</span> <span class="co"># indivíduos</span></span>
+<span><span class="co"># Repetições</span></span>
+<span><span class="va">rep.rep</span><span class="op">&lt;-</span><span class="va">classifiers</span><span class="op">$</span><span class="va">Rep</span> <span class="co"># repetições</span></span>
+<span></span>
+<span><span class="co"># Procrustes ANOVA - erro de medição</span></span>
+<span><span class="va">b.s.error</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/pkg/geomorph/man/bilat.symmetry.html">bilat.symmetry</a></span><span class="op">(</span><span class="va">tps.rep</span>,ind<span class="op">=</span><span class="va">ind.rep</span>,replicate<span class="op">=</span><span class="va">rep.rep</span>,object.sym<span class="op">=</span><span class="cn">TRUE</span>,land.pairs<span class="op">=</span><span class="va">pairs.matrix.rep</span><span class="op">)</span></span></code></pre></div>
+<p>A tabela de variância informa quanta variação está contida entre as réplicas de um mesmo indivíduo marcados duas vezes (ind:side:replicate).</p>
+<div class="sourceCode" id="cb49"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">b.s.error</span><span class="op">$</span><span class="va">shape.anova</span></span>
+<span><span class="co">#&gt;                     Df      SS        MS     Rsq       F</span></span>
+<span><span class="co">#&gt; ind                 39 0.34535 0.0088550 0.92935 30.8480</span></span>
+<span><span class="co">#&gt; side                 1 0.00466 0.0046638 0.01255 16.2470</span></span>
+<span><span class="co">#&gt; ind:side            39 0.01120 0.0002871 0.03013  2.2096</span></span>
+<span><span class="co">#&gt; ind:side:replicate  80 0.01039 0.0001299 0.02797        </span></span>
+<span><span class="co">#&gt; Total              159 0.37160                          </span></span>
+<span><span class="co">#&gt;                          Z Pr(&gt;F)   </span></span>
+<span><span class="co">#&gt; ind                 6.8520  0.001 **</span></span>
+<span><span class="co">#&gt; side                5.2769  0.001 **</span></span>
+<span><span class="co">#&gt; ind:side           13.2872  0.001 **</span></span>
+<span><span class="co">#&gt; ind:side:replicate                  </span></span>
+<span><span class="co">#&gt; Total                               </span></span>
+<span><span class="co">#&gt; ---</span></span>
+<span><span class="co">#&gt; Signif. codes:  </span></span>
+<span><span class="co">#&gt; 0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</span></span></code></pre></div>
+<p>O erro de medição é pelo menos duas vezes menor do que a assimetria flutuante.</p>
+<p>Podemos também calcular um valor de confiança da repetibilidade</p>
+<div class="sourceCode" id="cb50"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">R1</span><span class="op">&lt;-</span><span class="op">(</span><span class="op">(</span><span class="op">(</span><span class="va">b.s.error</span><span class="op">$</span><span class="va">shape.anova</span><span class="op">$</span><span class="va">MS</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span><span class="op">-</span><span class="va">b.s.error</span><span class="op">$</span><span class="va">shape.anova</span><span class="op">$</span><span class="va">MS</span><span class="op">[</span><span class="fl">4</span><span class="op">]</span><span class="op">)</span><span class="op">/</span><span class="fl">2</span><span class="op">)</span> <span class="op">/</span> <span class="op">(</span><span class="op">(</span><span class="va">b.s.error</span><span class="op">$</span><span class="va">shape.anova</span><span class="op">$</span><span class="va">MS</span><span class="op">[</span><span class="fl">4</span><span class="op">]</span><span class="op">+</span><span class="op">(</span><span class="op">(</span><span class="va">b.s.error</span><span class="op">$</span><span class="va">shape.anova</span><span class="op">$</span><span class="va">MS</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span><span class="op">-</span><span class="va">b.s.error</span><span class="op">$</span><span class="va">shape.anova</span><span class="op">$</span><span class="va">MS</span><span class="op">[</span><span class="fl">4</span><span class="op">]</span><span class="op">)</span><span class="op">/</span><span class="fl">2</span><span class="op">)</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> </span>
+<span><span class="va">R1</span></span>
+<span><span class="co">#&gt; [1] 0.9710822</span></span></code></pre></div>
+</div>
+<div id="exercício---erro-e-assimetria" class="section level3" number="4.4.6">
+<h3>
+<span class="header-section-number">4.4.6</span> Exercício - Erro e Assimetria<a class="anchor" aria-label="anchor" href="#exerc%C3%ADcio---erro-e-assimetria"><i class="fas fa-link"></i></a>
+</h3>
+<p>Usando os dados de asas de Drosophila já carregados (arquivo “fly wing replicates Proc.txt”) construa um modelo incluindo, além dos lados direto e esquerdo (assimetria) e da repetição das fotos entre indivíduos, também o fator imagem (3° coluna dos dados), que representa a repetição da captura de fotos, i.e. fotos diferentes do mesmo indivíduo. Uma maneira equivalente de representar a Procrustes ANOVA [bilat.symmetry(fly.tps,ind=fly.ind,side=fly.side,replicate=fly.rep] com modelos lineares em linguagem geomoph é usando procD.lm: procD.lm(fly.gpa$coords~fly.ind/fly.side+fly.side/fly.ind). Note que não é necessário usar o fator repetição explicitamente, uma vez que ele está dentro de indivíduos (compare os resíduos da primeira e da segunda função).</p>
+
+</div>
+</div>
+<div id="semilandmarks" class="section level2" number="4.5">
+<h2>
+<span class="header-section-number">4.5</span> Semilandmarks<a class="anchor" aria-label="anchor" href="#semilandmarks"><i class="fas fa-link"></i></a>
+</h2>
+<div id="digitalização-de-semilandmarks" class="section level3" number="4.5.1">
+<h3>
+<span class="header-section-number">4.5.1</span> Digitalização de semilandmarks<a class="anchor" aria-label="anchor" href="#digitaliza%C3%A7%C3%A3o-de-semilandmarks"><i class="fas fa-link"></i></a>
+</h3>
+<p>No TPSDig2, abra o arquivo ‘mandibula.tps’ com as coordenadas dos landmarks. Para incluir semilandmarks será usada a ferramenta Draw background curves, que se localiza em ‘Modes&gt;Draw curves’ ou no ícone parecido com uma caneta amarela. Cliques com o botão esquerdo do mouse atribuem as coordenadas para os semilandmarks, um por vez, e os conectam por uma linha azul. Para finalizar a marcação dos semilandmarks na curva desejada basta clicar com o botão direito. O mesmo botão pode ser usado para clicar sobre a curva e acessar o menu opções, onde é possível, por exemplo, ajustar as distâncias entre os semilandmarks e deixá-las igualmente espaçadas. Ao terminar, salve o arquivo normalmente e abra em um bloco de notas. Note que as coordenadas dos semilandmarks aparecem como pontos em curvas. Neste formato, o arquivo está pronto para ser carregado pelo geomorph do R.
+Para abrir o arquivo em outros programas (ex: MorphoJ) é preciso primeiro fazer o deslizamento dos semilandmarks (‘sliding’) ao longo das curvas. Para isso é preciso: no TPSUtil, (i) transformar os pontos em curva em semilandmarks verdadeiros (operação ‘Append tps Curve to landmarks’), (ii) informar quais pontos correspondem a semilandmarks em quais curvas (operação ‘Make sliders file’), e no TPSRelw, (iii) importar o arquivo contendo todas as coordenadas juntas (criado em (i)) e o arquivo slider (criado em (ii)), realizar a GPA com os semilandmarks e exportar o arquivo com as coordenadas alinhadas; esse último arquivo pode ser aberto em qualquer programa. Note que o método para deslizamento dos semilandmarks no TPSRelw pode ser modificado em ‘Options&gt;Slide Method’.</p>
+</div>
+<div id="semilandmarks-no-r" class="section level3" number="4.5.2">
+<h3>
+<span class="header-section-number">4.5.2</span> Semilandmarks no R<a class="anchor" aria-label="anchor" href="#semilandmarks-no-r"><i class="fas fa-link"></i></a>
+</h3>
+<p>Dados com semilandmarks podem ser carregados diretamente para o R com as coordenadas em formato de curva.</p>
+<div class="sourceCode" id="cb51"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">require</a></span><span class="op">(</span><span class="va"><a href="https://github.com/geomorphR/geomorph">geomorph</a></span><span class="op">)</span></span>
+<span><span class="co">#&gt; Carregando pacotes exigidos: geomorph</span></span>
+<span><span class="co">#&gt; Carregando pacotes exigidos: RRPP</span></span>
+<span><span class="co">#&gt; Carregando pacotes exigidos: rgl</span></span>
+<span><span class="co">#&gt; Carregando pacotes exigidos: Matrix</span></span>
+<span><span class="co"># Carregar dados usando readcurves = TRUE</span></span>
+<span><span class="va">tps.semi</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/pkg/geomorph/man/readland.tps.html">readland.tps</a></span><span class="op">(</span><span class="st">"dadosmg/mandibula.dig_curso.tps"</span>,specID <span class="op">=</span> <span class="st">"ID"</span>, readcurves <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<span><span class="va">tps.semi</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/dim.html">dim</a></span><span class="op">(</span><span class="va">tps.semi</span><span class="op">)</span></span></code></pre></div>
+<p>Note que os semilanmarks foram carregados como se fossem landmarks verdadeiros.
+Precisamos informar quais deles são semilandmarks e em quais curvas vão deslizar.
+Isso pode ser feito em arquivo texto (veja o formato de curves.slide.txt), pelo programa TPSUtil, ou com uma função interativa do pacote <em>geomorph</em> chamada define.sliders.</p>
+<div class="sourceCode" id="cb52"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Definir semilandmarks</span></span>
+<span><span class="va">curveslide</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/utils/read.table.html">read.table</a></span><span class="op">(</span><span class="st">"dadosmg/curves.slide.txt"</span>,h<span class="op">=</span><span class="cn">T</span><span class="op">)</span> <span class="co"># importa sliders definidos no TPS util </span></span>
+<span><span class="va">curveslide</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/base/matrix.html">as.matrix</a></span><span class="op">(</span><span class="va">curveslide</span><span class="op">)</span> </span>
+<span><span class="va">curveslide</span></span>
+<span><span class="co">#&gt;       before slide after</span></span>
+<span><span class="co">#&gt;  [1,]      2    14    15</span></span>
+<span><span class="co">#&gt;  [2,]     14    15    16</span></span>
+<span><span class="co">#&gt;  [3,]     15    16    17</span></span>
+<span><span class="co">#&gt;  [4,]      3    17    16</span></span>
+<span><span class="co">#&gt;  [5,]      3    18    19</span></span>
+<span><span class="co">#&gt;  [6,]     18    19    20</span></span>
+<span><span class="co">#&gt;  [7,]      4    20    19</span></span>
+<span><span class="co">#&gt;  [8,]      5    21    22</span></span>
+<span><span class="co">#&gt;  [9,]     21    22    23</span></span>
+<span><span class="co">#&gt; [10,]     22    23    24</span></span>
+<span><span class="co">#&gt; [11,]     23    24    25</span></span>
+<span><span class="co">#&gt; [12,]     24    25    26</span></span>
+<span><span class="co">#&gt; [13,]      6    26    25</span></span>
+<span><span class="co">#&gt; [14,]      6    27    28</span></span>
+<span><span class="co">#&gt; [15,]     27    28    29</span></span>
+<span><span class="co">#&gt; [16,]      7    29    28</span></span>
+<span><span class="co">#&gt; [17,]      7    30    31</span></span>
+<span><span class="co">#&gt; [18,]     30    31    32</span></span>
+<span><span class="co">#&gt; [19,]     31    32    33</span></span>
+<span><span class="co">#&gt; [20,]      8    33    32</span></span>
+<span><span class="co">#&gt; [21,]      8    34    35</span></span>
+<span><span class="co">#&gt; [22,]     34    35    36</span></span>
+<span><span class="co">#&gt; [23,]      9    36    35</span></span>
+<span><span class="co">#&gt; [24,]      9    37    38</span></span>
+<span><span class="co">#&gt; [25,]     37    38    39</span></span>
+<span><span class="co">#&gt; [26,]     38    39    40</span></span>
+<span><span class="co">#&gt; [27,]     10    40    39</span></span>
+<span><span class="co">#&gt; [28,]     10    41    42</span></span>
+<span><span class="co">#&gt; [29,]     41    42    43</span></span>
+<span><span class="co">#&gt; [30,]     42    43    44</span></span>
+<span><span class="co">#&gt; [31,]     11    44    43</span></span>
+<span><span class="co">#&gt; [32,]     11    45    46</span></span>
+<span><span class="co">#&gt; [33,]     45    46    47</span></span>
+<span><span class="co">#&gt; [34,]     47    48    49</span></span>
+<span><span class="co">#&gt; [35,]     46    47    48</span></span>
+<span><span class="co">#&gt; [36,]     48    49    50</span></span>
+<span><span class="co">#&gt; [37,]     49    50    51</span></span>
+<span><span class="co">#&gt; [38,]     50    51    52</span></span>
+<span><span class="co">#&gt; [39,]     51    52    53</span></span>
+<span><span class="co">#&gt; [40,]     52    53    54</span></span>
+<span><span class="co">#&gt; [41,]     12    54    53</span></span>
+<span><span class="co">#&gt; [42,]     12    55    56</span></span>
+<span><span class="co">#&gt; [43,]     55    56    57</span></span>
+<span><span class="co">#&gt; [44,]     56    57    58</span></span>
+<span><span class="co">#&gt; [45,]     57    58    59</span></span>
+<span><span class="co">#&gt; [46,]     58    59    60</span></span>
+<span><span class="co">#&gt; [47,]     13    60    59</span></span></code></pre></div>
+<p>Os semilandmarks formam a coluna do meio. Cada curva é colocada entre landmarks verdadeiros.</p>
+</div>
+<div id="métodos-de-deslizamento-de-semilandmarks" class="section level3" number="4.5.3">
+<h3>
+<span class="header-section-number">4.5.3</span> Métodos de deslizamento de semilandmarks<a class="anchor" aria-label="anchor" href="#m%C3%A9todos-de-deslizamento-de-semilandmarks"><i class="fas fa-link"></i></a>
+</h3>
+<p>Agora podemos realizar uma análise de Procrustes deslizando os semilandmarks.
+A opção/argumento “ProcD=FALSE” vai deslizar os semilandmarks minimizando a energia de deformação, e a opção/argumento “ProcD=TRUE” vai deslizar os semilandmarks minizando as distâncias de Procrustes.</p>
+<div class="sourceCode" id="cb53"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Deslizamento por Procrustes</span></span>
+<span><span class="va">gpa.semi</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/pkg/geomorph/man/gpagen.html">gpagen</a></span><span class="op">(</span><span class="va">tps.semi</span>,ProcD<span class="op">=</span><span class="cn">TRUE</span>,curves<span class="op">=</span><span class="va">curveslide</span><span class="op">)</span></span>
+<span><span class="va">shape.procD</span><span class="op">&lt;-</span><span class="va">gpa.semi</span><span class="op">$</span><span class="va">coords</span></span>
+<span><span class="fu"><a href="https://rdrr.io/pkg/geomorph/man/plotAllSpecimens.html">plotAllSpecimens</a></span><span class="op">(</span><span class="va">shape.procD</span><span class="op">)</span></span></code></pre></div>
+<div class="inline-figure"><img src="03.4-mgsemi_files/figure-html/unnamed-chunk-3-1.png" width="672"></div>
+<div class="sourceCode" id="cb54"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span></span>
+<span><span class="co"># Deslizamento por Bending Energy</span></span>
+<span><span class="va">gpa.semi</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/pkg/geomorph/man/gpagen.html">gpagen</a></span><span class="op">(</span><span class="va">tps.semi</span>,ProcD<span class="op">=</span><span class="cn">FALSE</span>,curves<span class="op">=</span><span class="va">curveslide</span><span class="op">)</span></span>
+<span><span class="va">shape.bend</span><span class="op">&lt;-</span><span class="va">gpa.semi</span><span class="op">$</span><span class="va">coords</span></span>
+<span><span class="fu"><a href="https://rdrr.io/pkg/geomorph/man/plotAllSpecimens.html">plotAllSpecimens</a></span><span class="op">(</span><span class="va">shape.bend</span><span class="op">)</span></span></code></pre></div>
+<div class="inline-figure"><img src="03.4-mgsemi_files/figure-html/unnamed-chunk-3-2.png" width="672"></div>
+<p>Compare os dois métodos.</p>
+<div class="sourceCode" id="cb55"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/par.html">par</a></span><span class="op">(</span>mfrow<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">2</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/pkg/geomorph/man/plotAllSpecimens.html">plotAllSpecimens</a></span><span class="op">(</span><span class="va">shape.procD</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/pkg/geomorph/man/plotAllSpecimens.html">plotAllSpecimens</a></span><span class="op">(</span><span class="va">shape.bend</span><span class="op">)</span></span></code></pre></div>
+<div class="inline-figure"><img src="03.4-mgsemi_files/figure-html/unnamed-chunk-4-1.png" width="672"></div>
+<div class="sourceCode" id="cb56"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/par.html">par</a></span><span class="op">(</span>mfrow<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">1</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+
+</div>
+</div>
+<div id="tamanho-do-centróide" class="section level2" number="4.6">
+<h2>
+<span class="header-section-number">4.6</span> Tamanho do Centróide<a class="anchor" aria-label="anchor" href="#tamanho-do-centr%C3%B3ide"><i class="fas fa-link"></i></a>
+</h2>
+<p>Em morfometria geométrica, o tamanho do centróide é uma medida de tamanho global da estrutura (configuração de landmarks). Ela é a raiz quadrada da soma das distâncias ao quadrado de cada landmark até o centróide da configuração de landmarks.</p>
+<p>Vamos usar as configurações de landmarks no crânio de roedores para explorar algumas análises de variação de tamanho usando o tamanho do centróide.</p>
+
+</div>
+</div>
+  <div class="chapter-nav">
+<div class="prev"><a href="uma-breve-introdu%C3%A7%C3%A3o-ao-r.html"><span class="header-section-number">3</span> Uma breve introdução ao R</a></div>
+<div class="next"><a href="macroevolu%C3%A7%C3%A3o.html"><span class="header-section-number">5</span> Macroevolução</a></div>
+</div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
+    <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
+      <ul class="nav navbar-nav">
+<li><a class="nav-link" href="#morfometria-geom%C3%A9trica"><span class="header-section-number">4</span> Morfometria Geométrica</a></li>
+<li>
+<a class="nav-link" href="#digitaliza%C3%A7%C3%A3o-de-landmarks"><span class="header-section-number">4.1</span> Digitalização de landmarks</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#cria%C3%A7%C3%A3o-de-arquivo-.tps-com-as-imagens-bi-dimensionais"><span class="header-section-number">4.1.1</span> Criação de arquivo .tps com as imagens bi-dimensionais</a></li>
+<li><a class="nav-link" href="#digitaliza%C3%A7%C3%A3o-de-landmarks-no-tpsdig2"><span class="header-section-number">4.1.2</span> Digitalização de landmarks no TPSDig2</a></li>
+<li><a class="nav-link" href="#digitaliza%C3%A7%C3%A3o-de-landmarks-em-3d"><span class="header-section-number">4.1.3</span> Digitalização de landmarks em 3D</a></li>
+</ul>
+</li>
+<li>
+<a class="nav-link" href="#an%C3%A1lise-de-procrustes"><span class="header-section-number">4.2</span> Análise de Procrustes</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#o-objeto-.tps-no-r"><span class="header-section-number">4.2.1</span> O objeto .tps no R</a></li>
+<li><a class="nav-link" href="#estimar-landmarks-faltantes"><span class="header-section-number">4.2.2</span> Estimar landmarks faltantes</a></li>
+<li><a class="nav-link" href="#an%C3%A1lise-generalizada-de-procrustes"><span class="header-section-number">4.2.3</span> Análise Generalizada de Procrustes</a></li>
+<li><a class="nav-link" href="#espa%C3%A7o-tangente"><span class="header-section-number">4.2.4</span> Espaço tangente</a></li>
+<li><a class="nav-link" href="#formato-array-e-matrix"><span class="header-section-number">4.2.5</span> Formato array e matrix</a></li>
+<li><a class="nav-link" href="#gpa-com-simetria-de-objeto"><span class="header-section-number">4.2.6</span> GPA com simetria de objeto</a></li>
+<li><a class="nav-link" href="#encontrando-outliers"><span class="header-section-number">4.2.7</span> Encontrando outliers</a></li>
+</ul>
+</li>
+<li>
+<a class="nav-link" href="#visualiza%C3%A7%C3%A3o-da-forma"><span class="header-section-number">4.3</span> Visualização da forma</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#m%C3%A9todo-de-grid-de-deforma%C3%A7%C3%A3o."><span class="header-section-number">4.3.1</span> Método de grid de deformação.</a></li>
+<li><a class="nav-link" href="#m%C3%A9todo-de-vetores."><span class="header-section-number">4.3.2</span> Método de vetores.</a></li>
+<li><a class="nav-link" href="#m%C3%A9todo-de-linhas."><span class="header-section-number">4.3.3</span> Método de linhas.</a></li>
+<li><a class="nav-link" href="#m%C3%A9todo-de-outlines."><span class="header-section-number">4.3.4</span> Método de outlines.</a></li>
+<li><a class="nav-link" href="#magnifica%C3%A7%C3%A3o-da-forma"><span class="header-section-number">4.3.5</span> Magnificação da forma</a></li>
+</ul>
+</li>
+<li>
+<a class="nav-link" href="#assimetria-e-quantifica%C3%A7%C3%A3o-de-erro"><span class="header-section-number">4.4</span> Assimetria e quantificação de erro</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#assimetria-de-objeto"><span class="header-section-number">4.4.1</span> Assimetria de objeto</a></li>
+<li><a class="nav-link" href="#assimetria-de-correspond%C3%AAncia"><span class="header-section-number">4.4.2</span> Assimetria de correspondência</a></li>
+<li><a class="nav-link" href="#assimetria-direcional"><span class="header-section-number">4.4.3</span> Assimetria direcional</a></li>
+<li><a class="nav-link" href="#assimetria-flutuante"><span class="header-section-number">4.4.4</span> Assimetria flutuante</a></li>
+<li><a class="nav-link" href="#quantifica%C3%A7%C3%A3o-de-erro"><span class="header-section-number">4.4.5</span> Quantificação de erro</a></li>
+<li><a class="nav-link" href="#exerc%C3%ADcio---erro-e-assimetria"><span class="header-section-number">4.4.6</span> Exercício - Erro e Assimetria</a></li>
+</ul>
+</li>
+<li>
+<a class="nav-link" href="#semilandmarks"><span class="header-section-number">4.5</span> Semilandmarks</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#digitaliza%C3%A7%C3%A3o-de-semilandmarks"><span class="header-section-number">4.5.1</span> Digitalização de semilandmarks</a></li>
+<li><a class="nav-link" href="#semilandmarks-no-r"><span class="header-section-number">4.5.2</span> Semilandmarks no R</a></li>
+<li><a class="nav-link" href="#m%C3%A9todos-de-deslizamento-de-semilandmarks"><span class="header-section-number">4.5.3</span> Métodos de deslizamento de semilandmarks</a></li>
+</ul>
+</li>
+<li><a class="nav-link" href="#tamanho-do-centr%C3%B3ide"><span class="header-section-number">4.6</span> Tamanho do Centróide</a></li>
+</ul>
+
+      <div class="book-extra">
+        <ul class="list-unstyled">
+<li><a id="book-source" href="https://github.com/rstudio/bookdown-demo/blob/master/03-m-geo.Rmd">View source <i class="fab fa-github"></i></a></li>
+          <li><a id="book-edit" href="https://github.com/rstudio/bookdown-demo/edit/master/03-m-geo.Rmd">Edit this page <i class="fab fa-github"></i></a></li>
+        </ul>
+</div>
+    </nav>
+</div>
+
+</div>
+</div> <!-- .container -->
+
+<footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>"<strong>A Minimal Book Example</strong>" was written by John Doe. It was last built on 2023-09-12.</p>
+  </div>
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>This book was built by the <a class="text-light" href="https://bookdown.org">bookdown</a> R package.</p>
+  </div>
+
+</div></div>
+</footer><!-- dynamically load mathjax for compatibility with self-contained --><script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script><script type="text/x-mathjax-config">const popovers = document.querySelectorAll('a.footnote-ref[data-toggle="popover"]');
+for (let popover of popovers) {
+  const div = document.createElement('div');
+  div.setAttribute('style', 'position: absolute; top: 0, left:0; width:0, height:0, overflow: hidden; visibility: hidden;');
+  div.innerHTML = popover.getAttribute('data-content');
+
+  var has_math = div.querySelector("span.math");
+  if (has_math) {
+    document.body.appendChild(div);
+    MathJax.Hub.Queue(["Typeset", MathJax.Hub, div]);
+    MathJax.Hub.Queue(function() {
+      popover.setAttribute('data-content', div.innerHTML);
+      document.body.removeChild(div);
+    })
+  }
+}
+</script>
+</body>
+</html>
