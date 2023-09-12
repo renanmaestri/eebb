@@ -1,0 +1,53 @@
+## Semilandmarks
+
+### Digitalização de semilandmarks
+No TPSDig2, abra o arquivo ‘mandibula.tps’ com as coordenadas dos landmarks. Para incluir semilandmarks será usada a ferramenta Draw background curves, que se localiza em ‘Modes>Draw curves’ ou no ícone parecido com uma caneta amarela. Cliques com o botão esquerdo do mouse atribuem as coordenadas para os semilandmarks, um por vez, e os conectam por uma linha azul. Para finalizar a marcação dos semilandmarks na curva desejada basta clicar com o botão direito. O mesmo botão pode ser usado para clicar sobre a curva e acessar o menu opções, onde é possível, por exemplo, ajustar as distâncias entre os semilandmarks e deixá-las igualmente espaçadas. Ao terminar, salve o arquivo normalmente e abra em um bloco de notas. Note que as coordenadas dos semilandmarks aparecem como pontos em curvas. Neste formato, o arquivo está pronto para ser carregado pelo geomorph do R.
+Para abrir o arquivo em outros programas (ex: MorphoJ) é preciso primeiro fazer o deslizamento dos semilandmarks (‘sliding’) ao longo das curvas. Para isso é preciso: no TPSUtil, (i) transformar os pontos em curva em semilandmarks verdadeiros (operação ‘Append tps Curve to landmarks’), (ii) informar quais pontos correspondem a semilandmarks em quais curvas (operação ‘Make sliders file’), e no TPSRelw, (iii) importar o arquivo contendo todas as coordenadas juntas (criado em (i)) e o arquivo slider (criado em (ii)), realizar a GPA com os semilandmarks e exportar o arquivo com as coordenadas alinhadas; esse último arquivo pode ser aberto em qualquer programa. Note que o método para deslizamento dos semilandmarks no TPSRelw pode ser modificado em ‘Options>Slide Method’.
+
+### Semilandmarks no R
+Dados com semilandmarks podem ser carregados diretamente para o R com as coordenadas em formato de curva.
+```{r, results='hide'}
+require(geomorph)
+# Carregar dados usando readcurves = TRUE
+tps.semi<-readland.tps("dadosmg/mandibula.dig_curso.tps",specID = "ID", readcurves = TRUE)
+tps.semi
+dim(tps.semi)
+```
+
+Note que os semilanmarks foram carregados como se fossem landmarks verdadeiros.
+Precisamos informar quais deles são semilandmarks e em quais curvas vão deslizar.
+Isso pode ser feito em arquivo texto (veja o formato de curves.slide.txt), pelo programa TPSUtil, ou com uma função interativa do pacote *geomorph* chamada define.sliders.
+```{r}
+# Definir semilandmarks
+curveslide<-read.table("dadosmg/curves.slide.txt",h=T) # importa sliders definidos no TPS util 
+curveslide<-as.matrix(curveslide) 
+curveslide
+```
+Os semilandmarks formam a coluna do meio. Cada curva é colocada entre landmarks verdadeiros.
+
+### Métodos de deslizamento de semilandmarks
+Agora podemos realizar uma análise de Procrustes deslizando os semilandmarks.
+A opção/argumento "ProcD=FALSE" vai deslizar os semilandmarks minimizando a energia de deformação, e a opção/argumento "ProcD=TRUE" vai deslizar os semilandmarks minizando as distâncias de Procrustes.
+
+```{r, message=FALSE, results='hide'}
+# Deslizamento por Procrustes
+gpa.semi<-gpagen(tps.semi,ProcD=TRUE,curves=curveslide)
+shape.procD<-gpa.semi$coords
+plotAllSpecimens(shape.procD)
+
+# Deslizamento por Bending Energy
+gpa.semi<-gpagen(tps.semi,ProcD=FALSE,curves=curveslide)
+shape.bend<-gpa.semi$coords
+plotAllSpecimens(shape.bend)
+```
+
+Compare os dois métodos.
+```{r}
+par(mfrow=c(1,2))
+plotAllSpecimens(shape.procD)
+plotAllSpecimens(shape.bend)
+par(mfrow=c(1,1))
+```
+
+
+
