@@ -10,15 +10,15 @@ Em construção.
 
 Em construção.
 
-### Seleção direcional {-}
+### Seleção direcional
 
 Em construção.
 
-### Seleção disruptiva {-}
+### Seleção disruptiva
 
 Em construção.
 
-### Seleção estabilizadora {-}
+### Seleção estabilizadora
 
 Em construção.
 
@@ -26,7 +26,7 @@ Em construção.
 
 Em construção.
 
-### Simulação de deriva e seleção {-}
+### Simulação de deriva e seleção
 
 Em construção.
 
@@ -34,15 +34,15 @@ Em construção.
 
 Em construção.
 
-### Interações genótipo-fenótipo-ambiente {-}
+### Interações genótipo-fenótipo-ambiente
 
 Em construção.
 
-### Plasticidade fenotípica {-}
+### Plasticidade fenotípica
 
 Em construção.
 
-### Epigenética {-}
+### Epigenética
 
 Em construção.
 

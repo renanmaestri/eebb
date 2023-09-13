@@ -2,8 +2,15 @@ fig:unnamed-chunk-1
 conceitos-básicos
 processos-evolutivos
 seleção-natural
+seleção-direcional
+seleção-disruptiva
+seleção-estabilizadora
 deriva-genética
+simulação-de-deriva-e-seleção
 ecologia-evolutiva-do-desenvolvimento
+interações-genótipo-fenótipo-ambiente
+plasticidade-fenotípica
+epigenética
 uma-breve-introdução-ao-r
 definindo-um-diretório-de-trabalho
 roteiros-scripts
