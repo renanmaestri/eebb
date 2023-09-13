@@ -14,7 +14,8 @@ csl: chicago-fullnote-bibliography.csl
 ---
 
 # Prefácio {-}
-
+**Manual de Ecologia Evolutiva, Biometria e Biogeografia**
+**Prof. Renan Maestri - Universidade Federal do Rio Grande do Sul**
 ```{r, echo=FALSE, out.width='100%', fig.asp=.75, fig.align='center'}
 knitr::include_graphics("images/Slogan_oficial_sologo.jpg")
 ```

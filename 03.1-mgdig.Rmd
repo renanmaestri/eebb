@@ -1,7 +1,7 @@
 ## Digitalização de landmarks
 
 ### Criação de arquivo .tps com as imagens bi-dimensionais
-Esse roteiro é para a manipulação de imagens digitais (2D) e a digitalização de marcos anatômicos (landmarks) nas imagens usando softwares TPS (http://life.bio.sunysb.edu/ee/rohlf/software.html). As imagens, previamente capturadas de maneira padronizada, devem estar individualizadas, todas em uma mesma pasta no computador.
+Esse roteiro é para a manipulação de imagens digitais (2D) e a digitalização de marcos anatômicos (landmarks) nas imagens usando [softwares TPS](https://www.sbmorphometrics.org/). As imagens, previamente capturadas de maneira padronizada, devem estar individualizadas, todas em uma mesma pasta no computador.
 
 No TPSUtil, selecione a operação ‘Build tps file from images’. Clique em ‘Input’ e selecione a pasta (selecione qualquer imagem dentro da pasta) contendo as fotos. No nosso caso, a pasta se chama ‘Atividade 1 – Imagens’. Clique em ‘Output’ e atribua um nome para o arquivo (use mandibula.tps). Clique em ‘Setup’. Todas as imagens da pasta estarão listadas. É possível conferir os nomes dos arquivos e modificar a ordem ou deletar imagens se necessário. Clique em ‘Create’ para criar o arquivo .tps com a lista de imagens. Vá até o mesmo diretório (pasta) com as imagens e verifique o arquivo mandibula.tps (abra com o bloco de notas).
 
@@ -26,3 +26,5 @@ L1: Borda anterior do alvéolo incisivo; L2: Extremo anterior superior da borda 
 O software MeshLab permite a digitalização de landmarks em superfícies, além de outras operações. Após abrir o software, selecione ‘File>Import Mesh’ e carregue o arquivo chamado ‘exemplo3d.ply’ de dentro da pasta ‘R Dados’.
 
 Para digitalizar landmarks na superfície clique em ‘Edit>PickPoints’ ou no ícone PP. Ao clicar com o botão esquerdo do mouse (pode demorar um pouco), as coordenadas são capturadas. Após o término da digitalização é possível salvar um arquivo em formato xml (.pp) com as coordenadas em 3D, que poderá ser aberto no R para análises posteriores.
+
+\newpage
