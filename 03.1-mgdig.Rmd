@@ -1,3 +1,4 @@
+\clearpage
 \newpage
 
 ## Digitalização de landmarks
