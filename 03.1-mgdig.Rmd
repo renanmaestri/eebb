@@ -1,3 +1,5 @@
+\newpage
+
 ## Digitalização de landmarks
 
 ### Criação de arquivo .tps com as imagens bi-dimensionais

@@ -208,7 +208,7 @@ seguido do nome da função.
 
 ```r
 ?mean
-#> démarrage du serveur d'aide httpd ... fini
+#> starting httpd help server ... done
 ?matrix
 ```
 
@@ -343,9 +343,7 @@ install.packages("geiger")
 ```r
 # Carregar ape 
 require(ape) 
-#> Le chargement a nécessité le package : ape
-#> Warning: le package 'ape' a été compilé avec la version R
-#> 4.2.3
+#> Carregando pacotes exigidos: ape
 # Construindo uma árvore newick via texto 
 texto<-"(((((((vaca, cavalo),baleia),(morcego,(camundongo,humano))),(pardal,tartaruga)),celacanto),nemo),tubarão);"
 # Função read.tree lê o arquivo contendo a árvore 

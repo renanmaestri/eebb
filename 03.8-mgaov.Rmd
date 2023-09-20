@@ -1,0 +1,7 @@
+## Modelos lineares para discriminação de grupos
+
+Uma classe ampla de modelos preditivos está abarcada pelo nome de Modelos Lineares Generalizados, incluindo regressão múltipla e análises de variância/covariância. Uma vasta gama de modelos pode ser ajustada com a função 'procD.lm' e outras do pacote *geomorph*, que usa distância de Procrustes entre espécimes para calcular tamanhos de efeito e randomização para calcular valores de *P* (de modo equivalente à MANOVA não paramétrica – Goodall 1991, Anderson 2001); assim, o número de variáveis de forma, normalmente muito alto em dados de MG, não é uma restrição ao ajuste de modelos (Collyer et al. 2015).
+
+### MANOVA
+
+### Fenograma

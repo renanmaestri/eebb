@@ -53,6 +53,15 @@ digitalização-de-semilandmarks
 semilandmarks-no-r
 métodos-de-deslizamento-de-semilandmarks
 tamanho-do-centróide
+métodos-de-ordenação
+análise-de-componentes-principais
+análise-de-variação-canônica
+exercício-análise-de-componentes-principais
+partial-least-squares
+modelos-lineares-para-discriminação-de-grupos
+manova
+fenograma
+alometria
 macroevolução
 lendo-e-manipulando-árvores-filogenéticas-no-r
 biogeografia-e-macroecologia
