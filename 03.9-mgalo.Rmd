@@ -1,3 +1,125 @@
 ## Alometria
 
-Em construção.
+De acordo com a escola Gould-Mosimann, alometria é covariação entre tamanho e forma. Esse conceito faz sentido em Morfometria Geométrica (MG), já que há uma distinção formal entre tamanho e forma. Assim, podemos testar se existe uma associação entre forma e tamanho, ou seja, alometria, ou se não existe tal associação, ou seja, isometria. Em MG, isso é tradicionalmente feito através de uma regressão multivariada da forma sobre o tamanho do centróide.
+
+A alometria é classicamente dividida em três níveis: *estática* (dentro de uma amostra homogênea, ex: adultos de uma população), *ontogenética* (ao longo do desenvolvimento, ex: indivíduos de diferentes idades em uma população) e *evolutiva* (entre várias espécies). A forma e a magnitude das relações alométricas dentro e entre grupos oferecem oportunidades interessantes para entender processos biológicos. Em alguns casos, pode-se também estar interessado em correção de tamanho/alometria nos dados, casos estes onde é fundamental investigar se há uma tendência alométrica comum aos dados (ou seja, quando as relações alométricas não diferem entre grupos). 
+
+Para textos abrangentes sobre alometria, veja: 
+Zelditch et al. 2012 Geometric Morphometrics for Biologists, Elsevier. 
+Klingenberg 2016 Dev Genes Evolution doi:10.1007/s00427-016-0539-2.
+
+### Alometria simples
+Vamos investigar se a forma e o tamanho do crânio de tuco-tucos estão associados.
+```{r, results='hide', warning=FALSE}
+require(geomorph)
+# Carregar dados
+tps<-readland.tps("dadosmg/Lista tuco dig 2.tps",specID = "ID", readcurves = FALSE)
+dim(tps)
+
+# Gerar matriz com pares de landmarks simétricos
+pairs.matrix<-matrix(c(2,3,5,6,7,8,10,11,12,13,14,15,16,17,18,19,20,21,23,24,25,26,27,28),nrow=12,ncol=2,byrow=T)
+# Vetor indivíduos
+ind<-c(1:dim(tps)[3])
+
+# GPA - Extrair tamanho do centróide
+gpa<-gpagen(tps)
+size<-gpa$Csize
+
+# GPA - Simetria bilateral 
+b.s<-bilat.symmetry(tps,ind=ind,object.sym=TRUE,land.pairs=pairs.matrix)
+
+# Matriz de forma
+shape.sym<-b.s$symm.shape
+
+# Carregar classificadores a partir de lista externa
+plan<-read.table("dadosmg/Planilha Ctenomys.txt",h=T)
+plan
+species<-plan[,1]
+species<-as.factor(species)
+sex<-plan[,2]
+sex<-as.factor(sex)
+sp.sex<-plan[,3]
+sp.sex<-as.factor(sp.sex)
+```
+
+Usaremos um modelo linear multivariado para testar a associação entre tamanho e forma. Também podemos visualizar a relação entre tamanho e forma em um espaço bivariado. Pra isso, precisamos resumir a variação de forma em um único vetor, o que pode ser feito de algumas maneiras. A maneira mais interessante é usar *regresion scores* (Drake & Klingenberg 2008) que retornam uma variável de forma que tem covariação máxima com o tamanho do centróide.
+```{r}
+# Alometria simples
+alometria<-procD.lm(shape.sym~log(size),iter=999)
+summary(alometria)
+plot(alometria,type="regression",predictor=log(size),
+     reg.type = "RegScore", pch=19, xlab="Log Size")
+```
+
+Finalmente, mas não menos importante, vamos visualizar as diferenças de forma entre valores diferentes de tamanho.
+```{r}
+plot.alometria<-plot(alometria,type="regression",predictor=log(size),
+     reg.type = "RegScore", pch=19, xlab="Log Size")
+preds<-shape.predictor(alometria$GM$fitted, x = plot.alometria$RegScore, 
+                        predmin = min(plot.alometria$RegScore), 
+                        predmax = max(plot.alometria$RegScore))
+ref <-mshape(shape.sym)
+# Menores tamanhos
+plotRefToTarget(ref, preds$predmin, mag=2)
+# Maiores tamanhos
+plotRefToTarget(ref, preds$predmax, mag=2)
+```
+
+### Correção de efeitos alométricos
+A correção de tamanho/alometria em estudos de MG pode ser feita usando os resíduos da regressão multivariada da forma sobre o tamanho do centróide em análises posteriores. Se a amostra for composta por grupos biológicos, é importante primeiro investigar se há uma tendência alométrica comum entre os grupos.
+```{r}
+shape.resid<-
+  arrayspecs(alometria$residuals,p=dim(shape.sym)[1],k=dim(shape.sym)[2]) #size adjusted residuals
+adj.shape<-shape.resid+array(gpa$consensus, dim(shape.resid)) # allometry-free shapes--somar a média retorna os números para o espaço de forma original e permite a visualização de mudanças de forma
+
+# PCA of allometry-free shape space
+PCA<-gm.prcomp(adj.shape)
+plot(PCA,axis1=1, axis2=2)
+```
+
+### Comparação de trajetórias alométricas entre grupos
+A análise de alometria considerando grupos (e.g., espécies, habitats) pode revelar se as relações alométricas (e.g., inclinação, ângulo, e comprimento das retas) são diferentes entre os grupos. Em outras palavras, é possível testar a homogeneidade ou heterogeneidade dos *slopes*/inclinações. Se as relações alométricas diferirem, a pergunta a ser respondida é quais fatores causam as diferenças alométricas.
+```{r}
+# Teste de Homogeneidade de Slopes
+alometria.HOS<-procD.lm(shape.sym~log(size)*species,iter=999)
+summary(alometria.HOS)
+# Comparando com modelo nulo
+alometria.nulo<-procD.lm(shape.sym~size+species,iter=999)
+anova(alometria.nulo,alometria.HOS) # R2 do modelo full é a diferença entre modelos
+```
+
+Visualizando trajetórias alométricas.
+```{r, results='hide', warning=FALSE}
+# Definindo cores para grupos
+col.group<-rainbow(length(levels(species))) # criar vetor de cores para grupos
+names(col.group)<-levels(species)
+col.group<-col.group[match(species,names(col.group))]
+
+# Plot RegScore
+{plotAllometry(alometria.HOS,size=size,logsz=TRUE,
+              method="RegScore",pch=19,col=col.group)
+legend(7.125,-0.007,legend=unique(species),pch=19,col=unique(col.group))}
+
+# Plot fitted values
+{plotAllometry(alometria.HOS,size=size,logsz=TRUE,
+              method="PredLine",pch=19,col=col.group)
+legend(7.11,0.00,legend=unique(species),pch=19,col=unique(col.group))}
+```
+
+Diferenças de magnitude e orientação das retas.
+```{r, results='hide', warning=FALSE}
+# Diferenças de magnitude (comprimento das retas)
+allo.mancova<-pairwise(alometria.HOS,groups=species)
+summary(allo.mancova)
+names(allo.mancova)
+summary(allo.mancova, confidence = 0.95, test.type = "DL")
+
+# Diferenças de orientação/direção dos vetores (ângulos, vector correlation)
+summary(allo.mancova,confidence = 0.95,test.type = "VC", angle.type = "deg")
+```
+
+
+
+
+
+

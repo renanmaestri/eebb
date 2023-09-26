@@ -1,0 +1,20 @@
+#NEXUS
+
+BEGIN TREES;
+	Title Trees;
+	LINK Taxa = Taxa;
+	TRANSLATE
+		1 Aded,
+		2 Irta,
+		3 Jshu,
+		4 Elmo,
+		5 Aupi,
+		6 Lomi,
+		7 Aega,
+		8 Aexa;
+	TREE Consensus = ((1,2),(3,((4,(5,6)),(7,8))));
+
+END;
+
+
+

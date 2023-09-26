@@ -1,7 +1,99 @@
 ## Modelos lineares para discriminação de grupos
 
 Uma classe ampla de modelos preditivos está abarcada pelo nome de Modelos Lineares Generalizados, incluindo regressão múltipla e análises de variância/covariância. Uma vasta gama de modelos pode ser ajustada com a função 'procD.lm' e outras do pacote *geomorph*, que usa distância de Procrustes entre espécimes para calcular tamanhos de efeito e randomização para calcular valores de *P* (de modo equivalente à MANOVA não paramétrica – Goodall 1991, Anderson 2001); assim, o número de variáveis de forma, normalmente muito alto em dados de MG, não é uma restrição ao ajuste de modelos (Collyer et al. 2015).
+Podemos usar esses modelos baseados em distância para responder diversas questões quando a variável resposta é composta por variáveis de forma. Aqui, vamos aplicá-los no contexto de discriminação de grupos, quando a variável preditora é categórica.
 
 ### MANOVA
+Vamos testar se existem diferenças de forma entre espécies de tuco-tucos.
+```{r, results='hide', warning=FALSE}
+require(geomorph)
+# Carregar dados
+tps<-readland.tps("dadosmg/Lista tuco dig 2.tps",specID = "ID", readcurves = FALSE)
+dim(tps)
+
+# Gerar matriz com pares de landmarks simétricos
+pairs.matrix<-matrix(c(2,3,5,6,7,8,10,11,12,13,14,15,16,17,18,19,20,21,23,24,25,26,27,28),nrow=12,ncol=2,byrow=T)
+# Vetor indivíduos
+ind<-c(1:dim(tps)[3])
+
+# GPA - Simetria bilateral 
+b.s<-bilat.symmetry(tps,ind=ind,object.sym=TRUE,land.pairs=pairs.matrix)
+
+# Matriz de forma
+shape.sym<-b.s$symm.shape
+
+# Carregar classificadores a partir de lista externa
+plan<-read.table("dadosmg/Planilha Ctenomys.txt",h=T)
+plan
+species<-plan[,1]
+species<-as.factor(species)
+sex<-plan[,2]
+sex<-as.factor(sex)
+sp.sex<-plan[,3]
+sp.sex<-as.factor(sp.sex)
+```
+
+MANOVA.
+```{r}
+# MANOVA (Multivariate Analysis of Variance)
+manova<-procD.lm(shape.sym~species, iter=999, RRPP= TRUE)
+summary(manova)
+
+manova.sex<-procD.lm(shape.sym~sex, iter=999, RRPP= TRUE)
+summary(manova.sex)
+
+manova.completa<-procD.lm(shape.sym~species*sex, iter=999, RRPP= TRUE)
+summary(manova.completa)
+
+# MANOVA Wilks's lambda
+PCA<-gm.prcomp(shape.sym)
+manova.w<-manova(PCA$x[,1:26]~species)
+summary(manova.w,test="Wilks")
+
+manova.w.sex<-manova(PCA$x[,1:26]~sex)
+summary(manova.w.sex,test="Wilks")
+```
+
+Além da resposta geral, é interessante obter comparações par a par.
+```{r}
+# Pairwise comparisons
+require(RRPP)
+manova.pairwise<-pairwise(manova,groups=species)
+summary(manova.pairwise)
+```
+
+Manova par a par "manual".
+```{r, results='hide', warning=FALSE}
+# Manova par a par
+gdf.1<- geomorph.data.frame(coords=shape.sym[,,which(species=="C.flamarioni"|species=="C.minutus")],species=species[species=="C.flamarioni" | species=="C.minutus"])
+manova.par1<-procD.lm(coords~species, iter=999, data = gdf.1)
+manova.par1
+summary(manova.par1)
+gdf.2<-
+  geomorph.data.frame(coords=shape.sym[,,which(species=="C.flamarioni"|species=="C.torquatus")],species=species[species=="C.flamarioni" | species=="C.torquatus"])
+manova.par2<-procD.lm(coords~species, iter=999, data = gdf.2)
+manova.par2
+summary(manova.par2)
+gdf.3<-
+  geomorph.data.frame(coords=shape.sym[,,which(species=="C.minutus"|species=="C.torquatus")],species=species[species=="C.minutus" | species=="C.torquatus"])
+manova.par3<-procD.lm(coords~species, iter=999, data = gdf.3)
+manova.par3
+summary(manova.par3)
+```
 
 ### Fenograma
+Dependendo da pergunta de estudo, fenogramas podem ser úteis para visualizar os padrões de diferenciação de forma em um formato de árvore de distâncias morfológicas.
+Aqui, vamos criar um fenograma com distâncias de Procrustes e agrupamento de Neighbot-Joining.
+```{r, results='hide', warning=FALSE}
+obj<-summary(manova.pairwise)
+obj$pairwise.tables$D
+means.dist<-obj$pairwise.tables$D
+require(ape)
+fen<-nj(means.dist)
+plot(fen)
+plot(fen,type="unrooted")
+```
+
+
+
+

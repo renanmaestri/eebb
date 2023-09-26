@@ -27,6 +27,15 @@ digitalização-de-landmarks
 criação-de-arquivo-.tps-com-as-imagens-bi-dimensionais
 digitalização-de-landmarks-no-tpsdig2
 digitalização-de-landmarks-em-3d
+análise-de-trajetória
+integração-morfológica-e-modularidade
+disparidade-e-variação-morfológica
+morfometria-geométrica-e-filogenias
+filomorfoespaço
+pca-filogenética
+sinal-filogenético-multivariado
+análise-filogenética-generalizada-por-quadrados-mínimos-pgls-multivariada
+exercício---morfometria-e-filogenias
 análise-de-procrustes
 o-objeto-.tps-no-r
 estimar-landmarks-faltantes
@@ -62,6 +71,9 @@ modelos-lineares-para-discriminação-de-grupos
 manova
 fenograma
 alometria
+alometria-simples
+correção-de-efeitos-alométricos
+comparação-de-trajetórias-alométricas-entre-grupos
 macroevolução
 lendo-e-manipulando-árvores-filogenéticas-no-r
 biogeografia-e-macroecologia

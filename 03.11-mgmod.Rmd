@@ -1,0 +1,55 @@
+## Integração morfológica e modularidade
+
+Integração morfológica e modularidade são conceitos próximos, mas que dão ênfase para aspectos diferentes da morfologia: associação e dissociação entre partes.
+A arquitetura do mapa genótipo-fenótipo dá origem aos padrões e magnitudes de integração morfológica. Desenvolvimento e função são também aspectos fundamentais para entendermos as origens da integração morfológica e da modularidade.
+
+Existem vários métodos para acessar a estrutura de integração morfológica em dados de morfometria. Alguns testam hipóteses *a priori* de modularidade, revisados em Zelditch et al. 2012. No exemplo, vamos usar um método que compara a variância entre módulos com a variância dentro de módulos.
+
+Para textos abrangentes sobre integração morfológica e modularidade no contexto de morfometria geométrica, veja: 
+Zelditch et al. 2012 Geometric Morphometrics for Biologists, Elsevier. 
+Klingenberg 2014 Phil Trans R Soc B doi: 10.1098/rstb.2013.0249
+
+Vamos investigar integração morfológica e modularidade sobre uma hipótese de módulos crânianos usando landmarks em crânios de roedores sigmodontíneos.
+```{r, results='hide', warning=FALSE}
+require(geomorph)
+# Carregar arquivo tps com a vista ventral do crânio 
+tps.v<-readland.tps("dadosmg/ventral.dig_curso.pls.tps",specID = "ID", readcurves = FALSE)
+
+# Gerar matriz com os pares de landmarks simétricos
+pairs.matrix<-matrix(c(2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,24,22,28,23,29,19,25,20,26,21,27,30,31,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,55,56),nrow=26,ncol=2,byrow=T)
+ind.v<-c(1:dim(tps.v)[3]) # vetor indivíduos
+# GPA - Simetria bilateral - Extrair componente simetrico da forma
+b.s<-bilat.symmetry(tps.v,ind=ind.v,object.sym=TRUE,land.pairs=pairs.matrix)
+shape.v<-b.s$symm.shape # componente sim?trico da forma
+ref.ventral<-mshape(shape.v)
+```
+
+Primeiro, precisamos definir a hipótese a ser testada. A função 'define.modules' permite desenharmos a hipótese de maneira interativa. Selecione os landmarks de um módulo, pressione esc, selecione os landmarks do segundo módulo, etc.
+```{r, results='hide', warning=FALSE, fig.show='hide'}
+partition<-define.modules(ref.ventral,2)
+```
+
+Testando a hipótese nula de ausência de modularidade.
+```{r, results='hide', warning=FALSE, fig.show='hide'}
+partition<-c(rep(1,36),rep(2,20))
+mod<-modularity.test(shape.v,partition,iter=999) 
+mod
+plot(mod)
+```
+
+Testando a hipótese nula de ausência de integração morfológica.
+```{r, results='hide', warning=FALSE, fig.show='hide'}
+int<-integration.test(shape.v,partition.gp=partition,iter=999) 
+int
+plot(int)
+```
+
+Função interativa para visualização da forma dos módulos.
+```{r, results='hide', warning=FALSE, fig.show='hide'}
+plot(int)
+int.plot<-plot(int,shape=TRUE)
+#picknplot.shape(int.plot)
+```
+
+
+

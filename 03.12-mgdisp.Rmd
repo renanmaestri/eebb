@@ -1,0 +1,47 @@
+## Disparidade e variação morfológica
+
+Disparidade e variação são conceitos próximos, ambos relacionados à ideia de “variedade” ou “diversidade” morfológica; as mesmas métricas podem ser utilizadas para ambos. No entanto, uma distinção conceitual é aplicada: (i) Disparidade tem relação com a variedade de um grupo de espécies, e é o resultado do processo evolutivo de longo prazo; (ii) Variação tem relação com a variedade de indivíduos dentro de uma única população.
+
+Vamos investigar a disparidade total e dentro/entre espécies de roedores sigmodontíneos.
+```{r, results='hide', warning=FALSE}
+require(geomorph)
+# Carregar arquivo tps com a vista ventral do crânio 
+tps.v<-readland.tps("dadosmg/ventral.dig_curso.pls.tps",specID = "ID", readcurves = FALSE)
+
+# Gerar matriz com os pares de landmarks simétricos
+pairs.matrix<-matrix(c(2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,24,22,28,23,29,19,25,20,26,21,27,30,31,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,55,56),nrow=26,ncol=2,byrow=T)
+ind.v<-c(1:dim(tps.v)[3]) # vetor indivíduos
+# GPA - Simetria bilateral - Extrair componente simetrico da forma
+b.s<-bilat.symmetry(tps.v,ind=ind.v,object.sym=TRUE,land.pairs=pairs.matrix)
+shape.v<-b.s$symm.shape # componente sim?trico da forma
+ref.ventral<-mshape(shape.v)
+
+# Carregar classificadores a partir de lista externa
+plan<-read.table("dadosmg/Planilha_PLS.txt",h=T)
+plan
+species<-as.factor(plan[,2])
+species
+```
+
+Disparidade morfológica.
+```{r}
+# Disparidade Morfológica
+div.total<-morphol.disparity(shape.v~1,groups=NULL,iter=999)
+div.total
+div.sp<-morphol.disparity(shape.v~species,groups=~species,iter=999)
+div.sp
+# Comparar com dispersão de pontos nos primeiros eixos da PCA:
+col.group<-rainbow(length(levels(species))) # criar vetor de cores para grupos
+names(col.group)<-levels(species)
+col.group<-col.group[match(species,names(col.group))]
+PCA<-gm.prcomp(shape.v) # rodar a PCA
+plot(PCA$x[,1],PCA$x[,2],pch=21,cex=2,bg=col.group,asp=T)
+# Disparidade considerando alometria
+gpa.v<-gpagen(tps.v)
+size<-gpa.v$Csize
+div.sp<-morphol.disparity(shape.v~log(size)*species,groups=~species,iter=999)
+div.sp
+```
+
+
+
