@@ -14,10 +14,8 @@ csl: chicago-fullnote-bibliography.csl
 ---
 
 # Prefácio {-}
-**Manual de Ecologia Evolutiva, Biometria e Biogeografia**
 
-**Prof. Renan Maestri - Universidade Federal do Rio Grande do Sul**
-<img src="images/Slogan_oficial_sologo.jpg" width="100%" style="display: block; margin: auto;" />
+<img src="images/Capa do Livro.png" width="100%" style="display: block; margin: auto;" />
 
 Esse manual tem o objetivo de servir de apoio às disciplinas que leciono na UFRGS. O manual  contém material de apoio das disciplinas de Introdução à Ecologia, Ecologia I (evolutiva) e Ecologia II (macroecologia e biogeografia), Ecologia e Evolução Morfológica, Fundamentos de Morfometria Geométrica, Macroecologia, Macroevolução e Métodos Filogenéticos Comparativos e Oficina de Ecologia Evolutiva. Ministro essas disciplinas na Universidade Federal do Rio Grande do Sul (UFRGS) desde 2018, algumas para a graduação e algumas para a pós-graduação, para diferentes cursos e Programas de Pós-Graduação do Instituto de Biociências da UFRGS. Várias dessas disciplinas são ou foram desenvolvidas em colaboração com os profs Gonçalo Ferraz e Heinrich Hasenack (Ecologia I), Leandro Duarte e Luciane Crossetti (Ecologia II), Rodrigo Fornel (Fundamentos de Morfometria Geométrica) e Leandro Duarte (Oficina de Ecologia Evolutiva). O livro contém uma parte do material visto nessas disciplinas, com foco nas atividades práticas.
 
