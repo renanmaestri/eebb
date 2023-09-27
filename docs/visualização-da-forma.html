@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>Capítulo 6 Visualização da forma | Manual de Ecologia Evolutiva, Biometria e Biogeografia</title>
+<meta name="author" content="Renan Maestri">
+<meta name="description" content="Existem várias maneiras de visualizar mudanças de forma com dados de Morfometria Geométrica (ver Klingenberg 2013 Hystrix 24:15-14). Aliás, essa é uma das vantagens da morfometria geométrica em...">
+<meta name="generator" content="bookdown 0.35 with bs4_book()">
+<meta property="og:title" content="Capítulo 6 Visualização da forma | Manual de Ecologia Evolutiva, Biometria e Biogeografia">
+<meta property="og:type" content="book">
+<meta property="og:url" content="https://renanmaestri.github.io/eebb/visualização-da-forma.html">
+<meta property="og:image" content="https://renanmaestri.github.io/eebb/images/Slogan_oficial_sologo.jpg">
+<meta property="og:description" content="Existem várias maneiras de visualizar mudanças de forma com dados de Morfometria Geométrica (ver Klingenberg 2013 Hystrix 24:15-14). Aliás, essa é uma das vantagens da morfometria geométrica em...">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Capítulo 6 Visualização da forma | Manual de Ecologia Evolutiva, Biometria e Biogeografia">
+<meta name="twitter:description" content="Existem várias maneiras de visualizar mudanças de forma com dados de Morfometria Geométrica (ver Klingenberg 2013 Hystrix 24:15-14). Aliás, essa é uma das vantagens da morfometria geométrica em...">
+<meta name="twitter:image" content="https://renanmaestri.github.io/eebb/images/Slogan_oficial_sologo.jpg">
+<!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.5.1/transition.js"></script><script src="libs/bs3compat-0.5.1/tabs.js"></script><script src="libs/bs3compat-0.5.1/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><style type="text/css">
+    
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  </style>
+<style type="text/css">
+    /* Used with Pandoc 2.11+ new --citeproc when CSL is used */
+    div.csl-bib-body { }
+    div.csl-entry {
+      clear: both;
+        }
+    .hanging div.csl-entry {
+      margin-left:2em;
+      text-indent:-2em;
+    }
+    div.csl-left-margin {
+      min-width:2em;
+      float:left;
+    }
+    div.csl-right-inline {
+      margin-left:2em;
+      padding-left:1em;
+    }
+    div.csl-indent {
+      margin-left: 2em;
+    }
+  </style>
+<link rel="stylesheet" href="style.css">
+</head>
+<body data-spy="scroll" data-target="#toc">
+
+<div class="container-fluid">
+<div class="row">
+  <header class="col-sm-12 col-lg-3 sidebar sidebar-book"><a class="sr-only sr-only-focusable" href="#content">Skip to main content</a>
+
+    <div class="d-flex align-items-start justify-content-between">
+      <h1>
+        <a href="index.html" title="">Manual de Ecologia Evolutiva, Biometria e Biogeografia</a>
+      </h1>
+      <button class="btn btn-outline-primary d-lg-none ml-2 mt-1" type="button" data-toggle="collapse" data-target="#main-nav" aria-expanded="true" aria-controls="main-nav"><i class="fas fa-bars"></i><span class="sr-only">Show table of contents</span></button>
+    </div>
+
+    <div id="main-nav" class="collapse-lg">
+      <form role="search">
+        <input id="search" class="form-control" type="search" placeholder="Search" aria-label="Search">
+</form>
+
+      <nav aria-label="Table of contents"><h2>Table of contents</h2>
+        <ul class="book-toc list-unstyled">
+<li><a class="" href="index.html">Prefácio</a></li>
+<li class="book-part">Conceitos básicos</li>
+<li><a class="" href="conceitos-b%C3%A1sicos.html"><span class="header-section-number">1</span> Conceitos básicos</a></li>
+<li class="book-part">Introdução ao R</li>
+<li><a class="" href="uma-breve-introdu%C3%A7%C3%A3o-ao-r.html"><span class="header-section-number">2</span> Uma breve introdução ao R</a></li>
+<li class="book-part">Morfometria Geométrica</li>
+<li><a class="" href="morfometria-geom%C3%A9trica.html"><span class="header-section-number">3</span> Morfometria Geométrica</a></li>
+<li><a class="" href="digitaliza%C3%A7%C3%A3o-de-landmarks.html"><span class="header-section-number">4</span> Digitalização de landmarks</a></li>
+<li><a class="" href="an%C3%A1lise-de-procrustes.html"><span class="header-section-number">5</span> Análise de Procrustes</a></li>
+<li><a class="active" href="visualiza%C3%A7%C3%A3o-da-forma.html"><span class="header-section-number">6</span> Visualização da forma</a></li>
+<li><a class="" href="assimetria-e-quantifica%C3%A7%C3%A3o-de-erro.html"><span class="header-section-number">7</span> Assimetria e quantificação de erro</a></li>
+<li><a class="" href="tamanho-do-centr%C3%B3ide.html"><span class="header-section-number">8</span> Tamanho do Centróide</a></li>
+<li><a class="" href="m%C3%A9todos-de-ordena%C3%A7%C3%A3o.html"><span class="header-section-number">9</span> Métodos de ordenação</a></li>
+<li><a class="" href="partial-least-squares.html"><span class="header-section-number">10</span> Partial Least Squares</a></li>
+<li><a class="" href="modelos-lineares-para-discrimina%C3%A7%C3%A3o-de-grupos.html"><span class="header-section-number">11</span> Modelos lineares para discriminação de grupos</a></li>
+<li><a class="" href="alometria.html"><span class="header-section-number">12</span> Alometria</a></li>
+<li><a class="" href="an%C3%A1lise-de-trajet%C3%B3ria.html"><span class="header-section-number">13</span> Análise de Trajetória</a></li>
+<li><a class="" href="integra%C3%A7%C3%A3o-morfol%C3%B3gica-e-modularidade.html"><span class="header-section-number">14</span> Integração morfológica e modularidade</a></li>
+<li><a class="" href="disparidade-e-varia%C3%A7%C3%A3o-morfol%C3%B3gica.html"><span class="header-section-number">15</span> Disparidade e variação morfológica</a></li>
+<li><a class="" href="morfometria-geom%C3%A9trica-e-filogenias.html"><span class="header-section-number">16</span> Morfometria geométrica e filogenias</a></li>
+<li class="book-part">Macroevolução</li>
+<li><a class="" href="macroevolu%C3%A7%C3%A3o.html"><span class="header-section-number">17</span> Macroevolução</a></li>
+<li class="book-part">Biogeografia e Macroecologia</li>
+<li><a class="" href="biogeografia-e-macroecologia.html"><span class="header-section-number">18</span> Biogeografia e Macroecologia</a></li>
+<li class="book-part">Conclusão</li>
+<li><a class="" href="considera%C3%A7%C3%B5es-finais.html"><span class="header-section-number">19</span> Considerações finais</a></li>
+<li><a class="" href="refer%C3%AAncias.html">Referências</a></li>
+</ul>
+
+        <div class="book-extra">
+          <p><a id="book-repo" href="https://github.com/renanmaestri/eebb">View book source <i class="fab fa-github"></i></a></p>
+        </div>
+      </nav>
+</div>
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="visualização-da-forma" class="section level1" number="6">
+<h1>
+<span class="header-section-number">Capítulo 6</span> Visualização da forma<a class="anchor" aria-label="anchor" href="#visualiza%C3%A7%C3%A3o-da-forma"><i class="fas fa-link"></i></a>
+</h1>
+<p>Existem várias maneiras de visualizar mudanças de forma com dados de Morfometria Geométrica (ver Klingenberg 2013 Hystrix 24:15-14). Aliás, essa é uma das vantagens da morfometria geométrica em comparação com a morfometria tradicional. As formas mais comuns de visualização são por grids de deformação, vetores (ou lollipops), e através da construção de links entre os landmarks e extrapolação da forma via <em>outlines</em> e <em>surfaces</em>. Em qualquer caso, é importante perceber que a diferença de forma está contida apenas entre os landmarks/semilandmarks; as extrapolações de forma além dos landmarks (via grids e outlines, por exemplo) podem ser úteis para visualização, mas devem ser interpretadas com bastante cautela. É também importante perceber que a interpretação das mudanças de forma não deve considerar os landmarks individualmente, mas sim a sua mudança relativa a todos os outros landmarks.</p>
+<p>Construção de forma média da amostra para comparação.</p>
+<div class="sourceCode" id="cb30"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">ref</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/pkg/geomorph/man/mshape.html">mshape</a></span><span class="op">(</span><span class="va">shape</span><span class="op">)</span></span></code></pre></div>
+<p>Construção de links entre os landmarks.</p>
+<div class="sourceCode" id="cb31"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">links</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">2</span>,<span class="fl">2</span>,<span class="fl">3</span>,<span class="fl">3</span>,<span class="fl">4</span>,<span class="fl">4</span>,<span class="fl">5</span>,<span class="fl">5</span>,<span class="fl">6</span>,<span class="fl">6</span>,<span class="fl">7</span>,<span class="fl">7</span>,<span class="fl">8</span>,<span class="fl">8</span>,<span class="fl">9</span>,<span class="fl">9</span>,<span class="fl">10</span>,<span class="fl">10</span>,<span class="fl">11</span>,<span class="fl">11</span>,<span class="fl">12</span>,<span class="fl">12</span>,<span class="fl">13</span>,<span class="fl">13</span>,<span class="fl">1</span><span class="op">)</span>,nrow<span class="op">=</span><span class="fl">13</span>,ncol<span class="op">=</span><span class="fl">2</span>,byrow<span class="op">=</span><span class="cn">T</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/pkg/geomorph/man/plotAllSpecimens.html">plotAllSpecimens</a></span><span class="op">(</span><span class="va">shape</span>,mean<span class="op">=</span><span class="cn">TRUE</span>,links<span class="op">=</span><span class="va">links</span><span class="op">)</span></span></code></pre></div>
+<div class="inline-figure"><img src="03.2-mggpa_files/figure-html/unnamed-chunk-13-1.png" width="672"></div>
+<p>Os links entre os landmarks também podem ser definidos interativamente com a função define.links do pacote <em>geomorph</em>.</p>
+<div id="método-de-grid-de-deformação." class="section level2" number="6.1">
+<h2>
+<span class="header-section-number">6.1</span> Método de grid de deformação.<a class="anchor" aria-label="anchor" href="#m%C3%A9todo-de-grid-de-deforma%C3%A7%C3%A3o."><i class="fas fa-link"></i></a>
+</h2>
+<div class="sourceCode" id="cb32"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Definir cor dos landmarks e links</span></span>
+<span><span class="va">GP1</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/pkg/geomorph/man/gridPar.html">gridPar</a></span><span class="op">(</span>pt.bg<span class="op">=</span><span class="st">"gray"</span>,link.col<span class="op">=</span><span class="st">"gray"</span>,link.lty<span class="op">=</span><span class="fl">1</span><span class="op">)</span> <span class="co"># cor dos landmarks e links</span></span>
+<span><span class="co"># Gráfico de mudança de forma</span></span>
+<span><span class="fu"><a href="https://rdrr.io/pkg/geomorph/man/plotRefToTarget.html">plotRefToTarget</a></span><span class="op">(</span><span class="va">ref</span>,<span class="va">shape</span><span class="op">[</span>,,<span class="fl">8</span><span class="op">]</span>,links<span class="op">=</span><span class="va">links</span>,method<span class="op">=</span><span class="st">"TPS"</span><span class="op">)</span></span></code></pre></div>
+<div class="inline-figure"><img src="03.2-mggpa_files/figure-html/unnamed-chunk-14-1.png" width="672"></div>
+</div>
+<div id="método-de-vetores." class="section level2" number="6.2">
+<h2>
+<span class="header-section-number">6.2</span> Método de vetores.<a class="anchor" aria-label="anchor" href="#m%C3%A9todo-de-vetores."><i class="fas fa-link"></i></a>
+</h2>
+<div class="sourceCode" id="cb33"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/geomorph/man/plotRefToTarget.html">plotRefToTarget</a></span><span class="op">(</span><span class="va">ref</span>,<span class="va">shape</span><span class="op">[</span>,,<span class="fl">8</span><span class="op">]</span>,links<span class="op">=</span><span class="va">links</span>,method<span class="op">=</span><span class="st">"vector"</span><span class="op">)</span></span></code></pre></div>
+<div class="inline-figure"><img src="03.2-mggpa_files/figure-html/unnamed-chunk-15-1.png" width="672"></div>
+</div>
+<div id="método-de-linhas." class="section level2" number="6.3">
+<h2>
+<span class="header-section-number">6.3</span> Método de linhas.<a class="anchor" aria-label="anchor" href="#m%C3%A9todo-de-linhas."><i class="fas fa-link"></i></a>
+</h2>
+<div class="sourceCode" id="cb34"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/geomorph/man/plotRefToTarget.html">plotRefToTarget</a></span><span class="op">(</span><span class="va">ref</span>,<span class="va">shape</span><span class="op">[</span>,,<span class="fl">8</span><span class="op">]</span>,links<span class="op">=</span><span class="va">links</span>,method<span class="op">=</span><span class="st">"points"</span>,gridPars<span class="op">=</span><span class="va">GP1</span><span class="op">)</span></span></code></pre></div>
+<div class="inline-figure"><img src="03.2-mggpa_files/figure-html/unnamed-chunk-16-1.png" width="672"></div>
+<p>Aqui, o alvo está em preto e a referência(média) está em cinza.</p>
+</div>
+<div id="método-de-outlines." class="section level2" number="6.4">
+<h2>
+<span class="header-section-number">6.4</span> Método de outlines.<a class="anchor" aria-label="anchor" href="#m%C3%A9todo-de-outlines."><i class="fas fa-link"></i></a>
+</h2>
+<div class="sourceCode" id="cb35"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Carregando outline</span></span>
+<span><span class="va">outline</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/pkg/geomorph/man/warpRefOutline.html">warpRefOutline</a></span><span class="op">(</span><span class="st">"dadosmg/outline.mandibula.R.tps"</span>, <span class="va">tps</span><span class="op">[</span>,,<span class="fl">11</span><span class="op">]</span>, <span class="va">ref</span><span class="op">)</span></span></code></pre></div>
+<div class="sourceCode" id="cb36"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Gráfico de mudança de forma</span></span>
+<span><span class="va">GP1</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/pkg/geomorph/man/gridPar.html">gridPar</a></span><span class="op">(</span>pt.bg<span class="op">=</span><span class="st">"gray"</span>,tar.out.col <span class="op">=</span> <span class="st">"red"</span>,tar.out.cex <span class="op">=</span> <span class="fl">0.5</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/pkg/geomorph/man/plotRefToTarget.html">plotRefToTarget</a></span><span class="op">(</span><span class="va">ref</span>,<span class="va">shape</span><span class="op">[</span>,,<span class="fl">8</span><span class="op">]</span>,outline<span class="op">=</span><span class="va">outline</span><span class="op">$</span><span class="va">outline</span>,method<span class="op">=</span><span class="st">"TPS"</span><span class="op">)</span></span></code></pre></div>
+<div class="inline-figure"><img src="03.2-mggpa_files/figure-html/unnamed-chunk-18-1.png" width="672"></div>
+<div class="sourceCode" id="cb37"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/geomorph/man/plotRefToTarget.html">plotRefToTarget</a></span><span class="op">(</span><span class="va">ref</span>,<span class="va">shape</span><span class="op">[</span>,,<span class="fl">8</span><span class="op">]</span>,outline<span class="op">=</span><span class="va">outline</span><span class="op">$</span><span class="va">outline</span>,method<span class="op">=</span><span class="st">"points"</span>,gridPars<span class="op">=</span><span class="va">GP1</span><span class="op">)</span></span></code></pre></div>
+<div class="inline-figure"><img src="03.2-mggpa_files/figure-html/unnamed-chunk-18-2.png" width="672"></div>
+<p>Com um número suficiente de pontos, dá-se a impressão de um desenho. Veja o exemplo do pacote <em>geomorph</em>.</p>
+<div class="sourceCode" id="cb38"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span><span class="op">(</span><span class="st">"plethodon"</span><span class="op">)</span> </span>
+<span><span class="va">Y.gpa</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/pkg/geomorph/man/gpagen.html">gpagen</a></span><span class="op">(</span><span class="va">plethodon</span><span class="op">$</span><span class="va">land</span>, print.progress <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span> </span>
+<span><span class="va">ref.y</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/pkg/geomorph/man/mshape.html">mshape</a></span><span class="op">(</span><span class="va">Y.gpa</span><span class="op">$</span><span class="va">coords</span><span class="op">)</span> </span>
+<span><span class="va">GP4</span><span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/geomorph/man/gridPar.html">gridPar</a></span><span class="op">(</span>tar.out.col <span class="op">=</span> <span class="st">"red"</span>, tar.out.cex <span class="op">=</span> <span class="fl">0.3</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/pkg/geomorph/man/plotRefToTarget.html">plotRefToTarget</a></span><span class="op">(</span><span class="va">ref.y</span>,<span class="va">Y.gpa</span><span class="op">$</span><span class="va">coords</span><span class="op">[</span>,,<span class="fl">39</span><span class="op">]</span>, gridPars<span class="op">=</span><span class="va">GP4</span>, mag<span class="op">=</span><span class="fl">3</span>, outline<span class="op">=</span><span class="va">plethodon</span><span class="op">$</span><span class="va">outline</span>, method<span class="op">=</span><span class="st">"TPS"</span><span class="op">)</span></span></code></pre></div>
+<div class="inline-figure"><img src="03.2-mggpa_files/figure-html/unnamed-chunk-19-1.png" width="672"></div>
+</div>
+<div id="magnificação-da-forma" class="section level2" number="6.5">
+<h2>
+<span class="header-section-number">6.5</span> Magnificação da forma<a class="anchor" aria-label="anchor" href="#magnifica%C3%A7%C3%A3o-da-forma"><i class="fas fa-link"></i></a>
+</h2>
+<p>Às vezes quando as diferenças de forma são muito sútis, podemos aumentar as diferenças para visualizar melhor. Use com cuidado.</p>
+<div class="sourceCode" id="cb39"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/geomorph/man/plotRefToTarget.html">plotRefToTarget</a></span><span class="op">(</span><span class="va">ref</span>,<span class="va">shape</span><span class="op">[</span>,,<span class="fl">8</span><span class="op">]</span>,outline<span class="op">=</span><span class="va">outline</span><span class="op">$</span><span class="va">outline</span>, method<span class="op">=</span><span class="st">"points"</span>,gridPars<span class="op">=</span><span class="va">GP1</span>,mag<span class="op">=</span><span class="fl">3</span><span class="op">)</span></span></code></pre></div>
+<div class="inline-figure"><img src="03.2-mggpa_files/figure-html/unnamed-chunk-20-1.png" width="672"></div>
+<div style="page-break-after: always;"></div>
+
+</div>
+</div>
+  <div class="chapter-nav">
+<div class="prev"><a href="an%C3%A1lise-de-procrustes.html"><span class="header-section-number">5</span> Análise de Procrustes</a></div>
+<div class="next"><a href="assimetria-e-quantifica%C3%A7%C3%A3o-de-erro.html"><span class="header-section-number">7</span> Assimetria e quantificação de erro</a></div>
+</div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
+    <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
+      <ul class="nav navbar-nav">
+<li><a class="nav-link" href="#visualiza%C3%A7%C3%A3o-da-forma"><span class="header-section-number">6</span> Visualização da forma</a></li>
+<li><a class="nav-link" href="#m%C3%A9todo-de-grid-de-deforma%C3%A7%C3%A3o."><span class="header-section-number">6.1</span> Método de grid de deformação.</a></li>
+<li><a class="nav-link" href="#m%C3%A9todo-de-vetores."><span class="header-section-number">6.2</span> Método de vetores.</a></li>
+<li><a class="nav-link" href="#m%C3%A9todo-de-linhas."><span class="header-section-number">6.3</span> Método de linhas.</a></li>
+<li><a class="nav-link" href="#m%C3%A9todo-de-outlines."><span class="header-section-number">6.4</span> Método de outlines.</a></li>
+<li><a class="nav-link" href="#magnifica%C3%A7%C3%A3o-da-forma"><span class="header-section-number">6.5</span> Magnificação da forma</a></li>
+</ul>
+
+      <div class="book-extra">
+        <ul class="list-unstyled">
+<li><a id="book-source" href="https://github.com/renanmaestri/eebb/blob/master/03.2-mggpa.Rmd">View source <i class="fab fa-github"></i></a></li>
+          <li><a id="book-edit" href="https://github.com/renanmaestri/eebb/edit/master/03.2-mggpa.Rmd">Edit this page <i class="fab fa-github"></i></a></li>
+        </ul>
+</div>
+    </nav>
+</div>
+
+</div>
+</div> <!-- .container -->
+
+<footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>"<strong>Manual de Ecologia Evolutiva, Biometria e Biogeografia</strong>" was written by Renan Maestri. It was last built on 2023-09-27.</p>
+  </div>
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>This book was built by the <a class="text-light" href="https://bookdown.org">bookdown</a> R package.</p>
+  </div>
+
+</div></div>
+</footer>
+</body>
+</html>

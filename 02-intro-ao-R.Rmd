@@ -1,11 +1,4 @@
----
-output:
-  pdf_document: default
-  html_document: default
-editor_options: 
-  markdown: 
-    wrap: sentence
----
+# (PART) Introdução ao R {-}
 
 # Uma breve introdução ao R
 

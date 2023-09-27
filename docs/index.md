@@ -1,7 +1,7 @@
 --- 
 title: "Manual de Ecologia Evolutiva, Biometria e Biogeografia"
 author: "Renan Maestri"
-date: "2023-09-26"
+date: "2023-09-27"
 site: bookdown::bookdown_site
 documentclass: book
 bibliography: [book.bib, packages.bib]

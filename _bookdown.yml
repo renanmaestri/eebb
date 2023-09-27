@@ -3,6 +3,28 @@ book_filename: "eebb"
 new_session: true
 before_chapter_script: _common.R
 delete_merged_file: true
+rmd_files:
+- "index.Rmd"
+- "01-intro.Rmd"
+- "02-intro-ao-R.Rmd"
+- "03-m-geo.Rmd"
+- "03.1-mgdig.Rmd"
+- "03.2-mggpa.Rmd"
+- "03.3-mgerro.Rmd"
+- "03.4-mgsemi.Rmd"
+- "03.5-mgcsize.Rmd"
+- "03.6-mgord.Rmd"
+- "03.7-mgpls.Rmd"
+- "03.8-mgaov.Rmd"
+- "03.9-mgalo.Rmd"
+- "03.10-mgtraj.Rmd"
+- "03.11-mgmod.Rmd"
+- "03.12-mgdisp.Rmd"
+- "03.13-mgpcm.Rmd"
+- "04-macroevol.Rmd"
+- "05-biogeo.Rmd"
+- "06-final.Rmd"
+- "07-references.Rmd"
 language:
   label:
     fig: "Figura "

@@ -1,4 +1,4 @@
-## Morfometria geométrica e filogenias
+# Morfometria geométrica e filogenias
 
 Quando as morfologias são de espécies diferentes, os dados não são independentes, já que as espécies são conectadas por uma árvore filogenética. A não-independência filogenética precisa ser levada em consideração em análises de correlação. Pra além disso, podemos entender muito sobre padrões e processos evolutivos da morfologia quando temos dados morfológicos de diferentes espécies e hipóteses filogenéticas. O capítulo deste manual sobre Macroevolução explora muitas perguntas/análises que podem ser feitas em um contexto comparativo.
 Aqui, os exemplos vão apresentar algumas análises comparativas no contexto de morfometria geométrica.
@@ -43,7 +43,7 @@ plot(tree)
 tree<-compute.brlen(tree,1) # definir comprimento dos ramos = 1
 ```
 
-### Filomorfoespaço
+## Filomorfoespaço
 Podemos representar de maneira gráfica a filogenia no espaço de forma criado com uma análise de componentes principais.
 ```{r}
 
@@ -54,24 +54,24 @@ Filomorfoespaço 3D.
 
 ```
 
-### PCA filogenética
+## PCA filogenética
 ```{r}
 
 ```
 
 
-### Sinal filogenético multivariado
+## Sinal filogenético multivariado
 ```{r}
 
 ```
 
-### Análise filogenética generalizada por quadrados mínimos (PGLS multivariada)
+## Análise filogenética generalizada por quadrados mínimos (PGLS multivariada)
 ```{r}
 
 ```
 
 
-### Exercício - Morfometria e filogenias
+## Exercício - Morfometria e filogenias
 Carregue o arquivo .tps ‘Roedores_Digitalizados.tps’ contendo coordenadas
 digitalizadas na mandíbula de 143 indivíduos de 19 espécies de roedores. Carregue
 também a informação taxonômica de cada indivíduo (‘Roedores_classificador.txt’), e

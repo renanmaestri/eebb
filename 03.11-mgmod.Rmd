@@ -1,4 +1,4 @@
-## Integração morfológica e modularidade
+# Integração morfológica e modularidade
 
 Integração morfológica e modularidade são conceitos próximos, mas que dão ênfase para aspectos diferentes da morfologia: associação e dissociação entre partes.
 A arquitetura do mapa genótipo-fenótipo dá origem aos padrões e magnitudes de integração morfológica. Desenvolvimento e função são também aspectos fundamentais para entendermos as origens da integração morfológica e da modularidade.

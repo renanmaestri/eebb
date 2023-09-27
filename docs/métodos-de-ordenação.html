@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>Capítulo 9 Métodos de ordenação | Manual de Ecologia Evolutiva, Biometria e Biogeografia</title>
+<meta name="author" content="Renan Maestri">
+<meta name="description" content="Os métodos de ordenação mais usados em dados de morfometria geométrica são a Análise de Componentes Principais (PCA) e a Análise de Variáveis Canônicas (CVA). Ambos os métodos são exploratórios, e...">
+<meta name="generator" content="bookdown 0.35 with bs4_book()">
+<meta property="og:title" content="Capítulo 9 Métodos de ordenação | Manual de Ecologia Evolutiva, Biometria e Biogeografia">
+<meta property="og:type" content="book">
+<meta property="og:url" content="https://renanmaestri.github.io/eebb/métodos-de-ordenação.html">
+<meta property="og:image" content="https://renanmaestri.github.io/eebb/images/Slogan_oficial_sologo.jpg">
+<meta property="og:description" content="Os métodos de ordenação mais usados em dados de morfometria geométrica são a Análise de Componentes Principais (PCA) e a Análise de Variáveis Canônicas (CVA). Ambos os métodos são exploratórios, e...">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Capítulo 9 Métodos de ordenação | Manual de Ecologia Evolutiva, Biometria e Biogeografia">
+<meta name="twitter:description" content="Os métodos de ordenação mais usados em dados de morfometria geométrica são a Análise de Componentes Principais (PCA) e a Análise de Variáveis Canônicas (CVA). Ambos os métodos são exploratórios, e...">
+<meta name="twitter:image" content="https://renanmaestri.github.io/eebb/images/Slogan_oficial_sologo.jpg">
+<!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.5.1/transition.js"></script><script src="libs/bs3compat-0.5.1/tabs.js"></script><script src="libs/bs3compat-0.5.1/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><style type="text/css">
+    
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  </style>
+<style type="text/css">
+    /* Used with Pandoc 2.11+ new --citeproc when CSL is used */
+    div.csl-bib-body { }
+    div.csl-entry {
+      clear: both;
+        }
+    .hanging div.csl-entry {
+      margin-left:2em;
+      text-indent:-2em;
+    }
+    div.csl-left-margin {
+      min-width:2em;
+      float:left;
+    }
+    div.csl-right-inline {
+      margin-left:2em;
+      padding-left:1em;
+    }
+    div.csl-indent {
+      margin-left: 2em;
+    }
+  </style>
+<link rel="stylesheet" href="style.css">
+</head>
+<body data-spy="scroll" data-target="#toc">
+
+<div class="container-fluid">
+<div class="row">
+  <header class="col-sm-12 col-lg-3 sidebar sidebar-book"><a class="sr-only sr-only-focusable" href="#content">Skip to main content</a>
+
+    <div class="d-flex align-items-start justify-content-between">
+      <h1>
+        <a href="index.html" title="">Manual de Ecologia Evolutiva, Biometria e Biogeografia</a>
+      </h1>
+      <button class="btn btn-outline-primary d-lg-none ml-2 mt-1" type="button" data-toggle="collapse" data-target="#main-nav" aria-expanded="true" aria-controls="main-nav"><i class="fas fa-bars"></i><span class="sr-only">Show table of contents</span></button>
+    </div>
+
+    <div id="main-nav" class="collapse-lg">
+      <form role="search">
+        <input id="search" class="form-control" type="search" placeholder="Search" aria-label="Search">
+</form>
+
+      <nav aria-label="Table of contents"><h2>Table of contents</h2>
+        <ul class="book-toc list-unstyled">
+<li><a class="" href="index.html">Prefácio</a></li>
+<li class="book-part">Conceitos básicos</li>
+<li><a class="" href="conceitos-b%C3%A1sicos.html"><span class="header-section-number">1</span> Conceitos básicos</a></li>
+<li class="book-part">Introdução ao R</li>
+<li><a class="" href="uma-breve-introdu%C3%A7%C3%A3o-ao-r.html"><span class="header-section-number">2</span> Uma breve introdução ao R</a></li>
+<li class="book-part">Morfometria Geométrica</li>
+<li><a class="" href="morfometria-geom%C3%A9trica.html"><span class="header-section-number">3</span> Morfometria Geométrica</a></li>
+<li><a class="" href="digitaliza%C3%A7%C3%A3o-de-landmarks.html"><span class="header-section-number">4</span> Digitalização de landmarks</a></li>
+<li><a class="" href="an%C3%A1lise-de-procrustes.html"><span class="header-section-number">5</span> Análise de Procrustes</a></li>
+<li><a class="" href="visualiza%C3%A7%C3%A3o-da-forma.html"><span class="header-section-number">6</span> Visualização da forma</a></li>
+<li><a class="" href="assimetria-e-quantifica%C3%A7%C3%A3o-de-erro.html"><span class="header-section-number">7</span> Assimetria e quantificação de erro</a></li>
+<li><a class="" href="tamanho-do-centr%C3%B3ide.html"><span class="header-section-number">8</span> Tamanho do Centróide</a></li>
+<li><a class="active" href="m%C3%A9todos-de-ordena%C3%A7%C3%A3o.html"><span class="header-section-number">9</span> Métodos de ordenação</a></li>
+<li><a class="" href="partial-least-squares.html"><span class="header-section-number">10</span> Partial Least Squares</a></li>
+<li><a class="" href="modelos-lineares-para-discrimina%C3%A7%C3%A3o-de-grupos.html"><span class="header-section-number">11</span> Modelos lineares para discriminação de grupos</a></li>
+<li><a class="" href="alometria.html"><span class="header-section-number">12</span> Alometria</a></li>
+<li><a class="" href="an%C3%A1lise-de-trajet%C3%B3ria.html"><span class="header-section-number">13</span> Análise de Trajetória</a></li>
+<li><a class="" href="integra%C3%A7%C3%A3o-morfol%C3%B3gica-e-modularidade.html"><span class="header-section-number">14</span> Integração morfológica e modularidade</a></li>
+<li><a class="" href="disparidade-e-varia%C3%A7%C3%A3o-morfol%C3%B3gica.html"><span class="header-section-number">15</span> Disparidade e variação morfológica</a></li>
+<li><a class="" href="morfometria-geom%C3%A9trica-e-filogenias.html"><span class="header-section-number">16</span> Morfometria geométrica e filogenias</a></li>
+<li class="book-part">Macroevolução</li>
+<li><a class="" href="macroevolu%C3%A7%C3%A3o.html"><span class="header-section-number">17</span> Macroevolução</a></li>
+<li class="book-part">Biogeografia e Macroecologia</li>
+<li><a class="" href="biogeografia-e-macroecologia.html"><span class="header-section-number">18</span> Biogeografia e Macroecologia</a></li>
+<li class="book-part">Conclusão</li>
+<li><a class="" href="considera%C3%A7%C3%B5es-finais.html"><span class="header-section-number">19</span> Considerações finais</a></li>
+<li><a class="" href="refer%C3%AAncias.html">Referências</a></li>
+</ul>
+
+        <div class="book-extra">
+          <p><a id="book-repo" href="https://github.com/renanmaestri/eebb">View book source <i class="fab fa-github"></i></a></p>
+        </div>
+      </nav>
+</div>
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="métodos-de-ordenação" class="section level1" number="9">
+<h1>
+<span class="header-section-number">Capítulo 9</span> Métodos de ordenação<a class="anchor" aria-label="anchor" href="#m%C3%A9todos-de-ordena%C3%A7%C3%A3o"><i class="fas fa-link"></i></a>
+</h1>
+<p>Os métodos de ordenação mais usados em dados de morfometria geométrica são a Análise de Componentes Principais (PCA) e a Análise de Variáveis Canônicas (CVA). Ambos os métodos são exploratórios, e providenciam uma descrição dos dados, e não testes de hipóteses. No entanto, a CVA pode ser utilizada como uma função para discriminação de grupos, onde a porcentagem de classificação correta de espécimes dentro de grupos pode ser usada como valor de suporte ao testar a confiabilidade de grupos (ex: espécies).
+Para se aprofundar, leia Zeldtich et al. 2012 Geometric Morphometrics for Biologists - Elsevier, e Klingengerb &amp; Monteiro 2005 Distances and directions in multidimensional shape spaces: implications for morphometric applications - Systematic Biology.</p>
+<div id="análise-de-componentes-principais" class="section level2" number="9.1">
+<h2>
+<span class="header-section-number">9.1</span> Análise de Componentes Principais<a class="anchor" aria-label="anchor" href="#an%C3%A1lise-de-componentes-principais"><i class="fas fa-link"></i></a>
+</h2>
+<p>A análise de componentes principais (Principal Component Analysis - PCA) simplifica os complexos padrões de variação e covariação de dados multivariados ao construir componentes principais independentes que resumem a maior parte da variação dos dados em poucos eixos. Assim, também é possível observar diretamente a combinação de dois ou três componentes principais em um gráfico.</p>
+<p>Vamos fazer uma PCA com dados de morfometria geométrica.
+Primeiro, vamos carregar os dados, fazer uma GPA, e carregar os classificadores.</p>
+<div class="sourceCode" id="cb66"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">require</a></span><span class="op">(</span><span class="va"><a href="https://github.com/geomorphR/geomorph">geomorph</a></span><span class="op">)</span></span>
+<span><span class="co">#&gt; Carregando pacotes exigidos: geomorph</span></span>
+<span><span class="co">#&gt; Carregando pacotes exigidos: RRPP</span></span>
+<span><span class="co">#&gt; Carregando pacotes exigidos: rgl</span></span>
+<span><span class="co">#&gt; Carregando pacotes exigidos: Matrix</span></span>
+<span><span class="co"># Carregar dados</span></span>
+<span><span class="va">tps</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/pkg/geomorph/man/readland.tps.html">readland.tps</a></span><span class="op">(</span><span class="st">"dadosmg/Lista tuco dig 2.tps"</span>,specID <span class="op">=</span> <span class="st">"ID"</span>, readcurves <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/dim.html">dim</a></span><span class="op">(</span><span class="va">tps</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Gerar matriz com pares de landmarks simétricos</span></span>
+<span><span class="va">pairs.matrix</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">2</span>,<span class="fl">3</span>,<span class="fl">5</span>,<span class="fl">6</span>,<span class="fl">7</span>,<span class="fl">8</span>,<span class="fl">10</span>,<span class="fl">11</span>,<span class="fl">12</span>,<span class="fl">13</span>,<span class="fl">14</span>,<span class="fl">15</span>,<span class="fl">16</span>,<span class="fl">17</span>,<span class="fl">18</span>,<span class="fl">19</span>,<span class="fl">20</span>,<span class="fl">21</span>,<span class="fl">23</span>,<span class="fl">24</span>,<span class="fl">25</span>,<span class="fl">26</span>,<span class="fl">27</span>,<span class="fl">28</span><span class="op">)</span>,nrow<span class="op">=</span><span class="fl">12</span>,ncol<span class="op">=</span><span class="fl">2</span>,byrow<span class="op">=</span><span class="cn">T</span><span class="op">)</span></span>
+<span><span class="co"># Vetor indivíduos</span></span>
+<span><span class="va">ind</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fu"><a href="https://rdrr.io/r/base/dim.html">dim</a></span><span class="op">(</span><span class="va">tps</span><span class="op">)</span><span class="op">[</span><span class="fl">3</span><span class="op">]</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># GPA - Simetria bilateral </span></span>
+<span><span class="va">b.s</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/pkg/geomorph/man/bilat.symmetry.html">bilat.symmetry</a></span><span class="op">(</span><span class="va">tps</span>,ind<span class="op">=</span><span class="va">ind</span>,object.sym<span class="op">=</span><span class="cn">TRUE</span>,land.pairs<span class="op">=</span><span class="va">pairs.matrix</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Matriz de forma</span></span>
+<span><span class="va">shape.sym</span><span class="op">&lt;-</span><span class="va">b.s</span><span class="op">$</span><span class="va">symm.shape</span></span>
+<span></span>
+<span><span class="co"># Carregar classificadores a partir de lista externa</span></span>
+<span><span class="va">plan</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/utils/read.table.html">read.table</a></span><span class="op">(</span><span class="st">"dadosmg/Planilha Ctenomys.txt"</span>,h<span class="op">=</span><span class="cn">T</span><span class="op">)</span></span>
+<span><span class="va">plan</span></span>
+<span><span class="va">species</span><span class="op">&lt;-</span><span class="va">plan</span><span class="op">[</span>,<span class="fl">1</span><span class="op">]</span></span>
+<span><span class="va">species</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/base/factor.html">as.factor</a></span><span class="op">(</span><span class="va">species</span><span class="op">)</span></span>
+<span><span class="va">sex</span><span class="op">&lt;-</span><span class="va">plan</span><span class="op">[</span>,<span class="fl">2</span><span class="op">]</span></span>
+<span><span class="va">sex</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/base/factor.html">as.factor</a></span><span class="op">(</span><span class="va">sex</span><span class="op">)</span></span>
+<span><span class="va">sp.sex</span><span class="op">&lt;-</span><span class="va">plan</span><span class="op">[</span>,<span class="fl">3</span><span class="op">]</span></span>
+<span><span class="va">sp.sex</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/base/factor.html">as.factor</a></span><span class="op">(</span><span class="va">sp.sex</span><span class="op">)</span></span></code></pre></div>
+<p>Muitas funções realizam a Análise de Componentes Principais no R. Para dados de morfometria geométrica (MG), é melhor usar funções de pacotes desenhados especificamente para MG, já que eles reconhecem a redundância nos graus de liberdade que resultam das transformações de escala, posição e rotação feitas anteriormente na Análise Generalisada de Procrustes, e já retornam o número exato de componentes principais necessários para capturar 100% da variação da forma.
+Vamos usar a PCA implementada no pacote <em>geomorph</em>.</p>
+<div class="sourceCode" id="cb67"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">PCA</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/pkg/geomorph/man/gm.prcomp.html">gm.prcomp</a></span><span class="op">(</span><span class="va">shape.sym</span><span class="op">)</span></span>
+<span><span class="va">PCA</span> <span class="co"># Porcentagem de explicação dos eixos</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; Ordination type: Principal Component Analysis </span></span>
+<span><span class="co">#&gt; Centering by OLS mean</span></span>
+<span><span class="co">#&gt; Orthogonal projection of OLS residuals</span></span>
+<span><span class="co">#&gt; Number of observations: 30 </span></span>
+<span><span class="co">#&gt; Number of vectors 28 </span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; Importance of Components:</span></span>
+<span><span class="co">#&gt;                               Comp1        Comp2</span></span>
+<span><span class="co">#&gt; Eigenvalues            0.0005691898 0.0002349919</span></span>
+<span><span class="co">#&gt; Proportion of Variance 0.4018322761 0.1658977524</span></span>
+<span><span class="co">#&gt; Cumulative Proportion  0.4018322761 0.5677300285</span></span>
+<span><span class="co">#&gt;                               Comp3        Comp4</span></span>
+<span><span class="co">#&gt; Eigenvalues            0.0001552391 9.049344e-05</span></span>
+<span><span class="co">#&gt; Proportion of Variance 0.1095945175 6.388587e-02</span></span>
+<span><span class="co">#&gt; Cumulative Proportion  0.6773245461 7.412104e-01</span></span>
+<span><span class="co">#&gt;                               Comp5        Comp6</span></span>
+<span><span class="co">#&gt; Eigenvalues            6.732315e-05 5.547785e-05</span></span>
+<span><span class="co">#&gt; Proportion of Variance 4.752828e-02 3.916583e-02</span></span>
+<span><span class="co">#&gt; Cumulative Proportion  7.887387e-01 8.279045e-01</span></span>
+<span><span class="co">#&gt;                               Comp7        Comp8</span></span>
+<span><span class="co">#&gt; Eigenvalues            4.232582e-05 3.705712e-05</span></span>
+<span><span class="co">#&gt; Proportion of Variance 2.988086e-02 2.616131e-02</span></span>
+<span><span class="co">#&gt; Cumulative Proportion  8.577854e-01 8.839467e-01</span></span>
+<span><span class="co">#&gt;                               Comp9       Comp10</span></span>
+<span><span class="co">#&gt; Eigenvalues            3.356797e-05 2.770576e-05</span></span>
+<span><span class="co">#&gt; Proportion of Variance 2.369806e-02 1.955950e-02</span></span>
+<span><span class="co">#&gt; Cumulative Proportion  9.076448e-01 9.272043e-01</span></span>
+<span><span class="co">#&gt;                              Comp11       Comp12</span></span>
+<span><span class="co">#&gt; Eigenvalues            2.221806e-05 1.731913e-05</span></span>
+<span><span class="co">#&gt; Proportion of Variance 1.568534e-02 1.222683e-02</span></span>
+<span><span class="co">#&gt; Cumulative Proportion  9.428896e-01 9.551164e-01</span></span>
+<span><span class="co">#&gt;                              Comp13       Comp14</span></span>
+<span><span class="co">#&gt; Eigenvalues            1.405341e-05 1.156877e-05</span></span>
+<span><span class="co">#&gt; Proportion of Variance 9.921316e-03 8.167232e-03</span></span>
+<span><span class="co">#&gt; Cumulative Proportion  9.650377e-01 9.732050e-01</span></span>
+<span><span class="co">#&gt;                              Comp15       Comp16</span></span>
+<span><span class="co">#&gt; Eigenvalues            1.028007e-05 8.308937e-06</span></span>
+<span><span class="co">#&gt; Proportion of Variance 7.257446e-03 5.865880e-03</span></span>
+<span><span class="co">#&gt; Cumulative Proportion  9.804624e-01 9.863283e-01</span></span>
+<span><span class="co">#&gt;                              Comp17       Comp18</span></span>
+<span><span class="co">#&gt; Eigenvalues            7.020041e-06 3.263883e-06</span></span>
+<span><span class="co">#&gt; Proportion of Variance 4.955955e-03 2.304211e-03</span></span>
+<span><span class="co">#&gt; Cumulative Proportion  9.912842e-01 9.935885e-01</span></span>
+<span><span class="co">#&gt;                              Comp19       Comp20</span></span>
+<span><span class="co">#&gt; Eigenvalues            2.679842e-06 2.081122e-06</span></span>
+<span><span class="co">#&gt; Proportion of Variance 1.891894e-03 1.469214e-03</span></span>
+<span><span class="co">#&gt; Cumulative Proportion  9.954804e-01 9.969496e-01</span></span>
+<span><span class="co">#&gt;                              Comp21       Comp22</span></span>
+<span><span class="co">#&gt; Eigenvalues            1.577657e-06 1.186452e-06</span></span>
+<span><span class="co">#&gt; Proportion of Variance 1.113783e-03 8.376027e-04</span></span>
+<span><span class="co">#&gt; Cumulative Proportion  9.980634e-01 9.989010e-01</span></span>
+<span><span class="co">#&gt;                              Comp23       Comp24</span></span>
+<span><span class="co">#&gt; Eigenvalues            9.098790e-07 4.159837e-07</span></span>
+<span><span class="co">#&gt; Proportion of Variance 6.423494e-04 2.936730e-04</span></span>
+<span><span class="co">#&gt; Cumulative Proportion  9.995433e-01 9.998370e-01</span></span>
+<span><span class="co">#&gt;                              Comp25       Comp26</span></span>
+<span><span class="co">#&gt; Eigenvalues            1.598994e-07 6.588247e-08</span></span>
+<span><span class="co">#&gt; Proportion of Variance 1.128845e-04 4.651120e-05</span></span>
+<span><span class="co">#&gt; Cumulative Proportion  9.999499e-01 9.999964e-01</span></span>
+<span><span class="co">#&gt;                              Comp27       Comp28</span></span>
+<span><span class="co">#&gt; Eigenvalues            5.138116e-09 1.613869e-19</span></span>
+<span><span class="co">#&gt; Proportion of Variance 3.627368e-06 1.139347e-16</span></span>
+<span><span class="co">#&gt; Cumulative Proportion  1.000000e+00 1.000000e+00</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">PCA</span>,axis1<span class="op">=</span><span class="fl">1</span>, axis2<span class="op">=</span><span class="fl">2</span><span class="op">)</span></span></code></pre></div>
+<div class="inline-figure"><img src="03.6-mgord_files/figure-html/unnamed-chunk-2-1.png" width="672"></div>
+<p>Antes de observar as mudanças de forma ao longo do gráfico da PCA, vamos criar uma forma média de referência e definir links entre os landmarks.</p>
+<div class="sourceCode" id="cb68"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Forma média</span></span>
+<span><span class="va">ref</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/pkg/geomorph/man/mshape.html">mshape</a></span><span class="op">(</span><span class="va">shape.sym</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">links.tuco</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">2</span>,<span class="fl">1</span>,<span class="fl">3</span>,<span class="fl">2</span>,<span class="fl">7</span>,<span class="fl">3</span>,<span class="fl">8</span>,<span class="fl">7</span>,<span class="fl">10</span>,<span class="fl">8</span>,<span class="fl">11</span>,<span class="fl">10</span>,<span class="fl">18</span>,<span class="fl">11</span>,<span class="fl">19</span>,<span class="fl">14</span>,<span class="fl">18</span>,<span class="fl">15</span>,<span class="fl">19</span>,<span class="fl">10</span>,<span class="fl">14</span>,<span class="fl">11</span>,<span class="fl">15</span>,<span class="fl">18</span>,<span class="fl">20</span>,<span class="fl">19</span>,<span class="fl">21</span>,<span class="fl">20</span>,<span class="fl">23</span>,<span class="fl">21</span>,<span class="fl">24</span>,<span class="fl">23</span>,<span class="fl">25</span>,<span class="fl">24</span>,<span class="fl">26</span>,<span class="fl">25</span>,<span class="fl">27</span>,<span class="fl">26</span>,<span class="fl">28</span>,<span class="fl">27</span>,<span class="fl">29</span>,<span class="fl">28</span>,<span class="fl">29</span>,<span class="fl">4</span>,<span class="fl">5</span>,<span class="fl">4</span>,<span class="fl">6</span>,<span class="fl">6</span>,<span class="fl">9</span>,<span class="fl">5</span>,<span class="fl">9</span>,<span class="fl">1</span>,<span class="fl">4</span>,<span class="fl">4</span>,<span class="fl">9</span>,<span class="fl">9</span>,<span class="fl">22</span>,<span class="fl">22</span>,<span class="fl">29</span>,<span class="fl">7</span>,<span class="fl">9</span>,<span class="fl">8</span>,<span class="fl">9</span>,<span class="fl">10</span>,<span class="fl">12</span>,<span class="fl">11</span>,<span class="fl">13</span>,<span class="fl">9</span>,<span class="fl">12</span>,<span class="fl">9</span>,<span class="fl">13</span>,<span class="fl">12</span>,<span class="fl">16</span>,<span class="fl">13</span>,<span class="fl">17</span>,<span class="fl">16</span>,<span class="fl">22</span>,<span class="fl">17</span>,<span class="fl">22</span>,<span class="fl">16</span>,<span class="fl">18</span>,<span class="fl">17</span>,<span class="fl">19</span>,<span class="fl">16</span>,<span class="fl">20</span>,<span class="fl">17</span>,<span class="fl">21</span>,<span class="fl">22</span>,<span class="fl">23</span>,<span class="fl">22</span>,<span class="fl">24</span>,<span class="fl">23</span>,<span class="fl">27</span>,<span class="fl">24</span>,<span class="fl">28</span>,<span class="fl">23</span>,<span class="fl">29</span>,<span class="fl">24</span>,<span class="fl">29</span><span class="op">)</span>,nrow<span class="op">=</span><span class="fl">50</span>,ncol<span class="op">=</span><span class="fl">2</span>,byrow<span class="op">=</span><span class="cn">T</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Plotar espécimes contra a média</span></span>
+<span><span class="va">GP1</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/pkg/geomorph/man/gridPar.html">gridPar</a></span><span class="op">(</span>pt.bg<span class="op">=</span><span class="st">"gray"</span>,link.col<span class="op">=</span><span class="st">"gray"</span>,link.lty<span class="op">=</span><span class="fl">1</span><span class="op">)</span> <span class="co"># cor dos landmarks e links</span></span>
+<span><span class="fu"><a href="https://rdrr.io/pkg/geomorph/man/plotRefToTarget.html">plotRefToTarget</a></span><span class="op">(</span><span class="va">ref</span>,<span class="va">shape.sym</span><span class="op">[</span>,,<span class="fl">8</span><span class="op">]</span>,links<span class="op">=</span><span class="va">links.tuco</span>,method<span class="op">=</span><span class="st">"TPS"</span><span class="op">)</span> </span></code></pre></div>
+<div class="inline-figure"><img src="03.6-mgord_files/figure-html/unnamed-chunk-3-1.png" width="672"></div>
+<div class="sourceCode" id="cb69"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/geomorph/man/plotRefToTarget.html">plotRefToTarget</a></span><span class="op">(</span><span class="va">ref</span>,<span class="va">shape.sym</span><span class="op">[</span>,,<span class="fl">8</span><span class="op">]</span>,links<span class="op">=</span><span class="va">links.tuco</span>,method<span class="op">=</span><span class="st">"vector"</span><span class="op">)</span> </span></code></pre></div>
+<div class="inline-figure"><img src="03.6-mgord_files/figure-html/unnamed-chunk-3-2.png" width="672"></div>
+<div class="sourceCode" id="cb70"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/geomorph/man/plotRefToTarget.html">plotRefToTarget</a></span><span class="op">(</span><span class="va">ref</span>,<span class="va">shape.sym</span><span class="op">[</span>,,<span class="fl">8</span><span class="op">]</span>,links<span class="op">=</span><span class="va">links.tuco</span>,method<span class="op">=</span><span class="st">"points"</span>,gridPars<span class="op">=</span><span class="va">GP1</span><span class="op">)</span> <span class="co"># alvo = em preto, referência = em cinza</span></span></code></pre></div>
+<div class="inline-figure"><img src="03.6-mgord_files/figure-html/unnamed-chunk-3-3.png" width="672"></div>
+<div class="sourceCode" id="cb71"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span></span>
+<span><span class="fu"><a href="https://rdrr.io/pkg/geomorph/man/plotAllSpecimens.html">plotAllSpecimens</a></span><span class="op">(</span><span class="va">shape.sym</span>,mean<span class="op">=</span><span class="cn">TRUE</span>,links<span class="op">=</span><span class="va">links.tuco</span><span class="op">)</span></span></code></pre></div>
+<div class="inline-figure"><img src="03.6-mgord_files/figure-html/unnamed-chunk-3-4.png" width="672"></div>
+<p>Podemos estilizar a PCA para mostrar, por exemplo, quais indivíduos pertecem a quais grupos. Além disso, é importante observar as formas associadas com porções diferentes do gráfico.</p>
+<div class="sourceCode" id="cb72"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># PCA Estilizada</span></span>
+<span><span class="va">col.group</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/grDevices/palettes.html">rainbow</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/levels.html">levels</a></span><span class="op">(</span><span class="va">species</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="co"># criar vetor de cores para grupos</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">col.group</span><span class="op">)</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/base/levels.html">levels</a></span><span class="op">(</span><span class="va">species</span><span class="op">)</span></span>
+<span><span class="va">col.group</span><span class="op">&lt;-</span><span class="va">col.group</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/match.html">match</a></span><span class="op">(</span><span class="va">species</span>,<span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">col.group</span><span class="op">)</span><span class="op">)</span><span class="op">]</span></span>
+<span><span class="va">PCA</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/pkg/geomorph/man/gm.prcomp.html">gm.prcomp</a></span><span class="op">(</span><span class="va">shape.sym</span><span class="op">)</span> <span class="co"># rodar a PCA</span></span>
+<span><span class="va">xlab</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste</a></span><span class="op">(</span><span class="st">"Principal Component 1 "</span>, <span class="st">"("</span>,<span class="fu"><a href="https://rdrr.io/r/base/Round.html">round</a></span><span class="op">(</span><span class="va">PCA</span><span class="op">$</span><span class="va">pc.summary</span><span class="op">$</span><span class="va">importance</span><span class="op">[</span><span class="fl">2</span>,<span class="fl">1</span><span class="op">]</span><span class="op">*</span><span class="fl">100</span>,<span class="fl">1</span><span class="op">)</span>,<span class="st">"%)"</span>,sep<span class="op">=</span><span class="st">""</span><span class="op">)</span> <span class="co"># Criar label pro eixo 1</span></span>
+<span><span class="va">ylab</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste</a></span><span class="op">(</span><span class="st">"Principal Component 2 "</span>, <span class="st">"("</span>,<span class="fu"><a href="https://rdrr.io/r/base/Round.html">round</a></span><span class="op">(</span><span class="va">PCA</span><span class="op">$</span><span class="va">pc.summary</span><span class="op">$</span><span class="va">importance</span><span class="op">[</span><span class="fl">2</span>,<span class="fl">2</span><span class="op">]</span><span class="op">*</span><span class="fl">100</span>,<span class="fl">1</span><span class="op">)</span>,<span class="st">"%)"</span>,sep<span class="op">=</span><span class="st">""</span><span class="op">)</span> <span class="co"># Criar label pro eixo 2</span></span>
+<span><span class="op">{</span><span class="va">mat</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">4</span>,<span class="fl">5</span>,<span class="fl">0</span>,<span class="fl">1</span>,<span class="fl">1</span>,<span class="fl">2</span>,<span class="fl">1</span>,<span class="fl">1</span>,<span class="fl">3</span><span class="op">)</span>,<span class="fl">3</span><span class="op">)</span> <span class="co"># Dividir a janela do plot</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/layout.html">layout</a></span><span class="op">(</span><span class="va">mat</span>, widths<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">1</span>,<span class="fl">1</span><span class="op">)</span>, heights<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">1</span>,<span class="fl">0.6</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/par.html">par</a></span><span class="op">(</span>mar<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">4</span>, <span class="fl">4</span>, <span class="fl">1</span>, <span class="fl">1</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">PCA</span><span class="op">$</span><span class="va">x</span><span class="op">[</span>,<span class="fl">1</span><span class="op">]</span>,<span class="va">PCA</span><span class="op">$</span><span class="va">x</span><span class="op">[</span>,<span class="fl">2</span><span class="op">]</span>,pch<span class="op">=</span><span class="fl">21</span>,cex<span class="op">=</span><span class="fl">2</span>,bg<span class="op">=</span><span class="va">col.group</span>,xlab<span class="op">=</span><span class="va">xlab</span>,ylab<span class="op">=</span><span class="va">ylab</span>,asp<span class="op">=</span><span class="cn">T</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/legend.html">legend</a></span><span class="op">(</span><span class="fl">0.025</span>,<span class="op">-</span><span class="fl">0.015</span>,legend<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/unique.html">unique</a></span><span class="op">(</span><span class="va">species</span><span class="op">)</span>,pch<span class="op">=</span><span class="fl">19</span>,col<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/unique.html">unique</a></span><span class="op">(</span><span class="va">col.group</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/pkg/geomorph/man/plotRefToTarget.html">plotRefToTarget</a></span><span class="op">(</span><span class="va">ref</span>,<span class="va">PCA</span><span class="op">$</span><span class="va">shapes</span><span class="op">$</span><span class="va">shapes.comp1</span><span class="op">$</span><span class="va">min</span>,links<span class="op">=</span><span class="va">links.tuco</span>,method<span class="op">=</span><span class="st">"TPS"</span>,gridPars<span class="op">=</span><span class="va">GP1</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/pkg/geomorph/man/plotRefToTarget.html">plotRefToTarget</a></span><span class="op">(</span><span class="va">ref</span>,<span class="va">PCA</span><span class="op">$</span><span class="va">shapes</span><span class="op">$</span><span class="va">shapes.comp1</span><span class="op">$</span><span class="va">max</span>,links<span class="op">=</span><span class="va">links.tuco</span>,method<span class="op">=</span><span class="st">"TPS"</span>,gridPars<span class="op">=</span><span class="va">GP1</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/pkg/geomorph/man/plotRefToTarget.html">plotRefToTarget</a></span><span class="op">(</span><span class="va">ref</span>,<span class="va">PCA</span><span class="op">$</span><span class="va">shapes</span><span class="op">$</span><span class="va">shapes.comp2</span><span class="op">$</span><span class="va">max</span>,links<span class="op">=</span><span class="va">links.tuco</span>,method<span class="op">=</span><span class="st">"TPS"</span>,gridPars<span class="op">=</span><span class="va">GP1</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/pkg/geomorph/man/plotRefToTarget.html">plotRefToTarget</a></span><span class="op">(</span><span class="va">ref</span>,<span class="va">PCA</span><span class="op">$</span><span class="va">shapes</span><span class="op">$</span><span class="va">shapes.comp2</span><span class="op">$</span><span class="va">min</span>,links<span class="op">=</span><span class="va">links.tuco</span>,method<span class="op">=</span><span class="st">"TPS"</span>,gridPars<span class="op">=</span><span class="va">GP1</span><span class="op">)</span><span class="op">}</span></span></code></pre></div>
+<div class="inline-figure"><img src="03.6-mgord_files/figure-html/unnamed-chunk-4-1.png" width="672"></div>
+<div class="sourceCode" id="cb73"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/par.html">par</a></span><span class="op">(</span>mfrow<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">1</span><span class="op">)</span><span class="op">)</span> <span class="co"># janela default do gr?fico  </span></span></code></pre></div>
+<p>É possível gerar elipses de confiança para os grupos em questão.</p>
+<div class="sourceCode" id="cb74"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">require</a></span><span class="op">(</span><span class="va"><a href="https://github.com/vegandevs/vegan">vegan</a></span><span class="op">)</span></span>
+<span><span class="co">#&gt; Carregando pacotes exigidos: vegan</span></span>
+<span><span class="co">#&gt; Carregando pacotes exigidos: permute</span></span>
+<span><span class="co">#&gt; Carregando pacotes exigidos: lattice</span></span>
+<span><span class="co">#&gt; This is vegan 2.6-4</span></span>
+<span><span class="op">{</span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">PCA</span><span class="op">$</span><span class="va">x</span><span class="op">[</span>,<span class="fl">1</span><span class="op">]</span>,<span class="va">PCA</span><span class="op">$</span><span class="va">x</span><span class="op">[</span>,<span class="fl">2</span><span class="op">]</span>,pch<span class="op">=</span><span class="fl">21</span>,cex<span class="op">=</span><span class="fl">2</span>,bg<span class="op">=</span><span class="va">col.group</span>,xlab<span class="op">=</span><span class="va">xlab</span>,ylab<span class="op">=</span><span class="va">ylab</span>,asp<span class="op">=</span><span class="cn">T</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/pkg/vegan/man/ordihull.html">ordiellipse</a></span><span class="op">(</span><span class="va">PCA</span><span class="op">$</span><span class="va">x</span>,group<span class="op">=</span><span class="va">species</span>, kind<span class="op">=</span><span class="st">"sd"</span>, conf<span class="op">=</span><span class="fl">0.95</span><span class="op">)</span><span class="op">}</span></span></code></pre></div>
+<div class="inline-figure"><img src="03.6-mgord_files/figure-html/unnamed-chunk-5-1.png" width="672"></div>
+<div class="sourceCode" id="cb75"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="op">{</span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">PCA</span><span class="op">$</span><span class="va">x</span><span class="op">[</span>,<span class="fl">1</span><span class="op">]</span>,<span class="va">PCA</span><span class="op">$</span><span class="va">x</span><span class="op">[</span>,<span class="fl">2</span><span class="op">]</span>,pch<span class="op">=</span><span class="fl">21</span>,cex<span class="op">=</span><span class="fl">2</span>,bg<span class="op">=</span><span class="va">col.group</span>,xlab<span class="op">=</span><span class="va">xlab</span>,ylab<span class="op">=</span><span class="va">ylab</span>,asp<span class="op">=</span><span class="cn">T</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/pkg/vegan/man/ordihull.html">ordihull</a></span><span class="op">(</span><span class="va">PCA</span><span class="op">$</span><span class="va">x</span>,group<span class="op">=</span><span class="va">species</span><span class="op">)</span><span class="op">}</span></span></code></pre></div>
+<div class="inline-figure"><img src="03.6-mgord_files/figure-html/unnamed-chunk-5-2.png" width="672"></div>
+<p>As mudanças de forma ao longo dos eixos da PCA podem ser visualizadas comparando-as com a média da amostra. Usualmente, as formas extremas de cada eixo são usadas para visualização. O <em>geomorph</em> retorna as formas extremas de maneira simplificada no output da função que faz a PCA.</p>
+<div class="sourceCode" id="cb76"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Definir cores dos landmarks e links</span></span>
+<span><span class="va">GP1</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/pkg/geomorph/man/gridPar.html">gridPar</a></span><span class="op">(</span>pt.bg<span class="op">=</span><span class="st">"gray"</span>,link.col<span class="op">=</span><span class="st">"gray"</span>,link.lty<span class="op">=</span><span class="fl">1</span><span class="op">)</span> <span class="co"># cor dos landmarks e links</span></span>
+<span><span class="co"># Mínimos e máximos contra a média</span></span>
+<span><span class="fu"><a href="https://rdrr.io/pkg/geomorph/man/plotRefToTarget.html">plotRefToTarget</a></span><span class="op">(</span><span class="va">ref</span>,<span class="va">PCA</span><span class="op">$</span><span class="va">shapes</span><span class="op">$</span><span class="va">shapes.comp1</span><span class="op">$</span><span class="va">min</span>,links<span class="op">=</span><span class="va">links.tuco</span>,method<span class="op">=</span><span class="st">"TPS"</span>,gridPars<span class="op">=</span><span class="va">GP1</span><span class="op">)</span></span></code></pre></div>
+<div class="inline-figure"><img src="03.6-mgord_files/figure-html/unnamed-chunk-6-1.png" width="672"></div>
+<div class="sourceCode" id="cb77"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/geomorph/man/plotRefToTarget.html">plotRefToTarget</a></span><span class="op">(</span><span class="va">ref</span>,<span class="va">PCA</span><span class="op">$</span><span class="va">shapes</span><span class="op">$</span><span class="va">shapes.comp1</span><span class="op">$</span><span class="va">max</span>,links<span class="op">=</span><span class="va">links.tuco</span>,method<span class="op">=</span><span class="st">"TPS"</span>,gridPars<span class="op">=</span><span class="va">GP1</span><span class="op">)</span></span></code></pre></div>
+<div class="inline-figure"><img src="03.6-mgord_files/figure-html/unnamed-chunk-6-2.png" width="672"></div>
+<div class="sourceCode" id="cb78"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Mínimo contra máximo</span></span>
+<span><span class="fu"><a href="https://rdrr.io/pkg/geomorph/man/plotRefToTarget.html">plotRefToTarget</a></span><span class="op">(</span><span class="va">PCA</span><span class="op">$</span><span class="va">shapes</span><span class="op">$</span><span class="va">shapes.comp1</span><span class="op">$</span><span class="va">min</span>,<span class="va">PCA</span><span class="op">$</span><span class="va">shapes</span><span class="op">$</span><span class="va">shapes.comp1</span><span class="op">$</span><span class="va">max</span>,links<span class="op">=</span><span class="va">links.tuco</span>,method<span class="op">=</span><span class="st">"points"</span>,gridPars<span class="op">=</span><span class="va">GP1</span><span class="op">)</span> <span class="co"># alvo = em preto, referência = em cinza</span></span></code></pre></div>
+<div class="inline-figure"><img src="03.6-mgord_files/figure-html/unnamed-chunk-6-3.png" width="672"></div>
+</div>
+<div id="análise-de-variação-canônica" class="section level2" number="9.2">
+<h2>
+<span class="header-section-number">9.2</span> Análise de Variação Canônica<a class="anchor" aria-label="anchor" href="#an%C3%A1lise-de-varia%C3%A7%C3%A3o-can%C3%B4nica"><i class="fas fa-link"></i></a>
+</h2>
+<p>Assim como na PCA, a Análise de Variação Canônica (Canonical Variates Analysis - CVA) também cria novas variáveis (eixos de ordenação) que são ortogonais. No entanto, a CVA descreve as diferenças <em>entre</em> as médias de <em>grupos</em>. Assim, ela pode ser usada para descrever as diferenças de forma entre quaisquer <em>grupos</em> biológicos que tenhamos. Contudo, ao contrário da PCA, que simplesmente rotaciona as coordenadas originais, a CVA realiza uma transformação (rescalonamento pela variação dentro de grupos) no sistema de coordenadas original, e por isso não deve ser interpretada livremente para representar variação de forma entre indivíduos. A CVA mostra apenas a direção em que os grupos são melhor discriminados um do outro.</p>
+<div class="sourceCode" id="cb79"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">require</a></span><span class="op">(</span><span class="va"><a href="https://github.com/zarquon42b/Morpho">Morpho</a></span><span class="op">)</span></span>
+<span><span class="co">#&gt; Carregando pacotes exigidos: Morpho</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; Attaching package: 'Morpho'</span></span>
+<span><span class="co">#&gt; The following object is masked from 'package:RRPP':</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt;     classify</span></span>
+<span><span class="va">cva</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/pkg/Morpho/man/CVA.html">CVA</a></span><span class="op">(</span><span class="va">PCA</span><span class="op">$</span><span class="va">x</span><span class="op">[</span>,<span class="fl">1</span><span class="op">:</span><span class="fl">20</span><span class="op">]</span>,groups<span class="op">=</span><span class="va">species</span>,cv<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span> <span class="co"># Jackknife Cross-validation</span></span>
+<span><span class="va">cva</span><span class="op">$</span><span class="va">Var</span></span>
+<span><span class="co">#&gt;      Canonical roots % Variance Cumulative %</span></span>
+<span><span class="co">#&gt; [1,]        88.21224   82.81358     82.81358</span></span>
+<span><span class="co">#&gt; [2,]        18.30681   17.18642    100.00000</span></span>
+<span></span>
+<span><span class="op">{</span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">cva</span><span class="op">$</span><span class="va">CVscores</span>,bg<span class="op">=</span><span class="va">col.group</span>,pch<span class="op">=</span><span class="fl">21</span>,cex<span class="op">=</span><span class="fl">2</span>,xlab<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste</a></span><span class="op">(</span><span class="st">"CV1  ("</span>,<span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Round.html">round</a></span><span class="op">(</span><span class="va">cva</span><span class="op">$</span><span class="va">Var</span><span class="op">[</span><span class="fl">1</span>,<span class="fl">2</span><span class="op">]</span>,<span class="fl">1</span><span class="op">)</span>,<span class="st">"%)"</span><span class="op">)</span>,sep<span class="op">=</span><span class="st">""</span><span class="op">)</span>,ylab<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste</a></span><span class="op">(</span><span class="st">"CV2  ("</span>,<span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Round.html">round</a></span><span class="op">(</span><span class="va">cva</span><span class="op">$</span><span class="va">Var</span><span class="op">[</span><span class="fl">2</span>,<span class="fl">2</span><span class="op">]</span>,<span class="fl">1</span><span class="op">)</span>,<span class="st">"%)"</span><span class="op">)</span>,sep<span class="op">=</span><span class="st">""</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/legend.html">legend</a></span><span class="op">(</span><span class="fl">0</span>,<span class="op">-</span><span class="fl">2</span>,legend<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/unique.html">unique</a></span><span class="op">(</span><span class="va">species</span><span class="op">)</span>,pch<span class="op">=</span><span class="fl">19</span>,col<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/unique.html">unique</a></span><span class="op">(</span><span class="va">col.group</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># gerar elipses de confiança</span></span>
+<span><span class="fu"><a href="https://rdrr.io/pkg/vegan/man/ordihull.html">ordiellipse</a></span><span class="op">(</span><span class="va">cva</span><span class="op">$</span><span class="va">CVscores</span>,group<span class="op">=</span><span class="va">species</span>, kind<span class="op">=</span><span class="st">"sd"</span>, conf<span class="op">=</span><span class="fl">0.95</span><span class="op">)</span><span class="op">}</span> </span></code></pre></div>
+<div class="inline-figure"><img src="03.6-mgord_files/figure-html/unnamed-chunk-7-1.png" width="672"></div>
+<div class="sourceCode" id="cb80"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># ou: ordihull(cva$CVscores,group=species)</span></span></code></pre></div>
+<p>Uma outra vantagem da CVA é que ela pode ser usada para estimar uma taxa de reclassificação correta de indivíduos dentro dos grupos hipotetizados.</p>
+<div class="sourceCode" id="cb81"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">cva</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/pkg/Morpho/man/CVA.html">CVA</a></span><span class="op">(</span><span class="va">PCA</span><span class="op">$</span><span class="va">x</span><span class="op">[</span>,<span class="fl">1</span><span class="op">:</span><span class="fl">20</span><span class="op">]</span>,groups<span class="op">=</span><span class="va">species</span>,cv<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span> <span class="co"># Jackknife Cross-validation</span></span>
+<span><span class="va">cva</span></span>
+<span><span class="co">#&gt;  cross-validated classification results in frequencies</span></span>
+<span><span class="co">#&gt;               </span></span>
+<span><span class="co">#&gt;                C.flamarioni C.minutus C.torquatus</span></span>
+<span><span class="co">#&gt;   C.flamarioni            9         0           1</span></span>
+<span><span class="co">#&gt;   C.minutus               0         7           3</span></span>
+<span><span class="co">#&gt;   C.torquatus             0         0          10</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt;  cross-validated classification result in %</span></span>
+<span><span class="co">#&gt;               </span></span>
+<span><span class="co">#&gt;                C.flamarioni C.minutus C.torquatus</span></span>
+<span><span class="co">#&gt;   C.flamarioni           90         0          10</span></span>
+<span><span class="co">#&gt;   C.minutus               0        70          30</span></span>
+<span><span class="co">#&gt;   C.torquatus             0         0         100</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt;  overall classification accuracy: 86.66667 %</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt;  Kappa statistic: 0.8</span></span>
+<span><span class="va">tab</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/base/table.html">table</a></span><span class="op">(</span><span class="va">species</span>,<span class="va">cva</span><span class="op">$</span><span class="va">class</span><span class="op">)</span></span>
+<span><span class="va">lda.p</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/base/diag.html">diag</a></span><span class="op">(</span><span class="va">tab</span><span class="op">)</span><span class="op">/</span><span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">species</span><span class="op">)</span><span class="op">*</span><span class="fl">100</span></span>
+<span><span class="va">lda.p</span> <span class="co"># proporção de classificação correta para cada grupo</span></span>
+<span><span class="co">#&gt; C.flamarioni    C.minutus  C.torquatus </span></span>
+<span><span class="co">#&gt;           90           70          100</span></span></code></pre></div>
+<p>Visualização da forma ao longo dos eixos da CVA.</p>
+<div class="sourceCode" id="cb82"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Mudança de forma ao longo do CV1 (positivo 15, negativo -10) e CV2</span></span>
+<span><span class="va">cv1max</span><span class="op">&lt;-</span> <span class="fl">15</span><span class="op">*</span><span class="va">cva</span><span class="op">$</span><span class="va">CVvis</span><span class="op">[</span>,<span class="fl">1</span><span class="op">]</span><span class="op">+</span><span class="va">cva</span><span class="op">$</span><span class="va">Grandm</span></span>
+<span><span class="va">cv1max</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/Morpho/man/restoreShapes.html">restoreShapes</a></span><span class="op">(</span><span class="va">cv1max</span>,<span class="va">PCA</span><span class="op">$</span><span class="va">x</span><span class="op">[</span>,<span class="fl">1</span><span class="op">:</span><span class="fl">20</span><span class="op">]</span>,<span class="va">ref</span><span class="op">)</span></span>
+<span><span class="va">cv1min</span><span class="op">&lt;-</span> <span class="op">-</span><span class="fl">10</span><span class="op">*</span><span class="va">cva</span><span class="op">$</span><span class="va">CVvis</span><span class="op">[</span>,<span class="fl">1</span><span class="op">]</span><span class="op">+</span><span class="va">cva</span><span class="op">$</span><span class="va">Grandm</span></span>
+<span><span class="va">cv1min</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/Morpho/man/restoreShapes.html">restoreShapes</a></span><span class="op">(</span><span class="va">cv1min</span>,<span class="va">PCA</span><span class="op">$</span><span class="va">x</span><span class="op">[</span>,<span class="fl">1</span><span class="op">:</span><span class="fl">20</span><span class="op">]</span>,<span class="va">ref</span><span class="op">)</span></span>
+<span><span class="va">cv2max</span><span class="op">&lt;-</span> <span class="fl">6</span><span class="op">*</span><span class="va">cva</span><span class="op">$</span><span class="va">CVvis</span><span class="op">[</span>,<span class="fl">2</span><span class="op">]</span><span class="op">+</span><span class="va">cva</span><span class="op">$</span><span class="va">Grandm</span></span>
+<span><span class="va">cv2max</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/Morpho/man/restoreShapes.html">restoreShapes</a></span><span class="op">(</span><span class="va">cv2max</span>,<span class="va">PCA</span><span class="op">$</span><span class="va">x</span><span class="op">[</span>,<span class="fl">1</span><span class="op">:</span><span class="fl">20</span><span class="op">]</span>,<span class="va">ref</span><span class="op">)</span></span>
+<span><span class="va">cv2min</span><span class="op">&lt;-</span> <span class="op">-</span><span class="fl">6</span><span class="op">*</span><span class="va">cva</span><span class="op">$</span><span class="va">CVvis</span><span class="op">[</span>,<span class="fl">2</span><span class="op">]</span><span class="op">+</span><span class="va">cva</span><span class="op">$</span><span class="va">Grandm</span></span>
+<span><span class="va">cv2min</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/Morpho/man/restoreShapes.html">restoreShapes</a></span><span class="op">(</span><span class="va">cv2min</span>,<span class="va">PCA</span><span class="op">$</span><span class="va">x</span><span class="op">[</span>,<span class="fl">1</span><span class="op">:</span><span class="fl">20</span><span class="op">]</span>,<span class="va">ref</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/pkg/geomorph/man/plotRefToTarget.html">plotRefToTarget</a></span><span class="op">(</span><span class="va">cv1min</span>,<span class="va">cv1max</span>,links<span class="op">=</span><span class="va">links.tuco</span>,method<span class="op">=</span><span class="st">"points"</span><span class="op">)</span> </span></code></pre></div>
+<div class="inline-figure"><img src="03.6-mgord_files/figure-html/unnamed-chunk-9-1.png" width="672"></div>
+<div class="sourceCode" id="cb83"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/geomorph/man/plotRefToTarget.html">plotRefToTarget</a></span><span class="op">(</span><span class="va">cv2min</span>,<span class="va">cv2max</span>,links<span class="op">=</span><span class="va">links.tuco</span>,method<span class="op">=</span><span class="st">"points"</span><span class="op">)</span> </span></code></pre></div>
+<div class="inline-figure"><img src="03.6-mgord_files/figure-html/unnamed-chunk-9-2.png" width="672"></div>
+<p>Veja também os modelos linares para discriminação de grupos no subcapítulo correspondente.</p>
+</div>
+<div id="exercício-análise-de-componentes-principais" class="section level2" number="9.3">
+<h2>
+<span class="header-section-number">9.3</span> Exercício – Análise de Componentes Principais<a class="anchor" aria-label="anchor" href="#exerc%C3%ADcio-an%C3%A1lise-de-componentes-principais"><i class="fas fa-link"></i></a>
+</h2>
+<p>Usando os mesmos dados deste exercício, faça uma PCA com a função própria do pacote <em>geomorph</em>, e uma PCA com a função ‘prcomp’. Qual a diferença entre as duas PCAs? Como a diferença pode ser explicada?</p>
+
+</div>
+</div>
+  <div class="chapter-nav">
+<div class="prev"><a href="tamanho-do-centr%C3%B3ide.html"><span class="header-section-number">8</span> Tamanho do Centróide</a></div>
+<div class="next"><a href="partial-least-squares.html"><span class="header-section-number">10</span> Partial Least Squares</a></div>
+</div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
+    <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
+      <ul class="nav navbar-nav">
+<li><a class="nav-link" href="#m%C3%A9todos-de-ordena%C3%A7%C3%A3o"><span class="header-section-number">9</span> Métodos de ordenação</a></li>
+<li><a class="nav-link" href="#an%C3%A1lise-de-componentes-principais"><span class="header-section-number">9.1</span> Análise de Componentes Principais</a></li>
+<li><a class="nav-link" href="#an%C3%A1lise-de-varia%C3%A7%C3%A3o-can%C3%B4nica"><span class="header-section-number">9.2</span> Análise de Variação Canônica</a></li>
+<li><a class="nav-link" href="#exerc%C3%ADcio-an%C3%A1lise-de-componentes-principais"><span class="header-section-number">9.3</span> Exercício – Análise de Componentes Principais</a></li>
+</ul>
+
+      <div class="book-extra">
+        <ul class="list-unstyled">
+<li><a id="book-source" href="https://github.com/renanmaestri/eebb/blob/master/03.6-mgord.Rmd">View source <i class="fab fa-github"></i></a></li>
+          <li><a id="book-edit" href="https://github.com/renanmaestri/eebb/edit/master/03.6-mgord.Rmd">Edit this page <i class="fab fa-github"></i></a></li>
+        </ul>
+</div>
+    </nav>
+</div>
+
+</div>
+</div> <!-- .container -->
+
+<footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>"<strong>Manual de Ecologia Evolutiva, Biometria e Biogeografia</strong>" was written by Renan Maestri. It was last built on 2023-09-27.</p>
+  </div>
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>This book was built by the <a class="text-light" href="https://bookdown.org">bookdown</a> R package.</p>
+  </div>
+
+</div></div>
+</footer>
+</body>
+</html>

@@ -1,9 +1,9 @@
-## Métodos de ordenação
+# Métodos de ordenação
 
 Os métodos de ordenação mais usados em dados de morfometria geométrica são a Análise de Componentes Principais (PCA) e a Análise de Variáveis Canônicas (CVA). Ambos os métodos são exploratórios, e providenciam uma descrição dos dados, e não testes de hipóteses. No entanto, a CVA pode ser utilizada como uma função para discriminação de grupos, onde a porcentagem de classificação correta de espécimes dentro de grupos pode ser usada como valor de suporte ao testar a confiabilidade de grupos (ex: espécies).
 Para se aprofundar, leia Zeldtich et al. 2012 Geometric Morphometrics for Biologists - Elsevier, e Klingengerb & Monteiro 2005 Distances and directions in multidimensional shape spaces: implications for morphometric applications - Systematic Biology.
 
-### Análise de Componentes Principais
+## Análise de Componentes Principais
 A análise de componentes principais (Principal Component Analysis - PCA) simplifica os complexos padrões de variação e covariação de dados multivariados ao construir componentes principais independentes que resumem a maior parte da variação dos dados em poucos eixos. Assim, também é possível observar diretamente a combinação de dois ou três componentes principais em um gráfico.
 
 Vamos fazer uma PCA com dados de morfometria geométrica.
@@ -104,7 +104,7 @@ plotRefToTarget(PCA$shapes$shapes.comp1$min,PCA$shapes$shapes.comp1$max,links=li
 ```
 
 
-### Análise de Variação Canônica
+## Análise de Variação Canônica
 Assim como na PCA, a Análise de Variação Canônica (Canonical Variates Analysis - CVA) também cria novas variáveis (eixos de ordenação) que são ortogonais. No entanto, a CVA descreve as diferenças *entre* as médias de *grupos*. Assim, ela pode ser usada para descrever as diferenças de forma entre quaisquer *grupos* biológicos que tenhamos. Contudo, ao contrário da PCA, que simplesmente rotaciona as coordenadas originais, a CVA realiza uma transformação (rescalonamento pela variação dentro de grupos) no sistema de coordenadas original, e por isso não deve ser interpretada livremente para representar variação de forma entre indivíduos. A CVA mostra apenas a direção em que os grupos são melhor discriminados um do outro. 
 ```{r}
 require(Morpho)
@@ -146,7 +146,7 @@ plotRefToTarget(cv2min,cv2max,links=links.tuco,method="points")
 Veja também os modelos linares para discriminação de grupos no subcapítulo correspondente.
 
 
-### Exercício – Análise de Componentes Principais
+## Exercício – Análise de Componentes Principais
 Usando os mesmos dados deste exercício, faça uma PCA com a função própria do pacote *geomorph*, e uma PCA com a função 'prcomp’. Qual a diferença entre as duas PCAs? Como a diferença pode ser explicada?
 
 

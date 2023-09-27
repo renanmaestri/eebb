@@ -1,8 +1,8 @@
-## Análise de Procrustes
+# Análise de Procrustes
 
 O passo primário fundamental em morfometria geométrica é a análise generalizada de Procrustes, que remove os efeitos de rotação, translação e tamanho dos objetos. O resultado é uma matriz com as variáveis de forma.
 
-### O objeto .tps no R
+## O objeto .tps no R
 
 O arquivo .tps criado no TPSDig2 pode ser lido no R com a função readland.tps do pacote geomorph. Antes, lembre-se de colocar o arquivo .tps na pasta dadosmg e definir essa pasta como diretório de trabalho no R.
 
@@ -33,7 +33,7 @@ tps.new<-tps[,,-7] # deleta espécime n 7
 tps.new<-tps[-5,,] # deleta landmark n 5
 ```
 
-### Estimar landmarks faltantes
+## Estimar landmarks faltantes
 
 A função estimate.missing do pacote *geomorph* implementa dois métodos para estimar landmarks faltantes.
 
@@ -46,7 +46,7 @@ tps.estimated
 writeland.tps(tps.estimated, "dadosmg/tps.estimated.tps") # exportar arquivo tps com landmarks estimados
 ```
 
-### Análise Generalizada de Procrustes
+## Análise Generalizada de Procrustes
 
 Aqui, faremos a análise de Procrustes (GPA) em dados sem simetria de objeto e atribuiremos nomes para os outputs de forma e tamanho do centróide.
 
@@ -67,7 +67,7 @@ hist(size)
 plotAllSpecimens(shape)
 ```
 
-### Espaço tangente
+## Espaço tangente
 
 A correlação do espaço de forma com o espaço tangente quase sempre será muito alta em dados de morfometria geométrica, justificando o uso de estatística Euclidiana.
 
@@ -76,7 +76,7 @@ require(Morpho)
 regdist(shape)
 ```
 
-### Formato array e matrix
+## Formato array e matrix
 
 Os dados de forma estão em formato array. Podemos nos mover facilmente entre os formatos array e matrix. Ambos carregam a mesma informação, mas algumas análises/operações só aceitam um dos dois formatos.
 
@@ -88,7 +88,7 @@ shape<-arrayspecs(shape.2d,13,2) # dados, landmarks, dimensões
 shape
 ```
 
-### GPA com simetria de objeto
+## GPA com simetria de objeto
 
 Quando os dados tiverem simetria e objeto, vamos informar isso ao R com uma matriz contendo os pares de landmarks simétricos e realizar uma GPA considerando a simetria.
 
@@ -108,7 +108,7 @@ shape.sym<-b.s$symm.shape # componente simétrico da forma
 plotAllSpecimens(shape.sym)
 ```
 
-### Encontrando outliers
+## Encontrando outliers
 
 Podemos encontrar indivíduos muito diferentes dos demais observando sua distância em relação à forma média da amostra. Em morfometria geométrica, é comum a marcação de landmarks trocados em alguns indivíduos, o que vai gerar óbvios outliers.
 
@@ -116,7 +116,7 @@ Podemos encontrar indivíduos muito diferentes dos demais observando sua distân
 plotOutliers(shape)
 ```
 
-## Visualização da forma
+# Visualização da forma
 
 Existem várias maneiras de visualizar mudanças de forma com dados de Morfometria Geométrica (ver Klingenberg 2013 Hystrix 24:15-14). Aliás, essa é uma das vantagens da morfometria geométrica em comparação com a morfometria tradicional. As formas mais comuns de visualização são por grids de deformação, vetores (ou lollipops), e através da construção de links entre os landmarks e extrapolação da forma via *outlines* e *surfaces*. Em qualquer caso, é importante perceber que a diferença de forma está contida apenas entre os landmarks/semilandmarks; as extrapolações de forma além dos landmarks (via grids e outlines, por exemplo) podem ser úteis para visualização, mas devem ser interpretadas com bastante cautela. É também importante perceber que a interpretação das mudanças de forma não deve considerar os landmarks individualmente, mas sim a sua mudança relativa a todos os outros landmarks.
 
@@ -135,7 +135,7 @@ plotAllSpecimens(shape,mean=TRUE,links=links)
 
 Os links entre os landmarks também podem ser definidos interativamente com a função define.links do pacote *geomorph*.
 
-### Método de grid de deformação.
+## Método de grid de deformação.
 
 ```{r}
 # Definir cor dos landmarks e links
@@ -144,13 +144,13 @@ GP1<-gridPar(pt.bg="gray",link.col="gray",link.lty=1) # cor dos landmarks e link
 plotRefToTarget(ref,shape[,,8],links=links,method="TPS")
 ```
 
-### Método de vetores.
+## Método de vetores.
 
 ```{r}
 plotRefToTarget(ref,shape[,,8],links=links,method="vector")
 ```
 
-### Método de linhas.
+## Método de linhas.
 
 ```{r}
 plotRefToTarget(ref,shape[,,8],links=links,method="points",gridPars=GP1)
@@ -158,7 +158,7 @@ plotRefToTarget(ref,shape[,,8],links=links,method="points",gridPars=GP1)
 
 Aqui, o alvo está em preto e a referência(média) está em cinza.
 
-### Método de outlines.
+## Método de outlines.
 
 ```{r, fig.show='hide'}
 # Carregando outline
@@ -182,7 +182,7 @@ GP4<- gridPar(tar.out.col = "red", tar.out.cex = 0.3)
 plotRefToTarget(ref.y,Y.gpa$coords[,,39], gridPars=GP4, mag=3, outline=plethodon$outline, method="TPS")
 ```
 
-### Magnificação da forma
+## Magnificação da forma
 
 Às vezes quando as diferenças de forma são muito sútis, podemos aumentar as diferenças para visualizar melhor. Use com cuidado.
 

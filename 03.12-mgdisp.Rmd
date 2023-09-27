@@ -1,4 +1,4 @@
-## Disparidade e variação morfológica
+# Disparidade e variação morfológica
 
 Disparidade e variação são conceitos próximos, ambos relacionados à ideia de “variedade” ou “diversidade” morfológica; as mesmas métricas podem ser utilizadas para ambos. No entanto, uma distinção conceitual é aplicada: (i) Disparidade tem relação com a variedade de um grupo de espécies, e é o resultado do processo evolutivo de longo prazo; (ii) Variação tem relação com a variedade de indivíduos dentro de uma única população.
 

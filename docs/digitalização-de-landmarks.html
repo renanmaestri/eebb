@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>Capítulo 4 Digitalização de landmarks | Manual de Ecologia Evolutiva, Biometria e Biogeografia</title>
+<meta name="author" content="Renan Maestri">
+<meta name="description" content="4.1 Criação de arquivo .tps com as imagens bi-dimensionais Esse roteiro é para a manipulação de imagens digitais (2D) e a digitalização de marcos anatômicos (landmarks) nas imagens usando...">
+<meta name="generator" content="bookdown 0.35 with bs4_book()">
+<meta property="og:title" content="Capítulo 4 Digitalização de landmarks | Manual de Ecologia Evolutiva, Biometria e Biogeografia">
+<meta property="og:type" content="book">
+<meta property="og:url" content="https://renanmaestri.github.io/eebb/digitalização-de-landmarks.html">
+<meta property="og:image" content="https://renanmaestri.github.io/eebb/images/Slogan_oficial_sologo.jpg">
+<meta property="og:description" content="4.1 Criação de arquivo .tps com as imagens bi-dimensionais Esse roteiro é para a manipulação de imagens digitais (2D) e a digitalização de marcos anatômicos (landmarks) nas imagens usando...">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Capítulo 4 Digitalização de landmarks | Manual de Ecologia Evolutiva, Biometria e Biogeografia">
+<meta name="twitter:description" content="4.1 Criação de arquivo .tps com as imagens bi-dimensionais Esse roteiro é para a manipulação de imagens digitais (2D) e a digitalização de marcos anatômicos (landmarks) nas imagens usando...">
+<meta name="twitter:image" content="https://renanmaestri.github.io/eebb/images/Slogan_oficial_sologo.jpg">
+<!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.5.1/transition.js"></script><script src="libs/bs3compat-0.5.1/tabs.js"></script><script src="libs/bs3compat-0.5.1/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><style type="text/css">
+    
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  </style>
+<style type="text/css">
+    /* Used with Pandoc 2.11+ new --citeproc when CSL is used */
+    div.csl-bib-body { }
+    div.csl-entry {
+      clear: both;
+        }
+    .hanging div.csl-entry {
+      margin-left:2em;
+      text-indent:-2em;
+    }
+    div.csl-left-margin {
+      min-width:2em;
+      float:left;
+    }
+    div.csl-right-inline {
+      margin-left:2em;
+      padding-left:1em;
+    }
+    div.csl-indent {
+      margin-left: 2em;
+    }
+  </style>
+<link rel="stylesheet" href="style.css">
+</head>
+<body data-spy="scroll" data-target="#toc">
+
+<div class="container-fluid">
+<div class="row">
+  <header class="col-sm-12 col-lg-3 sidebar sidebar-book"><a class="sr-only sr-only-focusable" href="#content">Skip to main content</a>
+
+    <div class="d-flex align-items-start justify-content-between">
+      <h1>
+        <a href="index.html" title="">Manual de Ecologia Evolutiva, Biometria e Biogeografia</a>
+      </h1>
+      <button class="btn btn-outline-primary d-lg-none ml-2 mt-1" type="button" data-toggle="collapse" data-target="#main-nav" aria-expanded="true" aria-controls="main-nav"><i class="fas fa-bars"></i><span class="sr-only">Show table of contents</span></button>
+    </div>
+
+    <div id="main-nav" class="collapse-lg">
+      <form role="search">
+        <input id="search" class="form-control" type="search" placeholder="Search" aria-label="Search">
+</form>
+
+      <nav aria-label="Table of contents"><h2>Table of contents</h2>
+        <ul class="book-toc list-unstyled">
+<li><a class="" href="index.html">Prefácio</a></li>
+<li class="book-part">Conceitos básicos</li>
+<li><a class="" href="conceitos-b%C3%A1sicos.html"><span class="header-section-number">1</span> Conceitos básicos</a></li>
+<li class="book-part">Introdução ao R</li>
+<li><a class="" href="uma-breve-introdu%C3%A7%C3%A3o-ao-r.html"><span class="header-section-number">2</span> Uma breve introdução ao R</a></li>
+<li class="book-part">Morfometria Geométrica</li>
+<li><a class="" href="morfometria-geom%C3%A9trica.html"><span class="header-section-number">3</span> Morfometria Geométrica</a></li>
+<li><a class="active" href="digitaliza%C3%A7%C3%A3o-de-landmarks.html"><span class="header-section-number">4</span> Digitalização de landmarks</a></li>
+<li><a class="" href="an%C3%A1lise-de-procrustes.html"><span class="header-section-number">5</span> Análise de Procrustes</a></li>
+<li><a class="" href="visualiza%C3%A7%C3%A3o-da-forma.html"><span class="header-section-number">6</span> Visualização da forma</a></li>
+<li><a class="" href="assimetria-e-quantifica%C3%A7%C3%A3o-de-erro.html"><span class="header-section-number">7</span> Assimetria e quantificação de erro</a></li>
+<li><a class="" href="tamanho-do-centr%C3%B3ide.html"><span class="header-section-number">8</span> Tamanho do Centróide</a></li>
+<li><a class="" href="m%C3%A9todos-de-ordena%C3%A7%C3%A3o.html"><span class="header-section-number">9</span> Métodos de ordenação</a></li>
+<li><a class="" href="partial-least-squares.html"><span class="header-section-number">10</span> Partial Least Squares</a></li>
+<li><a class="" href="modelos-lineares-para-discrimina%C3%A7%C3%A3o-de-grupos.html"><span class="header-section-number">11</span> Modelos lineares para discriminação de grupos</a></li>
+<li><a class="" href="alometria.html"><span class="header-section-number">12</span> Alometria</a></li>
+<li><a class="" href="an%C3%A1lise-de-trajet%C3%B3ria.html"><span class="header-section-number">13</span> Análise de Trajetória</a></li>
+<li><a class="" href="integra%C3%A7%C3%A3o-morfol%C3%B3gica-e-modularidade.html"><span class="header-section-number">14</span> Integração morfológica e modularidade</a></li>
+<li><a class="" href="disparidade-e-varia%C3%A7%C3%A3o-morfol%C3%B3gica.html"><span class="header-section-number">15</span> Disparidade e variação morfológica</a></li>
+<li><a class="" href="morfometria-geom%C3%A9trica-e-filogenias.html"><span class="header-section-number">16</span> Morfometria geométrica e filogenias</a></li>
+<li class="book-part">Macroevolução</li>
+<li><a class="" href="macroevolu%C3%A7%C3%A3o.html"><span class="header-section-number">17</span> Macroevolução</a></li>
+<li class="book-part">Biogeografia e Macroecologia</li>
+<li><a class="" href="biogeografia-e-macroecologia.html"><span class="header-section-number">18</span> Biogeografia e Macroecologia</a></li>
+<li class="book-part">Conclusão</li>
+<li><a class="" href="considera%C3%A7%C3%B5es-finais.html"><span class="header-section-number">19</span> Considerações finais</a></li>
+<li><a class="" href="refer%C3%AAncias.html">Referências</a></li>
+</ul>
+
+        <div class="book-extra">
+          <p><a id="book-repo" href="https://github.com/renanmaestri/eebb">View book source <i class="fab fa-github"></i></a></p>
+        </div>
+      </nav>
+</div>
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="digitalização-de-landmarks" class="section level1" number="4">
+<h1>
+<span class="header-section-number">Capítulo 4</span> Digitalização de landmarks<a class="anchor" aria-label="anchor" href="#digitaliza%C3%A7%C3%A3o-de-landmarks"><i class="fas fa-link"></i></a>
+</h1>
+<div id="criação-de-arquivo-.tps-com-as-imagens-bi-dimensionais" class="section level2" number="4.1">
+<h2>
+<span class="header-section-number">4.1</span> Criação de arquivo .tps com as imagens bi-dimensionais<a class="anchor" aria-label="anchor" href="#cria%C3%A7%C3%A3o-de-arquivo-.tps-com-as-imagens-bi-dimensionais"><i class="fas fa-link"></i></a>
+</h2>
+<p>Esse roteiro é para a manipulação de imagens digitais (2D) e a digitalização de marcos anatômicos (landmarks) nas imagens usando <a href="https://www.sbmorphometrics.org/">softwares TPS</a>. As imagens, previamente capturadas de maneira padronizada, devem estar individualizadas, todas em uma mesma pasta no computador.</p>
+<p>No TPSUtil, selecione a operação ‘Build tps file from images’. Clique em ‘Input’ e selecione a pasta (selecione qualquer imagem dentro da pasta) contendo as fotos. No nosso caso, a pasta se chama ‘Atividade 1 – Imagens’. Clique em ‘Output’ e atribua um nome para o arquivo (use mandibula.tps). Clique em ‘Setup’. Todas as imagens da pasta estarão listadas. É possível conferir os nomes dos arquivos e modificar a ordem ou deletar imagens se necessário. Clique em ‘Create’ para criar o arquivo .tps com a lista de imagens. Vá até o mesmo diretório (pasta) com as imagens e verifique o arquivo mandibula.tps (abra com o bloco de notas).</p>
+</div>
+<div id="digitalização-de-landmarks-no-tpsdig2" class="section level2" number="4.2">
+<h2>
+<span class="header-section-number">4.2</span> Digitalização de landmarks no TPSDig2<a class="anchor" aria-label="anchor" href="#digitaliza%C3%A7%C3%A3o-de-landmarks-no-tpsdig2"><i class="fas fa-link"></i></a>
+</h2>
+<p>No TPSDig2, para carregar as imagens clique em ‘File&gt;Input source&gt;File’. Selecione o arquivo .tps contendo a lista de imagens, no nosso caso ‘mandibula.tps’. Após clicar em ‘Abrir’, a primeira foto do arquivo será exibida. As setas vermelhas na barra de ferramentas permitem navegar pelas fotos, que serão exibidas uma por vez. A barra de ferramentas também permite ajustar o zoom das imagens, e inúmeras outras configurações de nitidez da imagem e cores/tamanho dos landmarks.</p>
+<p>Um passo importante é definir a escala da imagem. Para isso, clique em ‘Options&gt;Image tools’. Na aba ‘Measure’ defina o comprimento de referência e a unidade que desejar para o comprimento. Clique em ‘Set scale’, minimize a aba de ferramentas, vá até a escala de referência na imagem (no nosso caso, o papel milimetrado) e defina, com dois pontos (cliques), o mesmo comprimento atribuído na barra de ferramentas. Volte para a aba ‘Measure’ e clique em ‘Ok’. A calibração estará definida para esta imagem (o fator de escala será o valor de referência dividido pelo número de pixels necessários para obter a referência). Futuros valores de tamanho do centroide para esta imagem estarão na unidade definida como referência (e.g., cm, mm, etc.). O procedimento precisa ser repetido para cada imagem.</p>
+<p>Para digitalizar os landmarks, i.e., atribuir uma coodenada x,y para cada um, selecione a ferramenta ‘Digitize landmarks’ no menu ‘Modes’ ou clicando na figura com o formato de alvo na barra de ferramentas. Atribua os landmarks clicando na imagem, na posição desejada. Os landmarks vão aparecer em sequência numérica a partir do 1, e em todas as imagens a sequência de digitalização dos landmarks (a ordem) deve ser a mesma (e.g., o landmark 8 estará na mesma posição anatômica em todas as imagens).</p>
+<p>Após o término da digitalização clique em ‘File&gt;Save data’ e salve os dados. É extremamente recomendável repetir o salvamento após a digitalização de cada imagem; use o mesmo nome e clique em ‘Overwrite’ para que os dados atualizados sejam gravados sobre os antigos, gerando um único arquivo ao final. Vá até a pasta de trabalho e visualize o arquivo abrindo-o com o bloco de notas.</p>
+Para a atividade, atribua os landmarks conforme a imagem abaixo:
+<div class="figure" style="text-align: center">
+<span style="display:block;" id="fig:unnamed-chunk-1"></span>
+<img src="images/mandibula.png" alt="Landmarks na mandibula de um roedor sigmodontíneo" width="80%"><p class="caption">
+Figura 4.1: Landmarks na mandibula de um roedor sigmodontíneo.
+</p>
+</div>
+<p>Descrição dos landmarks:
+L1: Borda anterior do alvéolo incisivo; L2: Extremo anterior superior da borda do alvéolo incisive; L3: Posição de maior inflexão do diastema; L4: Borda anterior do álveolo no primeiro molar; L5: Interseção entre a linha de molars e o processo coronóide em vista lateral; L6: Ponta do processo coronóide; L7: Ponto de máxima curvatura entre o processo coronóide e o condilar; L8: Margem dorsal da borda anterior da supercífie articular do processo condilar; L9: Borda ventral da superfície articular do processo condilar; L10: Ponto de máxima curvatura entre o processo condilar e o angular; L11: Ponta do processo angular; L12: Interseção entre o corpo da mandíbula e a crista massetérica; L13: Limite ventral da sínfise mandibular.</p>
+</div>
+<div id="digitalização-de-landmarks-em-3d" class="section level2" number="4.3">
+<h2>
+<span class="header-section-number">4.3</span> Digitalização de landmarks em 3D<a class="anchor" aria-label="anchor" href="#digitaliza%C3%A7%C3%A3o-de-landmarks-em-3d"><i class="fas fa-link"></i></a>
+</h2>
+<p>O software MeshLab permite a digitalização de landmarks em superfícies, além de outras operações. Após abrir o software, selecione ‘File&gt;Import Mesh’ e carregue o arquivo chamado ‘exemplo3d.ply’ de dentro da pasta ‘R Dados’.</p>
+<p>Para digitalizar landmarks na superfície clique em ‘Edit&gt;PickPoints’ ou no ícone PP. Ao clicar com o botão esquerdo do mouse (pode demorar um pouco), as coordenadas são capturadas. Após o término da digitalização é possível salvar um arquivo em formato xml (.pp) com as coordenadas em 3D, que poderá ser aberto no R para análises posteriores.</p>
+<div style="page-break-after: always;"></div>
+
+</div>
+</div>
+  <div class="chapter-nav">
+<div class="prev"><a href="morfometria-geom%C3%A9trica.html"><span class="header-section-number">3</span> Morfometria Geométrica</a></div>
+<div class="next"><a href="an%C3%A1lise-de-procrustes.html"><span class="header-section-number">5</span> Análise de Procrustes</a></div>
+</div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
+    <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
+      <ul class="nav navbar-nav">
+<li><a class="nav-link" href="#digitaliza%C3%A7%C3%A3o-de-landmarks"><span class="header-section-number">4</span> Digitalização de landmarks</a></li>
+<li><a class="nav-link" href="#cria%C3%A7%C3%A3o-de-arquivo-.tps-com-as-imagens-bi-dimensionais"><span class="header-section-number">4.1</span> Criação de arquivo .tps com as imagens bi-dimensionais</a></li>
+<li><a class="nav-link" href="#digitaliza%C3%A7%C3%A3o-de-landmarks-no-tpsdig2"><span class="header-section-number">4.2</span> Digitalização de landmarks no TPSDig2</a></li>
+<li><a class="nav-link" href="#digitaliza%C3%A7%C3%A3o-de-landmarks-em-3d"><span class="header-section-number">4.3</span> Digitalização de landmarks em 3D</a></li>
+</ul>
+
+      <div class="book-extra">
+        <ul class="list-unstyled">
+<li><a id="book-source" href="https://github.com/renanmaestri/eebb/blob/master/03.1-mgdig.Rmd">View source <i class="fab fa-github"></i></a></li>
+          <li><a id="book-edit" href="https://github.com/renanmaestri/eebb/edit/master/03.1-mgdig.Rmd">Edit this page <i class="fab fa-github"></i></a></li>
+        </ul>
+</div>
+    </nav>
+</div>
+
+</div>
+</div> <!-- .container -->
+
+<footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>"<strong>Manual de Ecologia Evolutiva, Biometria e Biogeografia</strong>" was written by Renan Maestri. It was last built on 2023-09-27.</p>
+  </div>
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>This book was built by the <a class="text-light" href="https://bookdown.org">bookdown</a> R package.</p>
+  </div>
+
+</div></div>
+</footer>
+</body>
+</html>

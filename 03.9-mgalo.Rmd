@@ -1,4 +1,4 @@
-## Alometria
+# Alometria
 
 De acordo com a escola Gould-Mosimann, alometria é covariação entre tamanho e forma. Esse conceito faz sentido em Morfometria Geométrica (MG), já que há uma distinção formal entre tamanho e forma. Assim, podemos testar se existe uma associação entre forma e tamanho, ou seja, alometria, ou se não existe tal associação, ou seja, isometria. Em MG, isso é tradicionalmente feito através de uma regressão multivariada da forma sobre o tamanho do centróide.
 
@@ -8,7 +8,7 @@ Para textos abrangentes sobre alometria, veja:
 Zelditch et al. 2012 Geometric Morphometrics for Biologists, Elsevier. 
 Klingenberg 2016 Dev Genes Evolution doi:10.1007/s00427-016-0539-2.
 
-### Alometria simples
+## Alometria simples
 Vamos investigar se a forma e o tamanho do crânio de tuco-tucos estão associados.
 ```{r, results='hide', warning=FALSE}
 require(geomorph)
@@ -65,7 +65,7 @@ plotRefToTarget(ref, preds$predmin, mag=2)
 plotRefToTarget(ref, preds$predmax, mag=2)
 ```
 
-### Correção de efeitos alométricos
+## Correção de efeitos alométricos
 A correção de tamanho/alometria em estudos de MG pode ser feita usando os resíduos da regressão multivariada da forma sobre o tamanho do centróide em análises posteriores. Se a amostra for composta por grupos biológicos, é importante primeiro investigar se há uma tendência alométrica comum entre os grupos.
 ```{r}
 shape.resid<-
@@ -77,7 +77,7 @@ PCA<-gm.prcomp(adj.shape)
 plot(PCA,axis1=1, axis2=2)
 ```
 
-### Comparação de trajetórias alométricas entre grupos
+## Comparação de trajetórias alométricas entre grupos
 A análise de alometria considerando grupos (e.g., espécies, habitats) pode revelar se as relações alométricas (e.g., inclinação, ângulo, e comprimento das retas) são diferentes entre os grupos. Em outras palavras, é possível testar a homogeneidade ou heterogeneidade dos *slopes*/inclinações. Se as relações alométricas diferirem, a pergunta a ser respondida é quais fatores causam as diferenças alométricas.
 ```{r}
 # Teste de Homogeneidade de Slopes

@@ -1,4 +1,4 @@
-## Análise de Trajetória
+# Análise de Trajetória
 
 Análises de trajetória fenotípica (*Phenotypic Trajectory Analysis* - PTA) descrevem mudanças de forma ao longo de um gradiente, por exemplo, ecológico. Diferente de análises multivariadas padrão (MANOVAs) que permitem avaliar diferenças de forma média, com PTA é possível também investigar diferenças nas trajetórias: localização, comprimento, orientação e forma das trajetórias.
 Alguns tipos de perguntas biológicas são adequadamente respondidas com análises de trajetória.

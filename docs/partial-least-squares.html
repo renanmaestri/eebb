@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>Capítulo 10 Partial Least Squares | Manual de Ecologia Evolutiva, Biometria e Biogeografia</title>
+<meta name="author" content="Renan Maestri">
+<meta name="description" content="Partial Least Squares (PLS) é um método que explora padrões de covariação entre dois ou mais blocos de variáveis. De modo similar à PCA/CVA, a PLS cria eixos ortogonais que, neste caso, explicam a...">
+<meta name="generator" content="bookdown 0.35 with bs4_book()">
+<meta property="og:title" content="Capítulo 10 Partial Least Squares | Manual de Ecologia Evolutiva, Biometria e Biogeografia">
+<meta property="og:type" content="book">
+<meta property="og:url" content="https://renanmaestri.github.io/eebb/partial-least-squares.html">
+<meta property="og:image" content="https://renanmaestri.github.io/eebb/images/Slogan_oficial_sologo.jpg">
+<meta property="og:description" content="Partial Least Squares (PLS) é um método que explora padrões de covariação entre dois ou mais blocos de variáveis. De modo similar à PCA/CVA, a PLS cria eixos ortogonais que, neste caso, explicam a...">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Capítulo 10 Partial Least Squares | Manual de Ecologia Evolutiva, Biometria e Biogeografia">
+<meta name="twitter:description" content="Partial Least Squares (PLS) é um método que explora padrões de covariação entre dois ou mais blocos de variáveis. De modo similar à PCA/CVA, a PLS cria eixos ortogonais que, neste caso, explicam a...">
+<meta name="twitter:image" content="https://renanmaestri.github.io/eebb/images/Slogan_oficial_sologo.jpg">
+<!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.5.1/transition.js"></script><script src="libs/bs3compat-0.5.1/tabs.js"></script><script src="libs/bs3compat-0.5.1/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><style type="text/css">
+    
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  </style>
+<style type="text/css">
+    /* Used with Pandoc 2.11+ new --citeproc when CSL is used */
+    div.csl-bib-body { }
+    div.csl-entry {
+      clear: both;
+        }
+    .hanging div.csl-entry {
+      margin-left:2em;
+      text-indent:-2em;
+    }
+    div.csl-left-margin {
+      min-width:2em;
+      float:left;
+    }
+    div.csl-right-inline {
+      margin-left:2em;
+      padding-left:1em;
+    }
+    div.csl-indent {
+      margin-left: 2em;
+    }
+  </style>
+<link rel="stylesheet" href="style.css">
+</head>
+<body data-spy="scroll" data-target="#toc">
+
+<div class="container-fluid">
+<div class="row">
+  <header class="col-sm-12 col-lg-3 sidebar sidebar-book"><a class="sr-only sr-only-focusable" href="#content">Skip to main content</a>
+
+    <div class="d-flex align-items-start justify-content-between">
+      <h1>
+        <a href="index.html" title="">Manual de Ecologia Evolutiva, Biometria e Biogeografia</a>
+      </h1>
+      <button class="btn btn-outline-primary d-lg-none ml-2 mt-1" type="button" data-toggle="collapse" data-target="#main-nav" aria-expanded="true" aria-controls="main-nav"><i class="fas fa-bars"></i><span class="sr-only">Show table of contents</span></button>
+    </div>
+
+    <div id="main-nav" class="collapse-lg">
+      <form role="search">
+        <input id="search" class="form-control" type="search" placeholder="Search" aria-label="Search">
+</form>
+
+      <nav aria-label="Table of contents"><h2>Table of contents</h2>
+        <ul class="book-toc list-unstyled">
+<li><a class="" href="index.html">Prefácio</a></li>
+<li class="book-part">Conceitos básicos</li>
+<li><a class="" href="conceitos-b%C3%A1sicos.html"><span class="header-section-number">1</span> Conceitos básicos</a></li>
+<li class="book-part">Introdução ao R</li>
+<li><a class="" href="uma-breve-introdu%C3%A7%C3%A3o-ao-r.html"><span class="header-section-number">2</span> Uma breve introdução ao R</a></li>
+<li class="book-part">Morfometria Geométrica</li>
+<li><a class="" href="morfometria-geom%C3%A9trica.html"><span class="header-section-number">3</span> Morfometria Geométrica</a></li>
+<li><a class="" href="digitaliza%C3%A7%C3%A3o-de-landmarks.html"><span class="header-section-number">4</span> Digitalização de landmarks</a></li>
+<li><a class="" href="an%C3%A1lise-de-procrustes.html"><span class="header-section-number">5</span> Análise de Procrustes</a></li>
+<li><a class="" href="visualiza%C3%A7%C3%A3o-da-forma.html"><span class="header-section-number">6</span> Visualização da forma</a></li>
+<li><a class="" href="assimetria-e-quantifica%C3%A7%C3%A3o-de-erro.html"><span class="header-section-number">7</span> Assimetria e quantificação de erro</a></li>
+<li><a class="" href="tamanho-do-centr%C3%B3ide.html"><span class="header-section-number">8</span> Tamanho do Centróide</a></li>
+<li><a class="" href="m%C3%A9todos-de-ordena%C3%A7%C3%A3o.html"><span class="header-section-number">9</span> Métodos de ordenação</a></li>
+<li><a class="active" href="partial-least-squares.html"><span class="header-section-number">10</span> Partial Least Squares</a></li>
+<li><a class="" href="modelos-lineares-para-discrimina%C3%A7%C3%A3o-de-grupos.html"><span class="header-section-number">11</span> Modelos lineares para discriminação de grupos</a></li>
+<li><a class="" href="alometria.html"><span class="header-section-number">12</span> Alometria</a></li>
+<li><a class="" href="an%C3%A1lise-de-trajet%C3%B3ria.html"><span class="header-section-number">13</span> Análise de Trajetória</a></li>
+<li><a class="" href="integra%C3%A7%C3%A3o-morfol%C3%B3gica-e-modularidade.html"><span class="header-section-number">14</span> Integração morfológica e modularidade</a></li>
+<li><a class="" href="disparidade-e-varia%C3%A7%C3%A3o-morfol%C3%B3gica.html"><span class="header-section-number">15</span> Disparidade e variação morfológica</a></li>
+<li><a class="" href="morfometria-geom%C3%A9trica-e-filogenias.html"><span class="header-section-number">16</span> Morfometria geométrica e filogenias</a></li>
+<li class="book-part">Macroevolução</li>
+<li><a class="" href="macroevolu%C3%A7%C3%A3o.html"><span class="header-section-number">17</span> Macroevolução</a></li>
+<li class="book-part">Biogeografia e Macroecologia</li>
+<li><a class="" href="biogeografia-e-macroecologia.html"><span class="header-section-number">18</span> Biogeografia e Macroecologia</a></li>
+<li class="book-part">Conclusão</li>
+<li><a class="" href="considera%C3%A7%C3%B5es-finais.html"><span class="header-section-number">19</span> Considerações finais</a></li>
+<li><a class="" href="refer%C3%AAncias.html">Referências</a></li>
+</ul>
+
+        <div class="book-extra">
+          <p><a id="book-repo" href="https://github.com/renanmaestri/eebb">View book source <i class="fab fa-github"></i></a></p>
+        </div>
+      </nav>
+</div>
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="partial-least-squares" class="section level1" number="10">
+<h1>
+<span class="header-section-number">Capítulo 10</span> Partial Least Squares<a class="anchor" aria-label="anchor" href="#partial-least-squares"><i class="fas fa-link"></i></a>
+</h1>
+<p>Partial Least Squares (PLS) é um método que explora padrões de covariação entre dois ou mais blocos de variáveis. De modo similar à PCA/CVA, a PLS cria eixos ortogonais que, neste caso, explicam a covariância entre blocos. Em análises de MG, um dos blocos normalmente é a forma. O(s) bloco(s) adicional pode ser composto, por exemplo, por um grupo de variáveis climáticas, geográficas e/ou bióticas ou por outros descritores fenotípicos. Além disso, as variáveis dentro dos blocos não precisam ser independentes uma da outra, e o número de variáveis pode exceder o número de observações. Os blocos de variáveis podem conter variáveis de diversas naturezas (contínuas, categóricas). É importante que a ordem de entrada dos dados corresponda entre os dois blocos.</p>
+<p>No exemplo, vamos explorar a covariação entre a forma do crânio e a forma da mandíbula de roedores sigmodontíneos.</p>
+<p>Carregar dados.</p>
+<div class="sourceCode" id="cb84"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">require</a></span><span class="op">(</span><span class="va"><a href="https://github.com/geomorphR/geomorph">geomorph</a></span><span class="op">)</span></span>
+<span><span class="co">#&gt; Carregando pacotes exigidos: geomorph</span></span>
+<span><span class="co">#&gt; Carregando pacotes exigidos: RRPP</span></span>
+<span><span class="co">#&gt; Carregando pacotes exigidos: rgl</span></span>
+<span><span class="co">#&gt; Carregando pacotes exigidos: Matrix</span></span>
+<span><span class="co"># Carregar arquivo tps com a vista ventral do crânio</span></span>
+<span><span class="va">tps.v</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/pkg/geomorph/man/readland.tps.html">readland.tps</a></span><span class="op">(</span><span class="st">"dadosmg/ventral.dig_curso.pls.tps"</span>,specID <span class="op">=</span> <span class="st">"ID"</span>, readcurves <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
+<span><span class="co"># Matriz com os pares de landmarks simétricos</span></span>
+<span><span class="va">pairs.matrix</span><span class="op">&lt;-</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">2</span>,<span class="fl">3</span>,<span class="fl">4</span>,<span class="fl">5</span>,<span class="fl">6</span>,<span class="fl">7</span>,<span class="fl">8</span>,<span class="fl">9</span>,<span class="fl">10</span>,<span class="fl">11</span>,<span class="fl">12</span>,<span class="fl">13</span>,<span class="fl">14</span>,<span class="fl">15</span>,<span class="fl">16</span>,<span class="fl">17</span>,<span class="fl">18</span>,<span class="fl">24</span>,<span class="fl">22</span>,<span class="fl">28</span>,<span class="fl">23</span>,<span class="fl">29</span>,<span class="fl">19</span>,<span class="fl">25</span>,<span class="fl">20</span>,<span class="fl">26</span>,<span class="fl">21</span>,<span class="fl">27</span>,<span class="fl">30</span>,<span class="fl">31</span>,<span class="fl">33</span>,<span class="fl">34</span>,<span class="fl">35</span>,<span class="fl">36</span>,<span class="fl">37</span>,<span class="fl">38</span>,<span class="fl">39</span>,<span class="fl">40</span>,<span class="fl">41</span>,<span class="fl">42</span>,<span class="fl">43</span>,<span class="fl">44</span>,<span class="fl">45</span>,<span class="fl">46</span>,<span class="fl">47</span>,<span class="fl">48</span>,<span class="fl">49</span>,<span class="fl">50</span>,<span class="fl">51</span>,<span class="fl">52</span>,<span class="fl">55</span>,<span class="fl">56</span><span class="op">)</span>,nrow<span class="op">=</span><span class="fl">26</span>,ncol<span class="op">=</span><span class="fl">2</span>,byrow<span class="op">=</span><span class="cn">T</span><span class="op">)</span></span>
+<span><span class="va">ind.v</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fu"><a href="https://rdrr.io/r/base/dim.html">dim</a></span><span class="op">(</span><span class="va">tps.v</span><span class="op">)</span><span class="op">[</span><span class="fl">3</span><span class="op">]</span><span class="op">)</span> <span class="co"># vetor indivíduos</span></span>
+<span><span class="co"># GPA - Simetria bilateral - Extrair componente simetrico da forma</span></span>
+<span><span class="va">b.s</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/pkg/geomorph/man/bilat.symmetry.html">bilat.symmetry</a></span><span class="op">(</span><span class="va">tps.v</span>,ind<span class="op">=</span><span class="va">ind.v</span>,object.sym<span class="op">=</span><span class="cn">TRUE</span>,land.pairs<span class="op">=</span><span class="va">pairs.matrix</span><span class="op">)</span></span>
+<span><span class="va">shape.v</span><span class="op">&lt;-</span><span class="va">b.s</span><span class="op">$</span><span class="va">symm.shape</span> <span class="co"># componente simétrico da forma</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/dimnames.html">dimnames</a></span><span class="op">(</span><span class="va">shape.v</span><span class="op">)</span><span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/dimnames.html">dimnames</a></span><span class="op">(</span><span class="va">tps.v</span><span class="op">)</span> <span class="co">#manter os nomes dos espécimes</span></span>
+<span><span class="va">shape.v</span></span>
+<span><span class="co"># Forma média ventral</span></span>
+<span><span class="va">ref.ventral</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/pkg/geomorph/man/mshape.html">mshape</a></span><span class="op">(</span><span class="va">shape.v</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Carregar arquivo tps da mandíbula</span></span>
+<span><span class="va">tps</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/pkg/geomorph/man/readland.tps.html">readland.tps</a></span><span class="op">(</span><span class="st">"dadosmg/mandibula.dig_curso.pls.tps"</span>,specID <span class="op">=</span> <span class="st">"ID"</span>, readcurves <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
+<span><span class="va">gpa</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/pkg/geomorph/man/gpagen.html">gpagen</a></span><span class="op">(</span><span class="va">tps</span><span class="op">)</span></span>
+<span><span class="va">shape</span><span class="op">&lt;-</span><span class="va">gpa</span><span class="op">$</span><span class="va">coords</span></span>
+<span><span class="va">size</span><span class="op">&lt;-</span><span class="va">gpa</span><span class="op">$</span><span class="va">Csize</span></span>
+<span><span class="va">ref.mand</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/pkg/geomorph/man/mshape.html">mshape</a></span><span class="op">(</span><span class="va">shape</span><span class="op">)</span></span></code></pre></div>
+<p>Carregar classificadores a partir de lista externa.</p>
+<div class="sourceCode" id="cb85"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">plan</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/utils/read.table.html">read.table</a></span><span class="op">(</span><span class="st">"dadosmg/Planilha_PLS.txt"</span>,h<span class="op">=</span><span class="cn">T</span><span class="op">)</span></span>
+<span><span class="va">plan</span></span>
+<span><span class="va">species.pls</span><span class="op">&lt;-</span><span class="va">plan</span><span class="op">[</span>,<span class="fl">2</span><span class="op">]</span></span>
+<span><span class="va">species.pls</span></span></code></pre></div>
+<p>Partial Least Squares - PLS.</p>
+<div class="sourceCode" id="cb86"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb86-1"><a href="partial-least-squares.html#cb86-1" tabindex="-1"></a>pls<span class="ot">&lt;-</span><span class="fu">two.b.pls</span>(shape,shape.v,<span class="at">iter=</span><span class="dv">999</span>)</span>
+<span id="cb86-2"><a href="partial-least-squares.html#cb86-2" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb86-3"><a href="partial-least-squares.html#cb86-3" tabindex="-1"></a><span class="co">#&gt; Random PLS calculations: 1000 permutations.</span></span>
+<span id="cb86-4"><a href="partial-least-squares.html#cb86-4" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb86-5"><a href="partial-least-squares.html#cb86-5" tabindex="-1"></a>  <span class="sc">|</span>                                                        </span>
+<span id="cb86-6"><a href="partial-least-squares.html#cb86-6" tabindex="-1"></a>  <span class="er">|</span>                                                  <span class="er">|</span>   <span class="dv">0</span>%</span>
+<span id="cb86-7"><a href="partial-least-squares.html#cb86-7" tabindex="-1"></a>  <span class="sc">|</span>                                                        </span>
+<span id="cb86-8"><a href="partial-least-squares.html#cb86-8" tabindex="-1"></a>  <span class="er">|</span>                                                  <span class="er">|</span>   <span class="dv">1</span>%</span>
+<span id="cb86-9"><a href="partial-least-squares.html#cb86-9" tabindex="-1"></a>  <span class="sc">|</span>                                                        </span>
+<span id="cb86-10"><a href="partial-least-squares.html#cb86-10" tabindex="-1"></a>  <span class="er">|=</span>                                                 <span class="er">|</span>   <span class="dv">1</span>%</span>
+<span id="cb86-11"><a href="partial-least-squares.html#cb86-11" tabindex="-1"></a>  <span class="sc">|</span>                                                        </span>
+<span id="cb86-12"><a href="partial-least-squares.html#cb86-12" tabindex="-1"></a>  <span class="er">|=</span>                                                 <span class="er">|</span>   <span class="dv">2</span>%</span>
+<span id="cb86-13"><a href="partial-least-squares.html#cb86-13" tabindex="-1"></a>  <span class="sc">|</span>                                                        </span>
+<span id="cb86-14"><a href="partial-least-squares.html#cb86-14" tabindex="-1"></a>  <span class="er">|=</span>                                                 <span class="er">|</span>   <span class="dv">3</span>%</span>
+<span id="cb86-15"><a href="partial-least-squares.html#cb86-15" tabindex="-1"></a>  <span class="sc">|</span>                                                        </span>
+<span id="cb86-16"><a href="partial-least-squares.html#cb86-16" tabindex="-1"></a>  <span class="er">|==</span>                                                <span class="er">|</span>   <span class="dv">3</span>%</span>
+<span id="cb86-17"><a href="partial-least-squares.html#cb86-17" tabindex="-1"></a>  <span class="sc">|</span>                                                        </span>
+<span id="cb86-18"><a href="partial-least-squares.html#cb86-18" tabindex="-1"></a>  <span class="er">|==</span>                                                <span class="er">|</span>   <span class="dv">4</span>%</span>
+<span id="cb86-19"><a href="partial-least-squares.html#cb86-19" tabindex="-1"></a>  <span class="sc">|</span>                                                        </span>
+<span id="cb86-20"><a href="partial-least-squares.html#cb86-20" tabindex="-1"></a>  <span class="er">|==</span>                                                <span class="er">|</span>   <span class="dv">5</span>%</span>
+<span id="cb86-21"><a href="partial-least-squares.html#cb86-21" tabindex="-1"></a>  <span class="sc">|</span>                                                        </span>
+<span id="cb86-22"><a href="partial-least-squares.html#cb86-22" tabindex="-1"></a>  <span class="er">|===</span>                                               <span class="er">|</span>   <span class="dv">5</span>%</span>
+<span id="cb86-23"><a href="partial-least-squares.html#cb86-23" tabindex="-1"></a>  <span class="sc">|</span>                                                        </span>
+<span id="cb86-24"><a href="partial-least-squares.html#cb86-24" tabindex="-1"></a>  <span class="er">|===</span>                                               <span class="er">|</span>   <span class="dv">6</span>%</span>
+<span id="cb86-25"><a href="partial-least-squares.html#cb86-25" tabindex="-1"></a>  <span class="sc">|</span>                                                        </span>
+<span id="cb86-26"><a href="partial-least-squares.html#cb86-26" tabindex="-1"></a>  <span class="er">|===</span>                                               <span class="er">|</span>   <span class="dv">7</span>%</span>
+<span id="cb86-27"><a href="partial-least-squares.html#cb86-27" tabindex="-1"></a>  <span class="sc">|</span>                                                        </span>
+<span id="cb86-28"><a href="partial-least-squares.html#cb86-28" tabindex="-1"></a>  <span class="er">|====</span>                                              <span class="er">|</span>   <span class="dv">7</span>%</span>
+<span id="cb86-29"><a href="partial-least-squares.html#cb86-29" tabindex="-1"></a>  <span class="sc">|</span>                                                        </span>
+<span id="cb86-30"><a href="partial-least-squares.html#cb86-30" tabindex="-1"></a>  <span class="er">|====</span>                                              <span class="er">|</span>   <span class="dv">8</span>%</span>
+<span id="cb86-31"><a href="partial-least-squares.html#cb86-31" tabindex="-1"></a>  <span class="sc">|</span>                                                        </span>
+<span id="cb86-32"><a href="partial-least-squares.html#cb86-32" tabindex="-1"></a>  <span class="er">|====</span>                                              <span class="er">|</span>   <span class="dv">9</span>%</span>
+<span id="cb86-33"><a href="partial-least-squares.html#cb86-33" tabindex="-1"></a>  <span class="sc">|</span>                                                        </span>
+<span id="cb86-34"><a href="partial-least-squares.html#cb86-34" tabindex="-1"></a>  <span class="er">|=====</span>                                             <span class="er">|</span>   <span class="dv">9</span>%</span>
+<span id="cb86-35"><a href="partial-least-squares.html#cb86-35" tabindex="-1"></a>  <span class="sc">|</span>                                                        </span>
+<span id="cb86-36"><a href="partial-least-squares.html#cb86-36" tabindex="-1"></a>  <span class="er">|=====</span>                                             <span class="er">|</span>  <span class="dv">10</span>%</span>
+<span id="cb86-37"><a href="partial-least-squares.html#cb86-37" tabindex="-1"></a>  <span class="sc">|</span>                                                        </span>
+<span id="cb86-38"><a href="partial-least-squares.html#cb86-38" tabindex="-1"></a>  <span class="er">|=====</span>                                             <span class="er">|</span>  <span class="dv">11</span>%</span>
+<span id="cb86-39"><a href="partial-least-squares.html#cb86-39" tabindex="-1"></a>  <span class="sc">|</span>                                                        </span>
+<span id="cb86-40"><a href="partial-least-squares.html#cb86-40" tabindex="-1"></a>  <span class="er">|======</span>                                            <span class="er">|</span>  <span class="dv">11</span>%</span>
+<span id="cb86-41"><a href="partial-least-squares.html#cb86-41" tabindex="-1"></a>  <span class="sc">|</span>                                                        </span>
+<span id="cb86-42"><a href="partial-least-squares.html#cb86-42" tabindex="-1"></a>  <span class="er">|======</span>                                            <span class="er">|</span>  <span class="dv">12</span>%</span>
+<span id="cb86-43"><a href="partial-least-squares.html#cb86-43" tabindex="-1"></a>  <span class="sc">|</span>                                                        </span>
+<span id="cb86-44"><a href="partial-least-squares.html#cb86-44" tabindex="-1"></a>  <span class="er">|======</span>                                            <span class="er">|</span>  <span class="dv">13</span>%</span>
+<span id="cb86-45"><a href="partial-least-squares.html#cb86-45" tabindex="-1"></a>  <span class="sc">|</span>                                                        </span>
+<span id="cb86-46"><a href="partial-least-squares.html#cb86-46" tabindex="-1"></a>  <span class="er">|=======</span>                                           <span class="er">|</span>  <span class="dv">13</span>%</span>
+<span id="cb86-47"><a href="partial-least-squares.html#cb86-47" tabindex="-1"></a>  <span class="sc">|</span>                                                        </span>
+<span id="cb86-48"><a href="partial-least-squares.html#cb86-48" tabindex="-1"></a>  <span class="er">|=======</span>                                           <span class="er">|</span>  <span class="dv">14</span>%</span>
+<span id="cb86-49"><a href="partial-least-squares.html#cb86-49" tabindex="-1"></a>  <span class="sc">|</span>                                                        </span>
+<span id="cb86-50"><a href="partial-least-squares.html#cb86-50" tabindex="-1"></a>  <span class="er">|=======</span>                                           <span class="er">|</span>  <span class="dv">15</span>%</span>
+<span id="cb86-51"><a href="partial-least-squares.html#cb86-51" tabindex="-1"></a>  <span class="sc">|</span>                                                        </span>
+<span id="cb86-52"><a href="partial-least-squares.html#cb86-52" tabindex="-1"></a>  <span class="er">|========</span>                                          <span class="er">|</span>  <span class="dv">15</span>%</span>
+<span id="cb86-53"><a href="partial-least-squares.html#cb86-53" tabindex="-1"></a>  <span class="sc">|</span>                                                        </span>
+<span id="cb86-54"><a href="partial-least-squares.html#cb86-54" tabindex="-1"></a>  <span class="er">|========</span>                                          <span class="er">|</span>  <span class="dv">16</span>%</span>
+<span id="cb86-55"><a href="partial-least-squares.html#cb86-55" tabindex="-1"></a>  <span class="sc">|</span>                                                        </span>
+<span id="cb86-56"><a href="partial-least-squares.html#cb86-56" tabindex="-1"></a>  <span class="er">|========</span>                                          <span class="er">|</span>  <span class="dv">17</span>%</span>
+<span id="cb86-57"><a href="partial-least-squares.html#cb86-57" tabindex="-1"></a>  <span class="sc">|</span>                                                        </span>
+<span id="cb86-58"><a href="partial-least-squares.html#cb86-58" tabindex="-1"></a>  <span class="er">|=========</span>                                         <span class="er">|</span>  <span class="dv">17</span>%</span>
+<span id="cb86-59"><a href="partial-least-squares.html#cb86-59" tabindex="-1"></a>  <span class="sc">|</span>                                                        </span>
+<span id="cb86-60"><a href="partial-least-squares.html#cb86-60" tabindex="-1"></a>  <span class="er">|=========</span>                                         <span class="er">|</span>  <span class="dv">18</span>%</span>
+<span id="cb86-61"><a href="partial-least-squares.html#cb86-61" tabindex="-1"></a>  <span class="sc">|</span>                                                        </span>
+<span id="cb86-62"><a href="partial-least-squares.html#cb86-62" tabindex="-1"></a>  <span class="er">|=========</span>                                         <span class="er">|</span>  <span class="dv">19</span>%</span>
+<span id="cb86-63"><a href="partial-least-squares.html#cb86-63" tabindex="-1"></a>  <span class="sc">|</span>                                                        </span>
+<span id="cb86-64"><a href="partial-least-squares.html#cb86-64" tabindex="-1"></a>  <span class="er">|==========</span>                                        <span class="er">|</span>  <span class="dv">19</span>%</span>
+<span id="cb86-65"><a href="partial-least-squares.html#cb86-65" tabindex="-1"></a>  <span class="sc">|</span>                                                        </span>
+<span id="cb86-66"><a href="partial-least-squares.html#cb86-66" tabindex="-1"></a>  <span class="er">|==========</span>                                        <span class="er">|</span>  <span class="dv">20</span>%</span>
+<span id="cb86-67"><a href="partial-least-squares.html#cb86-67" tabindex="-1"></a>  <span class="sc">|</span>                                                        </span>
+<span id="cb86-68"><a href="partial-least-squares.html#cb86-68" tabindex="-1"></a>  <span class="er">|==========</span>                                        <span class="er">|</span>  <span class="dv">21</span>%</span>
+<span id="cb86-69"><a href="partial-least-squares.html#cb86-69" tabindex="-1"></a>  <span class="sc">|</span>                                                        </span>
+<span id="cb86-70"><a href="partial-least-squares.html#cb86-70" tabindex="-1"></a>  <span class="er">|===========</span>                                       <span class="er">|</span>  <span class="dv">21</span>%</span>
+<span id="cb86-71"><a href="partial-least-squares.html#cb86-71" tabindex="-1"></a>  <span class="sc">|</span>                                                        </span>
+<span id="cb86-72"><a href="partial-least-squares.html#cb86-72" tabindex="-1"></a>  <span class="er">|===========</span>                                       <span class="er">|</span>  <span class="dv">22</span>%</span>
+<span id="cb86-73"><a href="partial-least-squares.html#cb86-73" tabindex="-1"></a>  <span class="sc">|</span>                                                        </span>
+<span id="cb86-74"><a href="partial-least-squares.html#cb86-74" tabindex="-1"></a>  <span class="er">|===========</span>                                       <span class="er">|</span>  <span class="dv">23</span>%</span>
+<span id="cb86-75"><a href="partial-least-squares.html#cb86-75" tabindex="-1"></a>  <span class="sc">|</span>                                                        </span>
+<span id="cb86-76"><a href="partial-least-squares.html#cb86-76" tabindex="-1"></a>  <span class="er">|============</span>                                      <span class="er">|</span>  <span class="dv">23</span>%</span>
+<span id="cb86-77"><a href="partial-least-squares.html#cb86-77" tabindex="-1"></a>  <span class="sc">|</span>                                                        </span>
+<span id="cb86-78"><a href="partial-least-squares.html#cb86-78" tabindex="-1"></a>  <span class="er">|============</span>                                      <span class="er">|</span>  <span class="dv">24</span>%</span>
+<span id="cb86-79"><a href="partial-least-squares.html#cb86-79" tabindex="-1"></a>  <span class="sc">|</span>                                                        </span>
+<span id="cb86-80"><a href="partial-least-squares.html#cb86-80" tabindex="-1"></a>  <span class="er">|============</span>                                      <span class="er">|</span>  <span class="dv">25</span>%</span>
+<span id="cb86-81"><a href="partial-least-squares.html#cb86-81" tabindex="-1"></a>  <span class="sc">|</span>                                                        </span>
+<span id="cb86-82"><a href="partial-least-squares.html#cb86-82" tabindex="-1"></a>  <span class="er">|=============</span>                                     <span class="er">|</span>  <span class="dv">25</span>%</span>
+<span id="cb86-83"><a href="partial-least-squares.html#cb86-83" tabindex="-1"></a>  <span class="sc">|</span>                                                        </span>
+<span id="cb86-84"><a href="partial-least-squares.html#cb86-84" tabindex="-1"></a>  <span class="er">|=============</span>                                     <span class="er">|</span>  <span class="dv">26</span>%</span>
+<span id="cb86-85"><a href="partial-least-squares.html#cb86-85" tabindex="-1"></a>  <span class="sc">|</span>                                                        </span>
+<span id="cb86-86"><a href="partial-least-squares.html#cb86-86" tabindex="-1"></a>  <span class="er">|=============</span>                                     <span class="er">|</span>  <span class="dv">27</span>%</span>
+<span id="cb86-87"><a href="partial-least-squares.html#cb86-87" tabindex="-1"></a>  <span class="sc">|</span>                                                        </span>
+<span id="cb86-88"><a href="partial-least-squares.html#cb86-88" tabindex="-1"></a>  <span class="er">|==============</span>                                    <span class="er">|</span>  <span class="dv">27</span>%</span>
+<span id="cb86-89"><a href="partial-least-squares.html#cb86-89" tabindex="-1"></a>  <span class="sc">|</span>                                                        </span>
+<span id="cb86-90"><a href="partial-least-squares.html#cb86-90" tabindex="-1"></a>  <span class="er">|==============</span>                                    <span class="er">|</span>  <span class="dv">28</span>%</span>
+<span id="cb86-91"><a href="partial-least-squares.html#cb86-91" tabindex="-1"></a>  <span class="sc">|</span>                                                        </span>
+<span id="cb86-92"><a href="partial-least-squares.html#cb86-92" tabindex="-1"></a>  <span class="er">|==============</span>                                    <span class="er">|</span>  <span class="dv">29</span>%</span>
+<span id="cb86-93"><a href="partial-least-squares.html#cb86-93" tabindex="-1"></a>  <span class="sc">|</span>                                                        </span>
+<span id="cb86-94"><a href="partial-least-squares.html#cb86-94" tabindex="-1"></a>  <span class="er">|===============</span>                                   <span class="er">|</span>  <span class="dv">29</span>%</span>
+<span id="cb86-95"><a href="partial-least-squares.html#cb86-95" tabindex="-1"></a>  <span class="sc">|</span>                                                        </span>
+<span id="cb86-96"><a href="partial-least-squares.html#cb86-96" tabindex="-1"></a>  <span class="er">|===============</span>                                   <span class="er">|</span>  <span class="dv">30</span>%</span>
+<span id="cb86-97"><a href="partial-least-squares.html#cb86-97" tabindex="-1"></a>  <span class="sc">|</span>                                                        </span>
+<span id="cb86-98"><a href="partial-least-squares.html#cb86-98" tabindex="-1"></a>  <span class="er">|===============</span>                                   <span class="er">|</span>  <span class="dv">31</span>%</span>
+<span id="cb86-99"><a href="partial-least-squares.html#cb86-99" tabindex="-1"></a>  <span class="sc">|</span>                                                        </span>
+<span id="cb86-100"><a href="partial-least-squares.html#cb86-100" tabindex="-1"></a>  <span class="er">|================</span>                                  <span class="er">|</span>  <span class="dv">31</span>%</span>
+<span id="cb86-101"><a href="partial-least-squares.html#cb86-101" tabindex="-1"></a>  <span class="sc">|</span>                                                        </span>
+<span id="cb86-102"><a href="partial-least-squares.html#cb86-102" tabindex="-1"></a>  <span class="er">|================</span>                                  <span class="er">|</span>  <span class="dv">32</span>%</span>
+<span id="cb86-103"><a href="partial-least-squares.html#cb86-103" tabindex="-1"></a>  <span class="sc">|</span>                                                        </span>
+<span id="cb86-104"><a href="partial-least-squares.html#cb86-104" tabindex="-1"></a>  <span class="er">|================</span>                                  <span class="er">|</span>  <span class="dv">33</span>%</span>
+<span id="cb86-105"><a href="partial-least-squares.html#cb86-105" tabindex="-1"></a>  <span class="sc">|</span>                                                        </span>
+<span id="cb86-106"><a href="partial-least-squares.html#cb86-106" tabindex="-1"></a>  <span class="er">|=================</span>                                 <span class="er">|</span>  <span class="dv">33</span>%</span>
+<span id="cb86-107"><a href="partial-least-squares.html#cb86-107" tabindex="-1"></a>  <span class="sc">|</span>                                                        </span>
+<span id="cb86-108"><a href="partial-least-squares.html#cb86-108" tabindex="-1"></a>  <span class="er">|=================</span>                                 <span class="er">|</span>  <span class="dv">34</span>%</span>
+<span id="cb86-109"><a href="partial-least-squares.html#cb86-109" tabindex="-1"></a>  <span class="sc">|</span>                                                        </span>
+<span id="cb86-110"><a href="partial-least-squares.html#cb86-110" tabindex="-1"></a>  <span class="er">|=================</span>                                 <span class="er">|</span>  <span class="dv">35</span>%</span>
+<span id="cb86-111"><a href="partial-least-squares.html#cb86-111" tabindex="-1"></a>  <span class="sc">|</span>                                                        </span>
+<span id="cb86-112"><a href="partial-least-squares.html#cb86-112" tabindex="-1"></a>  <span class="er">|==================</span>                                <span class="er">|</span>  <span class="dv">35</span>%</span>
+<span id="cb86-113"><a href="partial-least-squares.html#cb86-113" tabindex="-1"></a>  <span class="sc">|</span>                                                        </span>
+<span id="cb86-114"><a href="partial-least-squares.html#cb86-114" tabindex="-1"></a>  <span class="er">|==================</span>                                <span class="er">|</span>  <span class="dv">36</span>%</span>
+<span id="cb86-115"><a href="partial-least-squares.html#cb86-115" tabindex="-1"></a>  <span class="sc">|</span>                                                        </span>
+<span id="cb86-116"><a href="partial-least-squares.html#cb86-116" tabindex="-1"></a>  <span class="er">|==================</span>                                <span class="er">|</span>  <span class="dv">37</span>%</span>
+<span id="cb86-117"><a href="partial-least-squares.html#cb86-117" tabindex="-1"></a>  <span class="sc">|</span>                                                        </span>
+<span id="cb86-118"><a href="partial-least-squares.html#cb86-118" tabindex="-1"></a>  <span class="er">|===================</span>                               <span class="er">|</span>  <span class="dv">37</span>%</span>
+<span id="cb86-119"><a href="partial-least-squares.html#cb86-119" tabindex="-1"></a>  <span class="sc">|</span>                                                        </span>
+<span id="cb86-120"><a href="partial-least-squares.html#cb86-120" tabindex="-1"></a>  <span class="er">|===================</span>                               <span class="er">|</span>  <span class="dv">38</span>%</span>
+<span id="cb86-121"><a href="partial-least-squares.html#cb86-121" tabindex="-1"></a>  <span class="sc">|</span>                                                        </span>
+<span id="cb86-122"><a href="partial-least-squares.html#cb86-122" tabindex="-1"></a>  <span class="er">|===================</span>                               <span class="er">|</span>  <span class="dv">39</span>%</span>
+<span id="cb86-123"><a href="partial-least-squares.html#cb86-123" tabindex="-1"></a>  <span class="sc">|</span>                                                        </span>
+<span id="cb86-124"><a href="partial-least-squares.html#cb86-124" tabindex="-1"></a>  <span class="er">|====================</span>                              <span class="er">|</span>  <span class="dv">39</span>%</span>
+<span id="cb86-125"><a href="partial-least-squares.html#cb86-125" tabindex="-1"></a>  <span class="sc">|</span>                                                        </span>
+<span id="cb86-126"><a href="partial-least-squares.html#cb86-126" tabindex="-1"></a>  <span class="er">|====================</span>                              <span class="er">|</span>  <span class="dv">40</span>%</span>
+<span id="cb86-127"><a href="partial-least-squares.html#cb86-127" tabindex="-1"></a>  <span class="sc">|</span>                                                        </span>
+<span id="cb86-128"><a href="partial-least-squares.html#cb86-128" tabindex="-1"></a>  <span class="er">|====================</span>                              <span class="er">|</span>  <span class="dv">41</span>%</span>
+<span id="cb86-129"><a href="partial-least-squares.html#cb86-129" tabindex="-1"></a>  <span class="sc">|</span>                                                        </span>
+<span id="cb86-130"><a href="partial-least-squares.html#cb86-130" tabindex="-1"></a>  <span class="er">|=====================</span>                             <span class="er">|</span>  <span class="dv">41</span>%</span>
+<span id="cb86-131"><a href="partial-least-squares.html#cb86-131" tabindex="-1"></a>  <span class="sc">|</span>                                                        </span>
+<span id="cb86-132"><a href="partial-least-squares.html#cb86-132" tabindex="-1"></a>  <span class="er">|=====================</span>                             <span class="er">|</span>  <span class="dv">42</span>%</span>
+<span id="cb86-133"><a href="partial-least-squares.html#cb86-133" tabindex="-1"></a>  <span class="sc">|</span>                                                        </span>
+<span id="cb86-134"><a href="partial-least-squares.html#cb86-134" tabindex="-1"></a>  <span class="er">|=====================</span>                             <span class="er">|</span>  <span class="dv">43</span>%</span>
+<span id="cb86-135"><a href="partial-least-squares.html#cb86-135" tabindex="-1"></a>  <span class="sc">|</span>                                                        </span>
+<span id="cb86-136"><a href="partial-least-squares.html#cb86-136" tabindex="-1"></a>  <span class="er">|======================</span>                            <span class="er">|</span>  <span class="dv">43</span>%</span>
+<span id="cb86-137"><a href="partial-least-squares.html#cb86-137" tabindex="-1"></a>  <span class="sc">|</span>                                                        </span>
+<span id="cb86-138"><a href="partial-least-squares.html#cb86-138" tabindex="-1"></a>  <span class="er">|======================</span>                            <span class="er">|</span>  <span class="dv">44</span>%</span>
+<span id="cb86-139"><a href="partial-least-squares.html#cb86-139" tabindex="-1"></a>  <span class="sc">|</span>                                                        </span>
+<span id="cb86-140"><a href="partial-least-squares.html#cb86-140" tabindex="-1"></a>  <span class="er">|======================</span>                            <span class="er">|</span>  <span class="dv">45</span>%</span>
+<span id="cb86-141"><a href="partial-least-squares.html#cb86-141" tabindex="-1"></a>  <span class="sc">|</span>                                                        </span>
+<span id="cb86-142"><a href="partial-least-squares.html#cb86-142" tabindex="-1"></a>  <span class="er">|=======================</span>                           <span class="er">|</span>  <span class="dv">45</span>%</span>
+<span id="cb86-143"><a href="partial-least-squares.html#cb86-143" tabindex="-1"></a>  <span class="sc">|</span>                                                        </span>
+<span id="cb86-144"><a href="partial-least-squares.html#cb86-144" tabindex="-1"></a>  <span class="er">|=======================</span>                           <span class="er">|</span>  <span class="dv">46</span>%</span>
+<span id="cb86-145"><a href="partial-least-squares.html#cb86-145" tabindex="-1"></a>  <span class="sc">|</span>                                                        </span>
+<span id="cb86-146"><a href="partial-least-squares.html#cb86-146" tabindex="-1"></a>  <span class="er">|=======================</span>                           <span class="er">|</span>  <span class="dv">47</span>%</span>
+<span id="cb86-147"><a href="partial-least-squares.html#cb86-147" tabindex="-1"></a>  <span class="sc">|</span>                                                        </span>
+<span id="cb86-148"><a href="partial-least-squares.html#cb86-148" tabindex="-1"></a>  <span class="er">|========================</span>                          <span class="er">|</span>  <span class="dv">47</span>%</span>
+<span id="cb86-149"><a href="partial-least-squares.html#cb86-149" tabindex="-1"></a>  <span class="sc">|</span>                                                        </span>
+<span id="cb86-150"><a href="partial-least-squares.html#cb86-150" tabindex="-1"></a>  <span class="er">|========================</span>                          <span class="er">|</span>  <span class="dv">48</span>%</span>
+<span id="cb86-151"><a href="partial-least-squares.html#cb86-151" tabindex="-1"></a>  <span class="sc">|</span>                                                        </span>
+<span id="cb86-152"><a href="partial-least-squares.html#cb86-152" tabindex="-1"></a>  <span class="er">|========================</span>                          <span class="er">|</span>  <span class="dv">49</span>%</span>
+<span id="cb86-153"><a href="partial-least-squares.html#cb86-153" tabindex="-1"></a>  <span class="sc">|</span>                                                        </span>
+<span id="cb86-154"><a href="partial-least-squares.html#cb86-154" tabindex="-1"></a>  <span class="er">|=========================</span>                         <span class="er">|</span>  <span class="dv">49</span>%</span>
+<span id="cb86-155"><a href="partial-least-squares.html#cb86-155" tabindex="-1"></a>  <span class="sc">|</span>                                                        </span>
+<span id="cb86-156"><a href="partial-least-squares.html#cb86-156" tabindex="-1"></a>  <span class="er">|=========================</span>                         <span class="er">|</span>  <span class="dv">50</span>%</span>
+<span id="cb86-157"><a href="partial-least-squares.html#cb86-157" tabindex="-1"></a>  <span class="sc">|</span>                                                        </span>
+<span id="cb86-158"><a href="partial-least-squares.html#cb86-158" tabindex="-1"></a>  <span class="er">|=========================</span>                         <span class="er">|</span>  <span class="dv">51</span>%</span>
+<span id="cb86-159"><a href="partial-least-squares.html#cb86-159" tabindex="-1"></a>  <span class="sc">|</span>                                                        </span>
+<span id="cb86-160"><a href="partial-least-squares.html#cb86-160" tabindex="-1"></a>  <span class="er">|==========================</span>                        <span class="er">|</span>  <span class="dv">51</span>%</span>
+<span id="cb86-161"><a href="partial-least-squares.html#cb86-161" tabindex="-1"></a>  <span class="sc">|</span>                                                        </span>
+<span id="cb86-162"><a href="partial-least-squares.html#cb86-162" tabindex="-1"></a>  <span class="er">|==========================</span>                        <span class="er">|</span>  <span class="dv">52</span>%</span>
+<span id="cb86-163"><a href="partial-least-squares.html#cb86-163" tabindex="-1"></a>  <span class="sc">|</span>                                                        </span>
+<span id="cb86-164"><a href="partial-least-squares.html#cb86-164" tabindex="-1"></a>  <span class="er">|==========================</span>                        <span class="er">|</span>  <span class="dv">53</span>%</span>
+<span id="cb86-165"><a href="partial-least-squares.html#cb86-165" tabindex="-1"></a>  <span class="sc">|</span>                                                        </span>
+<span id="cb86-166"><a href="partial-least-squares.html#cb86-166" tabindex="-1"></a>  <span class="er">|===========================</span>                       <span class="er">|</span>  <span class="dv">53</span>%</span>
+<span id="cb86-167"><a href="partial-least-squares.html#cb86-167" tabindex="-1"></a>  <span class="sc">|</span>                                                        </span>
+<span id="cb86-168"><a href="partial-least-squares.html#cb86-168" tabindex="-1"></a>  <span class="er">|===========================</span>                       <span class="er">|</span>  <span class="dv">54</span>%</span>
+<span id="cb86-169"><a href="partial-least-squares.html#cb86-169" tabindex="-1"></a>  <span class="sc">|</span>                                                        </span>
+<span id="cb86-170"><a href="partial-least-squares.html#cb86-170" tabindex="-1"></a>  <span class="er">|===========================</span>                       <span class="er">|</span>  <span class="dv">55</span>%</span>
+<span id="cb86-171"><a href="partial-least-squares.html#cb86-171" tabindex="-1"></a>  <span class="sc">|</span>                                                        </span>
+<span id="cb86-172"><a href="partial-least-squares.html#cb86-172" tabindex="-1"></a>  <span class="er">|============================</span>                      <span class="er">|</span>  <span class="dv">55</span>%</span>
+<span id="cb86-173"><a href="partial-least-squares.html#cb86-173" tabindex="-1"></a>  <span class="sc">|</span>                                                        </span>
+<span id="cb86-174"><a href="partial-least-squares.html#cb86-174" tabindex="-1"></a>  <span class="er">|============================</span>                      <span class="er">|</span>  <span class="dv">56</span>%</span>
+<span id="cb86-175"><a href="partial-least-squares.html#cb86-175" tabindex="-1"></a>  <span class="sc">|</span>                                                        </span>
+<span id="cb86-176"><a href="partial-least-squares.html#cb86-176" tabindex="-1"></a>  <span class="er">|============================</span>                      <span class="er">|</span>  <span class="dv">57</span>%</span>
+<span id="cb86-177"><a href="partial-least-squares.html#cb86-177" tabindex="-1"></a>  <span class="sc">|</span>                                                        </span>
+<span id="cb86-178"><a href="partial-least-squares.html#cb86-178" tabindex="-1"></a>  <span class="er">|=============================</span>                     <span class="er">|</span>  <span class="dv">57</span>%</span>
+<span id="cb86-179"><a href="partial-least-squares.html#cb86-179" tabindex="-1"></a>  <span class="sc">|</span>                                                        </span>
+<span id="cb86-180"><a href="partial-least-squares.html#cb86-180" tabindex="-1"></a>  <span class="er">|=============================</span>                     <span class="er">|</span>  <span class="dv">58</span>%</span>
+<span id="cb86-181"><a href="partial-least-squares.html#cb86-181" tabindex="-1"></a>  <span class="sc">|</span>                                                        </span>
+<span id="cb86-182"><a href="partial-least-squares.html#cb86-182" tabindex="-1"></a>  <span class="er">|=============================</span>                     <span class="er">|</span>  <span class="dv">59</span>%</span>
+<span id="cb86-183"><a href="partial-least-squares.html#cb86-183" tabindex="-1"></a>  <span class="sc">|</span>                                                        </span>
+<span id="cb86-184"><a href="partial-least-squares.html#cb86-184" tabindex="-1"></a>  <span class="er">|==============================</span>                    <span class="er">|</span>  <span class="dv">59</span>%</span>
+<span id="cb86-185"><a href="partial-least-squares.html#cb86-185" tabindex="-1"></a>  <span class="sc">|</span>                                                        </span>
+<span id="cb86-186"><a href="partial-least-squares.html#cb86-186" tabindex="-1"></a>  <span class="er">|==============================</span>                    <span class="er">|</span>  <span class="dv">60</span>%</span>
+<span id="cb86-187"><a href="partial-least-squares.html#cb86-187" tabindex="-1"></a>  <span class="sc">|</span>                                                        </span>
+<span id="cb86-188"><a href="partial-least-squares.html#cb86-188" tabindex="-1"></a>  <span class="er">|==============================</span>                    <span class="er">|</span>  <span class="dv">61</span>%</span>
+<span id="cb86-189"><a href="partial-least-squares.html#cb86-189" tabindex="-1"></a>  <span class="sc">|</span>                                                        </span>
+<span id="cb86-190"><a href="partial-least-squares.html#cb86-190" tabindex="-1"></a>  <span class="er">|===============================</span>                   <span class="er">|</span>  <span class="dv">61</span>%</span>
+<span id="cb86-191"><a href="partial-least-squares.html#cb86-191" tabindex="-1"></a>  <span class="sc">|</span>                                                        </span>
+<span id="cb86-192"><a href="partial-least-squares.html#cb86-192" tabindex="-1"></a>  <span class="er">|===============================</span>                   <span class="er">|</span>  <span class="dv">62</span>%</span>
+<span id="cb86-193"><a href="partial-least-squares.html#cb86-193" tabindex="-1"></a>  <span class="sc">|</span>                                                        </span>
+<span id="cb86-194"><a href="partial-least-squares.html#cb86-194" tabindex="-1"></a>  <span class="er">|===============================</span>                   <span class="er">|</span>  <span class="dv">63</span>%</span>
+<span id="cb86-195"><a href="partial-least-squares.html#cb86-195" tabindex="-1"></a>  <span class="sc">|</span>                                                        </span>
+<span id="cb86-196"><a href="partial-least-squares.html#cb86-196" tabindex="-1"></a>  <span class="er">|================================</span>                  <span class="er">|</span>  <span class="dv">63</span>%</span>
+<span id="cb86-197"><a href="partial-least-squares.html#cb86-197" tabindex="-1"></a>  <span class="sc">|</span>                                                        </span>
+<span id="cb86-198"><a href="partial-least-squares.html#cb86-198" tabindex="-1"></a>  <span class="er">|================================</span>                  <span class="er">|</span>  <span class="dv">64</span>%</span>
+<span id="cb86-199"><a href="partial-least-squares.html#cb86-199" tabindex="-1"></a>  <span class="sc">|</span>                                                        </span>
+<span id="cb86-200"><a href="partial-least-squares.html#cb86-200" tabindex="-1"></a>  <span class="er">|================================</span>                  <span class="er">|</span>  <span class="dv">65</span>%</span>
+<span id="cb86-201"><a href="partial-least-squares.html#cb86-201" tabindex="-1"></a>  <span class="sc">|</span>                                                        </span>
+<span id="cb86-202"><a href="partial-least-squares.html#cb86-202" tabindex="-1"></a>  <span class="er">|=================================</span>                 <span class="er">|</span>  <span class="dv">65</span>%</span>
+<span id="cb86-203"><a href="partial-least-squares.html#cb86-203" tabindex="-1"></a>  <span class="sc">|</span>                                                        </span>
+<span id="cb86-204"><a href="partial-least-squares.html#cb86-204" tabindex="-1"></a>  <span class="er">|=================================</span>                 <span class="er">|</span>  <span class="dv">66</span>%</span>
+<span id="cb86-205"><a href="partial-least-squares.html#cb86-205" tabindex="-1"></a>  <span class="sc">|</span>                                                        </span>
+<span id="cb86-206"><a href="partial-least-squares.html#cb86-206" tabindex="-1"></a>  <span class="er">|=================================</span>                 <span class="er">|</span>  <span class="dv">67</span>%</span>
+<span id="cb86-207"><a href="partial-least-squares.html#cb86-207" tabindex="-1"></a>  <span class="sc">|</span>                                                        </span>
+<span id="cb86-208"><a href="partial-least-squares.html#cb86-208" tabindex="-1"></a>  <span class="er">|==================================</span>                <span class="er">|</span>  <span class="dv">67</span>%</span>
+<span id="cb86-209"><a href="partial-least-squares.html#cb86-209" tabindex="-1"></a>  <span class="sc">|</span>                                                        </span>
+<span id="cb86-210"><a href="partial-least-squares.html#cb86-210" tabindex="-1"></a>  <span class="er">|==================================</span>                <span class="er">|</span>  <span class="dv">68</span>%</span>
+<span id="cb86-211"><a href="partial-least-squares.html#cb86-211" tabindex="-1"></a>  <span class="sc">|</span>                                                        </span>
+<span id="cb86-212"><a href="partial-least-squares.html#cb86-212" tabindex="-1"></a>  <span class="er">|==================================</span>                <span class="er">|</span>  <span class="dv">69</span>%</span>
+<span id="cb86-213"><a href="partial-least-squares.html#cb86-213" tabindex="-1"></a>  <span class="sc">|</span>                                                        </span>
+<span id="cb86-214"><a href="partial-least-squares.html#cb86-214" tabindex="-1"></a>  <span class="er">|===================================</span>               <span class="er">|</span>  <span class="dv">69</span>%</span>
+<span id="cb86-215"><a href="partial-least-squares.html#cb86-215" tabindex="-1"></a>  <span class="sc">|</span>                                                        </span>
+<span id="cb86-216"><a href="partial-least-squares.html#cb86-216" tabindex="-1"></a>  <span class="er">|===================================</span>               <span class="er">|</span>  <span class="dv">70</span>%</span>
+<span id="cb86-217"><a href="partial-least-squares.html#cb86-217" tabindex="-1"></a>  <span class="sc">|</span>                                                        </span>
+<span id="cb86-218"><a href="partial-least-squares.html#cb86-218" tabindex="-1"></a>  <span class="er">|===================================</span>               <span class="er">|</span>  <span class="dv">71</span>%</span>
+<span id="cb86-219"><a href="partial-least-squares.html#cb86-219" tabindex="-1"></a>  <span class="sc">|</span>                                                        </span>
+<span id="cb86-220"><a href="partial-least-squares.html#cb86-220" tabindex="-1"></a>  <span class="er">|====================================</span>              <span class="er">|</span>  <span class="dv">71</span>%</span>
+<span id="cb86-221"><a href="partial-least-squares.html#cb86-221" tabindex="-1"></a>  <span class="sc">|</span>                                                        </span>
+<span id="cb86-222"><a href="partial-least-squares.html#cb86-222" tabindex="-1"></a>  <span class="er">|====================================</span>              <span class="er">|</span>  <span class="dv">72</span>%</span>
+<span id="cb86-223"><a href="partial-least-squares.html#cb86-223" tabindex="-1"></a>  <span class="sc">|</span>                                                        </span>
+<span id="cb86-224"><a href="partial-least-squares.html#cb86-224" tabindex="-1"></a>  <span class="er">|====================================</span>              <span class="er">|</span>  <span class="dv">73</span>%</span>
+<span id="cb86-225"><a href="partial-least-squares.html#cb86-225" tabindex="-1"></a>  <span class="sc">|</span>                                                        </span>
+<span id="cb86-226"><a href="partial-least-squares.html#cb86-226" tabindex="-1"></a>  <span class="er">|=====================================</span>             <span class="er">|</span>  <span class="dv">73</span>%</span>
+<span id="cb86-227"><a href="partial-least-squares.html#cb86-227" tabindex="-1"></a>  <span class="sc">|</span>                                                        </span>
+<span id="cb86-228"><a href="partial-least-squares.html#cb86-228" tabindex="-1"></a>  <span class="er">|=====================================</span>             <span class="er">|</span>  <span class="dv">74</span>%</span>
+<span id="cb86-229"><a href="partial-least-squares.html#cb86-229" tabindex="-1"></a>  <span class="sc">|</span>                                                        </span>
+<span id="cb86-230"><a href="partial-least-squares.html#cb86-230" tabindex="-1"></a>  <span class="er">|=====================================</span>             <span class="er">|</span>  <span class="dv">75</span>%</span>
+<span id="cb86-231"><a href="partial-least-squares.html#cb86-231" tabindex="-1"></a>  <span class="sc">|</span>                                                        </span>
+<span id="cb86-232"><a href="partial-least-squares.html#cb86-232" tabindex="-1"></a>  <span class="er">|======================================</span>            <span class="er">|</span>  <span class="dv">75</span>%</span>
+<span id="cb86-233"><a href="partial-least-squares.html#cb86-233" tabindex="-1"></a>  <span class="sc">|</span>                                                        </span>
+<span id="cb86-234"><a href="partial-least-squares.html#cb86-234" tabindex="-1"></a>  <span class="er">|======================================</span>            <span class="er">|</span>  <span class="dv">76</span>%</span>
+<span id="cb86-235"><a href="partial-least-squares.html#cb86-235" tabindex="-1"></a>  <span class="sc">|</span>                                                        </span>
+<span id="cb86-236"><a href="partial-least-squares.html#cb86-236" tabindex="-1"></a>  <span class="er">|======================================</span>            <span class="er">|</span>  <span class="dv">77</span>%</span>
+<span id="cb86-237"><a href="partial-least-squares.html#cb86-237" tabindex="-1"></a>  <span class="sc">|</span>                                                        </span>
+<span id="cb86-238"><a href="partial-least-squares.html#cb86-238" tabindex="-1"></a>  <span class="er">|=======================================</span>           <span class="er">|</span>  <span class="dv">77</span>%</span>
+<span id="cb86-239"><a href="partial-least-squares.html#cb86-239" tabindex="-1"></a>  <span class="sc">|</span>                                                        </span>
+<span id="cb86-240"><a href="partial-least-squares.html#cb86-240" tabindex="-1"></a>  <span class="er">|=======================================</span>           <span class="er">|</span>  <span class="dv">78</span>%</span>
+<span id="cb86-241"><a href="partial-least-squares.html#cb86-241" tabindex="-1"></a>  <span class="sc">|</span>                                                        </span>
+<span id="cb86-242"><a href="partial-least-squares.html#cb86-242" tabindex="-1"></a>  <span class="er">|=======================================</span>           <span class="er">|</span>  <span class="dv">79</span>%</span>
+<span id="cb86-243"><a href="partial-least-squares.html#cb86-243" tabindex="-1"></a>  <span class="sc">|</span>                                                        </span>
+<span id="cb86-244"><a href="partial-least-squares.html#cb86-244" tabindex="-1"></a>  <span class="er">|========================================</span>          <span class="er">|</span>  <span class="dv">79</span>%</span>
+<span id="cb86-245"><a href="partial-least-squares.html#cb86-245" tabindex="-1"></a>  <span class="sc">|</span>                                                        </span>
+<span id="cb86-246"><a href="partial-least-squares.html#cb86-246" tabindex="-1"></a>  <span class="er">|========================================</span>          <span class="er">|</span>  <span class="dv">80</span>%</span>
+<span id="cb86-247"><a href="partial-least-squares.html#cb86-247" tabindex="-1"></a>  <span class="sc">|</span>                                                        </span>
+<span id="cb86-248"><a href="partial-least-squares.html#cb86-248" tabindex="-1"></a>  <span class="er">|========================================</span>          <span class="er">|</span>  <span class="dv">81</span>%</span>
+<span id="cb86-249"><a href="partial-least-squares.html#cb86-249" tabindex="-1"></a>  <span class="sc">|</span>                                                        </span>
+<span id="cb86-250"><a href="partial-least-squares.html#cb86-250" tabindex="-1"></a>  <span class="er">|=========================================</span>         <span class="er">|</span>  <span class="dv">81</span>%</span>
+<span id="cb86-251"><a href="partial-least-squares.html#cb86-251" tabindex="-1"></a>  <span class="sc">|</span>                                                        </span>
+<span id="cb86-252"><a href="partial-least-squares.html#cb86-252" tabindex="-1"></a>  <span class="er">|=========================================</span>         <span class="er">|</span>  <span class="dv">82</span>%</span>
+<span id="cb86-253"><a href="partial-least-squares.html#cb86-253" tabindex="-1"></a>  <span class="sc">|</span>                                                        </span>
+<span id="cb86-254"><a href="partial-least-squares.html#cb86-254" tabindex="-1"></a>  <span class="er">|=========================================</span>         <span class="er">|</span>  <span class="dv">83</span>%</span>
+<span id="cb86-255"><a href="partial-least-squares.html#cb86-255" tabindex="-1"></a>  <span class="sc">|</span>                                                        </span>
+<span id="cb86-256"><a href="partial-least-squares.html#cb86-256" tabindex="-1"></a>  <span class="er">|==========================================</span>        <span class="er">|</span>  <span class="dv">83</span>%</span>
+<span id="cb86-257"><a href="partial-least-squares.html#cb86-257" tabindex="-1"></a>  <span class="sc">|</span>                                                        </span>
+<span id="cb86-258"><a href="partial-least-squares.html#cb86-258" tabindex="-1"></a>  <span class="er">|==========================================</span>        <span class="er">|</span>  <span class="dv">84</span>%</span>
+<span id="cb86-259"><a href="partial-least-squares.html#cb86-259" tabindex="-1"></a>  <span class="sc">|</span>                                                        </span>
+<span id="cb86-260"><a href="partial-least-squares.html#cb86-260" tabindex="-1"></a>  <span class="er">|==========================================</span>        <span class="er">|</span>  <span class="dv">85</span>%</span>
+<span id="cb86-261"><a href="partial-least-squares.html#cb86-261" tabindex="-1"></a>  <span class="sc">|</span>                                                        </span>
+<span id="cb86-262"><a href="partial-least-squares.html#cb86-262" tabindex="-1"></a>  <span class="er">|===========================================</span>       <span class="er">|</span>  <span class="dv">85</span>%</span>
+<span id="cb86-263"><a href="partial-least-squares.html#cb86-263" tabindex="-1"></a>  <span class="sc">|</span>                                                        </span>
+<span id="cb86-264"><a href="partial-least-squares.html#cb86-264" tabindex="-1"></a>  <span class="er">|===========================================</span>       <span class="er">|</span>  <span class="dv">86</span>%</span>
+<span id="cb86-265"><a href="partial-least-squares.html#cb86-265" tabindex="-1"></a>  <span class="sc">|</span>                                                        </span>
+<span id="cb86-266"><a href="partial-least-squares.html#cb86-266" tabindex="-1"></a>  <span class="er">|===========================================</span>       <span class="er">|</span>  <span class="dv">87</span>%</span>
+<span id="cb86-267"><a href="partial-least-squares.html#cb86-267" tabindex="-1"></a>  <span class="sc">|</span>                                                        </span>
+<span id="cb86-268"><a href="partial-least-squares.html#cb86-268" tabindex="-1"></a>  <span class="er">|============================================</span>      <span class="er">|</span>  <span class="dv">87</span>%</span>
+<span id="cb86-269"><a href="partial-least-squares.html#cb86-269" tabindex="-1"></a>  <span class="sc">|</span>                                                        </span>
+<span id="cb86-270"><a href="partial-least-squares.html#cb86-270" tabindex="-1"></a>  <span class="er">|============================================</span>      <span class="er">|</span>  <span class="dv">88</span>%</span>
+<span id="cb86-271"><a href="partial-least-squares.html#cb86-271" tabindex="-1"></a>  <span class="sc">|</span>                                                        </span>
+<span id="cb86-272"><a href="partial-least-squares.html#cb86-272" tabindex="-1"></a>  <span class="er">|============================================</span>      <span class="er">|</span>  <span class="dv">89</span>%</span>
+<span id="cb86-273"><a href="partial-least-squares.html#cb86-273" tabindex="-1"></a>  <span class="sc">|</span>                                                        </span>
+<span id="cb86-274"><a href="partial-least-squares.html#cb86-274" tabindex="-1"></a>  <span class="er">|=============================================</span>     <span class="er">|</span>  <span class="dv">89</span>%</span>
+<span id="cb86-275"><a href="partial-least-squares.html#cb86-275" tabindex="-1"></a>  <span class="sc">|</span>                                                        </span>
+<span id="cb86-276"><a href="partial-least-squares.html#cb86-276" tabindex="-1"></a>  <span class="er">|=============================================</span>     <span class="er">|</span>  <span class="dv">90</span>%</span>
+<span id="cb86-277"><a href="partial-least-squares.html#cb86-277" tabindex="-1"></a>  <span class="sc">|</span>                                                        </span>
+<span id="cb86-278"><a href="partial-least-squares.html#cb86-278" tabindex="-1"></a>  <span class="er">|=============================================</span>     <span class="er">|</span>  <span class="dv">91</span>%</span>
+<span id="cb86-279"><a href="partial-least-squares.html#cb86-279" tabindex="-1"></a>  <span class="sc">|</span>                                                        </span>
+<span id="cb86-280"><a href="partial-least-squares.html#cb86-280" tabindex="-1"></a>  <span class="er">|==============================================</span>    <span class="er">|</span>  <span class="dv">91</span>%</span>
+<span id="cb86-281"><a href="partial-least-squares.html#cb86-281" tabindex="-1"></a>  <span class="sc">|</span>                                                        </span>
+<span id="cb86-282"><a href="partial-least-squares.html#cb86-282" tabindex="-1"></a>  <span class="er">|==============================================</span>    <span class="er">|</span>  <span class="dv">92</span>%</span>
+<span id="cb86-283"><a href="partial-least-squares.html#cb86-283" tabindex="-1"></a>  <span class="sc">|</span>                                                        </span>
+<span id="cb86-284"><a href="partial-least-squares.html#cb86-284" tabindex="-1"></a>  <span class="er">|==============================================</span>    <span class="er">|</span>  <span class="dv">93</span>%</span>
+<span id="cb86-285"><a href="partial-least-squares.html#cb86-285" tabindex="-1"></a>  <span class="sc">|</span>                                                        </span>
+<span id="cb86-286"><a href="partial-least-squares.html#cb86-286" tabindex="-1"></a>  <span class="er">|===============================================</span>   <span class="er">|</span>  <span class="dv">93</span>%</span>
+<span id="cb86-287"><a href="partial-least-squares.html#cb86-287" tabindex="-1"></a>  <span class="sc">|</span>                                                        </span>
+<span id="cb86-288"><a href="partial-least-squares.html#cb86-288" tabindex="-1"></a>  <span class="er">|===============================================</span>   <span class="er">|</span>  <span class="dv">94</span>%</span>
+<span id="cb86-289"><a href="partial-least-squares.html#cb86-289" tabindex="-1"></a>  <span class="sc">|</span>                                                        </span>
+<span id="cb86-290"><a href="partial-least-squares.html#cb86-290" tabindex="-1"></a>  <span class="er">|===============================================</span>   <span class="er">|</span>  <span class="dv">95</span>%</span>
+<span id="cb86-291"><a href="partial-least-squares.html#cb86-291" tabindex="-1"></a>  <span class="sc">|</span>                                                        </span>
+<span id="cb86-292"><a href="partial-least-squares.html#cb86-292" tabindex="-1"></a>  <span class="er">|================================================</span>  <span class="er">|</span>  <span class="dv">95</span>%</span>
+<span id="cb86-293"><a href="partial-least-squares.html#cb86-293" tabindex="-1"></a>  <span class="sc">|</span>                                                        </span>
+<span id="cb86-294"><a href="partial-least-squares.html#cb86-294" tabindex="-1"></a>  <span class="er">|================================================</span>  <span class="er">|</span>  <span class="dv">96</span>%</span>
+<span id="cb86-295"><a href="partial-least-squares.html#cb86-295" tabindex="-1"></a>  <span class="sc">|</span>                                                        </span>
+<span id="cb86-296"><a href="partial-least-squares.html#cb86-296" tabindex="-1"></a>  <span class="er">|================================================</span>  <span class="er">|</span>  <span class="dv">97</span>%</span>
+<span id="cb86-297"><a href="partial-least-squares.html#cb86-297" tabindex="-1"></a>  <span class="sc">|</span>                                                        </span>
+<span id="cb86-298"><a href="partial-least-squares.html#cb86-298" tabindex="-1"></a>  <span class="er">|=================================================</span> <span class="er">|</span>  <span class="dv">97</span>%</span>
+<span id="cb86-299"><a href="partial-least-squares.html#cb86-299" tabindex="-1"></a>  <span class="sc">|</span>                                                        </span>
+<span id="cb86-300"><a href="partial-least-squares.html#cb86-300" tabindex="-1"></a>  <span class="er">|=================================================</span> <span class="er">|</span>  <span class="dv">98</span>%</span>
+<span id="cb86-301"><a href="partial-least-squares.html#cb86-301" tabindex="-1"></a>  <span class="sc">|</span>                                                        </span>
+<span id="cb86-302"><a href="partial-least-squares.html#cb86-302" tabindex="-1"></a>  <span class="er">|=================================================</span> <span class="er">|</span>  <span class="dv">99</span>%</span>
+<span id="cb86-303"><a href="partial-least-squares.html#cb86-303" tabindex="-1"></a>  <span class="sc">|</span>                                                        </span>
+<span id="cb86-304"><a href="partial-least-squares.html#cb86-304" tabindex="-1"></a>  <span class="er">|==================================================|</span>  <span class="dv">99</span>%</span>
+<span id="cb86-305"><a href="partial-least-squares.html#cb86-305" tabindex="-1"></a>  <span class="sc">|</span>                                                        </span>
+<span id="cb86-306"><a href="partial-least-squares.html#cb86-306" tabindex="-1"></a>  <span class="er">|==================================================|</span> <span class="dv">100</span>%</span>
+<span id="cb86-307"><a href="partial-least-squares.html#cb86-307" tabindex="-1"></a>pls</span>
+<span id="cb86-308"><a href="partial-least-squares.html#cb86-308" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb86-309"><a href="partial-least-squares.html#cb86-309" tabindex="-1"></a><span class="co">#&gt; Call:</span></span>
+<span id="cb86-310"><a href="partial-least-squares.html#cb86-310" tabindex="-1"></a><span class="co">#&gt; two.b.pls(A1 = shape, A2 = shape.v, iter = 999) </span></span>
+<span id="cb86-311"><a href="partial-least-squares.html#cb86-311" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb86-312"><a href="partial-least-squares.html#cb86-312" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb86-313"><a href="partial-least-squares.html#cb86-313" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb86-314"><a href="partial-least-squares.html#cb86-314" tabindex="-1"></a><span class="co">#&gt; r-PLS: 0.897</span></span>
+<span id="cb86-315"><a href="partial-least-squares.html#cb86-315" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb86-316"><a href="partial-least-squares.html#cb86-316" tabindex="-1"></a><span class="co">#&gt; Effect Size (Z): 4.257</span></span>
+<span id="cb86-317"><a href="partial-least-squares.html#cb86-317" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb86-318"><a href="partial-least-squares.html#cb86-318" tabindex="-1"></a><span class="co">#&gt; P-value: 0.001</span></span>
+<span id="cb86-319"><a href="partial-least-squares.html#cb86-319" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb86-320"><a href="partial-least-squares.html#cb86-320" tabindex="-1"></a><span class="co">#&gt; Based on 1000 random permutations</span></span>
+<span id="cb86-321"><a href="partial-least-squares.html#cb86-321" tabindex="-1"></a></span>
+<span id="cb86-322"><a href="partial-least-squares.html#cb86-322" tabindex="-1"></a><span class="fu">plot</span>(pls,<span class="at">label=</span>species.pls)</span></code></pre></div>
+<div class="inline-figure"><img src="03.7-mgpls_files/figure-html/unnamed-chunk-3-1.png" width="672"></div>
+<p>É possível visualizar as mudanças de forma ao longo dos eixos da PLS de diferentes maneiras.
+Uma delas é usando uma função interativa do pacote <em>geomorph</em></p>
+<div class="sourceCode" id="cb87"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">pls.plot</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">pls</span><span class="op">)</span></span></code></pre></div>
+<div class="inline-figure"><img src="03.7-mgpls_files/figure-html/unnamed-chunk-4-1.png" width="672"></div>
+<div class="sourceCode" id="cb88"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co">#picknplot.shape(pls.plot)</span></span></code></pre></div>
+<p>A maneira mais tradicional é encontrar as formas a partir dos valores nos eixos da PLS.</p>
+<div class="sourceCode" id="cb89"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">pls</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/pkg/geomorph/man/two.b.pls.html">two.b.pls</a></span><span class="op">(</span><span class="va">shape</span>,<span class="va">shape.v</span>,iter<span class="op">=</span><span class="fl">999</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">pls</span>,label<span class="op">=</span><span class="va">species.pls</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Valores mínimos e máximos do pls plot</span></span>
+<span><span class="va">preds.v</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/pkg/geomorph/man/shape.predictor.html">shape.predictor</a></span><span class="op">(</span><span class="va">shape.v</span>,<span class="fu"><a href="https://rdrr.io/pkg/geomorph/man/two.d.array.html">two.d.array</a></span><span class="op">(</span><span class="va">shape</span><span class="op">)</span>,method<span class="op">=</span><span class="st">"PLS"</span>,</span>
+<span>                         Vmin<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">min</a></span><span class="op">(</span><span class="va">pls</span><span class="op">$</span><span class="va">XScores</span><span class="op">[</span>,<span class="fl">1</span><span class="op">]</span><span class="op">)</span>,</span>
+<span>                         Vmax<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">max</a></span><span class="op">(</span><span class="va">pls</span><span class="op">$</span><span class="va">XScores</span><span class="op">[</span>,<span class="fl">1</span><span class="op">]</span><span class="op">)</span><span class="op">)</span> </span>
+<span><span class="va">preds.v</span></span>
+<span></span>
+<span><span class="co"># Valores mínimos e máximos do pls2</span></span>
+<span><span class="va">pls2</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/pkg/geomorph/man/two.b.pls.html">two.b.pls</a></span><span class="op">(</span><span class="va">shape.v</span>,<span class="va">shape</span>,iter<span class="op">=</span><span class="fl">999</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">pls2</span>,label<span class="op">=</span><span class="va">species.pls</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">preds.m</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/pkg/geomorph/man/shape.predictor.html">shape.predictor</a></span><span class="op">(</span><span class="va">shape</span>,<span class="fu"><a href="https://rdrr.io/pkg/geomorph/man/two.d.array.html">two.d.array</a></span><span class="op">(</span><span class="va">shape.v</span><span class="op">)</span>,method<span class="op">=</span><span class="st">"PLS"</span>,</span>
+<span>                         Mmin<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">min</a></span><span class="op">(</span><span class="va">pls2</span><span class="op">$</span><span class="va">XScores</span><span class="op">[</span>,<span class="fl">1</span><span class="op">]</span><span class="op">)</span>,</span>
+<span>                         Mmax<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">max</a></span><span class="op">(</span><span class="va">pls2</span><span class="op">$</span><span class="va">XScores</span><span class="op">[</span>,<span class="fl">1</span><span class="op">]</span><span class="op">)</span><span class="op">)</span> </span>
+<span><span class="va">preds.m</span></span></code></pre></div>
+<p>Visualização das formas mínimas e máximas dos eixos da PLS.</p>
+<div class="sourceCode" id="cb90"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="op">{</span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">pls</span>,label<span class="op">=</span><span class="va">species.pls</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/par.html">par</a></span><span class="op">(</span>mfrow<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">2</span>,<span class="fl">2</span><span class="op">)</span>,mar<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0.01</span>,<span class="fl">0.01</span>,<span class="fl">0.01</span>,<span class="fl">0.01</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/pkg/geomorph/man/plotRefToTarget.html">plotRefToTarget</a></span><span class="op">(</span><span class="va">ref.mand</span>,<span class="va">preds.m</span><span class="op">$</span><span class="va">Mmax</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/text.html">text</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fl">0.4</span>,labels<span class="op">=</span><span class="st">"Valores negativos PLS1 Bloco1"</span>,cex<span class="op">=</span><span class="fl">1.3</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/pkg/geomorph/man/plotRefToTarget.html">plotRefToTarget</a></span><span class="op">(</span><span class="va">ref.ventral</span>,<span class="va">preds.v</span><span class="op">$</span><span class="va">Vmin</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/text.html">text</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fl">0.25</span>,labels<span class="op">=</span><span class="st">"Valores negativos PLS1 Bloco2"</span>,cex<span class="op">=</span><span class="fl">1.3</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/pkg/geomorph/man/plotRefToTarget.html">plotRefToTarget</a></span><span class="op">(</span><span class="va">ref.mand</span>,<span class="va">preds.m</span><span class="op">$</span><span class="va">Mmin</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/text.html">text</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fl">0.4</span>,labels<span class="op">=</span><span class="st">"Valores positivos PLS1 Bloco1"</span>,cex<span class="op">=</span><span class="fl">1.3</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/pkg/geomorph/man/plotRefToTarget.html">plotRefToTarget</a></span><span class="op">(</span><span class="va">ref.ventral</span>,<span class="va">preds.v</span><span class="op">$</span><span class="va">Vmax</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/text.html">text</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fl">0.25</span>,labels<span class="op">=</span><span class="st">"Valores positivos PLS1 Bloco2"</span>,cex<span class="op">=</span><span class="fl">1.3</span><span class="op">)</span><span class="op">}</span></span></code></pre></div>
+<p><img src="03.7-mgpls_files/figure-html/unnamed-chunk-6-1.png" width="672"><img src="03.7-mgpls_files/figure-html/unnamed-chunk-6-2.png" width="672"></p>
+<div class="sourceCode" id="cb91"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/par.html">par</a></span><span class="op">(</span>mfrow<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">1</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+
+</div>
+  <div class="chapter-nav">
+<div class="prev"><a href="m%C3%A9todos-de-ordena%C3%A7%C3%A3o.html"><span class="header-section-number">9</span> Métodos de ordenação</a></div>
+<div class="next"><a href="modelos-lineares-para-discrimina%C3%A7%C3%A3o-de-grupos.html"><span class="header-section-number">11</span> Modelos lineares para discriminação de grupos</a></div>
+</div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
+    <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
+      <ul class="nav navbar-nav"><li><a class="nav-link" href="#partial-least-squares"><span class="header-section-number">10</span> Partial Least Squares</a></li></ul>
+
+      <div class="book-extra">
+        <ul class="list-unstyled">
+<li><a id="book-source" href="https://github.com/renanmaestri/eebb/blob/master/03.7-mgpls.Rmd">View source <i class="fab fa-github"></i></a></li>
+          <li><a id="book-edit" href="https://github.com/renanmaestri/eebb/edit/master/03.7-mgpls.Rmd">Edit this page <i class="fab fa-github"></i></a></li>
+        </ul>
+</div>
+    </nav>
+</div>
+
+</div>
+</div> <!-- .container -->
+
+<footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>"<strong>Manual de Ecologia Evolutiva, Biometria e Biogeografia</strong>" was written by Renan Maestri. It was last built on 2023-09-27.</p>
+  </div>
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>This book was built by the <a class="text-light" href="https://bookdown.org">bookdown</a> R package.</p>
+  </div>
+
+</div></div>
+</footer>
+</body>
+</html>
