@@ -112,7 +112,7 @@ Aqui, os exemplos vão apresentar algumas análises comparativas no contexto de 
 Zelditch et al. 2012 Geometric Morphometrics for Biologists, Elsevier.
 Monteiro 2013 Hystrix, doi: 10.4404/hystrix-24.1-6282.
 Adams &amp; Collyer 2018 Syst Biol doi: 10.1093/sysbio/syx055.</p>
-<p>Para literatura geral, veja as referência no capítulo sobre Macroevolução deste manual.</p>
+<p>Para literatura geral, e muitas outras opções analíticas, veja o material e as referências na parte sobre Macroevolução deste manual.</p>
 <p>Vamos carregar dados morfológicos obtidos por morfometria geométrica e uma hipótese filogenética para explorar algumas análises filogenéticas comparativas.</p>
 <div class="sourceCode" id="cb118"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">require</a></span><span class="op">(</span><span class="va"><a href="https://github.com/geomorphR/geomorph">geomorph</a></span><span class="op">)</span></span>
@@ -120,7 +120,7 @@ Adams &amp; Collyer 2018 Syst Biol doi: 10.1093/sysbio/syx055.</p>
 <span><span class="co">#&gt; Carregando pacotes exigidos: RRPP</span></span>
 <span><span class="co">#&gt; Carregando pacotes exigidos: rgl</span></span>
 <span><span class="co">#&gt; Carregando pacotes exigidos: Matrix</span></span>
-<span><span class="co"># Carregar arquivo tps da mandíbula</span></span>
+<span><span class="co"># Carregar dados de forma média por espécie em formato de matriz</span></span>
 <span><span class="va">tps</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/pkg/geomorph/man/readland.tps.html">readland.tps</a></span><span class="op">(</span><span class="st">"dadosmg/mandibula.dig_curso.pls.tps"</span>,specID <span class="op">=</span> <span class="st">"ID"</span>, readcurves <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
 <span><span class="va">gpa</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/pkg/geomorph/man/gpagen.html">gpagen</a></span><span class="op">(</span><span class="va">tps</span><span class="op">)</span></span>
 <span><span class="va">shape</span><span class="op">&lt;-</span><span class="va">gpa</span><span class="op">$</span><span class="va">coords</span></span>
@@ -153,36 +153,461 @@ Adams &amp; Collyer 2018 Syst Biol doi: 10.1093/sysbio/syx055.</p>
 <h2>
 <span class="header-section-number">16.1</span> Filomorfoespaço<a class="anchor" aria-label="anchor" href="#filomorfoespa%C3%A7o"><i class="fas fa-link"></i></a>
 </h2>
-<p>Podemos representar de maneira gráfica a filogenia no espaço de forma criado com uma análise de componentes principais.</p>
+<p>Podemos representar de maneira gráfica a filogenia no espaço de forma criado com uma análise de componentes principais. Essa é a PCA padrão, inalterada, com a projeção da filogenia e estimativa de formas ancestrais.</p>
+<div class="sourceCode" id="cb121"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">PCA</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/pkg/geomorph/man/gm.prcomp.html">gm.prcomp</a></span><span class="op">(</span><span class="va">shape.means</span>,phy<span class="op">=</span><span class="va">tree</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">PCA</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">PCA</span>,phylo<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
+<div class="inline-figure"><img src="03.13-mgpcm_files/figure-html/unnamed-chunk-3-1.png" width="672"></div>
 <p>Filomorfoespaço 3D.</p>
+<div class="sourceCode" id="cb122"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">require</a></span><span class="op">(</span><span class="va"><a href="https://github.com/liamrevell/phytools">phytools</a></span><span class="op">)</span></span>
+<span><span class="co">#&gt; Carregando pacotes exigidos: phytools</span></span>
+<span><span class="co">#&gt; Carregando pacotes exigidos: maps</span></span>
+<span><span class="co">#phylomorphospace3d(tree,PCA$x[,1:3])</span></span></code></pre></div>
+<p>A visualização de formas pode ser feita ao longo dos eixos, como na PCA tradicional, bem como podem ser visualizadas as formas ancestrais estimadas, formas médias de espécies atuais, etc.</p>
+<div class="sourceCode" id="cb123"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">ref</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/pkg/geomorph/man/mshape.html">mshape</a></span><span class="op">(</span><span class="va">shape.means</span><span class="op">)</span></span>
+<span><span class="va">ancestral.shapes</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/pkg/geomorph/man/arrayspecs.html">arrayspecs</a></span><span class="op">(</span><span class="va">PCA</span><span class="op">$</span><span class="va">ancestors</span>,<span class="fl">13</span>,<span class="fl">2</span><span class="op">)</span></span>
+<span><span class="co"># Forma ancestral contra a média</span></span>
+<span><span class="fu"><a href="https://rdrr.io/pkg/geomorph/man/plotRefToTarget.html">plotRefToTarget</a></span><span class="op">(</span><span class="va">ref</span>,<span class="va">ancestral.shapes</span><span class="op">[</span>,,<span class="fl">1</span><span class="op">]</span>,method<span class="op">=</span><span class="st">"TPS"</span><span class="op">)</span></span></code></pre></div>
+<div class="inline-figure"><img src="03.13-mgpcm_files/figure-html/unnamed-chunk-5-1.png" width="672"></div>
+<div class="sourceCode" id="cb124"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Forma ancestral contra espécie atual</span></span>
+<span><span class="fu"><a href="https://rdrr.io/pkg/geomorph/man/plotRefToTarget.html">plotRefToTarget</a></span><span class="op">(</span><span class="va">ancestral.shapes</span><span class="op">[</span>,,<span class="fl">1</span><span class="op">]</span>,<span class="va">shape.means</span><span class="op">[</span>,,<span class="st">"Aexa"</span><span class="op">]</span>,method<span class="op">=</span><span class="st">"TPS"</span><span class="op">)</span></span></code></pre></div>
+<div class="inline-figure"><img src="03.13-mgpcm_files/figure-html/unnamed-chunk-5-2.png" width="672"></div>
+<p>Visualizar tamanho ao longo da filogenia.</p>
+<div class="sourceCode" id="cb125"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">size.means1</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/base/vector.html">as.vector</a></span><span class="op">(</span><span class="va">size.means</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">size.means1</span><span class="op">)</span><span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/colnames.html">rownames</a></span><span class="op">(</span><span class="va">size.means</span><span class="op">)</span></span>
+<span><span class="va">tree1</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/pkg/ape/man/compute.brlen.html">compute.brlen</a></span><span class="op">(</span><span class="va">tree</span>,method<span class="op">=</span><span class="st">"Grafen"</span><span class="op">)</span> <span class="co"># make ultrametric</span></span>
+<span><span class="co"># cores</span></span>
+<span><span class="fu"><a href="https://rdrr.io/pkg/phytools/man/contMap.html">contMap</a></span><span class="op">(</span><span class="va">tree1</span>,<span class="va">size.means1</span><span class="op">)</span></span></code></pre></div>
+<div class="inline-figure"><img src="03.13-mgpcm_files/figure-html/unnamed-chunk-6-1.png" width="672"></div>
+<div class="sourceCode" id="cb126"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># dots</span></span>
+<span><span class="fu"><a href="https://rdrr.io/pkg/phytools/man/dotTree.html">dotTree</a></span><span class="op">(</span><span class="va">tree1</span>,<span class="va">size.means1</span>,length<span class="op">=</span><span class="fl">10</span><span class="op">)</span></span></code></pre></div>
+<div class="inline-figure"><img src="03.13-mgpcm_files/figure-html/unnamed-chunk-6-2.png" width="672"></div>
+<div class="sourceCode" id="cb127"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># barras</span></span>
+<span><span class="fu"><a href="https://rdrr.io/pkg/phytools/man/plotTree.wBars.html">plotTree.barplot</a></span><span class="op">(</span><span class="va">tree1</span>,<span class="va">size.means1</span><span class="op">)</span></span></code></pre></div>
+<div class="inline-figure"><img src="03.13-mgpcm_files/figure-html/unnamed-chunk-6-3.png" width="672"></div>
 </div>
 <div id="pca-filogenética" class="section level2" number="16.2">
 <h2>
 <span class="header-section-number">16.2</span> PCA filogenética<a class="anchor" aria-label="anchor" href="#pca-filogen%C3%A9tica"><i class="fas fa-link"></i></a>
 </h2>
+<p>A PCA filogenética <em>sensu</em> Revell (2009).</p>
+<div class="sourceCode" id="cb128"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">phyloPCA</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/pkg/geomorph/man/gm.prcomp.html">gm.prcomp</a></span><span class="op">(</span><span class="va">shape.means</span>,phy<span class="op">=</span><span class="va">tree</span>,GLS<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">phyloPCA</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">phyloPCA</span>,phylo<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
+<div class="inline-figure"><img src="03.13-mgpcm_files/figure-html/unnamed-chunk-7-1.png" width="672"></div>
 </div>
 <div id="sinal-filogenético-multivariado" class="section level2" number="16.3">
 <h2>
 <span class="header-section-number">16.3</span> Sinal filogenético multivariado<a class="anchor" aria-label="anchor" href="#sinal-filogen%C3%A9tico-multivariado"><i class="fas fa-link"></i></a>
 </h2>
+<p>Sinal filogenético é um padrão que mostra se espécies mais próximas filogeneticamente têm morfologias mais similares do que espécies mais distantes filogeneticamente. Existem vários métodos para o cálculo de sinal filogenético, o mais comum é a estatística K (Blomberg et al. 2003; Adams 2014).
+K=1 indica que espécies próximas são tão parecidas quanto prevê o modelo Browniano
+K&lt;1 indica sinal filogenético menor do que esperado pelo modelo Browniano
+K&gt;1 indica sinal filogenético maior do que esperado pelo modelo Browniano</p>
+<div class="sourceCode" id="cb129"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Sinal Filogenético para forma do crânio</span></span>
+<span><span class="va">sinal.k</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/pkg/geomorph/man/physignal.html">physignal</a></span><span class="op">(</span><span class="va">shape.means</span>,<span class="va">tree</span>,iter<span class="op">=</span><span class="fl">999</span><span class="op">)</span></span>
+<span><span class="va">sinal.k</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; Call:</span></span>
+<span><span class="co">#&gt; physignal(A = shape.means, phy = tree, iter = 999) </span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; Observed Phylogenetic Signal (K): 0.6146</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; P-value: 0.158</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; Based on 1000 random permutations</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt;  Use physignal.z to estimate effect size.</span></span>
+<span><span class="co"># Sinal Filogenético para tamanho do crânio</span></span>
+<span><span class="va">sinal.k.size</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/pkg/geomorph/man/physignal.html">physignal</a></span><span class="op">(</span><span class="va">size.means</span>,<span class="va">tree</span>,iter<span class="op">=</span><span class="fl">999</span><span class="op">)</span></span>
+<span><span class="va">sinal.k.size</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; Call:</span></span>
+<span><span class="co">#&gt; physignal(A = size.means, phy = tree, iter = 999) </span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; Observed Phylogenetic Signal (K): 0.5612</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; P-value: 0.416</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; Based on 1000 random permutations</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt;  Use physignal.z to estimate effect size.</span></span></code></pre></div>
 </div>
 <div id="análise-filogenética-generalizada-por-quadrados-mínimos-pgls-multivariada" class="section level2" number="16.4">
 <h2>
 <span class="header-section-number">16.4</span> Análise filogenética generalizada por quadrados mínimos (PGLS multivariada)<a class="anchor" aria-label="anchor" href="#an%C3%A1lise-filogen%C3%A9tica-generalizada-por-quadrados-m%C3%ADnimos-pgls-multivariada"><i class="fas fa-link"></i></a>
 </h2>
+<div class="sourceCode" id="cb130"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb130-1"><a href="morfometria-geom%C3%A9trica-e-filogenias.html#cb130-1" tabindex="-1"></a><span class="co"># Variáveis hipotéticas para usar como exemplo</span></span>
+<span id="cb130-2"><a href="morfometria-geom%C3%A9trica-e-filogenias.html#cb130-2" tabindex="-1"></a>nomes<span class="ot">&lt;-</span><span class="fu">c</span>(<span class="st">"Aded"</span>,<span class="st">"Aega"</span>,<span class="st">"Aexa"</span>,<span class="st">"Aupi"</span>,<span class="st">"Elmo"</span>,<span class="st">"Irta"</span>,<span class="st">"Jshu"</span>,<span class="st">"Lomi"</span>)</span>
+<span id="cb130-3"><a href="morfometria-geom%C3%A9trica-e-filogenias.html#cb130-3" tabindex="-1"></a>temp<span class="ot">&lt;-</span><span class="fu">c</span>(<span class="fl">12.15</span>,<span class="dv">22</span>,<span class="fl">16.02</span>,<span class="fl">10.42</span>,<span class="fl">8.21</span>,<span class="fl">8.39</span>,<span class="dv">25</span>,<span class="fl">7.86</span>)</span>
+<span id="cb130-4"><a href="morfometria-geom%C3%A9trica-e-filogenias.html#cb130-4" tabindex="-1"></a>alt<span class="ot">&lt;-</span><span class="fu">c</span>(<span class="dv">2951</span>,<span class="dv">300</span>,<span class="dv">1931</span>,<span class="dv">3222</span>,<span class="fl">753.96</span>,<span class="fl">719.94</span>,<span class="dv">700</span>,<span class="fl">866.65</span>)</span>
+<span id="cb130-5"><a href="morfometria-geom%C3%A9trica-e-filogenias.html#cb130-5" tabindex="-1"></a><span class="fu">names</span>(temp)<span class="ot">&lt;-</span>nomes</span>
+<span id="cb130-6"><a href="morfometria-geom%C3%A9trica-e-filogenias.html#cb130-6" tabindex="-1"></a><span class="fu">names</span>(alt)<span class="ot">&lt;-</span>nomes</span>
+<span id="cb130-7"><a href="morfometria-geom%C3%A9trica-e-filogenias.html#cb130-7" tabindex="-1"></a></span>
+<span id="cb130-8"><a href="morfometria-geom%C3%A9trica-e-filogenias.html#cb130-8" tabindex="-1"></a>gdf<span class="ot">&lt;-</span><span class="fu">geomorph.data.frame</span>(<span class="at">shape.means=</span>shape.means,<span class="at">temp=</span>temp,<span class="at">tree=</span>tree)</span>
+<span id="cb130-9"><a href="morfometria-geom%C3%A9trica-e-filogenias.html#cb130-9" tabindex="-1"></a>fit.pgls<span class="ot">&lt;-</span><span class="fu">procD.pgls</span>(shape.means<span class="sc">~</span>temp,tree,<span class="at">data=</span>gdf)</span>
+<span id="cb130-10"><a href="morfometria-geom%C3%A9trica-e-filogenias.html#cb130-10" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb130-11"><a href="morfometria-geom%C3%A9trica-e-filogenias.html#cb130-11" tabindex="-1"></a><span class="co">#&gt; Please be aware that printing progress slows down the analysis (perhaps slightly).</span></span>
+<span id="cb130-12"><a href="morfometria-geom%C3%A9trica-e-filogenias.html#cb130-12" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb130-13"><a href="morfometria-geom%C3%A9trica-e-filogenias.html#cb130-13" tabindex="-1"></a><span class="co">#&gt; Preliminary Model Fit...</span></span>
+<span id="cb130-14"><a href="morfometria-geom%C3%A9trica-e-filogenias.html#cb130-14" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb130-15"><a href="morfometria-geom%C3%A9trica-e-filogenias.html#cb130-15" tabindex="-1"></a><span class="co">#&gt; Sums of Squares calculations: 1000 permutations.</span></span>
+<span id="cb130-16"><a href="morfometria-geom%C3%A9trica-e-filogenias.html#cb130-16" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb130-17"><a href="morfometria-geom%C3%A9trica-e-filogenias.html#cb130-17" tabindex="-1"></a>  <span class="sc">|</span>                                                        </span>
+<span id="cb130-18"><a href="morfometria-geom%C3%A9trica-e-filogenias.html#cb130-18" tabindex="-1"></a>  <span class="er">|</span>                                                  <span class="er">|</span>   <span class="dv">0</span>%</span>
+<span id="cb130-19"><a href="morfometria-geom%C3%A9trica-e-filogenias.html#cb130-19" tabindex="-1"></a>  <span class="sc">|</span>                                                        </span>
+<span id="cb130-20"><a href="morfometria-geom%C3%A9trica-e-filogenias.html#cb130-20" tabindex="-1"></a>  <span class="er">|</span>                                                  <span class="er">|</span>   <span class="dv">1</span>%</span>
+<span id="cb130-21"><a href="morfometria-geom%C3%A9trica-e-filogenias.html#cb130-21" tabindex="-1"></a>  <span class="sc">|</span>                                                        </span>
+<span id="cb130-22"><a href="morfometria-geom%C3%A9trica-e-filogenias.html#cb130-22" tabindex="-1"></a>  <span class="er">|=</span>                                                 <span class="er">|</span>   <span class="dv">1</span>%</span>
+<span id="cb130-23"><a href="morfometria-geom%C3%A9trica-e-filogenias.html#cb130-23" tabindex="-1"></a>  <span class="sc">|</span>                                                        </span>
+<span id="cb130-24"><a href="morfometria-geom%C3%A9trica-e-filogenias.html#cb130-24" tabindex="-1"></a>  <span class="er">|=</span>                                                 <span class="er">|</span>   <span class="dv">2</span>%</span>
+<span id="cb130-25"><a href="morfometria-geom%C3%A9trica-e-filogenias.html#cb130-25" tabindex="-1"></a>  <span class="sc">|</span>                                                        </span>
+<span id="cb130-26"><a href="morfometria-geom%C3%A9trica-e-filogenias.html#cb130-26" tabindex="-1"></a>  <span class="er">|=</span>                                                 <span class="er">|</span>   <span class="dv">3</span>%</span>
+<span id="cb130-27"><a href="morfometria-geom%C3%A9trica-e-filogenias.html#cb130-27" tabindex="-1"></a>  <span class="sc">|</span>                                                        </span>
+<span id="cb130-28"><a href="morfometria-geom%C3%A9trica-e-filogenias.html#cb130-28" tabindex="-1"></a>  <span class="er">|==</span>                                                <span class="er">|</span>   <span class="dv">3</span>%</span>
+<span id="cb130-29"><a href="morfometria-geom%C3%A9trica-e-filogenias.html#cb130-29" tabindex="-1"></a>  <span class="sc">|</span>                                                        </span>
+<span id="cb130-30"><a href="morfometria-geom%C3%A9trica-e-filogenias.html#cb130-30" tabindex="-1"></a>  <span class="er">|==</span>                                                <span class="er">|</span>   <span class="dv">4</span>%</span>
+<span id="cb130-31"><a href="morfometria-geom%C3%A9trica-e-filogenias.html#cb130-31" tabindex="-1"></a>  <span class="sc">|</span>                                                        </span>
+<span id="cb130-32"><a href="morfometria-geom%C3%A9trica-e-filogenias.html#cb130-32" tabindex="-1"></a>  <span class="er">|==</span>                                                <span class="er">|</span>   <span class="dv">5</span>%</span>
+<span id="cb130-33"><a href="morfometria-geom%C3%A9trica-e-filogenias.html#cb130-33" tabindex="-1"></a>  <span class="sc">|</span>                                                        </span>
+<span id="cb130-34"><a href="morfometria-geom%C3%A9trica-e-filogenias.html#cb130-34" tabindex="-1"></a>  <span class="er">|===</span>                                               <span class="er">|</span>   <span class="dv">5</span>%</span>
+<span id="cb130-35"><a href="morfometria-geom%C3%A9trica-e-filogenias.html#cb130-35" tabindex="-1"></a>  <span class="sc">|</span>                                                        </span>
+<span id="cb130-36"><a href="morfometria-geom%C3%A9trica-e-filogenias.html#cb130-36" tabindex="-1"></a>  <span class="er">|===</span>                                               <span class="er">|</span>   <span class="dv">6</span>%</span>
+<span id="cb130-37"><a href="morfometria-geom%C3%A9trica-e-filogenias.html#cb130-37" tabindex="-1"></a>  <span class="sc">|</span>                                                        </span>
+<span id="cb130-38"><a href="morfometria-geom%C3%A9trica-e-filogenias.html#cb130-38" tabindex="-1"></a>  <span class="er">|===</span>                                               <span class="er">|</span>   <span class="dv">7</span>%</span>
+<span id="cb130-39"><a href="morfometria-geom%C3%A9trica-e-filogenias.html#cb130-39" tabindex="-1"></a>  <span class="sc">|</span>                                                        </span>
+<span id="cb130-40"><a href="morfometria-geom%C3%A9trica-e-filogenias.html#cb130-40" tabindex="-1"></a>  <span class="er">|====</span>                                              <span class="er">|</span>   <span class="dv">7</span>%</span>
+<span id="cb130-41"><a href="morfometria-geom%C3%A9trica-e-filogenias.html#cb130-41" tabindex="-1"></a>  <span class="sc">|</span>                                                        </span>
+<span id="cb130-42"><a href="morfometria-geom%C3%A9trica-e-filogenias.html#cb130-42" tabindex="-1"></a>  <span class="er">|====</span>                                              <span class="er">|</span>   <span class="dv">8</span>%</span>
+<span id="cb130-43"><a href="morfometria-geom%C3%A9trica-e-filogenias.html#cb130-43" tabindex="-1"></a>  <span class="sc">|</span>                                                        </span>
+<span id="cb130-44"><a href="morfometria-geom%C3%A9trica-e-filogenias.html#cb130-44" tabindex="-1"></a>  <span class="er">|====</span>                                              <span class="er">|</span>   <span class="dv">9</span>%</span>
+<span id="cb130-45"><a href="morfometria-geom%C3%A9trica-e-filogenias.html#cb130-45" tabindex="-1"></a>  <span class="sc">|</span>                                                        </span>
+<span id="cb130-46"><a href="morfometria-geom%C3%A9trica-e-filogenias.html#cb130-46" tabindex="-1"></a>  <span class="er">|=====</span>                                             <span class="er">|</span>   <span class="dv">9</span>%</span>
+<span id="cb130-47"><a href="morfometria-geom%C3%A9trica-e-filogenias.html#cb130-47" tabindex="-1"></a>  <span class="sc">|</span>                                                        </span>
+<span id="cb130-48"><a href="morfometria-geom%C3%A9trica-e-filogenias.html#cb130-48" tabindex="-1"></a>  <span class="er">|=====</span>                                             <span class="er">|</span>  <span class="dv">10</span>%</span>
+<span id="cb130-49"><a href="morfometria-geom%C3%A9trica-e-filogenias.html#cb130-49" tabindex="-1"></a>  <span class="sc">|</span>                                                        </span>
+<span id="cb130-50"><a href="morfometria-geom%C3%A9trica-e-filogenias.html#cb130-50" tabindex="-1"></a>  <span class="er">|=====</span>                                             <span class="er">|</span>  <span class="dv">11</span>%</span>
+<span id="cb130-51"><a href="morfometria-geom%C3%A9trica-e-filogenias.html#cb130-51" tabindex="-1"></a>  <span class="sc">|</span>                                                        </span>
+<span id="cb130-52"><a href="morfometria-geom%C3%A9trica-e-filogenias.html#cb130-52" tabindex="-1"></a>  <span class="er">|======</span>                                            <span class="er">|</span>  <span class="dv">11</span>%</span>
+<span id="cb130-53"><a href="morfometria-geom%C3%A9trica-e-filogenias.html#cb130-53" tabindex="-1"></a>  <span class="sc">|</span>                                                        </span>
+<span id="cb130-54"><a href="morfometria-geom%C3%A9trica-e-filogenias.html#cb130-54" tabindex="-1"></a>  <span class="er">|======</span>                                            <span class="er">|</span>  <span class="dv">12</span>%</span>
+<span id="cb130-55"><a href="morfometria-geom%C3%A9trica-e-filogenias.html#cb130-55" tabindex="-1"></a>  <span class="sc">|</span>                                                        </span>
+<span id="cb130-56"><a href="morfometria-geom%C3%A9trica-e-filogenias.html#cb130-56" tabindex="-1"></a>  <span class="er">|======</span>                                            <span class="er">|</span>  <span class="dv">13</span>%</span>
+<span id="cb130-57"><a href="morfometria-geom%C3%A9trica-e-filogenias.html#cb130-57" tabindex="-1"></a>  <span class="sc">|</span>                                                        </span>
+<span id="cb130-58"><a href="morfometria-geom%C3%A9trica-e-filogenias.html#cb130-58" tabindex="-1"></a>  <span class="er">|=======</span>                                           <span class="er">|</span>  <span class="dv">13</span>%</span>
+<span id="cb130-59"><a href="morfometria-geom%C3%A9trica-e-filogenias.html#cb130-59" tabindex="-1"></a>  <span class="sc">|</span>                                                        </span>
+<span id="cb130-60"><a href="morfometria-geom%C3%A9trica-e-filogenias.html#cb130-60" tabindex="-1"></a>  <span class="er">|=======</span>                                           <span class="er">|</span>  <span class="dv">14</span>%</span>
+<span id="cb130-61"><a href="morfometria-geom%C3%A9trica-e-filogenias.html#cb130-61" tabindex="-1"></a>  <span class="sc">|</span>                                                        </span>
+<span id="cb130-62"><a href="morfometria-geom%C3%A9trica-e-filogenias.html#cb130-62" tabindex="-1"></a>  <span class="er">|=======</span>                                           <span class="er">|</span>  <span class="dv">15</span>%</span>
+<span id="cb130-63"><a href="morfometria-geom%C3%A9trica-e-filogenias.html#cb130-63" tabindex="-1"></a>  <span class="sc">|</span>                                                        </span>
+<span id="cb130-64"><a href="morfometria-geom%C3%A9trica-e-filogenias.html#cb130-64" tabindex="-1"></a>  <span class="er">|========</span>                                          <span class="er">|</span>  <span class="dv">15</span>%</span>
+<span id="cb130-65"><a href="morfometria-geom%C3%A9trica-e-filogenias.html#cb130-65" tabindex="-1"></a>  <span class="sc">|</span>                                                        </span>
+<span id="cb130-66"><a href="morfometria-geom%C3%A9trica-e-filogenias.html#cb130-66" tabindex="-1"></a>  <span class="er">|========</span>                                          <span class="er">|</span>  <span class="dv">16</span>%</span>
+<span id="cb130-67"><a href="morfometria-geom%C3%A9trica-e-filogenias.html#cb130-67" tabindex="-1"></a>  <span class="sc">|</span>                                                        </span>
+<span id="cb130-68"><a href="morfometria-geom%C3%A9trica-e-filogenias.html#cb130-68" tabindex="-1"></a>  <span class="er">|========</span>                                          <span class="er">|</span>  <span class="dv">17</span>%</span>
+<span id="cb130-69"><a href="morfometria-geom%C3%A9trica-e-filogenias.html#cb130-69" tabindex="-1"></a>  <span class="sc">|</span>                                                        </span>
+<span id="cb130-70"><a href="morfometria-geom%C3%A9trica-e-filogenias.html#cb130-70" tabindex="-1"></a>  <span class="er">|=========</span>                                         <span class="er">|</span>  <span class="dv">17</span>%</span>
+<span id="cb130-71"><a href="morfometria-geom%C3%A9trica-e-filogenias.html#cb130-71" tabindex="-1"></a>  <span class="sc">|</span>                                                        </span>
+<span id="cb130-72"><a href="morfometria-geom%C3%A9trica-e-filogenias.html#cb130-72" tabindex="-1"></a>  <span class="er">|=========</span>                                         <span class="er">|</span>  <span class="dv">18</span>%</span>
+<span id="cb130-73"><a href="morfometria-geom%C3%A9trica-e-filogenias.html#cb130-73" tabindex="-1"></a>  <span class="sc">|</span>                                                        </span>
+<span id="cb130-74"><a href="morfometria-geom%C3%A9trica-e-filogenias.html#cb130-74" tabindex="-1"></a>  <span class="er">|=========</span>                                         <span class="er">|</span>  <span class="dv">19</span>%</span>
+<span id="cb130-75"><a href="morfometria-geom%C3%A9trica-e-filogenias.html#cb130-75" tabindex="-1"></a>  <span class="sc">|</span>                                                        </span>
+<span id="cb130-76"><a href="morfometria-geom%C3%A9trica-e-filogenias.html#cb130-76" tabindex="-1"></a>  <span class="er">|==========</span>                                        <span class="er">|</span>  <span class="dv">19</span>%</span>
+<span id="cb130-77"><a href="morfometria-geom%C3%A9trica-e-filogenias.html#cb130-77" tabindex="-1"></a>  <span class="sc">|</span>                                                        </span>
+<span id="cb130-78"><a href="morfometria-geom%C3%A9trica-e-filogenias.html#cb130-78" tabindex="-1"></a>  <span class="er">|==========</span>                                        <span class="er">|</span>  <span class="dv">20</span>%</span>
+<span id="cb130-79"><a href="morfometria-geom%C3%A9trica-e-filogenias.html#cb130-79" tabindex="-1"></a>  <span class="sc">|</span>                                                        </span>
+<span id="cb130-80"><a href="morfometria-geom%C3%A9trica-e-filogenias.html#cb130-80" tabindex="-1"></a>  <span class="er">|==========</span>                                        <span class="er">|</span>  <span class="dv">21</span>%</span>
+<span id="cb130-81"><a href="morfometria-geom%C3%A9trica-e-filogenias.html#cb130-81" tabindex="-1"></a>  <span class="sc">|</span>                                                        </span>
+<span id="cb130-82"><a href="morfometria-geom%C3%A9trica-e-filogenias.html#cb130-82" tabindex="-1"></a>  <span class="er">|===========</span>                                       <span class="er">|</span>  <span class="dv">21</span>%</span>
+<span id="cb130-83"><a href="morfometria-geom%C3%A9trica-e-filogenias.html#cb130-83" tabindex="-1"></a>  <span class="sc">|</span>                                                        </span>
+<span id="cb130-84"><a href="morfometria-geom%C3%A9trica-e-filogenias.html#cb130-84" tabindex="-1"></a>  <span class="er">|===========</span>                                       <span class="er">|</span>  <span class="dv">22</span>%</span>
+<span id="cb130-85"><a href="morfometria-geom%C3%A9trica-e-filogenias.html#cb130-85" tabindex="-1"></a>  <span class="sc">|</span>                                                        </span>
+<span id="cb130-86"><a href="morfometria-geom%C3%A9trica-e-filogenias.html#cb130-86" tabindex="-1"></a>  <span class="er">|===========</span>                                       <span class="er">|</span>  <span class="dv">23</span>%</span>
+<span id="cb130-87"><a href="morfometria-geom%C3%A9trica-e-filogenias.html#cb130-87" tabindex="-1"></a>  <span class="sc">|</span>                                                        </span>
+<span id="cb130-88"><a href="morfometria-geom%C3%A9trica-e-filogenias.html#cb130-88" tabindex="-1"></a>  <span class="er">|============</span>                                      <span class="er">|</span>  <span class="dv">23</span>%</span>
+<span id="cb130-89"><a href="morfometria-geom%C3%A9trica-e-filogenias.html#cb130-89" tabindex="-1"></a>  <span class="sc">|</span>                                                        </span>
+<span id="cb130-90"><a href="morfometria-geom%C3%A9trica-e-filogenias.html#cb130-90" tabindex="-1"></a>  <span class="er">|============</span>                                      <span class="er">|</span>  <span class="dv">24</span>%</span>
+<span id="cb130-91"><a href="morfometria-geom%C3%A9trica-e-filogenias.html#cb130-91" tabindex="-1"></a>  <span class="sc">|</span>                                                        </span>
+<span id="cb130-92"><a href="morfometria-geom%C3%A9trica-e-filogenias.html#cb130-92" tabindex="-1"></a>  <span class="er">|============</span>                                      <span class="er">|</span>  <span class="dv">25</span>%</span>
+<span id="cb130-93"><a href="morfometria-geom%C3%A9trica-e-filogenias.html#cb130-93" tabindex="-1"></a>  <span class="sc">|</span>                                                        </span>
+<span id="cb130-94"><a href="morfometria-geom%C3%A9trica-e-filogenias.html#cb130-94" tabindex="-1"></a>  <span class="er">|=============</span>                                     <span class="er">|</span>  <span class="dv">25</span>%</span>
+<span id="cb130-95"><a href="morfometria-geom%C3%A9trica-e-filogenias.html#cb130-95" tabindex="-1"></a>  <span class="sc">|</span>                                                        </span>
+<span id="cb130-96"><a href="morfometria-geom%C3%A9trica-e-filogenias.html#cb130-96" tabindex="-1"></a>  <span class="er">|=============</span>                                     <span class="er">|</span>  <span class="dv">26</span>%</span>
+<span id="cb130-97"><a href="morfometria-geom%C3%A9trica-e-filogenias.html#cb130-97" tabindex="-1"></a>  <span class="sc">|</span>                                                        </span>
+<span id="cb130-98"><a href="morfometria-geom%C3%A9trica-e-filogenias.html#cb130-98" tabindex="-1"></a>  <span class="er">|=============</span>                                     <span class="er">|</span>  <span class="dv">27</span>%</span>
+<span id="cb130-99"><a href="morfometria-geom%C3%A9trica-e-filogenias.html#cb130-99" tabindex="-1"></a>  <span class="sc">|</span>                                                        </span>
+<span id="cb130-100"><a href="morfometria-geom%C3%A9trica-e-filogenias.html#cb130-100" tabindex="-1"></a>  <span class="er">|==============</span>                                    <span class="er">|</span>  <span class="dv">27</span>%</span>
+<span id="cb130-101"><a href="morfometria-geom%C3%A9trica-e-filogenias.html#cb130-101" tabindex="-1"></a>  <span class="sc">|</span>                                                        </span>
+<span id="cb130-102"><a href="morfometria-geom%C3%A9trica-e-filogenias.html#cb130-102" tabindex="-1"></a>  <span class="er">|==============</span>                                    <span class="er">|</span>  <span class="dv">28</span>%</span>
+<span id="cb130-103"><a href="morfometria-geom%C3%A9trica-e-filogenias.html#cb130-103" tabindex="-1"></a>  <span class="sc">|</span>                                                        </span>
+<span id="cb130-104"><a href="morfometria-geom%C3%A9trica-e-filogenias.html#cb130-104" tabindex="-1"></a>  <span class="er">|==============</span>                                    <span class="er">|</span>  <span class="dv">29</span>%</span>
+<span id="cb130-105"><a href="morfometria-geom%C3%A9trica-e-filogenias.html#cb130-105" tabindex="-1"></a>  <span class="sc">|</span>                                                        </span>
+<span id="cb130-106"><a href="morfometria-geom%C3%A9trica-e-filogenias.html#cb130-106" tabindex="-1"></a>  <span class="er">|===============</span>                                   <span class="er">|</span>  <span class="dv">29</span>%</span>
+<span id="cb130-107"><a href="morfometria-geom%C3%A9trica-e-filogenias.html#cb130-107" tabindex="-1"></a>  <span class="sc">|</span>                                                        </span>
+<span id="cb130-108"><a href="morfometria-geom%C3%A9trica-e-filogenias.html#cb130-108" tabindex="-1"></a>  <span class="er">|===============</span>                                   <span class="er">|</span>  <span class="dv">30</span>%</span>
+<span id="cb130-109"><a href="morfometria-geom%C3%A9trica-e-filogenias.html#cb130-109" tabindex="-1"></a>  <span class="sc">|</span>                                                        </span>
+<span id="cb130-110"><a href="morfometria-geom%C3%A9trica-e-filogenias.html#cb130-110" tabindex="-1"></a>  <span class="er">|===============</span>                                   <span class="er">|</span>  <span class="dv">31</span>%</span>
+<span id="cb130-111"><a href="morfometria-geom%C3%A9trica-e-filogenias.html#cb130-111" tabindex="-1"></a>  <span class="sc">|</span>                                                        </span>
+<span id="cb130-112"><a href="morfometria-geom%C3%A9trica-e-filogenias.html#cb130-112" tabindex="-1"></a>  <span class="er">|================</span>                                  <span class="er">|</span>  <span class="dv">31</span>%</span>
+<span id="cb130-113"><a href="morfometria-geom%C3%A9trica-e-filogenias.html#cb130-113" tabindex="-1"></a>  <span class="sc">|</span>                                                        </span>
+<span id="cb130-114"><a href="morfometria-geom%C3%A9trica-e-filogenias.html#cb130-114" tabindex="-1"></a>  <span class="er">|================</span>                                  <span class="er">|</span>  <span class="dv">32</span>%</span>
+<span id="cb130-115"><a href="morfometria-geom%C3%A9trica-e-filogenias.html#cb130-115" tabindex="-1"></a>  <span class="sc">|</span>                                                        </span>
+<span id="cb130-116"><a href="morfometria-geom%C3%A9trica-e-filogenias.html#cb130-116" tabindex="-1"></a>  <span class="er">|================</span>                                  <span class="er">|</span>  <span class="dv">33</span>%</span>
+<span id="cb130-117"><a href="morfometria-geom%C3%A9trica-e-filogenias.html#cb130-117" tabindex="-1"></a>  <span class="sc">|</span>                                                        </span>
+<span id="cb130-118"><a href="morfometria-geom%C3%A9trica-e-filogenias.html#cb130-118" tabindex="-1"></a>  <span class="er">|=================</span>                                 <span class="er">|</span>  <span class="dv">33</span>%</span>
+<span id="cb130-119"><a href="morfometria-geom%C3%A9trica-e-filogenias.html#cb130-119" tabindex="-1"></a>  <span class="sc">|</span>                                                        </span>
+<span id="cb130-120"><a href="morfometria-geom%C3%A9trica-e-filogenias.html#cb130-120" tabindex="-1"></a>  <span class="er">|=================</span>                                 <span class="er">|</span>  <span class="dv">34</span>%</span>
+<span id="cb130-121"><a href="morfometria-geom%C3%A9trica-e-filogenias.html#cb130-121" tabindex="-1"></a>  <span class="sc">|</span>                                                        </span>
+<span id="cb130-122"><a href="morfometria-geom%C3%A9trica-e-filogenias.html#cb130-122" tabindex="-1"></a>  <span class="er">|=================</span>                                 <span class="er">|</span>  <span class="dv">35</span>%</span>
+<span id="cb130-123"><a href="morfometria-geom%C3%A9trica-e-filogenias.html#cb130-123" tabindex="-1"></a>  <span class="sc">|</span>                                                        </span>
+<span id="cb130-124"><a href="morfometria-geom%C3%A9trica-e-filogenias.html#cb130-124" tabindex="-1"></a>  <span class="er">|==================</span>                                <span class="er">|</span>  <span class="dv">35</span>%</span>
+<span id="cb130-125"><a href="morfometria-geom%C3%A9trica-e-filogenias.html#cb130-125" tabindex="-1"></a>  <span class="sc">|</span>                                                        </span>
+<span id="cb130-126"><a href="morfometria-geom%C3%A9trica-e-filogenias.html#cb130-126" tabindex="-1"></a>  <span class="er">|==================</span>                                <span class="er">|</span>  <span class="dv">36</span>%</span>
+<span id="cb130-127"><a href="morfometria-geom%C3%A9trica-e-filogenias.html#cb130-127" tabindex="-1"></a>  <span class="sc">|</span>                                                        </span>
+<span id="cb130-128"><a href="morfometria-geom%C3%A9trica-e-filogenias.html#cb130-128" tabindex="-1"></a>  <span class="er">|==================</span>                                <span class="er">|</span>  <span class="dv">37</span>%</span>
+<span id="cb130-129"><a href="morfometria-geom%C3%A9trica-e-filogenias.html#cb130-129" tabindex="-1"></a>  <span class="sc">|</span>                                                        </span>
+<span id="cb130-130"><a href="morfometria-geom%C3%A9trica-e-filogenias.html#cb130-130" tabindex="-1"></a>  <span class="er">|===================</span>                               <span class="er">|</span>  <span class="dv">37</span>%</span>
+<span id="cb130-131"><a href="morfometria-geom%C3%A9trica-e-filogenias.html#cb130-131" tabindex="-1"></a>  <span class="sc">|</span>                                                        </span>
+<span id="cb130-132"><a href="morfometria-geom%C3%A9trica-e-filogenias.html#cb130-132" tabindex="-1"></a>  <span class="er">|===================</span>                               <span class="er">|</span>  <span class="dv">38</span>%</span>
+<span id="cb130-133"><a href="morfometria-geom%C3%A9trica-e-filogenias.html#cb130-133" tabindex="-1"></a>  <span class="sc">|</span>                                                        </span>
+<span id="cb130-134"><a href="morfometria-geom%C3%A9trica-e-filogenias.html#cb130-134" tabindex="-1"></a>  <span class="er">|===================</span>                               <span class="er">|</span>  <span class="dv">39</span>%</span>
+<span id="cb130-135"><a href="morfometria-geom%C3%A9trica-e-filogenias.html#cb130-135" tabindex="-1"></a>  <span class="sc">|</span>                                                        </span>
+<span id="cb130-136"><a href="morfometria-geom%C3%A9trica-e-filogenias.html#cb130-136" tabindex="-1"></a>  <span class="er">|====================</span>                              <span class="er">|</span>  <span class="dv">39</span>%</span>
+<span id="cb130-137"><a href="morfometria-geom%C3%A9trica-e-filogenias.html#cb130-137" tabindex="-1"></a>  <span class="sc">|</span>                                                        </span>
+<span id="cb130-138"><a href="morfometria-geom%C3%A9trica-e-filogenias.html#cb130-138" tabindex="-1"></a>  <span class="er">|====================</span>                              <span class="er">|</span>  <span class="dv">40</span>%</span>
+<span id="cb130-139"><a href="morfometria-geom%C3%A9trica-e-filogenias.html#cb130-139" tabindex="-1"></a>  <span class="sc">|</span>                                                        </span>
+<span id="cb130-140"><a href="morfometria-geom%C3%A9trica-e-filogenias.html#cb130-140" tabindex="-1"></a>  <span class="er">|====================</span>                              <span class="er">|</span>  <span class="dv">41</span>%</span>
+<span id="cb130-141"><a href="morfometria-geom%C3%A9trica-e-filogenias.html#cb130-141" tabindex="-1"></a>  <span class="sc">|</span>                                                        </span>
+<span id="cb130-142"><a href="morfometria-geom%C3%A9trica-e-filogenias.html#cb130-142" tabindex="-1"></a>  <span class="er">|=====================</span>                             <span class="er">|</span>  <span class="dv">41</span>%</span>
+<span id="cb130-143"><a href="morfometria-geom%C3%A9trica-e-filogenias.html#cb130-143" tabindex="-1"></a>  <span class="sc">|</span>                                                        </span>
+<span id="cb130-144"><a href="morfometria-geom%C3%A9trica-e-filogenias.html#cb130-144" tabindex="-1"></a>  <span class="er">|=====================</span>                             <span class="er">|</span>  <span class="dv">42</span>%</span>
+<span id="cb130-145"><a href="morfometria-geom%C3%A9trica-e-filogenias.html#cb130-145" tabindex="-1"></a>  <span class="sc">|</span>                                                        </span>
+<span id="cb130-146"><a href="morfometria-geom%C3%A9trica-e-filogenias.html#cb130-146" tabindex="-1"></a>  <span class="er">|=====================</span>                             <span class="er">|</span>  <span class="dv">43</span>%</span>
+<span id="cb130-147"><a href="morfometria-geom%C3%A9trica-e-filogenias.html#cb130-147" tabindex="-1"></a>  <span class="sc">|</span>                                                        </span>
+<span id="cb130-148"><a href="morfometria-geom%C3%A9trica-e-filogenias.html#cb130-148" tabindex="-1"></a>  <span class="er">|======================</span>                            <span class="er">|</span>  <span class="dv">43</span>%</span>
+<span id="cb130-149"><a href="morfometria-geom%C3%A9trica-e-filogenias.html#cb130-149" tabindex="-1"></a>  <span class="sc">|</span>                                                        </span>
+<span id="cb130-150"><a href="morfometria-geom%C3%A9trica-e-filogenias.html#cb130-150" tabindex="-1"></a>  <span class="er">|======================</span>                            <span class="er">|</span>  <span class="dv">44</span>%</span>
+<span id="cb130-151"><a href="morfometria-geom%C3%A9trica-e-filogenias.html#cb130-151" tabindex="-1"></a>  <span class="sc">|</span>                                                        </span>
+<span id="cb130-152"><a href="morfometria-geom%C3%A9trica-e-filogenias.html#cb130-152" tabindex="-1"></a>  <span class="er">|======================</span>                            <span class="er">|</span>  <span class="dv">45</span>%</span>
+<span id="cb130-153"><a href="morfometria-geom%C3%A9trica-e-filogenias.html#cb130-153" tabindex="-1"></a>  <span class="sc">|</span>                                                        </span>
+<span id="cb130-154"><a href="morfometria-geom%C3%A9trica-e-filogenias.html#cb130-154" tabindex="-1"></a>  <span class="er">|=======================</span>                           <span class="er">|</span>  <span class="dv">45</span>%</span>
+<span id="cb130-155"><a href="morfometria-geom%C3%A9trica-e-filogenias.html#cb130-155" tabindex="-1"></a>  <span class="sc">|</span>                                                        </span>
+<span id="cb130-156"><a href="morfometria-geom%C3%A9trica-e-filogenias.html#cb130-156" tabindex="-1"></a>  <span class="er">|=======================</span>                           <span class="er">|</span>  <span class="dv">46</span>%</span>
+<span id="cb130-157"><a href="morfometria-geom%C3%A9trica-e-filogenias.html#cb130-157" tabindex="-1"></a>  <span class="sc">|</span>                                                        </span>
+<span id="cb130-158"><a href="morfometria-geom%C3%A9trica-e-filogenias.html#cb130-158" tabindex="-1"></a>  <span class="er">|=======================</span>                           <span class="er">|</span>  <span class="dv">47</span>%</span>
+<span id="cb130-159"><a href="morfometria-geom%C3%A9trica-e-filogenias.html#cb130-159" tabindex="-1"></a>  <span class="sc">|</span>                                                        </span>
+<span id="cb130-160"><a href="morfometria-geom%C3%A9trica-e-filogenias.html#cb130-160" tabindex="-1"></a>  <span class="er">|========================</span>                          <span class="er">|</span>  <span class="dv">47</span>%</span>
+<span id="cb130-161"><a href="morfometria-geom%C3%A9trica-e-filogenias.html#cb130-161" tabindex="-1"></a>  <span class="sc">|</span>                                                        </span>
+<span id="cb130-162"><a href="morfometria-geom%C3%A9trica-e-filogenias.html#cb130-162" tabindex="-1"></a>  <span class="er">|========================</span>                          <span class="er">|</span>  <span class="dv">48</span>%</span>
+<span id="cb130-163"><a href="morfometria-geom%C3%A9trica-e-filogenias.html#cb130-163" tabindex="-1"></a>  <span class="sc">|</span>                                                        </span>
+<span id="cb130-164"><a href="morfometria-geom%C3%A9trica-e-filogenias.html#cb130-164" tabindex="-1"></a>  <span class="er">|========================</span>                          <span class="er">|</span>  <span class="dv">49</span>%</span>
+<span id="cb130-165"><a href="morfometria-geom%C3%A9trica-e-filogenias.html#cb130-165" tabindex="-1"></a>  <span class="sc">|</span>                                                        </span>
+<span id="cb130-166"><a href="morfometria-geom%C3%A9trica-e-filogenias.html#cb130-166" tabindex="-1"></a>  <span class="er">|=========================</span>                         <span class="er">|</span>  <span class="dv">49</span>%</span>
+<span id="cb130-167"><a href="morfometria-geom%C3%A9trica-e-filogenias.html#cb130-167" tabindex="-1"></a>  <span class="sc">|</span>                                                        </span>
+<span id="cb130-168"><a href="morfometria-geom%C3%A9trica-e-filogenias.html#cb130-168" tabindex="-1"></a>  <span class="er">|=========================</span>                         <span class="er">|</span>  <span class="dv">50</span>%</span>
+<span id="cb130-169"><a href="morfometria-geom%C3%A9trica-e-filogenias.html#cb130-169" tabindex="-1"></a>  <span class="sc">|</span>                                                        </span>
+<span id="cb130-170"><a href="morfometria-geom%C3%A9trica-e-filogenias.html#cb130-170" tabindex="-1"></a>  <span class="er">|=========================</span>                         <span class="er">|</span>  <span class="dv">51</span>%</span>
+<span id="cb130-171"><a href="morfometria-geom%C3%A9trica-e-filogenias.html#cb130-171" tabindex="-1"></a>  <span class="sc">|</span>                                                        </span>
+<span id="cb130-172"><a href="morfometria-geom%C3%A9trica-e-filogenias.html#cb130-172" tabindex="-1"></a>  <span class="er">|==========================</span>                        <span class="er">|</span>  <span class="dv">51</span>%</span>
+<span id="cb130-173"><a href="morfometria-geom%C3%A9trica-e-filogenias.html#cb130-173" tabindex="-1"></a>  <span class="sc">|</span>                                                        </span>
+<span id="cb130-174"><a href="morfometria-geom%C3%A9trica-e-filogenias.html#cb130-174" tabindex="-1"></a>  <span class="er">|==========================</span>                        <span class="er">|</span>  <span class="dv">52</span>%</span>
+<span id="cb130-175"><a href="morfometria-geom%C3%A9trica-e-filogenias.html#cb130-175" tabindex="-1"></a>  <span class="sc">|</span>                                                        </span>
+<span id="cb130-176"><a href="morfometria-geom%C3%A9trica-e-filogenias.html#cb130-176" tabindex="-1"></a>  <span class="er">|==========================</span>                        <span class="er">|</span>  <span class="dv">53</span>%</span>
+<span id="cb130-177"><a href="morfometria-geom%C3%A9trica-e-filogenias.html#cb130-177" tabindex="-1"></a>  <span class="sc">|</span>                                                        </span>
+<span id="cb130-178"><a href="morfometria-geom%C3%A9trica-e-filogenias.html#cb130-178" tabindex="-1"></a>  <span class="er">|===========================</span>                       <span class="er">|</span>  <span class="dv">53</span>%</span>
+<span id="cb130-179"><a href="morfometria-geom%C3%A9trica-e-filogenias.html#cb130-179" tabindex="-1"></a>  <span class="sc">|</span>                                                        </span>
+<span id="cb130-180"><a href="morfometria-geom%C3%A9trica-e-filogenias.html#cb130-180" tabindex="-1"></a>  <span class="er">|===========================</span>                       <span class="er">|</span>  <span class="dv">54</span>%</span>
+<span id="cb130-181"><a href="morfometria-geom%C3%A9trica-e-filogenias.html#cb130-181" tabindex="-1"></a>  <span class="sc">|</span>                                                        </span>
+<span id="cb130-182"><a href="morfometria-geom%C3%A9trica-e-filogenias.html#cb130-182" tabindex="-1"></a>  <span class="er">|===========================</span>                       <span class="er">|</span>  <span class="dv">55</span>%</span>
+<span id="cb130-183"><a href="morfometria-geom%C3%A9trica-e-filogenias.html#cb130-183" tabindex="-1"></a>  <span class="sc">|</span>                                                        </span>
+<span id="cb130-184"><a href="morfometria-geom%C3%A9trica-e-filogenias.html#cb130-184" tabindex="-1"></a>  <span class="er">|============================</span>                      <span class="er">|</span>  <span class="dv">55</span>%</span>
+<span id="cb130-185"><a href="morfometria-geom%C3%A9trica-e-filogenias.html#cb130-185" tabindex="-1"></a>  <span class="sc">|</span>                                                        </span>
+<span id="cb130-186"><a href="morfometria-geom%C3%A9trica-e-filogenias.html#cb130-186" tabindex="-1"></a>  <span class="er">|============================</span>                      <span class="er">|</span>  <span class="dv">56</span>%</span>
+<span id="cb130-187"><a href="morfometria-geom%C3%A9trica-e-filogenias.html#cb130-187" tabindex="-1"></a>  <span class="sc">|</span>                                                        </span>
+<span id="cb130-188"><a href="morfometria-geom%C3%A9trica-e-filogenias.html#cb130-188" tabindex="-1"></a>  <span class="er">|============================</span>                      <span class="er">|</span>  <span class="dv">57</span>%</span>
+<span id="cb130-189"><a href="morfometria-geom%C3%A9trica-e-filogenias.html#cb130-189" tabindex="-1"></a>  <span class="sc">|</span>                                                        </span>
+<span id="cb130-190"><a href="morfometria-geom%C3%A9trica-e-filogenias.html#cb130-190" tabindex="-1"></a>  <span class="er">|=============================</span>                     <span class="er">|</span>  <span class="dv">57</span>%</span>
+<span id="cb130-191"><a href="morfometria-geom%C3%A9trica-e-filogenias.html#cb130-191" tabindex="-1"></a>  <span class="sc">|</span>                                                        </span>
+<span id="cb130-192"><a href="morfometria-geom%C3%A9trica-e-filogenias.html#cb130-192" tabindex="-1"></a>  <span class="er">|=============================</span>                     <span class="er">|</span>  <span class="dv">58</span>%</span>
+<span id="cb130-193"><a href="morfometria-geom%C3%A9trica-e-filogenias.html#cb130-193" tabindex="-1"></a>  <span class="sc">|</span>                                                        </span>
+<span id="cb130-194"><a href="morfometria-geom%C3%A9trica-e-filogenias.html#cb130-194" tabindex="-1"></a>  <span class="er">|=============================</span>                     <span class="er">|</span>  <span class="dv">59</span>%</span>
+<span id="cb130-195"><a href="morfometria-geom%C3%A9trica-e-filogenias.html#cb130-195" tabindex="-1"></a>  <span class="sc">|</span>                                                        </span>
+<span id="cb130-196"><a href="morfometria-geom%C3%A9trica-e-filogenias.html#cb130-196" tabindex="-1"></a>  <span class="er">|==============================</span>                    <span class="er">|</span>  <span class="dv">59</span>%</span>
+<span id="cb130-197"><a href="morfometria-geom%C3%A9trica-e-filogenias.html#cb130-197" tabindex="-1"></a>  <span class="sc">|</span>                                                        </span>
+<span id="cb130-198"><a href="morfometria-geom%C3%A9trica-e-filogenias.html#cb130-198" tabindex="-1"></a>  <span class="er">|==============================</span>                    <span class="er">|</span>  <span class="dv">60</span>%</span>
+<span id="cb130-199"><a href="morfometria-geom%C3%A9trica-e-filogenias.html#cb130-199" tabindex="-1"></a>  <span class="sc">|</span>                                                        </span>
+<span id="cb130-200"><a href="morfometria-geom%C3%A9trica-e-filogenias.html#cb130-200" tabindex="-1"></a>  <span class="er">|==============================</span>                    <span class="er">|</span>  <span class="dv">61</span>%</span>
+<span id="cb130-201"><a href="morfometria-geom%C3%A9trica-e-filogenias.html#cb130-201" tabindex="-1"></a>  <span class="sc">|</span>                                                        </span>
+<span id="cb130-202"><a href="morfometria-geom%C3%A9trica-e-filogenias.html#cb130-202" tabindex="-1"></a>  <span class="er">|===============================</span>                   <span class="er">|</span>  <span class="dv">61</span>%</span>
+<span id="cb130-203"><a href="morfometria-geom%C3%A9trica-e-filogenias.html#cb130-203" tabindex="-1"></a>  <span class="sc">|</span>                                                        </span>
+<span id="cb130-204"><a href="morfometria-geom%C3%A9trica-e-filogenias.html#cb130-204" tabindex="-1"></a>  <span class="er">|===============================</span>                   <span class="er">|</span>  <span class="dv">62</span>%</span>
+<span id="cb130-205"><a href="morfometria-geom%C3%A9trica-e-filogenias.html#cb130-205" tabindex="-1"></a>  <span class="sc">|</span>                                                        </span>
+<span id="cb130-206"><a href="morfometria-geom%C3%A9trica-e-filogenias.html#cb130-206" tabindex="-1"></a>  <span class="er">|===============================</span>                   <span class="er">|</span>  <span class="dv">63</span>%</span>
+<span id="cb130-207"><a href="morfometria-geom%C3%A9trica-e-filogenias.html#cb130-207" tabindex="-1"></a>  <span class="sc">|</span>                                                        </span>
+<span id="cb130-208"><a href="morfometria-geom%C3%A9trica-e-filogenias.html#cb130-208" tabindex="-1"></a>  <span class="er">|================================</span>                  <span class="er">|</span>  <span class="dv">63</span>%</span>
+<span id="cb130-209"><a href="morfometria-geom%C3%A9trica-e-filogenias.html#cb130-209" tabindex="-1"></a>  <span class="sc">|</span>                                                        </span>
+<span id="cb130-210"><a href="morfometria-geom%C3%A9trica-e-filogenias.html#cb130-210" tabindex="-1"></a>  <span class="er">|================================</span>                  <span class="er">|</span>  <span class="dv">64</span>%</span>
+<span id="cb130-211"><a href="morfometria-geom%C3%A9trica-e-filogenias.html#cb130-211" tabindex="-1"></a>  <span class="sc">|</span>                                                        </span>
+<span id="cb130-212"><a href="morfometria-geom%C3%A9trica-e-filogenias.html#cb130-212" tabindex="-1"></a>  <span class="er">|================================</span>                  <span class="er">|</span>  <span class="dv">65</span>%</span>
+<span id="cb130-213"><a href="morfometria-geom%C3%A9trica-e-filogenias.html#cb130-213" tabindex="-1"></a>  <span class="sc">|</span>                                                        </span>
+<span id="cb130-214"><a href="morfometria-geom%C3%A9trica-e-filogenias.html#cb130-214" tabindex="-1"></a>  <span class="er">|=================================</span>                 <span class="er">|</span>  <span class="dv">65</span>%</span>
+<span id="cb130-215"><a href="morfometria-geom%C3%A9trica-e-filogenias.html#cb130-215" tabindex="-1"></a>  <span class="sc">|</span>                                                        </span>
+<span id="cb130-216"><a href="morfometria-geom%C3%A9trica-e-filogenias.html#cb130-216" tabindex="-1"></a>  <span class="er">|=================================</span>                 <span class="er">|</span>  <span class="dv">66</span>%</span>
+<span id="cb130-217"><a href="morfometria-geom%C3%A9trica-e-filogenias.html#cb130-217" tabindex="-1"></a>  <span class="sc">|</span>                                                        </span>
+<span id="cb130-218"><a href="morfometria-geom%C3%A9trica-e-filogenias.html#cb130-218" tabindex="-1"></a>  <span class="er">|=================================</span>                 <span class="er">|</span>  <span class="dv">67</span>%</span>
+<span id="cb130-219"><a href="morfometria-geom%C3%A9trica-e-filogenias.html#cb130-219" tabindex="-1"></a>  <span class="sc">|</span>                                                        </span>
+<span id="cb130-220"><a href="morfometria-geom%C3%A9trica-e-filogenias.html#cb130-220" tabindex="-1"></a>  <span class="er">|==================================</span>                <span class="er">|</span>  <span class="dv">67</span>%</span>
+<span id="cb130-221"><a href="morfometria-geom%C3%A9trica-e-filogenias.html#cb130-221" tabindex="-1"></a>  <span class="sc">|</span>                                                        </span>
+<span id="cb130-222"><a href="morfometria-geom%C3%A9trica-e-filogenias.html#cb130-222" tabindex="-1"></a>  <span class="er">|==================================</span>                <span class="er">|</span>  <span class="dv">68</span>%</span>
+<span id="cb130-223"><a href="morfometria-geom%C3%A9trica-e-filogenias.html#cb130-223" tabindex="-1"></a>  <span class="sc">|</span>                                                        </span>
+<span id="cb130-224"><a href="morfometria-geom%C3%A9trica-e-filogenias.html#cb130-224" tabindex="-1"></a>  <span class="er">|==================================</span>                <span class="er">|</span>  <span class="dv">69</span>%</span>
+<span id="cb130-225"><a href="morfometria-geom%C3%A9trica-e-filogenias.html#cb130-225" tabindex="-1"></a>  <span class="sc">|</span>                                                        </span>
+<span id="cb130-226"><a href="morfometria-geom%C3%A9trica-e-filogenias.html#cb130-226" tabindex="-1"></a>  <span class="er">|===================================</span>               <span class="er">|</span>  <span class="dv">69</span>%</span>
+<span id="cb130-227"><a href="morfometria-geom%C3%A9trica-e-filogenias.html#cb130-227" tabindex="-1"></a>  <span class="sc">|</span>                                                        </span>
+<span id="cb130-228"><a href="morfometria-geom%C3%A9trica-e-filogenias.html#cb130-228" tabindex="-1"></a>  <span class="er">|===================================</span>               <span class="er">|</span>  <span class="dv">70</span>%</span>
+<span id="cb130-229"><a href="morfometria-geom%C3%A9trica-e-filogenias.html#cb130-229" tabindex="-1"></a>  <span class="sc">|</span>                                                        </span>
+<span id="cb130-230"><a href="morfometria-geom%C3%A9trica-e-filogenias.html#cb130-230" tabindex="-1"></a>  <span class="er">|===================================</span>               <span class="er">|</span>  <span class="dv">71</span>%</span>
+<span id="cb130-231"><a href="morfometria-geom%C3%A9trica-e-filogenias.html#cb130-231" tabindex="-1"></a>  <span class="sc">|</span>                                                        </span>
+<span id="cb130-232"><a href="morfometria-geom%C3%A9trica-e-filogenias.html#cb130-232" tabindex="-1"></a>  <span class="er">|====================================</span>              <span class="er">|</span>  <span class="dv">71</span>%</span>
+<span id="cb130-233"><a href="morfometria-geom%C3%A9trica-e-filogenias.html#cb130-233" tabindex="-1"></a>  <span class="sc">|</span>                                                        </span>
+<span id="cb130-234"><a href="morfometria-geom%C3%A9trica-e-filogenias.html#cb130-234" tabindex="-1"></a>  <span class="er">|====================================</span>              <span class="er">|</span>  <span class="dv">72</span>%</span>
+<span id="cb130-235"><a href="morfometria-geom%C3%A9trica-e-filogenias.html#cb130-235" tabindex="-1"></a>  <span class="sc">|</span>                                                        </span>
+<span id="cb130-236"><a href="morfometria-geom%C3%A9trica-e-filogenias.html#cb130-236" tabindex="-1"></a>  <span class="er">|====================================</span>              <span class="er">|</span>  <span class="dv">73</span>%</span>
+<span id="cb130-237"><a href="morfometria-geom%C3%A9trica-e-filogenias.html#cb130-237" tabindex="-1"></a>  <span class="sc">|</span>                                                        </span>
+<span id="cb130-238"><a href="morfometria-geom%C3%A9trica-e-filogenias.html#cb130-238" tabindex="-1"></a>  <span class="er">|=====================================</span>             <span class="er">|</span>  <span class="dv">73</span>%</span>
+<span id="cb130-239"><a href="morfometria-geom%C3%A9trica-e-filogenias.html#cb130-239" tabindex="-1"></a>  <span class="sc">|</span>                                                        </span>
+<span id="cb130-240"><a href="morfometria-geom%C3%A9trica-e-filogenias.html#cb130-240" tabindex="-1"></a>  <span class="er">|=====================================</span>             <span class="er">|</span>  <span class="dv">74</span>%</span>
+<span id="cb130-241"><a href="morfometria-geom%C3%A9trica-e-filogenias.html#cb130-241" tabindex="-1"></a>  <span class="sc">|</span>                                                        </span>
+<span id="cb130-242"><a href="morfometria-geom%C3%A9trica-e-filogenias.html#cb130-242" tabindex="-1"></a>  <span class="er">|=====================================</span>             <span class="er">|</span>  <span class="dv">75</span>%</span>
+<span id="cb130-243"><a href="morfometria-geom%C3%A9trica-e-filogenias.html#cb130-243" tabindex="-1"></a>  <span class="sc">|</span>                                                        </span>
+<span id="cb130-244"><a href="morfometria-geom%C3%A9trica-e-filogenias.html#cb130-244" tabindex="-1"></a>  <span class="er">|======================================</span>            <span class="er">|</span>  <span class="dv">75</span>%</span>
+<span id="cb130-245"><a href="morfometria-geom%C3%A9trica-e-filogenias.html#cb130-245" tabindex="-1"></a>  <span class="sc">|</span>                                                        </span>
+<span id="cb130-246"><a href="morfometria-geom%C3%A9trica-e-filogenias.html#cb130-246" tabindex="-1"></a>  <span class="er">|======================================</span>            <span class="er">|</span>  <span class="dv">76</span>%</span>
+<span id="cb130-247"><a href="morfometria-geom%C3%A9trica-e-filogenias.html#cb130-247" tabindex="-1"></a>  <span class="sc">|</span>                                                        </span>
+<span id="cb130-248"><a href="morfometria-geom%C3%A9trica-e-filogenias.html#cb130-248" tabindex="-1"></a>  <span class="er">|======================================</span>            <span class="er">|</span>  <span class="dv">77</span>%</span>
+<span id="cb130-249"><a href="morfometria-geom%C3%A9trica-e-filogenias.html#cb130-249" tabindex="-1"></a>  <span class="sc">|</span>                                                        </span>
+<span id="cb130-250"><a href="morfometria-geom%C3%A9trica-e-filogenias.html#cb130-250" tabindex="-1"></a>  <span class="er">|=======================================</span>           <span class="er">|</span>  <span class="dv">77</span>%</span>
+<span id="cb130-251"><a href="morfometria-geom%C3%A9trica-e-filogenias.html#cb130-251" tabindex="-1"></a>  <span class="sc">|</span>                                                        </span>
+<span id="cb130-252"><a href="morfometria-geom%C3%A9trica-e-filogenias.html#cb130-252" tabindex="-1"></a>  <span class="er">|=======================================</span>           <span class="er">|</span>  <span class="dv">78</span>%</span>
+<span id="cb130-253"><a href="morfometria-geom%C3%A9trica-e-filogenias.html#cb130-253" tabindex="-1"></a>  <span class="sc">|</span>                                                        </span>
+<span id="cb130-254"><a href="morfometria-geom%C3%A9trica-e-filogenias.html#cb130-254" tabindex="-1"></a>  <span class="er">|=======================================</span>           <span class="er">|</span>  <span class="dv">79</span>%</span>
+<span id="cb130-255"><a href="morfometria-geom%C3%A9trica-e-filogenias.html#cb130-255" tabindex="-1"></a>  <span class="sc">|</span>                                                        </span>
+<span id="cb130-256"><a href="morfometria-geom%C3%A9trica-e-filogenias.html#cb130-256" tabindex="-1"></a>  <span class="er">|========================================</span>          <span class="er">|</span>  <span class="dv">79</span>%</span>
+<span id="cb130-257"><a href="morfometria-geom%C3%A9trica-e-filogenias.html#cb130-257" tabindex="-1"></a>  <span class="sc">|</span>                                                        </span>
+<span id="cb130-258"><a href="morfometria-geom%C3%A9trica-e-filogenias.html#cb130-258" tabindex="-1"></a>  <span class="er">|========================================</span>          <span class="er">|</span>  <span class="dv">80</span>%</span>
+<span id="cb130-259"><a href="morfometria-geom%C3%A9trica-e-filogenias.html#cb130-259" tabindex="-1"></a>  <span class="sc">|</span>                                                        </span>
+<span id="cb130-260"><a href="morfometria-geom%C3%A9trica-e-filogenias.html#cb130-260" tabindex="-1"></a>  <span class="er">|========================================</span>          <span class="er">|</span>  <span class="dv">81</span>%</span>
+<span id="cb130-261"><a href="morfometria-geom%C3%A9trica-e-filogenias.html#cb130-261" tabindex="-1"></a>  <span class="sc">|</span>                                                        </span>
+<span id="cb130-262"><a href="morfometria-geom%C3%A9trica-e-filogenias.html#cb130-262" tabindex="-1"></a>  <span class="er">|=========================================</span>         <span class="er">|</span>  <span class="dv">81</span>%</span>
+<span id="cb130-263"><a href="morfometria-geom%C3%A9trica-e-filogenias.html#cb130-263" tabindex="-1"></a>  <span class="sc">|</span>                                                        </span>
+<span id="cb130-264"><a href="morfometria-geom%C3%A9trica-e-filogenias.html#cb130-264" tabindex="-1"></a>  <span class="er">|=========================================</span>         <span class="er">|</span>  <span class="dv">82</span>%</span>
+<span id="cb130-265"><a href="morfometria-geom%C3%A9trica-e-filogenias.html#cb130-265" tabindex="-1"></a>  <span class="sc">|</span>                                                        </span>
+<span id="cb130-266"><a href="morfometria-geom%C3%A9trica-e-filogenias.html#cb130-266" tabindex="-1"></a>  <span class="er">|=========================================</span>         <span class="er">|</span>  <span class="dv">83</span>%</span>
+<span id="cb130-267"><a href="morfometria-geom%C3%A9trica-e-filogenias.html#cb130-267" tabindex="-1"></a>  <span class="sc">|</span>                                                        </span>
+<span id="cb130-268"><a href="morfometria-geom%C3%A9trica-e-filogenias.html#cb130-268" tabindex="-1"></a>  <span class="er">|==========================================</span>        <span class="er">|</span>  <span class="dv">83</span>%</span>
+<span id="cb130-269"><a href="morfometria-geom%C3%A9trica-e-filogenias.html#cb130-269" tabindex="-1"></a>  <span class="sc">|</span>                                                        </span>
+<span id="cb130-270"><a href="morfometria-geom%C3%A9trica-e-filogenias.html#cb130-270" tabindex="-1"></a>  <span class="er">|==========================================</span>        <span class="er">|</span>  <span class="dv">84</span>%</span>
+<span id="cb130-271"><a href="morfometria-geom%C3%A9trica-e-filogenias.html#cb130-271" tabindex="-1"></a>  <span class="sc">|</span>                                                        </span>
+<span id="cb130-272"><a href="morfometria-geom%C3%A9trica-e-filogenias.html#cb130-272" tabindex="-1"></a>  <span class="er">|==========================================</span>        <span class="er">|</span>  <span class="dv">85</span>%</span>
+<span id="cb130-273"><a href="morfometria-geom%C3%A9trica-e-filogenias.html#cb130-273" tabindex="-1"></a>  <span class="sc">|</span>                                                        </span>
+<span id="cb130-274"><a href="morfometria-geom%C3%A9trica-e-filogenias.html#cb130-274" tabindex="-1"></a>  <span class="er">|===========================================</span>       <span class="er">|</span>  <span class="dv">85</span>%</span>
+<span id="cb130-275"><a href="morfometria-geom%C3%A9trica-e-filogenias.html#cb130-275" tabindex="-1"></a>  <span class="sc">|</span>                                                        </span>
+<span id="cb130-276"><a href="morfometria-geom%C3%A9trica-e-filogenias.html#cb130-276" tabindex="-1"></a>  <span class="er">|===========================================</span>       <span class="er">|</span>  <span class="dv">86</span>%</span>
+<span id="cb130-277"><a href="morfometria-geom%C3%A9trica-e-filogenias.html#cb130-277" tabindex="-1"></a>  <span class="sc">|</span>                                                        </span>
+<span id="cb130-278"><a href="morfometria-geom%C3%A9trica-e-filogenias.html#cb130-278" tabindex="-1"></a>  <span class="er">|===========================================</span>       <span class="er">|</span>  <span class="dv">87</span>%</span>
+<span id="cb130-279"><a href="morfometria-geom%C3%A9trica-e-filogenias.html#cb130-279" tabindex="-1"></a>  <span class="sc">|</span>                                                        </span>
+<span id="cb130-280"><a href="morfometria-geom%C3%A9trica-e-filogenias.html#cb130-280" tabindex="-1"></a>  <span class="er">|============================================</span>      <span class="er">|</span>  <span class="dv">87</span>%</span>
+<span id="cb130-281"><a href="morfometria-geom%C3%A9trica-e-filogenias.html#cb130-281" tabindex="-1"></a>  <span class="sc">|</span>                                                        </span>
+<span id="cb130-282"><a href="morfometria-geom%C3%A9trica-e-filogenias.html#cb130-282" tabindex="-1"></a>  <span class="er">|============================================</span>      <span class="er">|</span>  <span class="dv">88</span>%</span>
+<span id="cb130-283"><a href="morfometria-geom%C3%A9trica-e-filogenias.html#cb130-283" tabindex="-1"></a>  <span class="sc">|</span>                                                        </span>
+<span id="cb130-284"><a href="morfometria-geom%C3%A9trica-e-filogenias.html#cb130-284" tabindex="-1"></a>  <span class="er">|============================================</span>      <span class="er">|</span>  <span class="dv">89</span>%</span>
+<span id="cb130-285"><a href="morfometria-geom%C3%A9trica-e-filogenias.html#cb130-285" tabindex="-1"></a>  <span class="sc">|</span>                                                        </span>
+<span id="cb130-286"><a href="morfometria-geom%C3%A9trica-e-filogenias.html#cb130-286" tabindex="-1"></a>  <span class="er">|=============================================</span>     <span class="er">|</span>  <span class="dv">89</span>%</span>
+<span id="cb130-287"><a href="morfometria-geom%C3%A9trica-e-filogenias.html#cb130-287" tabindex="-1"></a>  <span class="sc">|</span>                                                        </span>
+<span id="cb130-288"><a href="morfometria-geom%C3%A9trica-e-filogenias.html#cb130-288" tabindex="-1"></a>  <span class="er">|=============================================</span>     <span class="er">|</span>  <span class="dv">90</span>%</span>
+<span id="cb130-289"><a href="morfometria-geom%C3%A9trica-e-filogenias.html#cb130-289" tabindex="-1"></a>  <span class="sc">|</span>                                                        </span>
+<span id="cb130-290"><a href="morfometria-geom%C3%A9trica-e-filogenias.html#cb130-290" tabindex="-1"></a>  <span class="er">|=============================================</span>     <span class="er">|</span>  <span class="dv">91</span>%</span>
+<span id="cb130-291"><a href="morfometria-geom%C3%A9trica-e-filogenias.html#cb130-291" tabindex="-1"></a>  <span class="sc">|</span>                                                        </span>
+<span id="cb130-292"><a href="morfometria-geom%C3%A9trica-e-filogenias.html#cb130-292" tabindex="-1"></a>  <span class="er">|==============================================</span>    <span class="er">|</span>  <span class="dv">91</span>%</span>
+<span id="cb130-293"><a href="morfometria-geom%C3%A9trica-e-filogenias.html#cb130-293" tabindex="-1"></a>  <span class="sc">|</span>                                                        </span>
+<span id="cb130-294"><a href="morfometria-geom%C3%A9trica-e-filogenias.html#cb130-294" tabindex="-1"></a>  <span class="er">|==============================================</span>    <span class="er">|</span>  <span class="dv">92</span>%</span>
+<span id="cb130-295"><a href="morfometria-geom%C3%A9trica-e-filogenias.html#cb130-295" tabindex="-1"></a>  <span class="sc">|</span>                                                        </span>
+<span id="cb130-296"><a href="morfometria-geom%C3%A9trica-e-filogenias.html#cb130-296" tabindex="-1"></a>  <span class="er">|==============================================</span>    <span class="er">|</span>  <span class="dv">93</span>%</span>
+<span id="cb130-297"><a href="morfometria-geom%C3%A9trica-e-filogenias.html#cb130-297" tabindex="-1"></a>  <span class="sc">|</span>                                                        </span>
+<span id="cb130-298"><a href="morfometria-geom%C3%A9trica-e-filogenias.html#cb130-298" tabindex="-1"></a>  <span class="er">|===============================================</span>   <span class="er">|</span>  <span class="dv">93</span>%</span>
+<span id="cb130-299"><a href="morfometria-geom%C3%A9trica-e-filogenias.html#cb130-299" tabindex="-1"></a>  <span class="sc">|</span>                                                        </span>
+<span id="cb130-300"><a href="morfometria-geom%C3%A9trica-e-filogenias.html#cb130-300" tabindex="-1"></a>  <span class="er">|===============================================</span>   <span class="er">|</span>  <span class="dv">94</span>%</span>
+<span id="cb130-301"><a href="morfometria-geom%C3%A9trica-e-filogenias.html#cb130-301" tabindex="-1"></a>  <span class="sc">|</span>                                                        </span>
+<span id="cb130-302"><a href="morfometria-geom%C3%A9trica-e-filogenias.html#cb130-302" tabindex="-1"></a>  <span class="er">|===============================================</span>   <span class="er">|</span>  <span class="dv">95</span>%</span>
+<span id="cb130-303"><a href="morfometria-geom%C3%A9trica-e-filogenias.html#cb130-303" tabindex="-1"></a>  <span class="sc">|</span>                                                        </span>
+<span id="cb130-304"><a href="morfometria-geom%C3%A9trica-e-filogenias.html#cb130-304" tabindex="-1"></a>  <span class="er">|================================================</span>  <span class="er">|</span>  <span class="dv">95</span>%</span>
+<span id="cb130-305"><a href="morfometria-geom%C3%A9trica-e-filogenias.html#cb130-305" tabindex="-1"></a>  <span class="sc">|</span>                                                        </span>
+<span id="cb130-306"><a href="morfometria-geom%C3%A9trica-e-filogenias.html#cb130-306" tabindex="-1"></a>  <span class="er">|================================================</span>  <span class="er">|</span>  <span class="dv">96</span>%</span>
+<span id="cb130-307"><a href="morfometria-geom%C3%A9trica-e-filogenias.html#cb130-307" tabindex="-1"></a>  <span class="sc">|</span>                                                        </span>
+<span id="cb130-308"><a href="morfometria-geom%C3%A9trica-e-filogenias.html#cb130-308" tabindex="-1"></a>  <span class="er">|================================================</span>  <span class="er">|</span>  <span class="dv">97</span>%</span>
+<span id="cb130-309"><a href="morfometria-geom%C3%A9trica-e-filogenias.html#cb130-309" tabindex="-1"></a>  <span class="sc">|</span>                                                        </span>
+<span id="cb130-310"><a href="morfometria-geom%C3%A9trica-e-filogenias.html#cb130-310" tabindex="-1"></a>  <span class="er">|=================================================</span> <span class="er">|</span>  <span class="dv">97</span>%</span>
+<span id="cb130-311"><a href="morfometria-geom%C3%A9trica-e-filogenias.html#cb130-311" tabindex="-1"></a>  <span class="sc">|</span>                                                        </span>
+<span id="cb130-312"><a href="morfometria-geom%C3%A9trica-e-filogenias.html#cb130-312" tabindex="-1"></a>  <span class="er">|=================================================</span> <span class="er">|</span>  <span class="dv">98</span>%</span>
+<span id="cb130-313"><a href="morfometria-geom%C3%A9trica-e-filogenias.html#cb130-313" tabindex="-1"></a>  <span class="sc">|</span>                                                        </span>
+<span id="cb130-314"><a href="morfometria-geom%C3%A9trica-e-filogenias.html#cb130-314" tabindex="-1"></a>  <span class="er">|=================================================</span> <span class="er">|</span>  <span class="dv">99</span>%</span>
+<span id="cb130-315"><a href="morfometria-geom%C3%A9trica-e-filogenias.html#cb130-315" tabindex="-1"></a>  <span class="sc">|</span>                                                        </span>
+<span id="cb130-316"><a href="morfometria-geom%C3%A9trica-e-filogenias.html#cb130-316" tabindex="-1"></a>  <span class="er">|==================================================|</span>  <span class="dv">99</span>%</span>
+<span id="cb130-317"><a href="morfometria-geom%C3%A9trica-e-filogenias.html#cb130-317" tabindex="-1"></a>  <span class="sc">|</span>                                                        </span>
+<span id="cb130-318"><a href="morfometria-geom%C3%A9trica-e-filogenias.html#cb130-318" tabindex="-1"></a>  <span class="er">|==================================================|</span> <span class="dv">100</span>%</span>
+<span id="cb130-319"><a href="morfometria-geom%C3%A9trica-e-filogenias.html#cb130-319" tabindex="-1"></a><span class="fu">summary</span>(fit.pgls)</span>
+<span id="cb130-320"><a href="morfometria-geom%C3%A9trica-e-filogenias.html#cb130-320" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb130-321"><a href="morfometria-geom%C3%A9trica-e-filogenias.html#cb130-321" tabindex="-1"></a><span class="co">#&gt; Analysis of Variance, using Residual Randomization</span></span>
+<span id="cb130-322"><a href="morfometria-geom%C3%A9trica-e-filogenias.html#cb130-322" tabindex="-1"></a><span class="co">#&gt; Permutation procedure: Randomization of null model residuals </span></span>
+<span id="cb130-323"><a href="morfometria-geom%C3%A9trica-e-filogenias.html#cb130-323" tabindex="-1"></a><span class="co">#&gt; Number of permutations: 1000 </span></span>
+<span id="cb130-324"><a href="morfometria-geom%C3%A9trica-e-filogenias.html#cb130-324" tabindex="-1"></a><span class="co">#&gt; Estimation method: Generalized Least-Squares (via OLS projection) </span></span>
+<span id="cb130-325"><a href="morfometria-geom%C3%A9trica-e-filogenias.html#cb130-325" tabindex="-1"></a><span class="co">#&gt; Sums of Squares and Cross-products: Type I </span></span>
+<span id="cb130-326"><a href="morfometria-geom%C3%A9trica-e-filogenias.html#cb130-326" tabindex="-1"></a><span class="co">#&gt; Effect sizes (Z) based on F distributions</span></span>
+<span id="cb130-327"><a href="morfometria-geom%C3%A9trica-e-filogenias.html#cb130-327" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb130-328"><a href="morfometria-geom%C3%A9trica-e-filogenias.html#cb130-328" tabindex="-1"></a><span class="co">#&gt;           Df       SS       MS     Rsq      F       Z</span></span>
+<span id="cb130-329"><a href="morfometria-geom%C3%A9trica-e-filogenias.html#cb130-329" tabindex="-1"></a><span class="co">#&gt; temp       1 0.072892 0.072892 0.26685 2.1839 0.93768</span></span>
+<span id="cb130-330"><a href="morfometria-geom%C3%A9trica-e-filogenias.html#cb130-330" tabindex="-1"></a><span class="co">#&gt; Residuals  6 0.200262 0.033377 0.73315               </span></span>
+<span id="cb130-331"><a href="morfometria-geom%C3%A9trica-e-filogenias.html#cb130-331" tabindex="-1"></a><span class="co">#&gt; Total      7 0.273153                                </span></span>
+<span id="cb130-332"><a href="morfometria-geom%C3%A9trica-e-filogenias.html#cb130-332" tabindex="-1"></a><span class="co">#&gt;           Pr(&gt;F)</span></span>
+<span id="cb130-333"><a href="morfometria-geom%C3%A9trica-e-filogenias.html#cb130-333" tabindex="-1"></a><span class="co">#&gt; temp       0.202</span></span>
+<span id="cb130-334"><a href="morfometria-geom%C3%A9trica-e-filogenias.html#cb130-334" tabindex="-1"></a><span class="co">#&gt; Residuals       </span></span>
+<span id="cb130-335"><a href="morfometria-geom%C3%A9trica-e-filogenias.html#cb130-335" tabindex="-1"></a><span class="co">#&gt; Total           </span></span>
+<span id="cb130-336"><a href="morfometria-geom%C3%A9trica-e-filogenias.html#cb130-336" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb130-337"><a href="morfometria-geom%C3%A9trica-e-filogenias.html#cb130-337" tabindex="-1"></a><span class="co">#&gt; Call: procD.lm(f1 = shape.means ~ temp, iter = iter, seed = seed, RRPP = TRUE,  </span></span>
+<span id="cb130-338"><a href="morfometria-geom%C3%A9trica-e-filogenias.html#cb130-338" tabindex="-1"></a><span class="co">#&gt;     SS.type = SS.type, effect.type = effect.type, int.first = int.first,  </span></span>
+<span id="cb130-339"><a href="morfometria-geom%C3%A9trica-e-filogenias.html#cb130-339" tabindex="-1"></a><span class="co">#&gt;     Cov = Cov, data = data, print.progress = print.progress)</span></span></code></pre></div>
 </div>
-<div id="exercício---morfometria-e-filogenias" class="section level2" number="16.5">
+<div id="contrastes-filogenéticos-independentes" class="section level2" number="16.5">
 <h2>
-<span class="header-section-number">16.5</span> Exercício - Morfometria e filogenias<a class="anchor" aria-label="anchor" href="#exerc%C3%ADcio---morfometria-e-filogenias"><i class="fas fa-link"></i></a>
+<span class="header-section-number">16.5</span> Contrastes filogenéticos independentes<a class="anchor" aria-label="anchor" href="#contrastes-filogen%C3%A9ticos-independentes"><i class="fas fa-link"></i></a>
 </h2>
-<p>Carregue o arquivo .tps ‘Roedores_Digitalizados.tps’ contendo coordenadas
-digitalizadas na mandíbula de 143 indivíduos de 19 espécies de roedores. Carregue
-também a informação taxonômica de cada indivíduo (‘Roedores_classificador.txt’), e
-uma hipótese filogenética para as 19 espécies (‘Roedores_tree_nexus.nex’). Existe um
-arquivo adicional que informa a força da mordida média de cada uma das 19 espécies
-(‘Roedores_BiteForce.txt’).
-Investigue a força do sinal filogenético para o tamanho e a forma do crânio, e descubra
-se existe relação entre a força da mordida e a forma (e tamanho) do crânio.</p>
+<div class="sourceCode" id="cb131"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">pic.size</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/pkg/ape/man/pic.html">pic</a></span><span class="op">(</span><span class="va">size.means1</span>,<span class="va">tree</span><span class="op">)</span></span>
+<span><span class="va">pic.temp</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/pkg/ape/man/pic.html">pic</a></span><span class="op">(</span><span class="va">temp</span>,<span class="va">tree</span><span class="op">)</span></span>
+<span><span class="va">fit.pic</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">pic.size</span><span class="op">~</span><span class="va">pic.temp</span><span class="op">+</span><span class="fl">0</span><span class="op">)</span> <span class="co"># regressão pela origem, a direção da subtração foi arbitrária no cálculo dos PICs</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/stats/summary.aov.html">summary.aov</a></span><span class="op">(</span><span class="va">fit.pic</span><span class="op">)</span> <span class="co"># mesmo resultado da PGLS</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">pic.size</span><span class="op">~</span><span class="va">pic.temp</span><span class="op">)</span></span></code></pre></div>
+<div class="inline-figure"><img src="03.13-mgpcm_files/figure-html/unnamed-chunk-10-1.png" width="672"></div>
+</div>
+<div id="exercício---morfometria-e-filogenias" class="section level2" number="16.6">
+<h2>
+<span class="header-section-number">16.6</span> Exercício - Morfometria e filogenias<a class="anchor" aria-label="anchor" href="#exerc%C3%ADcio---morfometria-e-filogenias"><i class="fas fa-link"></i></a>
+</h2>
+<p>Carregue o arquivo .tps ‘Roedores_Digitalizados.tps’ contendo coordenadas digitalizadas na mandíbula de 143 indivíduos de 19 espécies de roedores. Carregue também a informação taxonômica de cada indivíduo (‘Roedores_classificador.txt’), e uma hipótese filogenética para as 19 espécies (‘Roedores_tree_nexus.nex’). Existe um arquivo adicional que informa a força da mordida média de cada uma das 19 espécies (‘Roedores_BiteForce.txt’).
+Investigue a força do sinal filogenético para o tamanho e a forma do crânio, e descubra se existe relação entre a força da mordida e a forma (e tamanho) do crânio.</p>
 
 </div>
 </div>
@@ -200,7 +625,8 @@ se existe relação entre a força da mordida e a forma (e tamanho) do crânio.<
 <li><a class="nav-link" href="#pca-filogen%C3%A9tica"><span class="header-section-number">16.2</span> PCA filogenética</a></li>
 <li><a class="nav-link" href="#sinal-filogen%C3%A9tico-multivariado"><span class="header-section-number">16.3</span> Sinal filogenético multivariado</a></li>
 <li><a class="nav-link" href="#an%C3%A1lise-filogen%C3%A9tica-generalizada-por-quadrados-m%C3%ADnimos-pgls-multivariada"><span class="header-section-number">16.4</span> Análise filogenética generalizada por quadrados mínimos (PGLS multivariada)</a></li>
-<li><a class="nav-link" href="#exerc%C3%ADcio---morfometria-e-filogenias"><span class="header-section-number">16.5</span> Exercício - Morfometria e filogenias</a></li>
+<li><a class="nav-link" href="#contrastes-filogen%C3%A9ticos-independentes"><span class="header-section-number">16.5</span> Contrastes filogenéticos independentes</a></li>
+<li><a class="nav-link" href="#exerc%C3%ADcio---morfometria-e-filogenias"><span class="header-section-number">16.6</span> Exercício - Morfometria e filogenias</a></li>
 </ul>
 
       <div class="book-extra">
@@ -218,7 +644,7 @@ se existe relação entre a força da mordida e a forma (e tamanho) do crânio.<
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Manual de Ecologia Evolutiva, Biometria e Biogeografia</strong>" was written by Renan Maestri. It was last built on 2023-09-27.</p>
+    <p>"<strong>Manual de Ecologia Evolutiva, Biometria e Biogeografia</strong>" was written by Renan Maestri. It was last built on 2023-09-28.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

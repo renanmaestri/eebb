@@ -73,6 +73,7 @@ filomorfoespaço
 pca-filogenética
 sinal-filogenético-multivariado
 análise-filogenética-generalizada-por-quadrados-mínimos-pgls-multivariada
+contrastes-filogenéticos-independentes
 exercício---morfometria-e-filogenias
 macroevolução
 lendo-e-manipulando-árvores-filogenéticas-no-r
