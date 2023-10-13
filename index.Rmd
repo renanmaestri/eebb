@@ -10,7 +10,7 @@ cover-image: images/Slogan_oficial_sologo.jpg
 description: |
   Manual de Ecologia Evolutiva, Biometria e Biogeografia.
 biblio-style: apalike
-csl: chicago-author-date.csl
+csl: chicago-fullnote-bibliography.csl
 ---
 
 # Prefácio {-}

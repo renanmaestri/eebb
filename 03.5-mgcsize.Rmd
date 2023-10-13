@@ -1,6 +1,6 @@
 # Tamanho do Centróide
 
-Em morfometria geométrica, o tamanho do centróide é uma medida de tamanho global da estrutura (configuração de landmarks). Ela é obtida como a raiz quadrada da soma das distâncias ao quadrado de cada landmark até o centróide da configuração de landmarks @bookstein1991. Por definição, essa medida é matematicamente ortogonal à forma. Por ser a única variável de tamanho não correlacionada com a forma em condições de isometria [@monteiro1999; @zelditch2012], ela é a variável de tamanho mais utilizada em morfometria geométrica.
+Em morfometria geométrica, o tamanho do centróide é uma medida de tamanho global da estrutura (configuração de landmarks). Ela é obtida como a raiz quadrada da soma das distâncias ao quadrado de cada landmark até o centróide da configuração de landmarks [@bookstein1991]. Por definição, essa medida é matematicamente ortogonal à forma. Por ser a única variável de tamanho não correlacionada com a forma em condições de isometria [@monteiro1999; @zelditch2012], ela é a variável de tamanho mais utilizada em morfometria geométrica.
 
 Vamos usar as configurações de landmarks no crânio de roedores para explorar algumas análises de variação de tamanho usando o tamanho do centróide.
 
