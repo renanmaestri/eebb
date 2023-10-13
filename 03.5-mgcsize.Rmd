@@ -1,7 +1,9 @@
 # Tamanho do Centróide
-Em morfometria geométrica, o tamanho do centróide é uma medida de tamanho global da estrutura (configuração de landmarks). Ela é a raiz quadrada da soma das distâncias ao quadrado de cada landmark até o centróide da configuração de landmarks. Por definição, essa medida é matematicamente ortogonal à forma.
+
+Em morfometria geométrica, o tamanho do centróide é uma medida de tamanho global da estrutura (configuração de landmarks). Ela é obtida como a raiz quadrada da soma das distâncias ao quadrado de cada landmark até o centróide da configuração de landmarks @bookstein1991. Por definição, essa medida é matematicamente ortogonal à forma. Por ser a única variável de tamanho não correlacionada com a forma em condições de isometria [@monteiro1999; @zelditch2012], ela é a variável de tamanho mais utilizada em morfometria geométrica.
 
 Vamos usar as configurações de landmarks no crânio de roedores para explorar algumas análises de variação de tamanho usando o tamanho do centróide.
+
 ```{r, results='hide', warning=FALSE}
 require(geomorph)
 # Carregar dados
@@ -16,6 +18,7 @@ size<-gpa$Csize
 ```
 
 Aqui está o tamanho do centróide.
+
 ```{r, results='hide', warning=FALSE}
 size
 
@@ -23,8 +26,8 @@ hist(size)
 hist(log(size))
 ```
 
-É importante manter os dados organizados e ter uma tabela em formato excel ou similar com as informações de cada espécime na mesma ordem em que eles aparecem na lista .tps. *Organization is key!*
-Podemos carregar uma tabela assim no R para explorar a variação de tamanho entre classificadores biológicos dos nossos dados.
+É importante manter os dados organizados e ter uma tabela em formato excel ou similar com as informações de cada espécime na mesma ordem em que eles aparecem na lista .tps. *Organization is key!* Podemos carregar uma tabela assim no R para explorar a variação de tamanho entre classificadores biológicos dos nossos dados.
+
 ```{r, results='hide', warning=FALSE}
 # Carregar classificadores a partir de lista externa
 plan<-read.table("dadosmg/Planilha Ctenomys.txt",h=T)
@@ -38,6 +41,7 @@ sp.sex<-as.factor(sp.sex)
 ```
 
 Variação do tamanho em função de classificadores biológicos.
+
 ```{r, results='hide', warning=FALSE}
 # Variação de tamanho entre sexos
 boxplot(size~sex,ylab="CENTROID SIZE")
@@ -70,5 +74,3 @@ TukeyHSD(anova)
 ```
 
 Um dos usos fundamentais do tamanho do centróide em Morfometria Geométrica é a investigação de alometria, veja o subcapítulo correspondente.
-
-

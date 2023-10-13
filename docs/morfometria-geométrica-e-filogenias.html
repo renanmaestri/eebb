@@ -106,12 +106,12 @@
 <h1>
 <span class="header-section-number">Capítulo 16</span> Morfometria geométrica e filogenias<a class="anchor" aria-label="anchor" href="#morfometria-geom%C3%A9trica-e-filogenias"><i class="fas fa-link"></i></a>
 </h1>
-<p>Quando as morfologias são de espécies diferentes, os dados não são independentes, já que as espécies são conectadas por uma árvore filogenética. A não-independência filogenética precisa ser levada em consideração em análises de correlação. Pra além disso, podemos entender muito sobre padrões e processos evolutivos da morfologia quando temos dados morfológicos de diferentes espécies e hipóteses filogenéticas. O capítulo deste manual sobre Macroevolução explora muitas perguntas/análises que podem ser feitas em um contexto comparativo.
+<p>Quando as morfologias são de espécies diferentes, os dados não são independentes, já que as espécies são conectadas por uma árvore filogenética.
+A não-independência filogenética precisa ser levada em consideração em análises de correlação.
+Pra além disso, podemos entender muito sobre padrões e processos evolutivos da morfologia quando temos dados morfológicos de diferentes espécies e hipóteses filogenéticas.
+A parte deste manual sobre Macroevolução explora muitas perguntas/análises que podem ser feitas em um contexto comparativo.
 Aqui, os exemplos vão apresentar algumas análises comparativas no contexto de morfometria geométrica.</p>
-<p>Para textos abrangentes sobre macroevolução e métodos filogenéticos comparativos no contexto de morfometria geométrica, veja:
-Zelditch et al. 2012 Geometric Morphometrics for Biologists, Elsevier.
-Monteiro 2013 Hystrix, doi: 10.4404/hystrix-24.1-6282.
-Adams &amp; Collyer 2018 Syst Biol doi: 10.1093/sysbio/syx055.</p>
+<p>Para textos abrangentes sobre macroevolução e métodos filogenéticos comparativos no contexto de morfometria geométrica, veja: <span class="citation">Zelditch, Swiderski, and Sheets (2012)</span>; <span class="citation">Leandro Rabello Monteiro (2013)</span>; <span class="citation">Adams and Collyer (2018)</span>.</p>
 <p>Para literatura geral, e muitas outras opções analíticas, veja o material e as referências na parte sobre Macroevolução deste manual.</p>
 <p>Vamos carregar dados morfológicos obtidos por morfometria geométrica e uma hipótese filogenética para explorar algumas análises filogenéticas comparativas.</p>
 <div class="sourceCode" id="cb118"><pre class="downlit sourceCode r">
@@ -153,7 +153,8 @@ Adams &amp; Collyer 2018 Syst Biol doi: 10.1093/sysbio/syx055.</p>
 <h2>
 <span class="header-section-number">16.1</span> Filomorfoespaço<a class="anchor" aria-label="anchor" href="#filomorfoespa%C3%A7o"><i class="fas fa-link"></i></a>
 </h2>
-<p>Podemos representar de maneira gráfica a filogenia no espaço de forma criado com uma análise de componentes principais. Essa é a PCA padrão, inalterada, com a projeção da filogenia e estimativa de formas ancestrais.</p>
+<p>Podemos representar de maneira gráfica a filogenia no espaço de forma criado com uma análise de componentes principais.
+Essa é a PCA padrão, inalterada, com a projeção da filogenia e estimativa de formas ancestrais.</p>
 <div class="sourceCode" id="cb121"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">PCA</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/pkg/geomorph/man/gm.prcomp.html">gm.prcomp</a></span><span class="op">(</span><span class="va">shape.means</span>,phy<span class="op">=</span><span class="va">tree</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">PCA</span><span class="op">)</span></span>
@@ -197,7 +198,7 @@ Adams &amp; Collyer 2018 Syst Biol doi: 10.1093/sysbio/syx055.</p>
 <h2>
 <span class="header-section-number">16.2</span> PCA filogenética<a class="anchor" aria-label="anchor" href="#pca-filogen%C3%A9tica"><i class="fas fa-link"></i></a>
 </h2>
-<p>A PCA filogenética <em>sensu</em> Revell (2009).</p>
+<p>A PCA filogenética <em>sensu</em> <span class="citation">Revell (2009)</span>.</p>
 <div class="sourceCode" id="cb128"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">phyloPCA</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/pkg/geomorph/man/gm.prcomp.html">gm.prcomp</a></span><span class="op">(</span><span class="va">shape.means</span>,phy<span class="op">=</span><span class="va">tree</span>,GLS<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">phyloPCA</span><span class="op">)</span></span>
@@ -208,10 +209,9 @@ Adams &amp; Collyer 2018 Syst Biol doi: 10.1093/sysbio/syx055.</p>
 <h2>
 <span class="header-section-number">16.3</span> Sinal filogenético multivariado<a class="anchor" aria-label="anchor" href="#sinal-filogen%C3%A9tico-multivariado"><i class="fas fa-link"></i></a>
 </h2>
-<p>Sinal filogenético é um padrão que mostra se espécies mais próximas filogeneticamente têm morfologias mais similares do que espécies mais distantes filogeneticamente. Existem vários métodos para o cálculo de sinal filogenético, o mais comum é a estatística K (Blomberg et al. 2003; Adams 2014).
-K=1 indica que espécies próximas são tão parecidas quanto prevê o modelo Browniano
-K&lt;1 indica sinal filogenético menor do que esperado pelo modelo Browniano
-K&gt;1 indica sinal filogenético maior do que esperado pelo modelo Browniano</p>
+<p>Sinal filogenético é um padrão que mostra se espécies mais próximas filogeneticamente têm morfologias mais similares do que espécies mais distantes filogeneticamente.
+Existem vários métodos para o cálculo de sinal filogenético, o mais comum é a estatística K <span class="citation">(Blomberg, Garland JR., and Ives 2003; Adams 2014)</span>.
+K=1 indica que espécies próximas são tão parecidas quanto prevê o modelo Browniano K&lt;1 indica sinal filogenético menor do que esperado pelo modelo Browniano K&gt;1 indica sinal filogenético maior do que esperado pelo modelo Browniano</p>
 <div class="sourceCode" id="cb129"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Sinal Filogenético para forma do crânio</span></span>
 <span><span class="va">sinal.k</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/pkg/geomorph/man/physignal.html">physignal</a></span><span class="op">(</span><span class="va">shape.means</span>,<span class="va">tree</span>,iter<span class="op">=</span><span class="fl">999</span><span class="op">)</span></span>
@@ -606,7 +606,9 @@ K&gt;1 indica sinal filogenético maior do que esperado pelo modelo Browniano</p
 <h2>
 <span class="header-section-number">16.6</span> Exercício - Morfometria e filogenias<a class="anchor" aria-label="anchor" href="#exerc%C3%ADcio---morfometria-e-filogenias"><i class="fas fa-link"></i></a>
 </h2>
-<p>Carregue o arquivo .tps ‘Roedores_Digitalizados.tps’ contendo coordenadas digitalizadas na mandíbula de 143 indivíduos de 19 espécies de roedores. Carregue também a informação taxonômica de cada indivíduo (‘Roedores_classificador.txt’), e uma hipótese filogenética para as 19 espécies (‘Roedores_tree_nexus.nex’). Existe um arquivo adicional que informa a força da mordida média de cada uma das 19 espécies (‘Roedores_BiteForce.txt’).
+<p>Carregue o arquivo .tps ‘Roedores_Digitalizados.tps’ contendo coordenadas digitalizadas na mandíbula de 143 indivíduos de 19 espécies de roedores.
+Carregue também a informação taxonômica de cada indivíduo (‘Roedores_classificador.txt’), e uma hipótese filogenética para as 19 espécies (‘Roedores_tree_nexus.nex’).
+Existe um arquivo adicional que informa a força da mordida média de cada uma das 19 espécies (‘Roedores_BiteForce.txt’).
 Investigue a força do sinal filogenético para o tamanho e a forma do crânio, e descubra se existe relação entre a força da mordida e a forma (e tamanho) do crânio.</p>
 
 </div>
@@ -644,7 +646,7 @@ Investigue a força do sinal filogenético para o tamanho e a forma do crânio, 
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Manual de Ecologia Evolutiva, Biometria e Biogeografia</strong>" was written by Renan Maestri. It was last built on 2023-09-28.</p>
+    <p>"<strong>Manual de Ecologia Evolutiva, Biometria e Biogeografia</strong>" was written by Renan Maestri. It was last built on 2023-10-13.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

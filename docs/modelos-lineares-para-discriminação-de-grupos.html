@@ -106,8 +106,7 @@
 <h1>
 <span class="header-section-number">Capítulo 11</span> Modelos lineares para discriminação de grupos<a class="anchor" aria-label="anchor" href="#modelos-lineares-para-discrimina%C3%A7%C3%A3o-de-grupos"><i class="fas fa-link"></i></a>
 </h1>
-<p>Uma classe ampla de modelos preditivos está abarcada pelo nome de Modelos Lineares Generalizados, incluindo regressão múltipla e análises de variância/covariância. Uma vasta gama de modelos pode ser ajustada com a função ‘procD.lm’ e outras do pacote <em>geomorph</em>, que usa distância de Procrustes entre espécimes para calcular tamanhos de efeito e randomização para calcular valores de <em>P</em> (de modo equivalente à MANOVA não paramétrica – Goodall 1991, Anderson 2001); assim, o número de variáveis de forma, normalmente muito alto em dados de MG, não é uma restrição ao ajuste de modelos (Collyer et al. 2015).
-Podemos usar esses modelos baseados em distância para responder diversas questões quando a variável resposta é composta por variáveis de forma. Aqui, vamos aplicá-los no contexto de discriminação de grupos, quando a variável preditora é categórica.</p>
+<p>Uma classe ampla de modelos preditivos está abarcada pelo nome de Modelos Lineares Generalizados, incluindo regressão múltipla e análises de variância/covariância. Uma vasta gama de modelos pode ser ajustada com a função ‘procD.lm’ e outras do pacote <em>geomorph</em>, que usa distância de Procrustes entre espécimes para calcular tamanhos de efeito e randomização para calcular valores de <em>P</em> (de modo equivalente à MANOVA não paramétrica – <span class="citation">(Goodall 1991; Pillar and Orlóci 1996; Anderson 2001)</span>; assim, o número de variáveis de forma, normalmente muito alto em dados de MG, não é uma restrição ao ajuste de modelos <span class="citation">Collyer, Sekora, and Adams (2015)</span>. Podemos usar esses modelos baseados em distância para responder diversas questões quando a variável resposta é composta por variáveis de forma. Aqui, vamos aplicá-los no contexto de discriminação de grupos, quando a variável preditora é categórica.</p>
 <div id="manova" class="section level2" number="11.1">
 <h2>
 <span class="header-section-number">11.1</span> MANOVA<a class="anchor" aria-label="anchor" href="#manova"><i class="fas fa-link"></i></a>
@@ -288,8 +287,7 @@ Podemos usar esses modelos baseados em distância para responder diversas quest�
 <h2>
 <span class="header-section-number">11.2</span> Fenograma<a class="anchor" aria-label="anchor" href="#fenograma"><i class="fas fa-link"></i></a>
 </h2>
-<p>Dependendo da pergunta de estudo, fenogramas podem ser úteis para visualizar os padrões de diferenciação de forma em um formato de árvore de distâncias morfológicas.
-Aqui, vamos criar um fenograma com distâncias de Procrustes e agrupamento de Neighbot-Joining.</p>
+<p>Dependendo da pergunta de estudo, fenogramas podem ser úteis para visualizar os padrões de diferenciação de forma em um formato de árvore de distâncias morfológicas. Aqui, vamos criar um fenograma com distâncias de Procrustes e agrupamento de Neighbot-Joining.</p>
 <div class="sourceCode" id="cb96"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">obj</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">manova.pairwise</span><span class="op">)</span></span>
 <span><span class="va">obj</span><span class="op">$</span><span class="va">pairwise.tables</span><span class="op">$</span><span class="va">D</span></span>
@@ -331,7 +329,7 @@ Aqui, vamos criar um fenograma com distâncias de Procrustes e agrupamento de Ne
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Manual de Ecologia Evolutiva, Biometria e Biogeografia</strong>" was written by Renan Maestri. It was last built on 2023-09-28.</p>
+    <p>"<strong>Manual de Ecologia Evolutiva, Biometria e Biogeografia</strong>" was written by Renan Maestri. It was last built on 2023-10-13.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

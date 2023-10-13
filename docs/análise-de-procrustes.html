@@ -6,16 +6,16 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <title>Capítulo 5 Análise de Procrustes | Manual de Ecologia Evolutiva, Biometria e Biogeografia</title>
 <meta name="author" content="Renan Maestri">
-<meta name="description" content="O passo primário fundamental em morfometria geométrica é a análise generalizada de Procrustes, que remove os efeitos de rotação, translação e tamanho dos objetos. O resultado é uma matriz com as...">
+<meta name="description" content="O passo primário fundamental em morfometria geométrica é a Análise Generalizada de Procrustes (GPA - Generalized Procrustes Analysis), que remove os efeitos de rotação/orientação,...">
 <meta name="generator" content="bookdown 0.35 with bs4_book()">
 <meta property="og:title" content="Capítulo 5 Análise de Procrustes | Manual de Ecologia Evolutiva, Biometria e Biogeografia">
 <meta property="og:type" content="book">
 <meta property="og:url" content="https://renanmaestri.github.io/eebb/análise-de-procrustes.html">
 <meta property="og:image" content="https://renanmaestri.github.io/eebb/images/Slogan_oficial_sologo.jpg">
-<meta property="og:description" content="O passo primário fundamental em morfometria geométrica é a análise generalizada de Procrustes, que remove os efeitos de rotação, translação e tamanho dos objetos. O resultado é uma matriz com as...">
+<meta property="og:description" content="O passo primário fundamental em morfometria geométrica é a Análise Generalizada de Procrustes (GPA - Generalized Procrustes Analysis), que remove os efeitos de rotação/orientação,...">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Capítulo 5 Análise de Procrustes | Manual de Ecologia Evolutiva, Biometria e Biogeografia">
-<meta name="twitter:description" content="O passo primário fundamental em morfometria geométrica é a análise generalizada de Procrustes, que remove os efeitos de rotação, translação e tamanho dos objetos. O resultado é uma matriz com as...">
+<meta name="twitter:description" content="O passo primário fundamental em morfometria geométrica é a Análise Generalizada de Procrustes (GPA - Generalized Procrustes Analysis), que remove os efeitos de rotação/orientação,...">
 <meta name="twitter:image" content="https://renanmaestri.github.io/eebb/images/Slogan_oficial_sologo.jpg">
 <!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
@@ -106,7 +106,9 @@
 <h1>
 <span class="header-section-number">Capítulo 5</span> Análise de Procrustes<a class="anchor" aria-label="anchor" href="#an%C3%A1lise-de-procrustes"><i class="fas fa-link"></i></a>
 </h1>
-<p>O passo primário fundamental em morfometria geométrica é a análise generalizada de Procrustes, que remove os efeitos de rotação, translação e tamanho dos objetos. O resultado é uma matriz com as variáveis de forma.</p>
+<p>O passo primário fundamental em morfometria geométrica é a Análise Generalizada de Procrustes (GPA - <em>Generalized Procrustes Analysis</em>), que remove os efeitos de rotação/orientação, translação/posição e tamanho dos objetos. O resultado é uma matriz com as variáveis de forma. Outros métodos de superposição de marcos anatômicos foram propostos, veja <span class="citation">(L. R. Monteiro and Reis 1999; Adams, Rohlf, and Slice 2004; Zelditch, Swiderski, and Sheets 2012)</span>, mas a GPA é o mais popular e mais adequado na maioria dos casos.</p>
+<p>Na GPA, os efeitos de translação/posição são removidos pois (i) o centróide de cada configuração é transladado para a origem: as coordenadas do centróide de cada configuração são subtraídas da coordenada correspondente de cada landmark, gerando a centralização ou superposição das configurações. Os efeitos de tamanho são removidos pois (ii) as configurações são escaladas/proporcionalizadas para um tamanho de centróide único após a divisão das coordenadas dos landmarks pelo seu tamanho do centróide. E os efeitos de rotação/orientação são removidos pois (iii) a raiz quadrada da soma das distâncias ao quadrado entre os landmarks correspondentes é minimizada usando rotação otimizada por quadrados mínimos; o processo inicia rotacionando as configurações em relação à uma forma de referência, em seguida, uma nova forma de referência (a média da configuração de landmarks) é calculada, e o processo se repete iterativamente até que as diferenças de orientação sejam minimizadas.</p>
+<p>Em duas dimensões, dois graus de liberdade são perdidos com a translação, um grau de liberdade é perdido com o escalonamento e um grau de liberdade é perdido com a rotação, totalizando quatro graus de liberdade perdidos. Em três dimensões, três graus de liberdade são perdidos com a translação, um grau de liberdade é perdido com o escalonamento, e três graus de liberdade são perdidos com a rotação, totalizando sete graus de liberdade perdidos.</p>
 <div id="o-objeto-.tps-no-r" class="section level2" number="5.1">
 <h2>
 <span class="header-section-number">5.1</span> O objeto .tps no R<a class="anchor" aria-label="anchor" href="#o-objeto-.tps-no-r"><i class="fas fa-link"></i></a>
@@ -298,7 +300,7 @@
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Manual de Ecologia Evolutiva, Biometria e Biogeografia</strong>" was written by Renan Maestri. It was last built on 2023-09-28.</p>
+    <p>"<strong>Manual de Ecologia Evolutiva, Biometria e Biogeografia</strong>" was written by Renan Maestri. It was last built on 2023-10-13.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

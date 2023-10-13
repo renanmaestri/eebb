@@ -106,9 +106,8 @@
 <h1>
 <span class="header-section-number">Capítulo 7</span> Assimetria e quantificação de erro<a class="anchor" aria-label="anchor" href="#assimetria-e-quantifica%C3%A7%C3%A3o-de-erro"><i class="fas fa-link"></i></a>
 </h1>
-<p>Duas fontes de adicionais de variação, normalmente bem pequenas, podem ser quantificadas: a assimetria e os erros oridundos da obtenção de dados e da medição de indivíduos.
-A assimetria é o menor dos efeitos biológicos, e pode ser quantificada através da diferença entre os lados direito e esquerdo de estruturas com simetria bilateral, ou entre estruturas correspondentes em outras formas de simetria, como em asas de insetos ou pétalas de flores.
-Erros oriundos da obtenção de dados ou de medição dos espécimes (colocação de landmarks) devem também ser muito pequenos para que possam ser ignorados com confiança. Espera-se que esses erros sejam várias vezes menores do que variação entre indivíduos, e mesmo que sejam bastante menores do que a variação vinda da assimetria flutuante.</p>
+<p>Duas fontes de adicionais de variação, normalmente bem pequenas, podem ser quantificadas: a assimetria e os erros oridundos da obtenção de dados e da medição de indivíduos. A assimetria é o menor dos efeitos biológicos, e pode ser quantificada através da diferença entre os lados direito e esquerdo de estruturas com simetria bilateral, ou entre estruturas correspondentes em outras formas de simetria, como em asas de insetos ou pétalas de flores. Erros oriundos da obtenção de dados ou de medição dos espécimes (colocação de landmarks) devem também ser muito pequenos para que possam ser ignorados com confiança. Espera-se que esses erros sejam várias vezes menores do que variação entre indivíduos, e mesmo que sejam bastante menores do que a variação vinda da assimetria flutuante.</p>
+<p>Para se aprofundar, leia: <span class="citation">Klingenberg, Barluenga, and Meyer (2002)</span>; <span class="citation">Klingenberg (2015)</span>.</p>
 <div id="assimetria-de-objeto" class="section level2" number="7.1">
 <h2>
 <span class="header-section-number">7.1</span> Assimetria de objeto<a class="anchor" aria-label="anchor" href="#assimetria-de-objeto"><i class="fas fa-link"></i></a>
@@ -188,8 +187,7 @@ Erros oriundos da obtenção de dados ou de medição dos espécimes (colocaçã
 <h2>
 <span class="header-section-number">7.5</span> Quantificação de erro<a class="anchor" aria-label="anchor" href="#quantifica%C3%A7%C3%A3o-de-erro"><i class="fas fa-link"></i></a>
 </h2>
-<p>A “Procrustes ANOVA” (Goodall 1991; Klingengerg &amp; McIntyre 1998), usada para quantificar diversas fontes de erro em morfometria geométrica, é uma análise multivariada de variância onde as fontes de erro são aninhadas uma dentro da outra. Por exemplo, podemos ter os lados direito/esquerdo de cada indivíduo, mais de uma marcação de landmarks para cada indivíduo, e mais de uma obtenção de imagem para cada indivíduo. A quantificação de variação em cada nível pode ser feita e comparada.
-No exemplo abaixo, vamos quantificar o erro de medição através de marcações de landmarks repetidas duas vezes em cada indivíduo da amostra. Queremos obter uma medida que represente a confiabilidade da marcação de landmarks por um operador, obtida através da repetição da colocação de landmarks em imagens idênticas, por esse operador; em teoria, os landmarks deveriam estar extamente na mesma posição.</p>
+<p>A “Procrustes ANOVA” (Goodall 1991; Klingengerg &amp; McIntyre 1998), usada para quantificar diversas fontes de erro em morfometria geométrica, é uma análise multivariada de variância onde as fontes de erro são aninhadas uma dentro da outra. Por exemplo, podemos ter os lados direito/esquerdo de cada indivíduo, mais de uma marcação de landmarks para cada indivíduo, e mais de uma obtenção de imagem para cada indivíduo. A quantificação de variação em cada nível pode ser feita e comparada. No exemplo abaixo, vamos quantificar o erro de medição através de marcações de landmarks repetidas duas vezes em cada indivíduo da amostra. Queremos obter uma medida que represente a confiabilidade da marcação de landmarks por um operador, obtida através da repetição da colocação de landmarks em imagens idênticas, por esse operador; em teoria, os landmarks deveriam estar extamente na mesma posição.</p>
 <div class="sourceCode" id="cb46"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Carregar arquivo tps com todos os indivíduos marcados 2 vezes</span></span>
 <span><span class="va">tps.rep</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/pkg/geomorph/man/readland.tps.html">readland.tps</a></span><span class="op">(</span><span class="st">"dadosmg/ventral.dig_curso_rep1_2.tps"</span>,specID <span class="op">=</span> <span class="st">"ID"</span>, readcurves <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span> </span>
@@ -396,7 +394,7 @@ A opção/argumento “ProcD=FALSE” vai deslizar os semilandmarks minimizando 
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Manual de Ecologia Evolutiva, Biometria e Biogeografia</strong>" was written by Renan Maestri. It was last built on 2023-09-28.</p>
+    <p>"<strong>Manual de Ecologia Evolutiva, Biometria e Biogeografia</strong>" was written by Renan Maestri. It was last built on 2023-10-13.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

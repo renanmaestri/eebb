@@ -6,16 +6,16 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <title>Capítulo 3 Morfometria Geométrica | Manual de Ecologia Evolutiva, Biometria e Biogeografia</title>
 <meta name="author" content="Renan Maestri">
-<meta name="description" content="“Organismos são entidades integradas, e não coleções de objetos discretos” (Gould &amp; Lewontin 1979). A visão “atomista” dos organismos, que trata medidas lineares únicas como merecedoras de atenção...">
+<meta name="description" content="“Organismos são entidades integradas, e não coleções de objetos discretos” Gould and Lewontin (1979). A visão “atomista” dos organismos, que trata medidas lineares únicas como merecedoras de...">
 <meta name="generator" content="bookdown 0.35 with bs4_book()">
 <meta property="og:title" content="Capítulo 3 Morfometria Geométrica | Manual de Ecologia Evolutiva, Biometria e Biogeografia">
 <meta property="og:type" content="book">
 <meta property="og:url" content="https://renanmaestri.github.io/eebb/morfometria-geométrica.html">
 <meta property="og:image" content="https://renanmaestri.github.io/eebb/images/Slogan_oficial_sologo.jpg">
-<meta property="og:description" content="“Organismos são entidades integradas, e não coleções de objetos discretos” (Gould &amp; Lewontin 1979). A visão “atomista” dos organismos, que trata medidas lineares únicas como merecedoras de atenção...">
+<meta property="og:description" content="“Organismos são entidades integradas, e não coleções de objetos discretos” Gould and Lewontin (1979). A visão “atomista” dos organismos, que trata medidas lineares únicas como merecedoras de...">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Capítulo 3 Morfometria Geométrica | Manual de Ecologia Evolutiva, Biometria e Biogeografia">
-<meta name="twitter:description" content="“Organismos são entidades integradas, e não coleções de objetos discretos” (Gould &amp; Lewontin 1979). A visão “atomista” dos organismos, que trata medidas lineares únicas como merecedoras de atenção...">
+<meta name="twitter:description" content="“Organismos são entidades integradas, e não coleções de objetos discretos” Gould and Lewontin (1979). A visão “atomista” dos organismos, que trata medidas lineares únicas como merecedoras de...">
 <meta name="twitter:image" content="https://renanmaestri.github.io/eebb/images/Slogan_oficial_sologo.jpg">
 <!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
@@ -106,16 +106,14 @@
 <h1>
 <span class="header-section-number">Capítulo 3</span> Morfometria Geométrica<a class="anchor" aria-label="anchor" href="#morfometria-geom%C3%A9trica"><i class="fas fa-link"></i></a>
 </h1>
-<p>“Organismos são entidades integradas, e não coleções de objetos discretos” (Gould &amp; Lewontin 1979).</p>
+<p>“Organismos são entidades integradas, e não coleções de objetos discretos” <span class="citation">Gould and Lewontin (1979)</span>.</p>
 <p>A visão “atomista” dos organismos, que trata medidas lineares únicas como merecedoras de atenção particular, está errada do ponto de vista da genética e do desenvolvimento. A evolução morfológica é inerentemente multivarida. Por isso, precisamos usar ferramentas multivariadas para entender os processos biológicos que produzem morfologias distintas. A morfometria fornece maneiras quantitativas de comparar a forma dos organismos, obtidas a partir do uso de ferramentas matemáticas sobre matrizes de variáveis contínuas. Assim, a morfometria multivariada é a melhor maneira de entender morfogênese e evolução morfológica.</p>
 <p>Contudo, a morfometria tradicional não oferece uma maneira precisa para acessar a geometria dos organismos, já que carece de uma definição precisa de forma e, assim, não distingue claramente forma e tamanho. Além disso, a morfometria tradicional não oferece maneiras de visualizar e interpretar com facilidade as diferenças morfológicas que estamos tentando entender.</p>
-<p>Ferramentas de <strong>morfometria geométrica</strong> oferecem uma <em>descrição precisa e acurada</em> da forma (geometria) dos organismos, podem ser combinadas com <em>análises estatísticas</em> rigorosas, e nos permitem <em>visualizar</em> as diferenças de <strong>forma</strong> entre organismos com extrema facilidade, o que não é alcançado facilmente por outros métodos (Zelditch et al. 2012).</p>
-<p><strong>Forma</strong>, em morfometria geométrica, é formamente definida como <em>todas as características geométricas de uma configuração de pontos exceto por seu tamanho, posição e orientação</em> (Kendall, 1977, Bookstein 1989, Dryden &amp; Mardia 1998, Monteiro &amp; Reis 1999, Klingenberg 2016). Essa formalidade é capturada matematicamente pela técnica conhecida como <em>Análise Generalizada de Procrustes</em>, que veremos na sequência. Assim, <em>morfometria geométrica faz uma distinção entre tamanho e forma</em>. <em>Tamanho</em> pode ser resumido em um número que captura a dimensão ou escala geral de um objeto (Klingenberg 2016) - veja a seção do manual sobre Tamanho do Centróide. <em>Forma</em> captura as diferentes proporções de um objeto: as formas de dois objetos podem ser iguais se forem geométricamente idênticas, mesmo que seu tamanho seja diferente (Zelditch et al. 2012; Klingenberg 2016).</p>
+<p>Ferramentas de <strong>morfometria geométrica</strong> oferecem uma <em>descrição precisa e acurada</em> da forma (geometria) dos organismos, podem ser combinadas com <em>análises estatísticas</em> rigorosas, e nos permitem <em>visualizar</em> as diferenças de <strong>forma</strong> entre organismos com extrema facilidade, o que não é alcançado facilmente por outros métodos <span class="citation">Zelditch, Swiderski, and Sheets (2012)</span>.</p>
+<p><strong>Forma</strong>, em morfometria geométrica, é formamente definida como <em>todas as características geométricas de uma configuração de pontos exceto por seu tamanho, posição e orientação</em> <span class="citation">(Kendall, n.d.; Bookstein 1989; Dryden and Mardia 1998; L. R. Monteiro and Reis 1999; Klingenberg 2016)</span>. Essa formalidade é capturada matematicamente pela técnica conhecida como <em>Análise Generalizada de Procrustes</em>, que veremos na sequência. Assim, <em>morfometria geométrica faz uma distinção entre tamanho e forma</em>. <em>Tamanho</em> pode ser resumido em um número que captura a dimensão ou escala geral de um objeto <span class="citation">Klingenberg (2016)</span> - veja a seção do manual sobre Tamanho do Centróide. <em>Forma</em> captura as diferentes proporções de um objeto: as formas de dois objetos podem ser iguais se forem geométricamente idênticas, mesmo que seu tamanho seja diferente <span class="citation">(Zelditch, Swiderski, and Sheets 2012; Klingenberg 2016)</span>.</p>
 <p>Os <strong>landmarks</strong>, ou marcos anatômicos, são pontos anatômicos discretos, fudamentais em morfometria, que precisam ser reconhecíveis em todos os indivíduos/objetos da amostra. A definição dos landmarks é central, já que eles permitirão capturar as estruturas biológicas de interesse (entre os landmarks) e comparar essas estruturas entre organismos. Daí a importância de os landmarks serem homólogos entre os indivíduos no estudo. Em morfometria geométrica, as <strong>coordenadas cartesianas</strong> desses landmarks é que serão usadas nas análises. Há uma outra vantagem da morfometria geométrica que resulta do uso dessas coordenadas cartesianas ao invés do uso de medidas lineares entre landmarks. A análise das variáveis de forma, obtidas por morfometria geométrica, sobre determinado número N de landmarks, contém tanta informação de forma quanto teriam todas as medidas lineares entre os N pares de landmarks, e com um número muito menor de variáveis de forma, removendo a redundância que existiria na matriz de medidas lineares entre os N landmarks.</p>
 <p>Além dos landmarks, também podem ser utilizados semilandmarks ou análises de contorno quando a estrutura biológica for muito complexa para ser inteiramente capturada por landmarks e/ou quando landmarks não puderem ser localizados com confiabilidade. Veja a seção sobre semilandmarks.</p>
-<p>Para livros abrangentes sobre morfometria geométrica, veja:
-Monteiro &amp; dos Reis 1999 Princípios de Morfometria Geométrica. Holos Editora.
-Zelditch et al. 2012 Geometric Morphometrics for Biologists. Elsevier.</p>
+<p>Para livros abrangentes sobre morfometria geométrica, veja: <span class="citation">L. R. Monteiro and Reis (1999)</span> e <span class="citation">Zelditch, Swiderski, and Sheets (2012)</span>.</p>
 <div style="page-break-after: always;"></div>
 
 </div>
@@ -141,7 +139,7 @@ Zelditch et al. 2012 Geometric Morphometrics for Biologists. Elsevier.</p>
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Manual de Ecologia Evolutiva, Biometria e Biogeografia</strong>" was written by Renan Maestri. It was last built on 2023-09-28.</p>
+    <p>"<strong>Manual de Ecologia Evolutiva, Biometria e Biogeografia</strong>" was written by Renan Maestri. It was last built on 2023-10-13.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

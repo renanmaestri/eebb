@@ -2,15 +2,14 @@
 
 Os métodos de ordenação mais usados em dados de morfometria geométrica são a Análise de Componentes Principais (PCA) e a Análise de Variáveis Canônicas (CVA). Ambos os métodos são exploratórios, e providenciam uma descrição dos dados, e não testes de hipóteses. No entanto, a CVA pode ser utilizada como uma função para discriminação de grupos, onde a porcentagem de classificação correta de espécimes dentro de grupos pode ser usada como valor de suporte ao testar a confiabilidade de grupos (ex: espécies).
 
-Para se aprofundar, leia: 
-Zeldtich et al. 2012 Geometric Morphometrics for Biologists - Elsevier, e 
-Klingengerb & Monteiro 2005 Distances and directions in multidimensional shape spaces: implications for morphometric applications - Systematic Biology.
+Para se aprofundar, leia: @klingen-monteiro2005; @zelditch2012.
 
 ## Análise de Componentes Principais
+
 A análise de componentes principais (Principal Component Analysis - PCA) simplifica os complexos padrões de variação e covariação de dados multivariados ao construir componentes principais independentes que resumem a maior parte da variação dos dados em poucos eixos. Assim, também é possível observar diretamente a combinação de dois ou três componentes principais em um gráfico.
 
-Vamos fazer uma PCA com dados de morfometria geométrica.
-Primeiro, vamos carregar os dados, fazer uma GPA, e carregar os classificadores.
+Vamos fazer uma PCA com dados de morfometria geométrica. Primeiro, vamos carregar os dados, fazer uma GPA, e carregar os classificadores.
+
 ```{r, results='hide', warning=FALSE}
 require(geomorph)
 # Carregar dados
@@ -39,8 +38,8 @@ sp.sex<-plan[,3]
 sp.sex<-as.factor(sp.sex)
 ```
 
-Muitas funções realizam a Análise de Componentes Principais no R. Para dados de morfometria geométrica (MG), é melhor usar funções de pacotes desenhados especificamente para MG, já que eles reconhecem a redundância nos graus de liberdade que resultam das transformações de escala, posição e rotação feitas anteriormente na Análise Generalisada de Procrustes, e já retornam o número exato de componentes principais necessários para capturar 100% da variação da forma.
-Vamos usar a PCA implementada no pacote *geomorph*.
+Muitas funções realizam a Análise de Componentes Principais no R. Para dados de morfometria geométrica (MG), é melhor usar funções de pacotes desenhados especificamente para MG, já que eles reconhecem a redundância nos graus de liberdade que resultam das transformações de escala, posição e rotação feitas anteriormente na Análise Generalisada de Procrustes, e já retornam o número exato de componentes principais necessários para capturar 100% da variação da forma. Vamos usar a PCA implementada no pacote *geomorph*.
+
 ```{r}
 PCA<-gm.prcomp(shape.sym)
 PCA # Porcentagem de explicação dos eixos
@@ -49,6 +48,7 @@ plot(PCA,axis1=1, axis2=2)
 ```
 
 Antes de observar as mudanças de forma ao longo do gráfico da PCA, vamos criar uma forma média de referência e definir links entre os landmarks.
+
 ```{r, results='hide', warning=FALSE}
 # Forma média
 ref<-mshape(shape.sym)
@@ -64,8 +64,8 @@ plotRefToTarget(ref,shape.sym[,,8],links=links.tuco,method="points",gridPars=GP1
 plotAllSpecimens(shape.sym,mean=TRUE,links=links.tuco)
 ```
 
-
 Podemos estilizar a PCA para mostrar, por exemplo, quais indivíduos pertecem a quais grupos. Além disso, é importante observar as formas associadas com porções diferentes do gráfico.
+
 ```{r, results='hide', warning=FALSE}
 # PCA Estilizada
 col.group<-rainbow(length(levels(species))) # criar vetor de cores para grupos
@@ -87,6 +87,7 @@ par(mfrow=c(1,1)) # janela default do gr?fico
 ```
 
 É possível gerar elipses de confiança para os grupos em questão.
+
 ```{r, results='hide', warning=FALSE}
 require(vegan)
 {plot(PCA$x[,1],PCA$x[,2],pch=21,cex=2,bg=col.group,xlab=xlab,ylab=ylab,asp=T)
@@ -96,6 +97,7 @@ ordihull(PCA$x,group=species)}
 ```
 
 As mudanças de forma ao longo dos eixos da PCA podem ser visualizadas comparando-as com a média da amostra. Usualmente, as formas extremas de cada eixo são usadas para visualização. O *geomorph* retorna as formas extremas de maneira simplificada no output da função que faz a PCA.
+
 ```{r, results='hide', warning=FALSE}
 # Definir cores dos landmarks e links
 GP1<-gridPar(pt.bg="gray",link.col="gray",link.lty=1) # cor dos landmarks e links
@@ -106,9 +108,10 @@ plotRefToTarget(ref,PCA$shapes$shapes.comp1$max,links=links.tuco,method="TPS",gr
 plotRefToTarget(PCA$shapes$shapes.comp1$min,PCA$shapes$shapes.comp1$max,links=links.tuco,method="points",gridPars=GP1) # alvo = em preto, referência = em cinza
 ```
 
-
 ## Análise de Variação Canônica
-Assim como na PCA, a Análise de Variação Canônica (Canonical Variates Analysis - CVA) também cria novas variáveis (eixos de ordenação) que são ortogonais. No entanto, a CVA descreve as diferenças *entre* as médias de *grupos*. Assim, ela pode ser usada para descrever as diferenças de forma entre quaisquer *grupos* biológicos que tenhamos. Contudo, ao contrário da PCA, que simplesmente rotaciona as coordenadas originais, a CVA realiza uma transformação (rescalonamento pela variação dentro de grupos) no sistema de coordenadas original, e por isso não deve ser interpretada livremente para representar variação de forma entre indivíduos. A CVA mostra apenas a direção em que os grupos são melhor discriminados um do outro. 
+
+Assim como na PCA, a Análise de Variação Canônica (Canonical Variates Analysis - CVA) também cria novas variáveis (eixos de ordenação) que são ortogonais. No entanto, a CVA descreve as diferenças *entre* as médias de *grupos*. Assim, ela pode ser usada para descrever as diferenças de forma entre quaisquer *grupos* biológicos que tenhamos. Contudo, ao contrário da PCA, que simplesmente rotaciona as coordenadas originais, a CVA realiza uma transformação (rescalonamento pela variação dentro de grupos) no sistema de coordenadas original, e por isso não deve ser interpretada livremente para representar variação de forma entre indivíduos. A CVA mostra apenas a direção em que os grupos são melhor discriminados um do outro.
+
 ```{r}
 require(Morpho)
 cva<-CVA(PCA$x[,1:20],groups=species,cv=TRUE) # Jackknife Cross-validation
@@ -122,7 +125,8 @@ ordiellipse(cva$CVscores,group=species, kind="sd", conf=0.95)}
 # ou: ordihull(cva$CVscores,group=species)
 ```
 
-Uma outra vantagem da CVA é que ela pode ser usada para estimar uma taxa de reclassificação correta de indivíduos dentro dos grupos hipotetizados. 
+Uma outra vantagem da CVA é que ela pode ser usada para estimar uma taxa de reclassificação correta de indivíduos dentro dos grupos hipotetizados.
+
 ```{r}
 cva<-CVA(PCA$x[,1:20],groups=species,cv=TRUE) # Jackknife Cross-validation
 cva
@@ -132,6 +136,7 @@ lda.p # proporção de classificação correta para cada grupo
 ```
 
 Visualização da forma ao longo dos eixos da CVA.
+
 ```{r, results='hide', warning=FALSE}
 # Mudança de forma ao longo do CV1 (positivo 15, negativo -10) e CV2
 cv1max<- 15*cva$CVvis[,1]+cva$Grandm
@@ -148,9 +153,6 @@ plotRefToTarget(cv2min,cv2max,links=links.tuco,method="points")
 
 Veja também os modelos linares para discriminação de grupos no subcapítulo correspondente.
 
+## Exercício -- Análise de Componentes Principais
 
-## Exercício – Análise de Componentes Principais
-Usando os mesmos dados deste exercício, faça uma PCA com a função própria do pacote *geomorph*, e uma PCA com a função 'prcomp’. Qual a diferença entre as duas PCAs? Como a diferença pode ser explicada?
-
-
-
+Usando os mesmos dados deste exercício, faça uma PCA com a função própria do pacote *geomorph*, e uma PCA com a função 'prcomp'. Qual a diferença entre as duas PCAs? Como a diferença pode ser explicada?

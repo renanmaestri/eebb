@@ -1,16 +1,23 @@
+---
+editor_options: 
+  markdown: 
+    wrap: sentence
+---
+
 # Morfometria geométrica e filogenias
 
-Quando as morfologias são de espécies diferentes, os dados não são independentes, já que as espécies são conectadas por uma árvore filogenética. A não-independência filogenética precisa ser levada em consideração em análises de correlação. Pra além disso, podemos entender muito sobre padrões e processos evolutivos da morfologia quando temos dados morfológicos de diferentes espécies e hipóteses filogenéticas. O capítulo deste manual sobre Macroevolução explora muitas perguntas/análises que podem ser feitas em um contexto comparativo.
+Quando as morfologias são de espécies diferentes, os dados não são independentes, já que as espécies são conectadas por uma árvore filogenética.
+A não-independência filogenética precisa ser levada em consideração em análises de correlação.
+Pra além disso, podemos entender muito sobre padrões e processos evolutivos da morfologia quando temos dados morfológicos de diferentes espécies e hipóteses filogenéticas.
+A parte deste manual sobre Macroevolução explora muitas perguntas/análises que podem ser feitas em um contexto comparativo.
 Aqui, os exemplos vão apresentar algumas análises comparativas no contexto de morfometria geométrica.
 
-Para textos abrangentes sobre macroevolução e métodos filogenéticos comparativos no contexto de morfometria geométrica, veja:
-Zelditch et al. 2012 Geometric Morphometrics for Biologists, Elsevier.
-Monteiro 2013 Hystrix, doi: 10.4404/hystrix-24.1-6282.
-Adams & Collyer 2018 Syst Biol doi: 10.1093/sysbio/syx055.
+Para textos abrangentes sobre macroevolução e métodos filogenéticos comparativos no contexto de morfometria geométrica, veja: @zelditch2012; @monteiro2013; @adams&collyer2018.
 
 Para literatura geral, e muitas outras opções analíticas, veja o material e as referências na parte sobre Macroevolução deste manual.
 
 Vamos carregar dados morfológicos obtidos por morfometria geométrica e uma hipótese filogenética para explorar algumas análises filogenéticas comparativas.
+
 ```{r, results='hide', warning=FALSE}
 require(geomorph)
 # Carregar dados de forma média por espécie em formato de matriz
@@ -35,6 +42,7 @@ size.means<-rowsum(size,species)/as.vector(table(species))
 ```
 
 Hipótese filogenética.
+
 ```{r, results='hide', warning=FALSE}
 require(ape)
 tree<-read.nexus("dadosmg/nexus.tree.sig.nex")
@@ -44,7 +52,10 @@ tree<-compute.brlen(tree,1) # definir comprimento dos ramos = 1
 ```
 
 ## Filomorfoespaço
-Podemos representar de maneira gráfica a filogenia no espaço de forma criado com uma análise de componentes principais. Essa é a PCA padrão, inalterada, com a projeção da filogenia e estimativa de formas ancestrais.
+
+Podemos representar de maneira gráfica a filogenia no espaço de forma criado com uma análise de componentes principais.
+Essa é a PCA padrão, inalterada, com a projeção da filogenia e estimativa de formas ancestrais.
+
 ```{r, results='hide', warning=FALSE}
 PCA<-gm.prcomp(shape.means,phy=tree)
 summary(PCA)
@@ -52,12 +63,14 @@ plot(PCA,phylo=TRUE)
 ```
 
 Filomorfoespaço 3D.
+
 ```{r, results='hide', warning=FALSE}
 require(phytools)
 #phylomorphospace3d(tree,PCA$x[,1:3])
 ```
 
 A visualização de formas pode ser feita ao longo dos eixos, como na PCA tradicional, bem como podem ser visualizadas as formas ancestrais estimadas, formas médias de espécies atuais, etc.
+
 ```{r, results='hide', warning=FALSE}
 ref<-mshape(shape.means)
 ancestral.shapes<-arrayspecs(PCA$ancestors,13,2)
@@ -68,6 +81,7 @@ plotRefToTarget(ancestral.shapes[,,1],shape.means[,,"Aexa"],method="TPS")
 ```
 
 Visualizar tamanho ao longo da filogenia.
+
 ```{r, results='hide', warning=FALSE}
 size.means1<-as.vector(size.means)
 names(size.means1)=rownames(size.means)
@@ -81,7 +95,9 @@ plotTree.barplot(tree1,size.means1)
 ```
 
 ## PCA filogenética
-A PCA filogenética *sensu* Revell (2009).
+
+A PCA filogenética *sensu* @revell2009.
+
 ```{r, results='hide', warning=FALSE}
 phyloPCA<-gm.prcomp(shape.means,phy=tree,GLS=TRUE)
 summary(phyloPCA)
@@ -89,10 +105,11 @@ plot(phyloPCA,phylo=TRUE)
 ```
 
 ## Sinal filogenético multivariado
-Sinal filogenético é um padrão que mostra se espécies mais próximas filogeneticamente têm morfologias mais similares do que espécies mais distantes filogeneticamente. Existem vários métodos para o cálculo de sinal filogenético, o mais comum é a estatística K (Blomberg et al. 2003; Adams 2014).
-K=1 indica que espécies próximas são tão parecidas quanto prevê o modelo Browniano
-K<1 indica sinal filogenético menor do que esperado pelo modelo Browniano
-K>1 indica sinal filogenético maior do que esperado pelo modelo Browniano
+
+Sinal filogenético é um padrão que mostra se espécies mais próximas filogeneticamente têm morfologias mais similares do que espécies mais distantes filogeneticamente.
+Existem vários métodos para o cálculo de sinal filogenético, o mais comum é a estatística K [@blomberg2003; @adams2014].
+K=1 indica que espécies próximas são tão parecidas quanto prevê o modelo Browniano K\<1 indica sinal filogenético menor do que esperado pelo modelo Browniano K\>1 indica sinal filogenético maior do que esperado pelo modelo Browniano
+
 ```{r}
 # Sinal Filogenético para forma do crânio
 sinal.k<-physignal(shape.means,tree,iter=999)
@@ -103,6 +120,7 @@ sinal.k.size
 ```
 
 ## Análise filogenética generalizada por quadrados mínimos (PGLS multivariada)
+
 ```{r}
 # Variáveis hipotéticas para usar como exemplo
 nomes<-c("Aded","Aega","Aexa","Aupi","Elmo","Irta","Jshu","Lomi")
@@ -117,6 +135,7 @@ summary(fit.pgls)
 ```
 
 ## Contrastes filogenéticos independentes
+
 ```{r, results='hide', warning=FALSE}
 pic.size<-pic(size.means1,tree)
 pic.temp<-pic(temp,tree)
@@ -126,9 +145,8 @@ plot(pic.size~pic.temp)
 ```
 
 ## Exercício - Morfometria e filogenias
-Carregue o arquivo .tps ‘Roedores_Digitalizados.tps’ contendo coordenadas digitalizadas na mandíbula de 143 indivíduos de 19 espécies de roedores. Carregue também a informação taxonômica de cada indivíduo (‘Roedores_classificador.txt’), e uma hipótese filogenética para as 19 espécies (‘Roedores_tree_nexus.nex’). Existe um arquivo adicional que informa a força da mordida média de cada uma das 19 espécies (‘Roedores_BiteForce.txt’).
+
+Carregue o arquivo .tps 'Roedores_Digitalizados.tps' contendo coordenadas digitalizadas na mandíbula de 143 indivíduos de 19 espécies de roedores.
+Carregue também a informação taxonômica de cada indivíduo ('Roedores_classificador.txt'), e uma hipótese filogenética para as 19 espécies ('Roedores_tree_nexus.nex').
+Existe um arquivo adicional que informa a força da mordida média de cada uma das 19 espécies ('Roedores_BiteForce.txt').
 Investigue a força do sinal filogenético para o tamanho e a forma do crânio, e descubra se existe relação entre a força da mordida e a forma (e tamanho) do crânio.
-
-
-
-

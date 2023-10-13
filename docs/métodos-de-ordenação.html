@@ -107,16 +107,13 @@
 <span class="header-section-number">Capítulo 9</span> Métodos de ordenação<a class="anchor" aria-label="anchor" href="#m%C3%A9todos-de-ordena%C3%A7%C3%A3o"><i class="fas fa-link"></i></a>
 </h1>
 <p>Os métodos de ordenação mais usados em dados de morfometria geométrica são a Análise de Componentes Principais (PCA) e a Análise de Variáveis Canônicas (CVA). Ambos os métodos são exploratórios, e providenciam uma descrição dos dados, e não testes de hipóteses. No entanto, a CVA pode ser utilizada como uma função para discriminação de grupos, onde a porcentagem de classificação correta de espécimes dentro de grupos pode ser usada como valor de suporte ao testar a confiabilidade de grupos (ex: espécies).</p>
-<p>Para se aprofundar, leia:
-Zeldtich et al. 2012 Geometric Morphometrics for Biologists - Elsevier, e
-Klingengerb &amp; Monteiro 2005 Distances and directions in multidimensional shape spaces: implications for morphometric applications - Systematic Biology.</p>
+<p>Para se aprofundar, leia: <span class="citation">Klingenberg and Monteiro (2005)</span>; <span class="citation">Zelditch, Swiderski, and Sheets (2012)</span>.</p>
 <div id="análise-de-componentes-principais" class="section level2" number="9.1">
 <h2>
 <span class="header-section-number">9.1</span> Análise de Componentes Principais<a class="anchor" aria-label="anchor" href="#an%C3%A1lise-de-componentes-principais"><i class="fas fa-link"></i></a>
 </h2>
 <p>A análise de componentes principais (Principal Component Analysis - PCA) simplifica os complexos padrões de variação e covariação de dados multivariados ao construir componentes principais independentes que resumem a maior parte da variação dos dados em poucos eixos. Assim, também é possível observar diretamente a combinação de dois ou três componentes principais em um gráfico.</p>
-<p>Vamos fazer uma PCA com dados de morfometria geométrica.
-Primeiro, vamos carregar os dados, fazer uma GPA, e carregar os classificadores.</p>
+<p>Vamos fazer uma PCA com dados de morfometria geométrica. Primeiro, vamos carregar os dados, fazer uma GPA, e carregar os classificadores.</p>
 <div class="sourceCode" id="cb66"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">require</a></span><span class="op">(</span><span class="va"><a href="https://github.com/geomorphR/geomorph">geomorph</a></span><span class="op">)</span></span>
 <span><span class="co">#&gt; Carregando pacotes exigidos: geomorph</span></span>
@@ -147,8 +144,7 @@ Primeiro, vamos carregar os dados, fazer uma GPA, e carregar os classificadores.
 <span><span class="va">sex</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/base/factor.html">as.factor</a></span><span class="op">(</span><span class="va">sex</span><span class="op">)</span></span>
 <span><span class="va">sp.sex</span><span class="op">&lt;-</span><span class="va">plan</span><span class="op">[</span>,<span class="fl">3</span><span class="op">]</span></span>
 <span><span class="va">sp.sex</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/base/factor.html">as.factor</a></span><span class="op">(</span><span class="va">sp.sex</span><span class="op">)</span></span></code></pre></div>
-<p>Muitas funções realizam a Análise de Componentes Principais no R. Para dados de morfometria geométrica (MG), é melhor usar funções de pacotes desenhados especificamente para MG, já que eles reconhecem a redundância nos graus de liberdade que resultam das transformações de escala, posição e rotação feitas anteriormente na Análise Generalisada de Procrustes, e já retornam o número exato de componentes principais necessários para capturar 100% da variação da forma.
-Vamos usar a PCA implementada no pacote <em>geomorph</em>.</p>
+<p>Muitas funções realizam a Análise de Componentes Principais no R. Para dados de morfometria geométrica (MG), é melhor usar funções de pacotes desenhados especificamente para MG, já que eles reconhecem a redundância nos graus de liberdade que resultam das transformações de escala, posição e rotação feitas anteriormente na Análise Generalisada de Procrustes, e já retornam o número exato de componentes principais necessários para capturar 100% da variação da forma. Vamos usar a PCA implementada no pacote <em>geomorph</em>.</p>
 <div class="sourceCode" id="cb67"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">PCA</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/pkg/geomorph/man/gm.prcomp.html">gm.prcomp</a></span><span class="op">(</span><span class="va">shape.sym</span><span class="op">)</span></span>
 <span><span class="va">PCA</span> <span class="co"># Porcentagem de explicação dos eixos</span></span>
@@ -398,7 +394,7 @@ Vamos usar a PCA implementada no pacote <em>geomorph</em>.</p>
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Manual de Ecologia Evolutiva, Biometria e Biogeografia</strong>" was written by Renan Maestri. It was last built on 2023-09-28.</p>
+    <p>"<strong>Manual de Ecologia Evolutiva, Biometria e Biogeografia</strong>" was written by Renan Maestri. It was last built on 2023-10-13.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">
