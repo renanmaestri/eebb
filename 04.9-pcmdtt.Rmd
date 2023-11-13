@@ -1,0 +1,43 @@
+---
+bibliography: references.bib
+---
+
+# Disparidade fenotípica ao longo do tempo
+
+Esse exemplo implementa a análise de disparidade morfológica ao longo do tempo (*Disparity through time plots*) de @harmon2003.
+
+Carregar dados.
+
+```{r, results='hide', warning=FALSE}
+require(ape)
+require(geiger)
+require(phytools)
+# Filogenia
+tree<-read.nexus("dadospcm/sigmodontinae-tree.tre")
+plotTree(tree,fsize=0.4,ftype="i",type="fan",lwd=1)
+# Dados morfológicos
+dados<-read.table("dadospcm/sigmodontinae-atributos.txt",h=T,row.names=1)
+head(dados)
+size<-dados$Size
+names(size)=rownames(dados)
+size
+```
+
+*Disparity through time plots*.
+
+```{r, results='hide', warning=FALSE}
+# Tamanho
+dtt.size<-dtt(tree,size,nsim=999,calculateMDIp = TRUE)
+dtt.size$MDI
+dtt.size$MDIpVal
+# DTT multivariado
+dados<-read.table("dadospcm/sigmodontinae-shape.txt",h=T,row.names=1)
+head(dados)
+diet<-as.factor(dados$Diet) # A dieta é um código (Onivoro-1; Herbivoro-2; Insetivoro-3)
+names(diet)=rownames(dados)
+forma<-dados[,3:28]
+forma
+dtt.shape<-dtt(tree,as.matrix(forma),nsim=999,calculateMDIp = TRUE)
+dtt.shape$MDI
+dtt.shape$MDIpVal
+```

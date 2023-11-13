@@ -1,0 +1,97 @@
+---
+bibliography: references.bib
+---
+
+# Correlação de fenótipos discretos
+
+Esse capítulo implementa algumas análises que são úteis quando a variável resposta é de interesse é categórica/discreta.
+
+## Correlação de fenótipos binários
+
+Vamos carregar filogenia e fenótipos de espécies de primatas e investigar a associação evolutiva entre o tamanho do grupo social (solitario vs. social) e o tamanho da área de vida (Pequena \< 300m² \> Grande).
+
+```{r, results='hide', warning=FALSE}
+require(ape)
+require(phytools)
+require(geiger)
+# Filogenia
+tree<-read.tree("dadospcm/primate-tree.txt")
+plotTree(tree,fsize=0.4,ftype="i",type="fan",lwd=1)
+# Atributos
+dados<-read.table("dadospcm/primate-data.txt",h=T,row.names=1)
+head(dados)
+# Recortar filogenia
+match.species<-treedata(tree,dados)
+tree<-match.species$phy
+plotTree(tree,fsize=0.5,ftype="i",type="fan",lwd=1)
+# Grupo Social
+binsocial<-dados$BinSocial
+names(binsocial)=rownames(dados)
+binsocial<-as.factor(binsocial)
+binsocial
+# Area de Vida
+area<-dados$AreaVida
+names(area)=rownames(dados)
+area<-as.factor(area)
+area
+```
+
+O primeiro passo é visualizar os dados junto com a árvore.
+
+```{r, results='hide', warning=FALSE}
+# Visualizando os dados binários
+par(mfrow=c(1,2))
+{plot(tree,show.tip.label=FALSE,no.margin=TRUE)
+cores<-setNames(c("blue","red"),levels(binsocial))
+tiplabels(pie=to.matrix(binsocial[tree$tip.label],levels(binsocial)),
+ piecol=cores,cex=0.5)
+legend("bottomleft",legend=c("Social","Solitary"),pch=15,col=cores,bty="n")
+plot(tree,show.tip.label=FALSE,no.margin=TRUE,direction="leftwards")
+cores<-setNames(c("blue","red"),levels(area))
+tiplabels(pie=to.matrix(area[tree$tip.label],levels(area)),
+ piecol=cores,cex=0.5)
+legend("bottomright",legend=c("Grande","Pequena"),pch=15,col=cores,bty="n")}
+par(mfrow=c(1,1))
+```
+
+Agora, vamos implementar o teste de @pagel1994, que compara um modelo de evolução independente entre os caracteres (ausência de correlação) com um modelo de evolução dependente (presença de correlação).
+```{r, results='hide', warning=FALSE}
+fit.AS<-fitPagel(tree,binsocial,area,model="ARD")
+fit.AS
+plot(fit.AS)
+plot(fit.AS,lwd.by.rate=TRUE)
+```
+O *P* valor é um indício de que o modelo dependente é melhor (podemos rejeitar o modelo independente com *P*<alpha).
+
+Podemos comparar os modelos dependente e independente com modelos onde a taxa de mudança em Grupo Social depende de Área (dep.var="binsocial") mas não o contrário, ou onde a taxa de mudança em Área depende do Grupo Social (dep.var="area") mas não o contrário.
+```{r, results='hide', warning=FALSE}
+# Dependente X - Mudança em Grupo Social depende da Area
+fit.GS<-fitPagel(tree,binsocial,area,dep.var="x")
+fit.GS
+plot(fit.GS,lwd.by.rate=TRUE)
+# Dependente Y - Mudança em Area depende de Grupo Social
+fit.AR<-fitPagel(tree,binsocial,area,dep.var="y")
+fit.AR
+plot(fit.AR,lwd.by.rate=TRUE)
+```
+
+Comparação de modelos.
+```{r, results='hide', warning=FALSE}
+aic.scores<-setNames(c(fit.AS$independent.AIC,
+ fit.GS$dependent.AIC,
+ fit.AR$dependent.AIC,
+ fit.AS$dependent.AIC),
+ c("independente","dependente Grupo",
+ "dependente Area","dependente Grupo&Area"))
+aic.scores
+aicw(aic.scores)
+```
+O maior peso está para o modelo de dependência de Área para Grupo, mas o modelo de dependência mútua também recebeu forte suporte.
+
+## Correlação de fenótipos categóricos multiestado
+
+A correlação entre atributos categóricos multiestado pode ser feita com a estatística D de @huelsenbeck2003, implementada no pacote *phytools* com a função Dtest.
+
+## Exercício - Correlação de fenótipos discretos
+
+Carregue os dados: Árvore: Pagel.tre Dados: Pagel.txt Teste a correlação entre os caracteres x1 e y1 usando fitPagel. Quais foram os resultados? Visualize a distribuição dos caracteres na árvore. O que isso te informa sobre os resultados?

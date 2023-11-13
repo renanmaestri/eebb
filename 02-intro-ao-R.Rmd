@@ -1,6 +1,6 @@
 # (PART) PARTE II - Introdução ao R {-}
 
-# Uma breve introdução ao R
+# Uma breve introdução ao R {#cap2}
 
 O R pode ser instalado a partir do website: <https://www.r-project.org/> Nós vamos usar também o RStudio: <https://www.rstudio.com/>
 

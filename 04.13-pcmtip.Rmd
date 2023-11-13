@@ -1,0 +1,42 @@
+---
+bibliography: references.bib
+---
+
+# Diversificação baseada em terminais (*tip-speciation*)
+
+Uma das medidas mais comuns de taxa de especiação/diversificação nos terminais (tipDR) é a de @jetz2012, que é o inverso da medida equal splits de @redding2006. Veja também uma outra medida de diversificação em terminais no ClaDS @maliet2019.
+
+Carregar dados.
+
+```{r, results='hide', warning=FALSE}
+require(ape)
+require(phytools)
+require(picante)
+# Filogenia
+tree<-read.tree("dadospcm/primate-tree.txt")
+plotTree(tree,fsize=0.4,ftype="i",type="fan",lwd=1)
+# Atributos
+dados<-read.table("dadospcm/primate-data.txt",h=T,row.names=1)
+```
+
+DR.
+
+```{r, results='hide', warning=FALSE}
+ES = evol.distinct(tree, type = "equal.splits")$w
+DR = 1/ES
+# Plot
+names(DR)=tree$tip.label
+contMap(tree,DR)
+```
+
+O tamanho corporal influencia a diversificação?
+
+```{r, results='hide', warning=FALSE}
+# Massa corporal
+massa<-dados$AdultBodyMass_g
+names(massa)=rownames(dados)
+contMap(tree,log(massa))
+# Correlação
+cor(DR,log(massa))
+plot(log(massa),DR)
+```
