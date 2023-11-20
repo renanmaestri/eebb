@@ -18,4 +18,3 @@ Além dos landmarks, também podem ser utilizados semilandmarks ou análises de 
 
 Para livros abrangentes sobre morfometria geométrica, veja: @monteiro1999 e @zelditch2012.
 
-\pagebreak

@@ -1,6 +1,6 @@
 # (PART) PARTE III - Morfometria Geométrica {.unnumbered}
 
-# Morfometria Geométrica
+# Morfometria Geométrica {#cap3}
 
 "Organismos são entidades integradas, e não coleções de objetos discretos" @gould1979.
 
@@ -18,4 +18,3 @@ Além dos landmarks, também podem ser utilizados semilandmarks ou análises de 
 
 Para livros abrangentes sobre morfometria geométrica, veja: @monteiro1999 e @zelditch2012.
 
-\pagebreak

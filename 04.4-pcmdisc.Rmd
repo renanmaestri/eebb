@@ -137,8 +137,7 @@ Comparando os modelos.
 
 ```{r, results='hide', warning=FALSE}
 aic.scores<-
-setNames(c(ER.grupo$opt$aicc,SYM.grupo$opt$aicc,ARD.grupo$opt$aicc,OR.grupo$
-opt$aicc),
+setNames(c(ER.grupo$opt$aicc,SYM.grupo$opt$aicc,ARD.grupo$opt$aicc,OR.grupo$opt$aicc),
  c("ER","SYM","ARD","OR"))
 aic.scores
 aicw(aic.scores) # Delta AICc e AICc weights
@@ -153,12 +152,11 @@ Para reconstrução ancestral de estados discretos, o modelo subjacente será o 
 
 ```{r, results='hide', warning=FALSE}
 # Visualização dos atributos
-plotTree(tree,fsize=0.5,ftype="i")
+{plotTree(tree,fsize=0.5,ftype="i")
 cores<-setNames(c("blue","red"),levels(binsocial))
 cores
-tiplabels(pie=to.matrix(binsocial[tree$tip.label],levels(binsocial)),
- piecol=cores,cex=0.3)
-legend("bottomleft",legend=c("Social","Solitary"),pch=15,col=cores,bty="n")
+tiplabels(pie=to.matrix(binsocial[tree$tip.label],levels(binsocial)),piecol=cores,cex=0.3)
+legend("bottomleft",legend=c("Social","Solitary"),pch=15,col=cores,bty="n")}
 # Estimativa de estados ancestrais com modelo ER
 ERanc<-ace(binsocial,tree,type="discrete",model="ER")
 ERanc
@@ -177,11 +175,10 @@ node.states
 Visualização de estados com gráficos de "pizza".
 
 ```{r, results='hide', warning=FALSE}
-plotTree(tree,fsize=0.5,ftype="i")
+{plotTree(tree,fsize=0.5,ftype="i")
 nodelabels(pie = ERanc$lik.anc, piecol = cores, cex = 0.5)
-tiplabels(pie=to.matrix(binsocial[tree$tip.label],levels(binsocial)),
- piecol=cores,cex=0.3)
-legend("bottomleft",legend=c("Social","Solitary"),pch=15,col=cores,bty="n")
+tiplabels(pie=to.matrix(binsocial[tree$tip.label],levels(binsocial)),piecol=cores,cex=0.3)
+legend("bottomleft",legend=c("Social","Solitary"),pch=15,col=cores,bty="n")}
 ```
 
 Estimativa de estados ancestrais com o modelo ARD.
@@ -189,11 +186,10 @@ Estimativa de estados ancestrais com o modelo ARD.
 ```{r, results='hide', warning=FALSE}
 ARDanc<-ace(binsocial,tree,type="discrete",model="ARD")
 ARDanc
-plotTree(tree,fsize=0.5,ftype="i")
+{plotTree(tree,fsize=0.5,ftype="i")
 nodelabels(pie = ARDanc$lik.anc, piecol = cores, cex = 0.5)
-tiplabels(pie=to.matrix(binsocial[tree$tip.label],levels(binsocial)),
- piecol=cores,cex=0.3)
-legend("bottomleft",legend=c("Social","Solitary"),pch=15,col=cores,bty="n")
+tiplabels(pie=to.matrix(binsocial[tree$tip.label],levels(binsocial)),piecol=cores,cex=0.3)
+legend("bottomleft",legend=c("Social","Solitary"),pch=15,col=cores,bty="n")}
 ```
 
 ### Mapeamento estocástico de caracteres
@@ -201,9 +197,8 @@ Existe outra alternativa às estimativas acima, que usa MCMC (Bayesiano) para am
 ```{r, results='hide', warning=FALSE}
 # Função make.simmap do phytools
 anc.tree<-make.simmap(tree,binsocial,model="ER")
-plot(anc.tree,cores,fsize=0.5,ftype="i")
-add.simmap.legend(colors=cores,prompt=FALSE,x=-2*par()$usr[1],
- y=-5*par()$usr[3],fsize=0.8)
+{plot(anc.tree,cores,fsize=0.5,ftype="i")
+add.simmap.legend(colors=cores,prompt=FALSE,x=-2*par()$usr[1],y=-5*par()$usr[3],fsize=0.8)}
 ```
 Esta é uma única simulação da história, é preciso analisar múltiplos mapas estocásticos.
 
@@ -213,21 +208,15 @@ anc.tree
 # Resumindo múltiplas árvores
 pd<-summary(anc.tree)
 pd
-plot(pd,fsize=0.5,ftype="i",colors=cores)
-add.simmap.legend(colors=cores,prompt=FALSE,x=1,y=10)
+{plot(pd,fsize=0.5,ftype="i",colors=cores)
+add.simmap.legend(colors=cores,prompt=FALSE,x=1,y=10)}
 # Plotando pizza sobre um mapa ao acaso
-plot(sample(anc.tree,1),fsize=0.5,ftype="i",colors=cores)
-nodelabels(pie=pd$ace,piecol=cores,cex=0.5)
-add.simmap.legend(colors=cores,prompt=FALSE,x=1,y=10)
+#{plot(sample(anc.tree,1),fsize=0.5,ftype="i",colors=cores)
+#nodelabels(pie=pd$ace,piecol=cores,cex=0.5)
+#add.simmap.legend(colors=cores,prompt=FALSE,x=1,y=10)}
 ```
 
-Podemos comparar as probabilidades posteriores do stochastic mapping com as probabilidades de estados diferentes pelo ace. As probabilidades devem se tornar as mesmas conforme o número de mapas estocásticos aumenta ao infinito.
-```{r, results='hide', warning=FALSE}
-par(mfrow=c(1,1),mar=c(5,4,2,2))
-plot(ERanc$lik.anc,pd$ace,xlab="Estados Ancestrais Marginais",
- ylab="Probabilidade posterior do stochastic mapping",pch=19)
-lines(c(0,1),c(0,1),col="red",lwd=2)
-```
+Poderíamos comparar as probabilidades posteriores do stochastic mapping com as probabilidades de estados diferentes pelo ace. As probabilidades devem se tornar as mesmas conforme o número de mapas estocásticos aumenta ao infinito.
 
 ## Exercício - Modelos discretos
 Carregue os mesmos dados:

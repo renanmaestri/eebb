@@ -4,17 +4,17 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>Capítulo 11 Modelos lineares para discriminação de grupos | Manual de Ecologia Evolutiva, Biometria e Biogeografia</title>
+<title>Capítulo 12 Modelos lineares para discriminação de grupos | Manual de Ecologia Evolutiva, Biometria e Biogeografia</title>
 <meta name="author" content="Renan Maestri">
 <meta name="description" content="Uma classe ampla de modelos preditivos está abarcada pelo nome de Modelos Lineares Generalizados, incluindo regressão múltipla e análises de variância/covariância. Uma vasta gama de modelos pode...">
-<meta name="generator" content="bookdown 0.35 with bs4_book()">
-<meta property="og:title" content="Capítulo 11 Modelos lineares para discriminação de grupos | Manual de Ecologia Evolutiva, Biometria e Biogeografia">
+<meta name="generator" content="bookdown 0.36 with bs4_book()">
+<meta property="og:title" content="Capítulo 12 Modelos lineares para discriminação de grupos | Manual de Ecologia Evolutiva, Biometria e Biogeografia">
 <meta property="og:type" content="book">
 <meta property="og:url" content="https://renanmaestri.github.io/eebb/modelos-lineares-para-discriminação-de-grupos.html">
 <meta property="og:image" content="https://renanmaestri.github.io/eebb/images/Slogan_oficial_sologo.jpg">
 <meta property="og:description" content="Uma classe ampla de modelos preditivos está abarcada pelo nome de Modelos Lineares Generalizados, incluindo regressão múltipla e análises de variância/covariância. Uma vasta gama de modelos pode...">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Capítulo 11 Modelos lineares para discriminação de grupos | Manual de Ecologia Evolutiva, Biometria e Biogeografia">
+<meta name="twitter:title" content="Capítulo 12 Modelos lineares para discriminação de grupos | Manual de Ecologia Evolutiva, Biometria e Biogeografia">
 <meta name="twitter:description" content="Uma classe ampla de modelos preditivos está abarcada pelo nome de Modelos Lineares Generalizados, incluindo regressão múltipla e análises de variância/covariância. Uma vasta gama de modelos pode...">
 <meta name="twitter:image" content="https://renanmaestri.github.io/eebb/images/Slogan_oficial_sologo.jpg">
 <!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -72,28 +72,43 @@
 <li class="book-part">PARTE I - Conceitos básicos</li>
 <li><a class="" href="conceitos-b%C3%A1sicos.html"><span class="header-section-number">1</span> Conceitos básicos</a></li>
 <li class="book-part">PARTE II - Introdução ao R</li>
-<li><a class="" href="uma-breve-introdu%C3%A7%C3%A3o-ao-r.html"><span class="header-section-number">2</span> Uma breve introdução ao R</a></li>
+<li><a class="" href="cap2.html"><span class="header-section-number">2</span> Uma breve introdução ao R</a></li>
 <li class="book-part">PARTE III - Morfometria Geométrica</li>
-<li><a class="" href="morfometria-geom%C3%A9trica.html"><span class="header-section-number">3</span> Morfometria Geométrica</a></li>
+<li><a class="" href="cap3.html"><span class="header-section-number">3</span> Morfometria Geométrica</a></li>
 <li><a class="" href="digitaliza%C3%A7%C3%A3o-de-landmarks.html"><span class="header-section-number">4</span> Digitalização de landmarks</a></li>
 <li><a class="" href="an%C3%A1lise-de-procrustes.html"><span class="header-section-number">5</span> Análise de Procrustes</a></li>
 <li><a class="" href="visualiza%C3%A7%C3%A3o-da-forma.html"><span class="header-section-number">6</span> Visualização da forma</a></li>
 <li><a class="" href="assimetria-e-quantifica%C3%A7%C3%A3o-de-erro.html"><span class="header-section-number">7</span> Assimetria e quantificação de erro</a></li>
-<li><a class="" href="tamanho-do-centr%C3%B3ide.html"><span class="header-section-number">8</span> Tamanho do Centróide</a></li>
-<li><a class="" href="m%C3%A9todos-de-ordena%C3%A7%C3%A3o.html"><span class="header-section-number">9</span> Métodos de ordenação</a></li>
-<li><a class="" href="partial-least-squares.html"><span class="header-section-number">10</span> Partial Least Squares</a></li>
-<li><a class="active" href="modelos-lineares-para-discrimina%C3%A7%C3%A3o-de-grupos.html"><span class="header-section-number">11</span> Modelos lineares para discriminação de grupos</a></li>
-<li><a class="" href="alometria.html"><span class="header-section-number">12</span> Alometria</a></li>
-<li><a class="" href="an%C3%A1lise-de-trajet%C3%B3ria.html"><span class="header-section-number">13</span> Análise de Trajetória</a></li>
-<li><a class="" href="integra%C3%A7%C3%A3o-morfol%C3%B3gica-e-modularidade.html"><span class="header-section-number">14</span> Integração morfológica e modularidade</a></li>
-<li><a class="" href="disparidade-e-varia%C3%A7%C3%A3o-morfol%C3%B3gica.html"><span class="header-section-number">15</span> Disparidade e variação morfológica</a></li>
-<li><a class="" href="morfometria-geom%C3%A9trica-e-filogenias.html"><span class="header-section-number">16</span> Morfometria geométrica e filogenias</a></li>
+<li><a class="" href="semilandmarks.html"><span class="header-section-number">8</span> Semilandmarks</a></li>
+<li><a class="" href="tamanho-do-centr%C3%B3ide.html"><span class="header-section-number">9</span> Tamanho do Centróide</a></li>
+<li><a class="" href="m%C3%A9todos-de-ordena%C3%A7%C3%A3o.html"><span class="header-section-number">10</span> Métodos de ordenação</a></li>
+<li><a class="" href="partial-least-squares.html"><span class="header-section-number">11</span> Partial Least Squares</a></li>
+<li><a class="active" href="modelos-lineares-para-discrimina%C3%A7%C3%A3o-de-grupos.html"><span class="header-section-number">12</span> Modelos lineares para discriminação de grupos</a></li>
+<li><a class="" href="alometria.html"><span class="header-section-number">13</span> Alometria</a></li>
+<li><a class="" href="an%C3%A1lise-de-trajet%C3%B3ria.html"><span class="header-section-number">14</span> Análise de Trajetória</a></li>
+<li><a class="" href="integra%C3%A7%C3%A3o-morfol%C3%B3gica-e-modularidade.html"><span class="header-section-number">15</span> Integração morfológica e modularidade</a></li>
+<li><a class="" href="disparidade-e-varia%C3%A7%C3%A3o-morfol%C3%B3gica.html"><span class="header-section-number">16</span> Disparidade e variação morfológica</a></li>
+<li><a class="" href="morfometria-geom%C3%A9trica-e-filogenias.html"><span class="header-section-number">17</span> Morfometria geométrica e filogenias</a></li>
 <li class="book-part">PARTE IV - Macroevolução</li>
-<li><a class="" href="macroevolu%C3%A7%C3%A3o.html"><span class="header-section-number">17</span> Macroevolução</a></li>
+<li><a class="" href="macroevolu%C3%A7%C3%A3o.html"><span class="header-section-number">18</span> Macroevolução</a></li>
+<li><a class="" href="lendo-e-manipulando-%C3%A1rvores-filogen%C3%A9ticas-no-r.html"><span class="header-section-number">19</span> Lendo e manipulando árvores filogenéticas no R</a></li>
+<li><a class="" href="sinal-filogen%C3%A9tico.html"><span class="header-section-number">20</span> Sinal filogenético</a></li>
+<li><a class="" href="modelos-para-evolu%C3%A7%C3%A3o-de-fen%C3%B3tipos-cont%C3%ADnuos.html"><span class="header-section-number">21</span> Modelos para evolução de fenótipos contínuos</a></li>
+<li><a class="" href="modelos-para-evolu%C3%A7%C3%A3o-de-fen%C3%B3tipos-discretos.html"><span class="header-section-number">22</span> Modelos para evolução de fenótipos discretos</a></li>
+<li><a class="" href="regress%C3%A3o-filogen%C3%A9tica.html"><span class="header-section-number">23</span> Regressão filogenética</a></li>
+<li><a class="" href="correla%C3%A7%C3%A3o-de-fen%C3%B3tipos-discretos.html"><span class="header-section-number">24</span> Correlação de fenótipos discretos</a></li>
+<li><a class="" href="evolu%C3%A7%C3%A3o-multi-taxa-e-multi-regime.html"><span class="header-section-number">25</span> Evolução multi-taxa e multi-regime</a></li>
+<li><a class="" href="m%C3%A9todos-filogen%C3%A9ticos-multivariados.html"><span class="header-section-number">26</span> Métodos filogenéticos multivariados</a></li>
+<li><a class="" href="disparidade-fenot%C3%ADpica-ao-longo-do-tempo.html"><span class="header-section-number">27</span> Disparidade fenotípica ao longo do tempo</a></li>
+<li><a class="" href="diversifica%C3%A7%C3%A3o-de-linhagens.html"><span class="header-section-number">28</span> Diversificação de linhagens</a></li>
+<li><a class="" href="taxas-de-especia%C3%A7%C3%A3o-e-extin%C3%A7%C3%A3o-constantes-e-vari%C3%A1veis.html"><span class="header-section-number">29</span> Taxas de especiação e extinção constantes e variáveis</a></li>
+<li><a class="" href="diversifica%C3%A7%C3%A3o-dependente-de-estado.html"><span class="header-section-number">30</span> Diversificação dependente de estado</a></li>
+<li><a class="" href="diversifica%C3%A7%C3%A3o-baseada-em-terminais-tip-speciation.html"><span class="header-section-number">31</span> Diversificação baseada em terminais (tip-speciation)</a></li>
+<li><a class="" href="co-diversifica%C3%A7%C3%A3o.html"><span class="header-section-number">32</span> Co-diversificação</a></li>
 <li class="book-part">PARTE IV - Biogeografia e Macroecologia</li>
-<li><a class="" href="biogeografia-e-macroecologia.html"><span class="header-section-number">18</span> Biogeografia e Macroecologia</a></li>
+<li><a class="" href="biogeografia-e-macroecologia.html"><span class="header-section-number">33</span> Biogeografia e Macroecologia</a></li>
 <li class="book-part">Conclusão</li>
-<li><a class="" href="considera%C3%A7%C3%B5es-finais.html"><span class="header-section-number">19</span> Considerações finais</a></li>
+<li><a class="" href="considera%C3%A7%C3%B5es-finais.html"><span class="header-section-number">34</span> Considerações finais</a></li>
 <li><a class="" href="refer%C3%AAncias.html">Referências</a></li>
 </ul>
 
@@ -102,22 +117,22 @@
         </div>
       </nav>
 </div>
-  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="modelos-lineares-para-discriminação-de-grupos" class="section level1" number="11">
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="modelos-lineares-para-discriminação-de-grupos" class="section level1" number="12">
 <h1>
-<span class="header-section-number">Capítulo 11</span> Modelos lineares para discriminação de grupos<a class="anchor" aria-label="anchor" href="#modelos-lineares-para-discrimina%C3%A7%C3%A3o-de-grupos"><i class="fas fa-link"></i></a>
+<span class="header-section-number">Capítulo 12</span> Modelos lineares para discriminação de grupos<a class="anchor" aria-label="anchor" href="#modelos-lineares-para-discrimina%C3%A7%C3%A3o-de-grupos"><i class="fas fa-link"></i></a>
 </h1>
-<p>Uma classe ampla de modelos preditivos está abarcada pelo nome de Modelos Lineares Generalizados, incluindo regressão múltipla e análises de variância/covariância. Uma vasta gama de modelos pode ser ajustada com a função ‘procD.lm’ e outras do pacote <em>geomorph</em>, que usa distância de Procrustes entre espécimes para calcular tamanhos de efeito e randomização para calcular valores de <em>P</em> (de modo equivalente à MANOVA não paramétrica – <span class="citation">(Goodall 1991; Pillar and Orlóci 1996; Anderson 2001)</span>; assim, o número de variáveis de forma, normalmente muito alto em dados de MG, não é uma restrição ao ajuste de modelos <span class="citation">(Collyer, Sekora, and Adams 2015)</span>. Podemos usar esses modelos baseados em distância para responder diversas questões quando a variável resposta é composta por variáveis de forma. Aqui, vamos aplicá-los no contexto de discriminação de grupos, quando a variável preditora é categórica.</p>
-<div id="manova" class="section level2" number="11.1">
+<p>Uma classe ampla de modelos preditivos está abarcada pelo nome de Modelos Lineares Generalizados, incluindo regressão múltipla e análises de variância/covariância. Uma vasta gama de modelos pode ser ajustada com a função ‘procD.lm’ e outras do pacote <em>geomorph</em>, que usa distância de Procrustes entre espécimes para calcular tamanhos de efeito e randomização para calcular valores de <em>P</em> (de modo equivalente à MANOVA não paramétrica – <span class="citation">(<strong>goodall1991?</strong>; <strong>pillar1996?</strong>; <strong>anderson2001?</strong>)</span>; assim, o número de variáveis de forma, normalmente muito alto em dados de MG, não é uma restrição ao ajuste de modelos <span class="citation">(<strong>collyer2015?</strong>)</span>. Podemos usar esses modelos baseados em distância para responder diversas questões quando a variável resposta é composta por variáveis de forma. Aqui, vamos aplicá-los no contexto de discriminação de grupos, quando a variável preditora é categórica.</p>
+<div id="manova" class="section level2" number="12.1">
 <h2>
-<span class="header-section-number">11.1</span> MANOVA<a class="anchor" aria-label="anchor" href="#manova"><i class="fas fa-link"></i></a>
+<span class="header-section-number">12.1</span> MANOVA<a class="anchor" aria-label="anchor" href="#manova"><i class="fas fa-link"></i></a>
 </h2>
 <p>Vamos testar se existem diferenças de forma entre espécies de tuco-tucos.</p>
 <div class="sourceCode" id="cb92"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">require</a></span><span class="op">(</span><span class="va"><a href="https://github.com/geomorphR/geomorph">geomorph</a></span><span class="op">)</span></span>
-<span><span class="co">#&gt; Carregando pacotes exigidos: geomorph</span></span>
-<span><span class="co">#&gt; Carregando pacotes exigidos: RRPP</span></span>
-<span><span class="co">#&gt; Carregando pacotes exigidos: rgl</span></span>
-<span><span class="co">#&gt; Carregando pacotes exigidos: Matrix</span></span>
+<span><span class="co">#&gt; Le chargement a nécessité le package : geomorph</span></span>
+<span><span class="co">#&gt; Le chargement a nécessité le package : RRPP</span></span>
+<span><span class="co">#&gt; Le chargement a nécessité le package : rgl</span></span>
+<span><span class="co">#&gt; Le chargement a nécessité le package : Matrix</span></span>
 <span><span class="co"># Carregar dados</span></span>
 <span><span class="va">tps</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/pkg/geomorph/man/readland.tps.html">readland.tps</a></span><span class="op">(</span><span class="st">"dadosmg/Lista tuco dig 2.tps"</span>,specID <span class="op">=</span> <span class="st">"ID"</span>, readcurves <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/dim.html">dim</a></span><span class="op">(</span><span class="va">tps</span><span class="op">)</span></span>
@@ -283,9 +298,9 @@
 <span><span class="va">manova.par3</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">manova.par3</span><span class="op">)</span></span></code></pre></div>
 </div>
-<div id="fenograma" class="section level2" number="11.2">
+<div id="fenograma" class="section level2" number="12.2">
 <h2>
-<span class="header-section-number">11.2</span> Fenograma<a class="anchor" aria-label="anchor" href="#fenograma"><i class="fas fa-link"></i></a>
+<span class="header-section-number">12.2</span> Fenograma<a class="anchor" aria-label="anchor" href="#fenograma"><i class="fas fa-link"></i></a>
 </h2>
 <p>Dependendo da pergunta de estudo, fenogramas podem ser úteis para visualizar os padrões de diferenciação de forma em um formato de árvore de distâncias morfológicas. Aqui, vamos criar um fenograma com distâncias de Procrustes e agrupamento de Neighbot-Joining.</p>
 <div class="sourceCode" id="cb96"><pre class="downlit sourceCode r">
@@ -293,7 +308,7 @@
 <span><span class="va">obj</span><span class="op">$</span><span class="va">pairwise.tables</span><span class="op">$</span><span class="va">D</span></span>
 <span><span class="va">means.dist</span><span class="op">&lt;-</span><span class="va">obj</span><span class="op">$</span><span class="va">pairwise.tables</span><span class="op">$</span><span class="va">D</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">require</a></span><span class="op">(</span><span class="va"><a href="http://ape-package.ird.fr/">ape</a></span><span class="op">)</span></span>
-<span><span class="co">#&gt; Carregando pacotes exigidos: ape</span></span>
+<span><span class="co">#&gt; Le chargement a nécessité le package : ape</span></span>
 <span><span class="va">fen</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/pkg/ape/man/nj.html">nj</a></span><span class="op">(</span><span class="va">means.dist</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">fen</span><span class="op">)</span></span></code></pre></div>
 <div class="inline-figure"><img src="03.8-mgaov_files/figure-html/unnamed-chunk-5-1.png" width="672"></div>
@@ -304,14 +319,14 @@
 </div>
 </div>
   <div class="chapter-nav">
-<div class="prev"><a href="partial-least-squares.html"><span class="header-section-number">10</span> Partial Least Squares</a></div>
-<div class="next"><a href="alometria.html"><span class="header-section-number">12</span> Alometria</a></div>
+<div class="prev"><a href="partial-least-squares.html"><span class="header-section-number">11</span> Partial Least Squares</a></div>
+<div class="next"><a href="alometria.html"><span class="header-section-number">13</span> Alometria</a></div>
 </div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
     <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
       <ul class="nav navbar-nav">
-<li><a class="nav-link" href="#modelos-lineares-para-discrimina%C3%A7%C3%A3o-de-grupos"><span class="header-section-number">11</span> Modelos lineares para discriminação de grupos</a></li>
-<li><a class="nav-link" href="#manova"><span class="header-section-number">11.1</span> MANOVA</a></li>
-<li><a class="nav-link" href="#fenograma"><span class="header-section-number">11.2</span> Fenograma</a></li>
+<li><a class="nav-link" href="#modelos-lineares-para-discrimina%C3%A7%C3%A3o-de-grupos"><span class="header-section-number">12</span> Modelos lineares para discriminação de grupos</a></li>
+<li><a class="nav-link" href="#manova"><span class="header-section-number">12.1</span> MANOVA</a></li>
+<li><a class="nav-link" href="#fenograma"><span class="header-section-number">12.2</span> Fenograma</a></li>
 </ul>
 
       <div class="book-extra">
@@ -329,7 +344,78 @@
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Manual de Ecologia Evolutiva, Biometria e Biogeografia</strong>" was written by Renan Maestri. It was last built on 2023-10-13.</p>
+    <p>"<strong>Manual de Ecologia Evolutiva, Biometria e Biogeografia</strong>" was written by Renan Maestri. It was last built on 2023-11-14.</p>
+  </div>
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>This book was built by the <a class="text-light" href="https://bookdown.org">bookdown</a> R package.</p>
+  </div>
+
+</div></div>
+</footer><!-- dynamically load mathjax for compatibility with self-contained --><script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script><script type="text/x-mathjax-config">const popovers = document.querySelectorAll('a.footnote-ref[data-toggle="popover"]');
+for (let popover of popovers) {
+  const div = document.createElement('div');
+  div.setAttribute('style', 'position: absolute; top: 0, left:0; width:0, height:0, overflow: hidden; visibility: hidden;');
+  div.innerHTML = popover.getAttribute('data-content');
+
+  var has_math = div.querySelector("span.math");
+  if (has_math) {
+    document.body.appendChild(div);
+    MathJax.Hub.Queue(["Typeset", MathJax.Hub, div]);
+    MathJax.Hub.Queue(function() {
+      popover.setAttribute('data-content', div.innerHTML);
+      document.body.removeChild(div);
+    })
+  }
+}
+</script>
+</body>
+</html>
+odelos-lineares-para-discriminação-de-grupos.html#cb96-5" tabindex="-1"></a><span class="co">#&gt; Le chargement a nécessité le package : ape</span></span>
+<span id="cb96-6"><a href="modelos-lineares-para-discriminação-de-grupos.html#cb96-6" tabindex="-1"></a>fen<span class="ot">&lt;-</span><span class="fu">nj</span>(means.dist)</span>
+<span id="cb96-7"><a href="modelos-lineares-para-discriminação-de-grupos.html#cb96-7" tabindex="-1"></a><span class="fu">plot</span>(fen)</span></code></pre></div>
+<p><img src="03.8-mgaov_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
+<div class="sourceCode" id="cb97"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb97-1"><a href="modelos-lineares-para-discriminação-de-grupos.html#cb97-1" tabindex="-1"></a><span class="fu">plot</span>(fen,<span class="at">type=</span><span class="st">&quot;unrooted&quot;</span>)</span></code></pre></div>
+<p><img src="03.8-mgaov_files/figure-html/unnamed-chunk-5-2.png" width="672" /></p>
+
+</div>
+</div>
+  </main>
+
+  <div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
+    <nav id="toc" data-toggle="toc" aria-label="On this page">
+      <h2>On this page</h2>
+      <div id="book-on-this-page"></div>
+
+      <div class="book-extra">
+        <ul class="list-unstyled">
+          <li><a id="book-source" href="#">View source <i class="fab fa-github"></i></a></li>
+          <li><a id="book-edit" href="#">Edit this page <i class="fab fa-github"></i></a></li>
+        </ul>
+      </div>
+    </nav>
+  </div>
+
+</div>
+</div> <!-- .container -->
+
+<footer class="bg-primary text-light mt-5">
+  <div class="container"><div class="row">
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>"<strong>Manual de Ecologia Evolutiva, Biometria e Biogeografia</strong>" was written by Renan Maestri. It was last built on 2023-11-14.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">
@@ -338,5 +424,39 @@
 
 </div></div>
 </footer>
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+<script type="text/x-mathjax-config">const popovers = document.querySelectorAll('a.footnote-ref[data-toggle="popover"]');
+for (let popover of popovers) {
+  const div = document.createElement('div');
+  div.setAttribute('style', 'position: absolute; top: 0, left:0; width:0, height:0, overflow: hidden; visibility: hidden;');
+  div.innerHTML = popover.getAttribute('data-content');
+
+  var has_math = div.querySelector("span.math");
+  if (has_math) {
+    document.body.appendChild(div);
+    MathJax.Hub.Queue(["Typeset", MathJax.Hub, div]);
+    MathJax.Hub.Queue(function() {
+      popover.setAttribute('data-content', div.innerHTML);
+      document.body.removeChild(div);
+    })
+  }
+}
+</script>
 </body>
+
 </html>

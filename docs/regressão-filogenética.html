@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>Capítulo 23 Regressão filogenética | Manual de Ecologia Evolutiva, Biometria e Biogeografia</title>
+<meta name="author" content="Renan Maestri">
+<meta name="description" content="Esse capítulo implementa contrastes filogenéticos independentes (PIC) (Felsenstein 1985), regressão filogenética generalizada por quadrados mínimos (PGLS) (Grafen 1989) e regressão de autovetores...">
+<meta name="generator" content="bookdown 0.36 with bs4_book()">
+<meta property="og:title" content="Capítulo 23 Regressão filogenética | Manual de Ecologia Evolutiva, Biometria e Biogeografia">
+<meta property="og:type" content="book">
+<meta property="og:url" content="https://renanmaestri.github.io/eebb/regressão-filogenética.html">
+<meta property="og:image" content="https://renanmaestri.github.io/eebb/images/Slogan_oficial_sologo.jpg">
+<meta property="og:description" content="Esse capítulo implementa contrastes filogenéticos independentes (PIC) (Felsenstein 1985), regressão filogenética generalizada por quadrados mínimos (PGLS) (Grafen 1989) e regressão de autovetores...">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Capítulo 23 Regressão filogenética | Manual de Ecologia Evolutiva, Biometria e Biogeografia">
+<meta name="twitter:description" content="Esse capítulo implementa contrastes filogenéticos independentes (PIC) (Felsenstein 1985), regressão filogenética generalizada por quadrados mínimos (PGLS) (Grafen 1989) e regressão de autovetores...">
+<meta name="twitter:image" content="https://renanmaestri.github.io/eebb/images/Slogan_oficial_sologo.jpg">
+<!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.5.1/transition.js"></script><script src="libs/bs3compat-0.5.1/tabs.js"></script><script src="libs/bs3compat-0.5.1/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><style type="text/css">
+    
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  </style>
+<style type="text/css">
+    /* Used with Pandoc 2.11+ new --citeproc when CSL is used */
+    div.csl-bib-body { }
+    div.csl-entry {
+      clear: both;
+        }
+    .hanging div.csl-entry {
+      margin-left:2em;
+      text-indent:-2em;
+    }
+    div.csl-left-margin {
+      min-width:2em;
+      float:left;
+    }
+    div.csl-right-inline {
+      margin-left:2em;
+      padding-left:1em;
+    }
+    div.csl-indent {
+      margin-left: 2em;
+    }
+  </style>
+<link rel="stylesheet" href="style.css">
+</head>
+<body data-spy="scroll" data-target="#toc">
+
+<div class="container-fluid">
+<div class="row">
+  <header class="col-sm-12 col-lg-3 sidebar sidebar-book"><a class="sr-only sr-only-focusable" href="#content">Skip to main content</a>
+
+    <div class="d-flex align-items-start justify-content-between">
+      <h1>
+        <a href="index.html" title="">Manual de Ecologia Evolutiva, Biometria e Biogeografia</a>
+      </h1>
+      <button class="btn btn-outline-primary d-lg-none ml-2 mt-1" type="button" data-toggle="collapse" data-target="#main-nav" aria-expanded="true" aria-controls="main-nav"><i class="fas fa-bars"></i><span class="sr-only">Show table of contents</span></button>
+    </div>
+
+    <div id="main-nav" class="collapse-lg">
+      <form role="search">
+        <input id="search" class="form-control" type="search" placeholder="Search" aria-label="Search">
+</form>
+
+      <nav aria-label="Table of contents"><h2>Table of contents</h2>
+        <ul class="book-toc list-unstyled">
+<li><a class="" href="index.html">Prefácio</a></li>
+<li class="book-part">PARTE I - Conceitos básicos</li>
+<li><a class="" href="conceitos-b%C3%A1sicos.html"><span class="header-section-number">1</span> Conceitos básicos</a></li>
+<li class="book-part">PARTE II - Introdução ao R</li>
+<li><a class="" href="cap2.html"><span class="header-section-number">2</span> Uma breve introdução ao R</a></li>
+<li class="book-part">PARTE III - Morfometria Geométrica</li>
+<li><a class="" href="cap3.html"><span class="header-section-number">3</span> Morfometria Geométrica</a></li>
+<li><a class="" href="digitaliza%C3%A7%C3%A3o-de-landmarks.html"><span class="header-section-number">4</span> Digitalização de landmarks</a></li>
+<li><a class="" href="an%C3%A1lise-de-procrustes.html"><span class="header-section-number">5</span> Análise de Procrustes</a></li>
+<li><a class="" href="visualiza%C3%A7%C3%A3o-da-forma.html"><span class="header-section-number">6</span> Visualização da forma</a></li>
+<li><a class="" href="assimetria-e-quantifica%C3%A7%C3%A3o-de-erro.html"><span class="header-section-number">7</span> Assimetria e quantificação de erro</a></li>
+<li><a class="" href="semilandmarks.html"><span class="header-section-number">8</span> Semilandmarks</a></li>
+<li><a class="" href="tamanho-do-centr%C3%B3ide.html"><span class="header-section-number">9</span> Tamanho do Centróide</a></li>
+<li><a class="" href="m%C3%A9todos-de-ordena%C3%A7%C3%A3o.html"><span class="header-section-number">10</span> Métodos de ordenação</a></li>
+<li><a class="" href="partial-least-squares.html"><span class="header-section-number">11</span> Partial Least Squares</a></li>
+<li><a class="" href="modelos-lineares-para-discrimina%C3%A7%C3%A3o-de-grupos.html"><span class="header-section-number">12</span> Modelos lineares para discriminação de grupos</a></li>
+<li><a class="" href="alometria.html"><span class="header-section-number">13</span> Alometria</a></li>
+<li><a class="" href="an%C3%A1lise-de-trajet%C3%B3ria.html"><span class="header-section-number">14</span> Análise de Trajetória</a></li>
+<li><a class="" href="integra%C3%A7%C3%A3o-morfol%C3%B3gica-e-modularidade.html"><span class="header-section-number">15</span> Integração morfológica e modularidade</a></li>
+<li><a class="" href="disparidade-e-varia%C3%A7%C3%A3o-morfol%C3%B3gica.html"><span class="header-section-number">16</span> Disparidade e variação morfológica</a></li>
+<li><a class="" href="morfometria-geom%C3%A9trica-e-filogenias.html"><span class="header-section-number">17</span> Morfometria geométrica e filogenias</a></li>
+<li class="book-part">PARTE IV - Macroevolução</li>
+<li><a class="" href="macroevolu%C3%A7%C3%A3o.html"><span class="header-section-number">18</span> Macroevolução</a></li>
+<li><a class="" href="lendo-e-manipulando-%C3%A1rvores-filogen%C3%A9ticas-no-r.html"><span class="header-section-number">19</span> Lendo e manipulando árvores filogenéticas no R</a></li>
+<li><a class="" href="sinal-filogen%C3%A9tico.html"><span class="header-section-number">20</span> Sinal filogenético</a></li>
+<li><a class="" href="modelos-para-evolu%C3%A7%C3%A3o-de-fen%C3%B3tipos-cont%C3%ADnuos.html"><span class="header-section-number">21</span> Modelos para evolução de fenótipos contínuos</a></li>
+<li><a class="" href="modelos-para-evolu%C3%A7%C3%A3o-de-fen%C3%B3tipos-discretos.html"><span class="header-section-number">22</span> Modelos para evolução de fenótipos discretos</a></li>
+<li><a class="active" href="regress%C3%A3o-filogen%C3%A9tica.html"><span class="header-section-number">23</span> Regressão filogenética</a></li>
+<li><a class="" href="correla%C3%A7%C3%A3o-de-fen%C3%B3tipos-discretos.html"><span class="header-section-number">24</span> Correlação de fenótipos discretos</a></li>
+<li><a class="" href="evolu%C3%A7%C3%A3o-multi-taxa-e-multi-regime.html"><span class="header-section-number">25</span> Evolução multi-taxa e multi-regime</a></li>
+<li><a class="" href="m%C3%A9todos-filogen%C3%A9ticos-multivariados.html"><span class="header-section-number">26</span> Métodos filogenéticos multivariados</a></li>
+<li><a class="" href="disparidade-fenot%C3%ADpica-ao-longo-do-tempo.html"><span class="header-section-number">27</span> Disparidade fenotípica ao longo do tempo</a></li>
+<li><a class="" href="diversifica%C3%A7%C3%A3o-de-linhagens.html"><span class="header-section-number">28</span> Diversificação de linhagens</a></li>
+<li><a class="" href="taxas-de-especia%C3%A7%C3%A3o-e-extin%C3%A7%C3%A3o-constantes-e-vari%C3%A1veis.html"><span class="header-section-number">29</span> Taxas de especiação e extinção constantes e variáveis</a></li>
+<li><a class="" href="diversifica%C3%A7%C3%A3o-dependente-de-estado.html"><span class="header-section-number">30</span> Diversificação dependente de estado</a></li>
+<li><a class="" href="diversifica%C3%A7%C3%A3o-baseada-em-terminais-tip-speciation.html"><span class="header-section-number">31</span> Diversificação baseada em terminais (tip-speciation)</a></li>
+<li><a class="" href="co-diversifica%C3%A7%C3%A3o.html"><span class="header-section-number">32</span> Co-diversificação</a></li>
+<li class="book-part">PARTE IV - Biogeografia e Macroecologia</li>
+<li><a class="" href="biogeografia-e-macroecologia.html"><span class="header-section-number">33</span> Biogeografia e Macroecologia</a></li>
+<li class="book-part">Conclusão</li>
+<li><a class="" href="considera%C3%A7%C3%B5es-finais.html"><span class="header-section-number">34</span> Considerações finais</a></li>
+<li><a class="" href="refer%C3%AAncias.html">Referências</a></li>
+</ul>
+
+        <div class="book-extra">
+          <p><a id="book-repo" href="https://github.com/renanmaestri/eebb">View book source <i class="fab fa-github"></i></a></p>
+        </div>
+      </nav>
+</div>
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="regressão-filogenética" class="section level1" number="23">
+<h1>
+<span class="header-section-number">Capítulo 23</span> Regressão filogenética<a class="anchor" aria-label="anchor" href="#regress%C3%A3o-filogen%C3%A9tica"><i class="fas fa-link"></i></a>
+</h1>
+<p>Esse capítulo implementa contrastes filogenéticos independentes (PIC) <span class="citation">(Felsenstein 1985)</span>, regressão filogenética generalizada por quadrados mínimos (PGLS) <span class="citation">(Grafen 1989)</span> e regressão de autovetores filogenéticos (PVR) <span class="citation">(Diniz-Filho, de Sant’Ana, and Bini 1998)</span>.</p>
+<div id="contrastes-filogenéticos-independentes-1" class="section level2" number="23.1">
+<h2>
+<span class="header-section-number">23.1</span> Contrastes filogenéticos independentes<a class="anchor" aria-label="anchor" href="#contrastes-filogen%C3%A9ticos-independentes-1"><i class="fas fa-link"></i></a>
+</h2>
+<p>Vamos investigar a relação evolutiva entre força da mordida e tamanho do crânio em um gênero de roedores. Pra isso, vamos precisar dos dados fenotípicos e pelo menos uma hipótese filogenética.</p>
+<p>Carregar dados fenotípicos.</p>
+<div class="sourceCode" id="cb197"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">dados</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/utils/read.table.html">read.table</a></span><span class="op">(</span><span class="st">"dadospcm/akodon.txt"</span>,h<span class="op">=</span><span class="cn">T</span><span class="op">)</span></span>
+<span><span class="va">dados</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/attach.html">attach</a></span><span class="op">(</span><span class="va">dados</span><span class="op">)</span></span></code></pre></div>
+<p>Antes, vamos ajustar um modelo ordinário (OLS), sem levar a filogenia em consideração, apenas como exemplo didático. Na prática, você não deve/precisa fazer isso.</p>
+<div class="sourceCode" id="cb198"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># OLS</span></span>
+<span><span class="va">fit.ols</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">bite_force</span><span class="op">~</span><span class="va">skull_length</span>,data<span class="op">=</span><span class="va">dados</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">fit.ols</span><span class="op">)</span></span>
+<span><span class="op">{</span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">skull_length</span>,<span class="va">bite_force</span>,</span>
+<span> xlab<span class="op">=</span><span class="st">"skull length (log)"</span>,</span>
+<span> ylab<span class="op">=</span><span class="st">"bite force (log)"</span>,pch<span class="op">=</span><span class="fl">21</span>,bg<span class="op">=</span><span class="st">"grey"</span>,cex<span class="op">=</span><span class="fl">1.5</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/abline.html">abline</a></span><span class="op">(</span><span class="va">fit.ols</span>,col<span class="op">=</span><span class="st">"red"</span><span class="op">)</span><span class="op">}</span></span></code></pre></div>
+<div class="inline-figure"><img src="04.5-pcmreg_files/figure-html/unnamed-chunk-2-1.png" width="672"></div>
+<p>Como os dados são de espécies diferentes, o pressuposto de independência dos resíduos do modelo é violado. Uma maneira de levar em consideração a filogenia é através dos Contrastes Filogenéticos Independentes.</p>
+<div class="sourceCode" id="cb199"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># PIC</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">require</a></span><span class="op">(</span><span class="va"><a href="http://ape-package.ird.fr/">ape</a></span><span class="op">)</span></span>
+<span><span class="co">#&gt; Le chargement a nécessité le package : ape</span></span>
+<span><span class="va">akodon.tree</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/pkg/ape/man/read.tree.html">read.tree</a></span><span class="op">(</span>file<span class="op">=</span><span class="st">"dadospcm/akodon.tree"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">akodon.tree</span><span class="op">)</span></span></code></pre></div>
+<div class="inline-figure"><img src="04.5-pcmreg_files/figure-html/unnamed-chunk-3-1.png" width="672"></div>
+<div class="sourceCode" id="cb200"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">akodon.tree</span></span>
+<span><span class="co"># Atribuindo nomes para os dados</span></span>
+<span><span class="va">skull_length</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/stats/setNames.html">setNames</a></span><span class="op">(</span><span class="va">skull_length</span>,<span class="va">species</span><span class="op">)</span></span>
+<span><span class="va">skull_length</span></span>
+<span><span class="va">bite_force</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/stats/setNames.html">setNames</a></span><span class="op">(</span><span class="va">bite_force</span>,<span class="va">species</span><span class="op">)</span></span>
+<span><span class="va">bite_force</span></span>
+<span><span class="co"># Calculando os contrastes</span></span>
+<span><span class="va">pic.sl</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/pkg/ape/man/pic.html">pic</a></span><span class="op">(</span><span class="va">skull_length</span>,<span class="va">akodon.tree</span><span class="op">)</span></span>
+<span><span class="va">pic.bf</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/pkg/ape/man/pic.html">pic</a></span><span class="op">(</span><span class="va">bite_force</span>,<span class="va">akodon.tree</span><span class="op">)</span></span>
+<span><span class="co"># Modelo PIC</span></span>
+<span><span class="va">fit.pic</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">pic.bf</span><span class="op">~</span><span class="va">pic.sl</span><span class="op">+</span><span class="fl">0</span><span class="op">)</span></span>
+<span><span class="va">fit.pic</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">fit.pic</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">pic.sl</span>,<span class="va">pic.bf</span>,</span>
+<span> xlab<span class="op">=</span><span class="st">"PICs for skull length"</span>,</span>
+<span> ylab<span class="op">=</span><span class="st">"PICs for bite force"</span>,pch<span class="op">=</span><span class="fl">21</span>,bg<span class="op">=</span><span class="st">"grey"</span>,cex<span class="op">=</span><span class="fl">1.5</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/abline.html">abline</a></span><span class="op">(</span><span class="va">fit.pic</span>,col<span class="op">=</span><span class="st">"red"</span><span class="op">)</span></span></code></pre></div>
+<div class="inline-figure"><img src="04.5-pcmreg_files/figure-html/unnamed-chunk-3-2.png" width="672"></div>
+<p>Como podemos perceber, para estes dados não existe muita diferença nos resultados levando em consideração a filogenia. Isso nem sempre vai ser o caso. Nós podemos simular condições para visualizar como levar em conta a filogenia pode ter uma consequência grande.</p>
+<div class="sourceCode" id="cb201"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># PIC dados simulados</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">require</a></span><span class="op">(</span><span class="va"><a href="https://github.com/liamrevell/phytools">phytools</a></span><span class="op">)</span></span>
+<span><span class="co">#&gt; Le chargement a nécessité le package : phytools</span></span>
+<span><span class="co">#&gt; Le chargement a nécessité le package : maps</span></span>
+<span><span class="co"># set seed (starting point na geração de sequência aleatória, assim todos teremos os mesmos resultados)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span><span class="op">(</span><span class="fl">4</span><span class="op">)</span></span>
+<span><span class="co"># simular uma árvore filogenética</span></span>
+<span><span class="va">tree</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/pkg/ape/man/rtree.html">rcoal</a></span><span class="op">(</span>n<span class="op">=</span><span class="fl">80</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/pkg/phytools/man/plotTree.html">plotTree</a></span><span class="op">(</span><span class="va">tree</span>,ftype<span class="op">=</span><span class="st">"off"</span><span class="op">)</span></span></code></pre></div>
+<div class="inline-figure"><img src="04.5-pcmreg_files/figure-html/unnamed-chunk-4-1.png" width="672"></div>
+<div class="sourceCode" id="cb202"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># simular 2 atributos (independentemente) evoluindo por movimento Browniano na filogenia</span></span>
+<span><span class="va">x</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/pkg/phytools/man/fastBM.html">fastBM</a></span><span class="op">(</span><span class="va">tree</span><span class="op">)</span></span>
+<span><span class="va">y</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/pkg/phytools/man/fastBM.html">fastBM</a></span><span class="op">(</span><span class="va">tree</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/par.html">par</a></span><span class="op">(</span>mar<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">5</span>,<span class="fl">4</span>,<span class="fl">2</span>,<span class="fl">2</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="co"># Ajustar OLS</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">x</span>,<span class="va">y</span>,pch<span class="op">=</span><span class="fl">21</span>,bg<span class="op">=</span><span class="st">"grey"</span>,cex<span class="op">=</span><span class="fl">1.5</span><span class="op">)</span></span>
+<span><span class="va">fit.OLS</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">y</span><span class="op">~</span><span class="va">x</span><span class="op">)</span></span>
+<span><span class="op">{</span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">x</span>,<span class="va">y</span>,pch<span class="op">=</span><span class="fl">21</span>,bg<span class="op">=</span><span class="st">"grey"</span>,cex<span class="op">=</span><span class="fl">1.5</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/abline.html">abline</a></span><span class="op">(</span><span class="va">fit.OLS</span>,col<span class="op">=</span><span class="st">"red"</span><span class="op">)</span><span class="op">}</span></span></code></pre></div>
+<div class="inline-figure"><img src="04.5-pcmreg_files/figure-html/unnamed-chunk-4-2.png" width="672"></div>
+<div class="sourceCode" id="cb203"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">fit.OLS</span><span class="op">)</span></span></code></pre></div>
+<p>Mesmo os dados tendo sidos simulados independentemente (na ausência de correlação entre x e y) nós podemos ver que existe uma correlação entre os dados induzida pela filogenia (erro tipo I).
+Podemos plotar a filogenia no espaço de forma para descobrir o motivo:</p>
+<div class="sourceCode" id="cb204"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="op">{</span><span class="fu"><a href="https://rdrr.io/pkg/phytools/man/phylomorphospace.html">phylomorphospace</a></span><span class="op">(</span><span class="va">tree</span>,<span class="fu"><a href="https://rdrr.io/r/base/cbind.html">cbind</a></span><span class="op">(</span><span class="va">x</span>,<span class="va">y</span><span class="op">)</span>,label<span class="op">=</span><span class="st">"off"</span>,node.size<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fl">0</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/points.html">points</a></span><span class="op">(</span><span class="va">x</span>,<span class="va">y</span>,pch<span class="op">=</span><span class="fl">21</span>,bg<span class="op">=</span><span class="st">"grey"</span>,cex<span class="op">=</span><span class="fl">1.5</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/abline.html">abline</a></span><span class="op">(</span><span class="va">fit.OLS</span>,col<span class="op">=</span><span class="st">"red"</span>,lwd<span class="op">=</span><span class="fl">2</span><span class="op">)</span><span class="op">}</span></span></code></pre></div>
+<div class="inline-figure">
+<img src="04.5-pcmreg_files/figure-html/unnamed-chunk-5-1.png" width="672">
+Neste caso, espécies próximas filogeneticamente têm valores de atributo muito similares. Isso gera dois grupos de espécies próximas com fenótipo similar. Podemos usar os contrastes independentes neste caso.</div>
+<div class="sourceCode" id="cb205"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Ajustando PIC</span></span>
+<span><span class="va">pic.x</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/pkg/ape/man/pic.html">pic</a></span><span class="op">(</span><span class="va">x</span>,<span class="va">tree</span><span class="op">)</span></span>
+<span><span class="va">pic.y</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/pkg/ape/man/pic.html">pic</a></span><span class="op">(</span><span class="va">y</span>,<span class="va">tree</span><span class="op">)</span></span>
+<span><span class="va">fit.pic</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">pic.y</span><span class="op">~</span><span class="va">pic.x</span><span class="op">+</span><span class="fl">0</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">fit.pic</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/stats/summary.aov.html">summary.aov</a></span><span class="op">(</span><span class="va">fit.pic</span><span class="op">)</span></span></code></pre></div>
+</div>
+<div id="regressão-filogenética-generalisada-por-quadrados-mínimos" class="section level2" number="23.2">
+<h2>
+<span class="header-section-number">23.2</span> Regressão filogenética generalisada por quadrados mínimos<a class="anchor" aria-label="anchor" href="#regress%C3%A3o-filogen%C3%A9tica-generalisada-por-quadrados-m%C3%ADnimos"><i class="fas fa-link"></i></a>
+</h2>
+<p>Vários pacotes realizam PGLS no R. Vamos usar os mais comuns - <em>ape</em>/<em>nlme</em> + <em>caper</em>. A PGLS usa uma matriz de covariância entre espécies de acordo com algum processo evolutivo (BM, Pagel, OU, outros).</p>
+<p>Vamos carregar alguns dados de borboletas.</p>
+<div class="sourceCode" id="cb206"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">require</a></span><span class="op">(</span><span class="va"><a href="http://ape-package.ird.fr/">ape</a></span><span class="op">)</span></span>
+<span><span class="va">dados</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/utils/read.table.html">read.table</a></span><span class="op">(</span><span class="st">"dadospcm/butterfly-data.txt"</span>,h<span class="op">=</span><span class="cn">T</span>,row.names <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span>
+<span><span class="va">dados</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/attach.html">attach</a></span><span class="op">(</span><span class="va">dados</span><span class="op">)</span></span>
+<span><span class="va">wing_length</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/stats/setNames.html">setNames</a></span><span class="op">(</span><span class="va">wing_length</span>,<span class="fu"><a href="https://rdrr.io/r/base/colnames.html">rownames</a></span><span class="op">(</span><span class="va">dados</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="va">temp</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/stats/setNames.html">setNames</a></span><span class="op">(</span><span class="va">temp</span>,<span class="fu"><a href="https://rdrr.io/r/base/colnames.html">rownames</a></span><span class="op">(</span><span class="va">dados</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="va">eye_width</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/stats/setNames.html">setNames</a></span><span class="op">(</span><span class="va">eye_width</span>,<span class="fu"><a href="https://rdrr.io/r/base/colnames.html">rownames</a></span><span class="op">(</span><span class="va">dados</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="co"># Carregar árvore</span></span>
+<span><span class="va">tree</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/pkg/ape/man/read.tree.html">read.tree</a></span><span class="op">(</span><span class="st">"dadospcm/butterfly-tree.txt"</span><span class="op">)</span></span>
+<span><span class="op">{</span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">tree</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/pkg/ape/man/axisPhylo.html">axisPhylo</a></span><span class="op">(</span><span class="op">)</span><span class="op">}</span></span></code></pre></div>
+<div class="inline-figure"><img src="04.5-pcmreg_files/figure-html/unnamed-chunk-7-1.png" width="672"></div>
+<p>Conferir correspondência entre espécies nos dados fenotópicos e na árvore filogenética.</p>
+<div class="sourceCode" id="cb207"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">require</a></span><span class="op">(</span><span class="va">geiger</span><span class="op">)</span></span>
+<span><span class="co">#&gt; Le chargement a nécessité le package : geiger</span></span>
+<span><span class="va">obj</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/pkg/geiger/man/name.check.html">name.check</a></span><span class="op">(</span><span class="va">tree</span>,<span class="va">dados</span><span class="op">)</span></span>
+<span><span class="va">obj</span></span>
+<span><span class="co"># 59 espécies na árvore não contêm dados</span></span>
+<span><span class="co"># remover espécies da árvore</span></span>
+<span><span class="va">tree.pruned</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/pkg/ape/man/drop.tip.html">drop.tip</a></span><span class="op">(</span><span class="va">tree</span>,<span class="va">obj</span><span class="op">$</span><span class="va">tree_not_data</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/pkg/geiger/man/name.check.html">name.check</a></span><span class="op">(</span><span class="va">tree.pruned</span>,<span class="va">dados</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">tree.pruned</span><span class="op">)</span></span></code></pre></div>
+<div class="inline-figure"><img src="04.5-pcmreg_files/figure-html/unnamed-chunk-8-1.png" width="672"></div>
+<p>PGLS com os pacotes <em>ape</em> e <em>nlme</em>.</p>
+<div class="sourceCode" id="cb208"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">require</a></span><span class="op">(</span><span class="va"><a href="http://ape-package.ird.fr/">ape</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">require</a></span><span class="op">(</span><span class="va"><a href="https://svn.r-project.org/R-packages/trunk/nlme/">nlme</a></span><span class="op">)</span></span>
+<span><span class="co">#&gt; Le chargement a nécessité le package : nlme</span></span>
+<span><span class="co"># Estrutura de covariação Browniana</span></span>
+<span><span class="va">BM</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/pkg/ape/man/corBrownian.html">corBrownian</a></span><span class="op">(</span><span class="fl">1</span>,<span class="va">tree.pruned</span><span class="op">)</span></span>
+<span><span class="va">BM</span></span>
+<span><span class="co"># Podemos ajustar um modelo PGLS para investigar a relação entre temperatura e </span></span>
+<span><span class="co">#comprimento da asa</span></span>
+<span><span class="va">modelo1</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/pkg/nlme/man/gls.html">gls</a></span><span class="op">(</span><span class="va">wing_length</span><span class="op">~</span><span class="va">temp</span>,data<span class="op">=</span><span class="va">dados</span>,correlation<span class="op">=</span><span class="va">BM</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">modelo1</span><span class="op">)</span></span>
+<span><span class="co"># Plots de diagnóstico</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/stats/qqnorm.html">qqnorm</a></span><span class="op">(</span><span class="va">modelo1</span><span class="op">$</span><span class="va">residuals</span><span class="op">)</span></span></code></pre></div>
+<div class="inline-figure"><img src="04.5-pcmreg_files/figure-html/unnamed-chunk-9-1.png" width="672"></div>
+<div class="sourceCode" id="cb209"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Comparando com OLS, os resultados são similares</span></span>
+<span><span class="va">modelo.ols</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">wing_length</span><span class="op">~</span><span class="va">temp</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">modelo.ols</span><span class="op">)</span></span>
+<span><span class="co"># Plotando os resultados</span></span>
+<span><span class="op">{</span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">temp</span>,<span class="va">wing_length</span>,pch<span class="op">=</span><span class="fl">21</span>,bg<span class="op">=</span><span class="st">"grey"</span>,cex<span class="op">=</span><span class="fl">1.5</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/abline.html">abline</a></span><span class="op">(</span><span class="va">modelo.ols</span>,col<span class="op">=</span><span class="st">"red"</span>,lty<span class="op">=</span><span class="st">"dashed"</span>,lwd<span class="op">=</span><span class="fl">2</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/abline.html">abline</a></span><span class="op">(</span><span class="va">modelo1</span>,col<span class="op">=</span><span class="st">"blue"</span>,lty<span class="op">=</span><span class="st">"dashed"</span>,lwd<span class="op">=</span><span class="fl">2</span><span class="op">)</span><span class="op">}</span></span></code></pre></div>
+<div class="inline-figure"><img src="04.5-pcmreg_files/figure-html/unnamed-chunk-9-2.png" width="672"></div>
+<p>É possível usar outras estruturas de covariância. Um dos modelos mais comuns usa o λ de Pagel. Esse modelo tem um parâmetro adicional (λ) que estima o sinal filogenético nos resíduos; os elementos off-diagonal são multiplicados pelo valor de lambda estimado, que varia entre 0 e 1. Quando λ=0 a covariância entre espécies é zero, e a regressão filogenética = regressão comum. Quando λ=1 a covariação é igual ao esperado pelo modelo Browniano (= PIC).</p>
+<div class="sourceCode" id="cb210"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">modelo2</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/pkg/nlme/man/gls.html">gls</a></span><span class="op">(</span><span class="va">wing_length</span><span class="op">~</span><span class="va">temp</span>,data<span class="op">=</span><span class="va">dados</span>,correlation<span class="op">=</span><span class="fu"><a href="https://rdrr.io/pkg/ape/man/corPagel.html">corPagel</a></span><span class="op">(</span><span class="fl">1</span>,<span class="va">tree.pruned</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">modelo2</span><span class="op">)</span></span>
+<span><span class="op">{</span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">temp</span>,<span class="va">wing_length</span>,pch<span class="op">=</span><span class="fl">21</span>,bg<span class="op">=</span><span class="st">"grey"</span>,cex<span class="op">=</span><span class="fl">1.5</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/abline.html">abline</a></span><span class="op">(</span><span class="va">modelo.ols</span>,col<span class="op">=</span><span class="st">"red"</span>,lty<span class="op">=</span><span class="st">"dashed"</span>,lwd<span class="op">=</span><span class="fl">2</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/abline.html">abline</a></span><span class="op">(</span><span class="va">modelo1</span>,col<span class="op">=</span><span class="st">"blue"</span>,lty<span class="op">=</span><span class="st">"dashed"</span>,lwd<span class="op">=</span><span class="fl">2</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/abline.html">abline</a></span><span class="op">(</span><span class="va">modelo2</span>,col<span class="op">=</span><span class="st">"green"</span>,lty<span class="op">=</span><span class="st">"dashed"</span>,lwd<span class="op">=</span><span class="fl">2</span><span class="op">)</span><span class="op">}</span></span></code></pre></div>
+<div class="inline-figure"><img src="04.5-pcmreg_files/figure-html/unnamed-chunk-10-1.png" width="672"></div>
+<p>PGLS pode ser aplicada em um contexto de regressão múltipla.</p>
+<div class="sourceCode" id="cb211"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">modelo3</span><span class="op">&lt;-</span></span>
+<span><span class="fu"><a href="https://rdrr.io/pkg/nlme/man/gls.html">gls</a></span><span class="op">(</span><span class="va">wing_length</span><span class="op">~</span><span class="va">eye_width</span><span class="op">+</span><span class="va">temp</span>,data<span class="op">=</span><span class="va">dados</span>,correlation<span class="op">=</span><span class="fu"><a href="https://rdrr.io/pkg/ape/man/corPagel.html">corPagel</a></span><span class="op">(</span><span class="fl">1</span>,<span class="va">tree.pruned</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">modelo3</span><span class="op">)</span></span></code></pre></div>
+<p>PGLS com o pacote <em>caper</em>.
+O caper tem um objeto especial ‘comparative data’ para combinar todos os dados.</p>
+<div class="sourceCode" id="cb212"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">require</a></span><span class="op">(</span><span class="va">caper</span><span class="op">)</span></span>
+<span><span class="co">#&gt; Le chargement a nécessité le package : caper</span></span>
+<span><span class="co">#&gt; Le chargement a nécessité le package : MASS</span></span>
+<span><span class="co">#&gt; Le chargement a nécessité le package : mvtnorm</span></span>
+<span><span class="va">dados</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/utils/read.table.html">read.table</a></span><span class="op">(</span><span class="st">"dadospcm/butterfly-data.txt"</span>,header<span class="op">=</span><span class="cn">T</span><span class="op">)</span></span>
+<span><span class="va">comp.data</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/pkg/caper/man/comparative.data.html">comparative.data</a></span><span class="op">(</span><span class="va">tree.pruned</span>,<span class="va">dados</span>,names.col<span class="op">=</span><span class="st">'species'</span><span class="op">)</span></span>
+<span><span class="co"># pgls usando lambda</span></span>
+<span><span class="va">modelo4</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/pkg/caper/man/pgls.html">pgls</a></span><span class="op">(</span><span class="va">wing_length</span><span class="op">~</span><span class="va">temp</span>,data <span class="op">=</span> <span class="va">comp.data</span>,lambda<span class="op">=</span><span class="st">"ML"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">modelo4</span><span class="op">)</span></span></code></pre></div>
+<p>Com o caper é possível plotar gráficos de diagnostico facilmente.</p>
+<div class="sourceCode" id="cb213"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/par.html">par</a></span><span class="op">(</span>mfrow <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">2</span>, <span class="fl">2</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">modelo4</span><span class="op">)</span></span></code></pre></div>
+<div class="inline-figure"><img src="04.5-pcmreg_files/figure-html/unnamed-chunk-13-1.png" width="672"></div>
+<div class="sourceCode" id="cb214"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/par.html">par</a></span><span class="op">(</span>mfrow <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">1</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<p>O que olhar nesses plots:
+No gráfico 1, dados com resíduos maiores que +- 3 podem ser outliers. Os pontos no QQ-plot (gráfico 2) devem cair aproximadamente sobre a linha. Os gráficos 3 e 4 devem mostrar uma distribuição mais ou menos randômica, sem padrões aparentes.</p>
+<p>Como qualquer outro modelo linear, também é preciso prestar atenção ao número de preditores e número de termos estimados no modelo em relação ao número deobservações (espécies). Uma “regra” simples é usar +- 10 vezes mais espécies do que termos estimados (incluindo intercepto, interações, e o parâmetro lambda, por exemplo).</p>
+</div>
+<div id="regressão-de-autovetores-filogenéticos" class="section level2" number="23.3">
+<h2>
+<span class="header-section-number">23.3</span> Regressão de autovetores filogenéticos<a class="anchor" aria-label="anchor" href="#regress%C3%A3o-de-autovetores-filogen%C3%A9ticos"><i class="fas fa-link"></i></a>
+</h2>
+<p>Regressão de autovetores filogenéticos e Curva PSR com o pacote <em>PVR</em>. Veja o capítulo sobre Sinal Filogenético pra mais detalhes sobre as análises.</p>
+<div class="sourceCode" id="cb215"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">require</a></span><span class="op">(</span><span class="va">PVR</span><span class="op">)</span></span>
+<span><span class="co">#&gt; Le chargement a nécessité le package : PVR</span></span>
+<span><span class="co">#&gt; Warning: le package 'PVR' a été compilé avec la version R</span></span>
+<span><span class="co">#&gt; 4.3.2</span></span>
+<span><span class="co">#&gt; PVR 0.3 loaded</span></span>
+<span><span class="co"># Decomposição de matriz de distância filogenética</span></span>
+<span><span class="va">pvr_obj</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/pkg/PVR/man/PVRdecomp.html">PVRdecomp</a></span><span class="op">(</span><span class="va">tree.pruned</span><span class="op">)</span></span>
+<span><span class="co"># Regressão de autovetores filogenéticos</span></span>
+<span><span class="va">pvr_reg</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/pkg/PVR/man/PVR.html">PVR</a></span><span class="op">(</span><span class="va">pvr_obj</span>,<span class="va">tree.pruned</span>,<span class="va">wing_length</span>,<span class="va">temp</span><span class="op">)</span></span>
+<span><span class="co"># Porcentagem de cada componente</span></span>
+<span><span class="va">pvr_reg</span><span class="op">@</span><span class="va">VarPart</span></span>
+<span><span class="co">#&gt; $a</span></span>
+<span><span class="co">#&gt; [1] 0.3326349</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; $b</span></span>
+<span><span class="co">#&gt; [1] 0.1093753</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; $c</span></span>
+<span><span class="co">#&gt; [1] 0.08198286</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; $d</span></span>
+<span><span class="co">#&gt; [1] 0.4760069</span></span>
+<span><span class="fu"><a href="https://rdrr.io/pkg/PVR/man/VarPartplot.html">VarPartplot</a></span><span class="op">(</span><span class="va">pvr_reg</span><span class="op">)</span></span></code></pre></div>
+<div class="inline-figure"><img src="04.5-pcmreg_files/figure-html/unnamed-chunk-14-1.png" width="672"></div>
+<pre><code>#&gt; [a] - Variation explained by environmental variables
+#&gt; [b] - Shared variation between environmental variables and phylogeny(PVR)
+#&gt; [c] - Variation explained by phylogeny(PVR)
+#&gt; [d]     - Unexplained variation
+# Sinal Filogenético com PSR Curve
+psr_obj&lt;-PSR(pvr_obj,trait=wing_length,
+null.model=TRUE,Brownian.model=TRUE,times=10)
+PSRplot(psr_obj,info="both")</code></pre>
+<div class="inline-figure"><img src="04.5-pcmreg_files/figure-html/unnamed-chunk-14-2.png" width="672"></div>
+</div>
+<div id="exercício---regressão-filogenética" class="section level2" number="23.4">
+<h2>
+<span class="header-section-number">23.4</span> Exercício - Regressão filogenética<a class="anchor" aria-label="anchor" href="#exerc%C3%ADcio---regress%C3%A3o-filogen%C3%A9tica"><i class="fas fa-link"></i></a>
+</h2>
+<p>Carregue os dois conjuntos de dados:
+pic-dados.txt
+pic-arvore.tre
+Ajuste uma regressão não-filogenética e uma regressão filogenética aos dados usando contrastes independentes. Quais foram os resultados? Qual a interpretação?</p>
+
+</div>
+</div>
+  <div class="chapter-nav">
+<div class="prev"><a href="modelos-para-evolu%C3%A7%C3%A3o-de-fen%C3%B3tipos-discretos.html"><span class="header-section-number">22</span> Modelos para evolução de fenótipos discretos</a></div>
+<div class="next"><a href="correla%C3%A7%C3%A3o-de-fen%C3%B3tipos-discretos.html"><span class="header-section-number">24</span> Correlação de fenótipos discretos</a></div>
+</div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
+    <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
+      <ul class="nav navbar-nav">
+<li><a class="nav-link" href="#regress%C3%A3o-filogen%C3%A9tica"><span class="header-section-number">23</span> Regressão filogenética</a></li>
+<li><a class="nav-link" href="#contrastes-filogen%C3%A9ticos-independentes-1"><span class="header-section-number">23.1</span> Contrastes filogenéticos independentes</a></li>
+<li><a class="nav-link" href="#regress%C3%A3o-filogen%C3%A9tica-generalisada-por-quadrados-m%C3%ADnimos"><span class="header-section-number">23.2</span> Regressão filogenética generalisada por quadrados mínimos</a></li>
+<li><a class="nav-link" href="#regress%C3%A3o-de-autovetores-filogen%C3%A9ticos"><span class="header-section-number">23.3</span> Regressão de autovetores filogenéticos</a></li>
+<li><a class="nav-link" href="#exerc%C3%ADcio---regress%C3%A3o-filogen%C3%A9tica"><span class="header-section-number">23.4</span> Exercício - Regressão filogenética</a></li>
+</ul>
+
+      <div class="book-extra">
+        <ul class="list-unstyled">
+<li><a id="book-source" href="https://github.com/renanmaestri/eebb/blob/master/04.5-pcmreg.Rmd">View source <i class="fab fa-github"></i></a></li>
+          <li><a id="book-edit" href="https://github.com/renanmaestri/eebb/edit/master/04.5-pcmreg.Rmd">Edit this page <i class="fab fa-github"></i></a></li>
+        </ul>
+</div>
+    </nav>
+</div>
+
+</div>
+</div> <!-- .container -->
+
+<footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>"<strong>Manual de Ecologia Evolutiva, Biometria e Biogeografia</strong>" was written by Renan Maestri. It was last built on 2023-11-14.</p>
+  </div>
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>This book was built by the <a class="text-light" href="https://bookdown.org">bookdown</a> R package.</p>
+  </div>
+
+</div></div>
+</footer><!-- dynamically load mathjax for compatibility with self-contained --><script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script><script type="text/x-mathjax-config">const popovers = document.querySelectorAll('a.footnote-ref[data-toggle="popover"]');
+for (let popover of popovers) {
+  const div = document.createElement('div');
+  div.setAttribute('style', 'position: absolute; top: 0, left:0; width:0, height:0, overflow: hidden; visibility: hidden;');
+  div.innerHTML = popover.getAttribute('data-content');
+
+  var has_math = div.querySelector("span.math");
+  if (has_math) {
+    document.body.appendChild(div);
+    MathJax.Hub.Queue(["Typeset", MathJax.Hub, div]);
+    MathJax.Hub.Queue(function() {
+      popover.setAttribute('data-content', div.innerHTML);
+      document.body.removeChild(div);
+    })
+  }
+}
+</script>
+</body>
+</html>

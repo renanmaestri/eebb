@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>Capítulo 19 Lendo e manipulando árvores filogenéticas no R | Manual de Ecologia Evolutiva, Biometria e Biogeografia</title>
+<meta name="author" content="Renan Maestri">
+<meta name="description" content="É aconselhável criar um único diretório contendo a(s) árvore(s) e os dados fenotípicos, e informar ao R de qual diretório os arquivos devem ser lidos. Árvores filogenéticas podem ser importadas...">
+<meta name="generator" content="bookdown 0.36 with bs4_book()">
+<meta property="og:title" content="Capítulo 19 Lendo e manipulando árvores filogenéticas no R | Manual de Ecologia Evolutiva, Biometria e Biogeografia">
+<meta property="og:type" content="book">
+<meta property="og:url" content="https://renanmaestri.github.io/eebb/lendo-e-manipulando-árvores-filogenéticas-no-r.html">
+<meta property="og:image" content="https://renanmaestri.github.io/eebb/images/Slogan_oficial_sologo.jpg">
+<meta property="og:description" content="É aconselhável criar um único diretório contendo a(s) árvore(s) e os dados fenotípicos, e informar ao R de qual diretório os arquivos devem ser lidos. Árvores filogenéticas podem ser importadas...">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Capítulo 19 Lendo e manipulando árvores filogenéticas no R | Manual de Ecologia Evolutiva, Biometria e Biogeografia">
+<meta name="twitter:description" content="É aconselhável criar um único diretório contendo a(s) árvore(s) e os dados fenotípicos, e informar ao R de qual diretório os arquivos devem ser lidos. Árvores filogenéticas podem ser importadas...">
+<meta name="twitter:image" content="https://renanmaestri.github.io/eebb/images/Slogan_oficial_sologo.jpg">
+<!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.5.1/transition.js"></script><script src="libs/bs3compat-0.5.1/tabs.js"></script><script src="libs/bs3compat-0.5.1/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><style type="text/css">
+    
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  </style>
+<style type="text/css">
+    /* Used with Pandoc 2.11+ new --citeproc when CSL is used */
+    div.csl-bib-body { }
+    div.csl-entry {
+      clear: both;
+        }
+    .hanging div.csl-entry {
+      margin-left:2em;
+      text-indent:-2em;
+    }
+    div.csl-left-margin {
+      min-width:2em;
+      float:left;
+    }
+    div.csl-right-inline {
+      margin-left:2em;
+      padding-left:1em;
+    }
+    div.csl-indent {
+      margin-left: 2em;
+    }
+  </style>
+<link rel="stylesheet" href="style.css">
+</head>
+<body data-spy="scroll" data-target="#toc">
+
+<div class="container-fluid">
+<div class="row">
+  <header class="col-sm-12 col-lg-3 sidebar sidebar-book"><a class="sr-only sr-only-focusable" href="#content">Skip to main content</a>
+
+    <div class="d-flex align-items-start justify-content-between">
+      <h1>
+        <a href="index.html" title="">Manual de Ecologia Evolutiva, Biometria e Biogeografia</a>
+      </h1>
+      <button class="btn btn-outline-primary d-lg-none ml-2 mt-1" type="button" data-toggle="collapse" data-target="#main-nav" aria-expanded="true" aria-controls="main-nav"><i class="fas fa-bars"></i><span class="sr-only">Show table of contents</span></button>
+    </div>
+
+    <div id="main-nav" class="collapse-lg">
+      <form role="search">
+        <input id="search" class="form-control" type="search" placeholder="Search" aria-label="Search">
+</form>
+
+      <nav aria-label="Table of contents"><h2>Table of contents</h2>
+        <ul class="book-toc list-unstyled">
+<li><a class="" href="index.html">Prefácio</a></li>
+<li class="book-part">PARTE I - Conceitos básicos</li>
+<li><a class="" href="conceitos-b%C3%A1sicos.html"><span class="header-section-number">1</span> Conceitos básicos</a></li>
+<li class="book-part">PARTE II - Introdução ao R</li>
+<li><a class="" href="cap2.html"><span class="header-section-number">2</span> Uma breve introdução ao R</a></li>
+<li class="book-part">PARTE III - Morfometria Geométrica</li>
+<li><a class="" href="cap3.html"><span class="header-section-number">3</span> Morfometria Geométrica</a></li>
+<li><a class="" href="digitaliza%C3%A7%C3%A3o-de-landmarks.html"><span class="header-section-number">4</span> Digitalização de landmarks</a></li>
+<li><a class="" href="an%C3%A1lise-de-procrustes.html"><span class="header-section-number">5</span> Análise de Procrustes</a></li>
+<li><a class="" href="visualiza%C3%A7%C3%A3o-da-forma.html"><span class="header-section-number">6</span> Visualização da forma</a></li>
+<li><a class="" href="assimetria-e-quantifica%C3%A7%C3%A3o-de-erro.html"><span class="header-section-number">7</span> Assimetria e quantificação de erro</a></li>
+<li><a class="" href="semilandmarks.html"><span class="header-section-number">8</span> Semilandmarks</a></li>
+<li><a class="" href="tamanho-do-centr%C3%B3ide.html"><span class="header-section-number">9</span> Tamanho do Centróide</a></li>
+<li><a class="" href="m%C3%A9todos-de-ordena%C3%A7%C3%A3o.html"><span class="header-section-number">10</span> Métodos de ordenação</a></li>
+<li><a class="" href="partial-least-squares.html"><span class="header-section-number">11</span> Partial Least Squares</a></li>
+<li><a class="" href="modelos-lineares-para-discrimina%C3%A7%C3%A3o-de-grupos.html"><span class="header-section-number">12</span> Modelos lineares para discriminação de grupos</a></li>
+<li><a class="" href="alometria.html"><span class="header-section-number">13</span> Alometria</a></li>
+<li><a class="" href="an%C3%A1lise-de-trajet%C3%B3ria.html"><span class="header-section-number">14</span> Análise de Trajetória</a></li>
+<li><a class="" href="integra%C3%A7%C3%A3o-morfol%C3%B3gica-e-modularidade.html"><span class="header-section-number">15</span> Integração morfológica e modularidade</a></li>
+<li><a class="" href="disparidade-e-varia%C3%A7%C3%A3o-morfol%C3%B3gica.html"><span class="header-section-number">16</span> Disparidade e variação morfológica</a></li>
+<li><a class="" href="morfometria-geom%C3%A9trica-e-filogenias.html"><span class="header-section-number">17</span> Morfometria geométrica e filogenias</a></li>
+<li class="book-part">PARTE IV - Macroevolução</li>
+<li><a class="" href="macroevolu%C3%A7%C3%A3o.html"><span class="header-section-number">18</span> Macroevolução</a></li>
+<li><a class="active" href="lendo-e-manipulando-%C3%A1rvores-filogen%C3%A9ticas-no-r.html"><span class="header-section-number">19</span> Lendo e manipulando árvores filogenéticas no R</a></li>
+<li><a class="" href="sinal-filogen%C3%A9tico.html"><span class="header-section-number">20</span> Sinal filogenético</a></li>
+<li><a class="" href="modelos-para-evolu%C3%A7%C3%A3o-de-fen%C3%B3tipos-cont%C3%ADnuos.html"><span class="header-section-number">21</span> Modelos para evolução de fenótipos contínuos</a></li>
+<li><a class="" href="modelos-para-evolu%C3%A7%C3%A3o-de-fen%C3%B3tipos-discretos.html"><span class="header-section-number">22</span> Modelos para evolução de fenótipos discretos</a></li>
+<li><a class="" href="regress%C3%A3o-filogen%C3%A9tica.html"><span class="header-section-number">23</span> Regressão filogenética</a></li>
+<li><a class="" href="correla%C3%A7%C3%A3o-de-fen%C3%B3tipos-discretos.html"><span class="header-section-number">24</span> Correlação de fenótipos discretos</a></li>
+<li><a class="" href="evolu%C3%A7%C3%A3o-multi-taxa-e-multi-regime.html"><span class="header-section-number">25</span> Evolução multi-taxa e multi-regime</a></li>
+<li><a class="" href="m%C3%A9todos-filogen%C3%A9ticos-multivariados.html"><span class="header-section-number">26</span> Métodos filogenéticos multivariados</a></li>
+<li><a class="" href="disparidade-fenot%C3%ADpica-ao-longo-do-tempo.html"><span class="header-section-number">27</span> Disparidade fenotípica ao longo do tempo</a></li>
+<li><a class="" href="diversifica%C3%A7%C3%A3o-de-linhagens.html"><span class="header-section-number">28</span> Diversificação de linhagens</a></li>
+<li><a class="" href="taxas-de-especia%C3%A7%C3%A3o-e-extin%C3%A7%C3%A3o-constantes-e-vari%C3%A1veis.html"><span class="header-section-number">29</span> Taxas de especiação e extinção constantes e variáveis</a></li>
+<li><a class="" href="diversifica%C3%A7%C3%A3o-dependente-de-estado.html"><span class="header-section-number">30</span> Diversificação dependente de estado</a></li>
+<li><a class="" href="diversifica%C3%A7%C3%A3o-baseada-em-terminais-tip-speciation.html"><span class="header-section-number">31</span> Diversificação baseada em terminais (tip-speciation)</a></li>
+<li><a class="" href="co-diversifica%C3%A7%C3%A3o.html"><span class="header-section-number">32</span> Co-diversificação</a></li>
+<li class="book-part">PARTE IV - Biogeografia e Macroecologia</li>
+<li><a class="" href="biogeografia-e-macroecologia.html"><span class="header-section-number">33</span> Biogeografia e Macroecologia</a></li>
+<li class="book-part">Conclusão</li>
+<li><a class="" href="considera%C3%A7%C3%B5es-finais.html"><span class="header-section-number">34</span> Considerações finais</a></li>
+<li><a class="" href="refer%C3%AAncias.html">Referências</a></li>
+</ul>
+
+        <div class="book-extra">
+          <p><a id="book-repo" href="https://github.com/renanmaestri/eebb">View book source <i class="fab fa-github"></i></a></p>
+        </div>
+      </nav>
+</div>
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="lendo-e-manipulando-árvores-filogenéticas-no-r" class="section level1" number="19">
+<h1>
+<span class="header-section-number">Capítulo 19</span> Lendo e manipulando árvores filogenéticas no R<a class="anchor" aria-label="anchor" href="#lendo-e-manipulando-%C3%A1rvores-filogen%C3%A9ticas-no-r"><i class="fas fa-link"></i></a>
+</h1>
+<p>É aconselhável criar um único diretório contendo a(s) árvore(s) e os dados fenotípicos, e informar ao R de qual diretório os arquivos devem ser lidos. Árvores filogenéticas podem ser importadas facilmente para dentro do ambiente R através de funções como read.tree e read.nexus do pacote <em>ape</em>.</p>
+<p>Neste capítulo, vamos explorar algumas maneiras de representar graficamente as árvores filogenéticas e manipulá-las. Para entender mais sobre a estrutura da árvore em formato phylo volte ao <a href="cap2.html#cap2">Capítulo 2</a> do manual.</p>
+<p>Vamos ler uma árvore filogenética do gênero de roedores neotropicais <em>Akodon</em> e representá-la graficamente.</p>
+<div class="sourceCode" id="cb132"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">require</a></span><span class="op">(</span><span class="va"><a href="http://ape-package.ird.fr/">ape</a></span><span class="op">)</span></span>
+<span><span class="co">#&gt; Le chargement a nécessité le package : ape</span></span>
+<span><span class="va">akodon.tree</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/pkg/ape/man/read.tree.html">read.tree</a></span><span class="op">(</span>file<span class="op">=</span><span class="st">"dadospcm/akodon.tree"</span><span class="op">)</span></span>
+<span><span class="va">akodon.tree</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; Phylogenetic tree with 31 tips and 30 internal nodes.</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; Tip labels:</span></span>
+<span><span class="co">#&gt;   Castoria_angustidens, Akodon_mimus, Akodon_lindberghi, Akodon_subfuscus, Akodon_lutescens, Akodon_sylvanus, ...</span></span>
+<span><span class="co">#&gt; Node labels:</span></span>
+<span><span class="co">#&gt;   474, 475, 476, 477, 479, 480, ...</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; Rooted; includes branch lengths.</span></span>
+<span><span class="co"># Existem muitas formas de plotar a árvore</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">akodon.tree</span><span class="op">)</span></span></code></pre></div>
+<div class="inline-figure"><img src="04.1-pcmtrees_files/figure-html/unnamed-chunk-1-1.png" width="672"></div>
+<div class="sourceCode" id="cb133"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># cladograma orientado pra esquerda</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">akodon.tree</span>, type <span class="op">=</span> <span class="st">"c"</span>, use.edge.length <span class="op">=</span> <span class="cn">FALSE</span>,direction<span class="op">=</span><span class="st">"l"</span><span class="op">)</span></span></code></pre></div>
+<div class="inline-figure"><img src="04.1-pcmtrees_files/figure-html/unnamed-chunk-1-2.png" width="672"></div>
+<div class="sourceCode" id="cb134"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># nomes alinhados à esquerda</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">akodon.tree</span>, type <span class="op">=</span> <span class="st">"c"</span>, use.edge.length <span class="op">=</span> <span class="cn">FALSE</span>,direction<span class="op">=</span><span class="st">"l"</span>,adj<span class="op">=</span><span class="fl">0</span><span class="op">)</span></span></code></pre></div>
+<div class="inline-figure"><img src="04.1-pcmtrees_files/figure-html/unnamed-chunk-1-3.png" width="672"></div>
+<div class="sourceCode" id="cb135"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># visualizar partes da árvore com zoom</span></span>
+<span><span class="fu"><a href="https://rdrr.io/pkg/ape/man/zoom.html">zoom</a></span><span class="op">(</span><span class="va">akodon.tree</span>, <span class="fl">13</span><span class="op">:</span><span class="fl">17</span>, subtree <span class="op">=</span> <span class="cn">FALSE</span>, cex <span class="op">=</span> <span class="fl">0.8</span><span class="op">)</span></span></code></pre></div>
+<div class="inline-figure"><img src="04.1-pcmtrees_files/figure-html/unnamed-chunk-1-4.png" width="672"></div>
+<div class="sourceCode" id="cb136"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/par.html">par</a></span><span class="op">(</span>mfrow<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">1</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="co"># mudando cores</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">akodon.tree</span>, type <span class="op">=</span> <span class="st">"fan"</span>, edge.color <span class="op">=</span> <span class="st">"violetred"</span>, tip.color <span class="op">=</span> <span class="st">"turquoise1"</span>,</span>
+<span> cex <span class="op">=</span> <span class="fl">0.5</span><span class="op">)</span></span></code></pre></div>
+<div class="inline-figure"><img src="04.1-pcmtrees_files/figure-html/unnamed-chunk-1-5.png" width="672"></div>
+<div class="sourceCode" id="cb137"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># com o pacote phytools</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">require</a></span><span class="op">(</span><span class="va"><a href="https://github.com/liamrevell/phytools">phytools</a></span><span class="op">)</span></span>
+<span><span class="co">#&gt; Le chargement a nécessité le package : phytools</span></span>
+<span><span class="co">#&gt; Le chargement a nécessité le package : maps</span></span>
+<span><span class="fu"><a href="https://rdrr.io/pkg/phytools/man/plotTree.html">plotTree</a></span><span class="op">(</span><span class="va">akodon.tree</span>,ftype<span class="op">=</span><span class="st">"i"</span>,fsize<span class="op">=</span><span class="fl">0.8</span>,lwd<span class="op">=</span><span class="fl">1</span><span class="op">)</span></span></code></pre></div>
+<div class="inline-figure"><img src="04.1-pcmtrees_files/figure-html/unnamed-chunk-1-6.png" width="672"></div>
+<div class="sourceCode" id="cb138"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># filograma arredondado</span></span>
+<span><span class="fu"><a href="https://rdrr.io/pkg/phytools/man/roundPhylogram.html">roundPhylogram</a></span><span class="op">(</span><span class="va">akodon.tree</span><span class="op">)</span></span></code></pre></div>
+<div class="inline-figure"><img src="04.1-pcmtrees_files/figure-html/unnamed-chunk-1-7.png" width="672"></div>
+<div class="sourceCode" id="cb139"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># cladograma desenraizado (unrooted)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/ape/man/root.html">unroot</a></span><span class="op">(</span><span class="va">akodon.tree</span><span class="op">)</span>,type<span class="op">=</span><span class="st">"unrooted"</span>,cex<span class="op">=</span><span class="fl">0.8</span>,use.edge.length<span class="op">=</span><span class="cn">FALSE</span>,lab4ut<span class="op">=</span><span class="st">"axial"</span><span class="op">)</span></span></code></pre></div>
+<div class="inline-figure"><img src="04.1-pcmtrees_files/figure-html/unnamed-chunk-1-8.png" width="672"></div>
+<div class="sourceCode" id="cb140"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># árvore circular (fan tree)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/pkg/phytools/man/plotTree.html">plotTree</a></span><span class="op">(</span><span class="va">akodon.tree</span>,type<span class="op">=</span><span class="st">"fan"</span>,fsize<span class="op">=</span><span class="fl">0.8</span>,lwd<span class="op">=</span><span class="fl">1</span>,ftype<span class="op">=</span><span class="st">"i"</span><span class="op">)</span></span></code></pre></div>
+<div class="inline-figure"><img src="04.1-pcmtrees_files/figure-html/unnamed-chunk-1-9.png" width="672"></div>
+<div class="sourceCode" id="cb141"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Legenda dos comprimento de ramos</span></span>
+<span><span class="op">{</span><span class="fu"><a href="https://rdrr.io/pkg/phytools/man/plotTree.html">plotTree</a></span><span class="op">(</span><span class="va">akodon.tree</span>,ftype<span class="op">=</span><span class="st">"i"</span>,fsize<span class="op">=</span><span class="fl">0.8</span>,lwd<span class="op">=</span><span class="fl">1</span>,mar<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">3.0</span>,<span class="fl">0.1</span>,<span class="fl">0.1</span>,<span class="fl">0.1</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/pkg/ape/man/axisPhylo.html">axisPhylo</a></span><span class="op">(</span><span class="op">)</span><span class="op">}</span></span></code></pre></div>
+<div class="inline-figure"><img src="04.1-pcmtrees_files/figure-html/unnamed-chunk-1-10.png" width="672"></div>
+<div id="extraindo-subclados-ou-espécies-da-árvore" class="section level2" number="19.1">
+<h2>
+<span class="header-section-number">19.1</span> Extraindo subclados ou espécies da árvore<a class="anchor" aria-label="anchor" href="#extraindo-subclados-ou-esp%C3%A9cies-da-%C3%A1rvore"><i class="fas fa-link"></i></a>
+</h2>
+<p>Podemos remover ou manter apenas determinadas espécies ou subclados da árvore. Pra isso, as espécies devem estar identificadas pelos seus nomes (tip labels) ou os subclados pelo nome ou número do nó que identifica o ancestral comum mais recente do subclado. Abaixo estão exemplificadas as duas formas.</p>
+<div class="sourceCode" id="cb142"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">akodon.tree</span><span class="op">$</span><span class="va">tip.label</span></span>
+<span><span class="co"># Exemplo: identificar as espécies do gênero com ocorrência no sul do Brasil</span></span>
+<span><span class="va">sul.especies</span><span class="op">&lt;-</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Akodon_paranaensis"</span>,<span class="st">"Akodon_azarae"</span>,<span class="st">"Akodon_reigi"</span>,<span class="st">"Akodon_montensis"</span>,<span class="st">"Cast</span></span>
+<span><span class="st">oria_angustidens"</span><span class="op">)</span></span>
+<span><span class="co"># remover essas espécies da árvore</span></span>
+<span><span class="va">akodon.drop</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/pkg/ape/man/drop.tip.html">drop.tip</a></span><span class="op">(</span><span class="va">akodon.tree</span>,<span class="va">sul.especies</span><span class="op">)</span></span>
+<span><span class="va">akodon.drop</span></span>
+<span><span class="fu"><a href="https://rdrr.io/pkg/phytools/man/plotTree.html">plotTree</a></span><span class="op">(</span><span class="va">akodon.tree</span>,ftype<span class="op">=</span><span class="st">"i"</span>,fsize<span class="op">=</span><span class="fl">0.8</span>,lwd<span class="op">=</span><span class="fl">1</span><span class="op">)</span></span></code></pre></div>
+<div class="inline-figure"><img src="04.1-pcmtrees_files/figure-html/unnamed-chunk-2-1.png" width="672"></div>
+<div class="sourceCode" id="cb143"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/phytools/man/plotTree.html">plotTree</a></span><span class="op">(</span><span class="va">akodon.drop</span>,ftype<span class="op">=</span><span class="st">"i"</span>,fsize<span class="op">=</span><span class="fl">0.8</span>,lwd<span class="op">=</span><span class="fl">1</span><span class="op">)</span></span></code></pre></div>
+<div class="inline-figure"><img src="04.1-pcmtrees_files/figure-html/unnamed-chunk-2-2.png" width="672"></div>
+<div class="sourceCode" id="cb144"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># ou manter apenas essas espécies na árvore</span></span>
+<span><span class="va">akodon.drop1</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/pkg/ape/man/drop.tip.html">drop.tip</a></span><span class="op">(</span><span class="va">akodon.tree</span>,<span class="fu"><a href="https://rdrr.io/r/base/sets.html">setdiff</a></span><span class="op">(</span><span class="va">akodon.tree</span><span class="op">$</span><span class="va">tip.label</span>,<span class="va">sul.especies</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="va">akodon.drop1</span></span>
+<span><span class="fu"><a href="https://rdrr.io/pkg/phytools/man/plotTree.html">plotTree</a></span><span class="op">(</span><span class="va">akodon.drop1</span>,ftype<span class="op">=</span><span class="st">"i"</span>,fsize<span class="op">=</span><span class="fl">0.8</span>,lwd<span class="op">=</span><span class="fl">1</span><span class="op">)</span></span></code></pre></div>
+<div class="inline-figure"><img src="04.1-pcmtrees_files/figure-html/unnamed-chunk-2-3.png" width="672"></div>
+<div class="sourceCode" id="cb145"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># extrair um subclado da árvore</span></span>
+<span><span class="op">{</span><span class="fu"><a href="https://rdrr.io/pkg/phytools/man/plotTree.html">plotTree</a></span><span class="op">(</span><span class="va">akodon.tree</span>,ftype<span class="op">=</span><span class="st">"i"</span>,fsize<span class="op">=</span><span class="fl">0.8</span>,lwd<span class="op">=</span><span class="fl">1</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/pkg/ape/man/nodelabels.html">nodelabels</a></span><span class="op">(</span><span class="op">)</span><span class="op">}</span></span></code></pre></div>
+<div class="inline-figure"><img src="04.1-pcmtrees_files/figure-html/unnamed-chunk-2-4.png" width="672"></div>
+<div class="sourceCode" id="cb146"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">clado1</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/pkg/ape/man/drop.tip.html">extract.clade</a></span><span class="op">(</span><span class="va">akodon.tree</span>,node<span class="op">=</span><span class="fl">35</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/pkg/phytools/man/plotTree.html">plotTree</a></span><span class="op">(</span><span class="va">clado1</span>,ftype<span class="op">=</span><span class="st">"i"</span>,fsize<span class="op">=</span><span class="fl">0.8</span>,lwd<span class="op">=</span><span class="fl">1</span><span class="op">)</span></span></code></pre></div>
+<div class="inline-figure"><img src="04.1-pcmtrees_files/figure-html/unnamed-chunk-2-5.png" width="672"></div>
+<div class="sourceCode" id="cb147"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># remover o clado</span></span>
+<span><span class="va">akodon.noclado1</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/pkg/ape/man/drop.tip.html">drop.tip</a></span><span class="op">(</span><span class="va">akodon.tree</span>,<span class="va">clado1</span><span class="op">$</span><span class="va">tip.label</span><span class="op">)</span></span>
+<span><span class="va">akodon.noclado1</span></span>
+<span><span class="fu"><a href="https://rdrr.io/pkg/phytools/man/plotTree.html">plotTree</a></span><span class="op">(</span><span class="va">akodon.noclado1</span>,ftype<span class="op">=</span><span class="st">"i"</span>,fsize<span class="op">=</span><span class="fl">0.8</span>,lwd<span class="op">=</span><span class="fl">1</span><span class="op">)</span></span></code></pre></div>
+<div class="inline-figure"><img src="04.1-pcmtrees_files/figure-html/unnamed-chunk-2-6.png" width="672"></div>
+<div class="sourceCode" id="cb148"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># função interativa do phytools para remover clados</span></span>
+<span><span class="va">akodon.col</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/pkg/phytools/man/collapseTree.html">collapseTree</a></span><span class="op">(</span><span class="va">akodon.tree</span><span class="op">)</span></span></code></pre></div>
+<div class="inline-figure"><img src="04.1-pcmtrees_files/figure-html/unnamed-chunk-2-7.png" width="672"></div>
+<div class="sourceCode" id="cb149"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/phytools/man/plotTree.html">plotTree</a></span><span class="op">(</span><span class="va">akodon.col</span>,ftype<span class="op">=</span><span class="st">"i"</span>,fsize<span class="op">=</span><span class="fl">0.8</span>,lwd<span class="op">=</span><span class="fl">1</span><span class="op">)</span></span></code></pre></div>
+<div class="inline-figure"><img src="04.1-pcmtrees_files/figure-html/unnamed-chunk-2-8.png" width="672"></div>
+</div>
+<div id="incerteza-filogenética" class="section level2" number="19.2">
+<h2>
+<span class="header-section-number">19.2</span> Incerteza filogenética<a class="anchor" aria-label="anchor" href="#incerteza-filogen%C3%A9tica"><i class="fas fa-link"></i></a>
+</h2>
+<p>Uma árvore filogenética é uma hipótese sobre as relações de parentesco entre aquelas espécies. Assim, é recomendável avaliar a incerteza resultante do uso de hipóteses alternativas. Uma das maneiras de fazer isso é repetindo as análises de interesse para um conjunto de árvores (hipóteses).</p>
+<div id="politomias" class="section level3" number="19.2.1">
+<h3>
+<span class="header-section-number">19.2.1</span> Politomias<a class="anchor" aria-label="anchor" href="#politomias"><i class="fas fa-link"></i></a>
+</h3>
+<p>Uma das fontes de incerteza filogenética são as politomias. Algumas das funções implementando métodos comparativos no R, que veremos, vão aceitar ávores com politomias, outras funções não vão. Podemos considerar incerteza filogenética ao resolver aleatoriamente as politomias um grande número de vezes, e considerar todas as hipóteses alternativas nos nossos testes estatísticos. Uma das maneiras mais simples de resolver politomias no R é usando a função multi2di do pacote <em>ape</em>.</p>
+<div class="sourceCode" id="cb150"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">ex</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/pkg/ape/man/read.tree.html">read.tree</a></span><span class="op">(</span>text<span class="op">=</span><span class="st">"((A,B,C),(D,E));"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">ex</span><span class="op">)</span></span></code></pre></div>
+<div class="inline-figure"><img src="04.1-pcmtrees_files/figure-html/unnamed-chunk-3-1.png" width="672"></div>
+<div class="sourceCode" id="cb151"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/ape/man/is.binary.tree.html">is.binary</a></span><span class="op">(</span><span class="va">ex</span><span class="op">)</span></span>
+<span><span class="co"># resolver ao acaso uma única vez</span></span>
+<span><span class="va">ex1</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/pkg/ape/man/multi2di.html">multi2di</a></span><span class="op">(</span><span class="va">ex</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">ex1</span><span class="op">)</span></span></code></pre></div>
+<div class="inline-figure"><img src="04.1-pcmtrees_files/figure-html/unnamed-chunk-3-2.png" width="672"></div>
+<div class="sourceCode" id="cb152"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/ape/man/is.binary.tree.html">is.binary</a></span><span class="op">(</span><span class="va">ex1</span><span class="op">)</span></span></code></pre></div>
+<p>Lembre-se que ao resolver apenas 1 vez ao acaso não existe avaliação de incerteza filogenética, é preciso repetir o processo um determinado número de vezes, que vai depender de quantas instâncias de politomia estiverem presentes na árvore, e quantas espécies estiverem nas politomias. Existem outros métodos que permitem gerar múltiplas árvores com as politomias resolvidas ao acaso. Por exemplo: <a href="https://bioinfo.inf.ufg.br/sunplin/">sunplin</a>- <span class="citation">Rangel et al. (2015)</span>.</p>
+</div>
+<div id="multiplas-árvores" class="section level3" number="19.2.2">
+<h3>
+<span class="header-section-number">19.2.2</span> Multiplas árvores<a class="anchor" aria-label="anchor" href="#multiplas-%C3%A1rvores"><i class="fas fa-link"></i></a>
+</h3>
+<p>Múltiplas filogenias são úteis quando queremos incorporar incerteza filogenética, por exemplo, replicando as mesmas análises em múltiplas árvores.
+Árvores múltiplas pertencem ao objeto de classe multiPhylo, que é uma lista de filogenias da classe phylo. Muitas funções podem prontamente ser aplicadas tanto para phylo como para multiPhylo. Algumas vão exigir a replicação em cada filogenia separada.
+Vamos juntar as árvores que criamos até aqui para exemplificar um objeto multiPhylo.</p>
+<div class="sourceCode" id="cb153"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">akodon.trees</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">akodon.tree</span>,<span class="va">akodon.drop</span>,<span class="va">akodon.drop1</span>,<span class="va">clado1</span>,<span class="va">akodon.noclado1</span><span class="op">)</span></span>
+<span><span class="va">akodon.trees</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/class.html">class</a></span><span class="op">(</span><span class="va">akodon.trees</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">akodon.trees</span>,details<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/str.html">str</a></span><span class="op">(</span><span class="va">akodon.trees</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span><span class="op">)</span></span></code></pre></div>
+<p>Um exemplo para uso de funções em múltiplas árvores, uma por vez, exemplificado com o recorte de uma parte da árvore.</p>
+<div class="sourceCode" id="cb154"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Extraindo clados de múltiplas árvores</span></span>
+<span><span class="va">trees</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/pkg/phytools/man/pbtree.html">pbtree</a></span><span class="op">(</span>n<span class="op">=</span><span class="fl">50</span>,nsim<span class="op">=</span><span class="fl">100</span><span class="op">)</span></span>
+<span><span class="va">trees</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">trees</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span><span class="op">)</span></span></code></pre></div>
+<div class="inline-figure"><img src="04.1-pcmtrees_files/figure-html/unnamed-chunk-5-1.png" width="672"></div>
+<div class="sourceCode" id="cb155"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">tree_cortado</span><span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/vector.html">vector</a></span><span class="op">(</span>mode <span class="op">=</span> <span class="st">"list"</span>, <span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">trees</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="kw">for</span><span class="op">(</span><span class="va">i</span> <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span><span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">trees</span><span class="op">)</span><span class="op">)</span><span class="op">{</span></span>
+<span> <span class="va">tree_cortado</span><span class="op">[[</span><span class="va">i</span><span class="op">]</span><span class="op">]</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/pkg/ape/man/drop.tip.html">keep.tip</a></span><span class="op">(</span><span class="va">trees</span><span class="op">[[</span><span class="va">i</span><span class="op">]</span><span class="op">]</span>, tip<span class="op">=</span><span class="va">trees</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span><span class="op">$</span><span class="va">tip.label</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">12</span><span class="op">]</span><span class="op">)</span></span>
+<span><span class="op">}</span></span>
+<span><span class="va">tree_cortado</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">tree_cortado</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span><span class="op">)</span></span></code></pre></div>
+<div class="inline-figure"><img src="04.1-pcmtrees_files/figure-html/unnamed-chunk-5-2.png" width="672"></div>
+
+</div>
+</div>
+</div>
+  <div class="chapter-nav">
+<div class="prev"><a href="macroevolu%C3%A7%C3%A3o.html"><span class="header-section-number">18</span> Macroevolução</a></div>
+<div class="next"><a href="sinal-filogen%C3%A9tico.html"><span class="header-section-number">20</span> Sinal filogenético</a></div>
+</div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
+    <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
+      <ul class="nav navbar-nav">
+<li><a class="nav-link" href="#lendo-e-manipulando-%C3%A1rvores-filogen%C3%A9ticas-no-r"><span class="header-section-number">19</span> Lendo e manipulando árvores filogenéticas no R</a></li>
+<li><a class="nav-link" href="#extraindo-subclados-ou-esp%C3%A9cies-da-%C3%A1rvore"><span class="header-section-number">19.1</span> Extraindo subclados ou espécies da árvore</a></li>
+<li>
+<a class="nav-link" href="#incerteza-filogen%C3%A9tica"><span class="header-section-number">19.2</span> Incerteza filogenética</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#politomias"><span class="header-section-number">19.2.1</span> Politomias</a></li>
+<li><a class="nav-link" href="#multiplas-%C3%A1rvores"><span class="header-section-number">19.2.2</span> Multiplas árvores</a></li>
+</ul>
+</li>
+</ul>
+
+      <div class="book-extra">
+        <ul class="list-unstyled">
+<li><a id="book-source" href="https://github.com/renanmaestri/eebb/blob/master/04.1-pcmtrees.Rmd">View source <i class="fab fa-github"></i></a></li>
+          <li><a id="book-edit" href="https://github.com/renanmaestri/eebb/edit/master/04.1-pcmtrees.Rmd">Edit this page <i class="fab fa-github"></i></a></li>
+        </ul>
+</div>
+    </nav>
+</div>
+
+</div>
+</div> <!-- .container -->
+
+<footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>"<strong>Manual de Ecologia Evolutiva, Biometria e Biogeografia</strong>" was written by Renan Maestri. It was last built on 2023-11-14.</p>
+  </div>
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>This book was built by the <a class="text-light" href="https://bookdown.org">bookdown</a> R package.</p>
+  </div>
+
+</div></div>
+</footer><!-- dynamically load mathjax for compatibility with self-contained --><script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script><script type="text/x-mathjax-config">const popovers = document.querySelectorAll('a.footnote-ref[data-toggle="popover"]');
+for (let popover of popovers) {
+  const div = document.createElement('div');
+  div.setAttribute('style', 'position: absolute; top: 0, left:0; width:0, height:0, overflow: hidden; visibility: hidden;');
+  div.innerHTML = popover.getAttribute('data-content');
+
+  var has_math = div.querySelector("span.math");
+  if (has_math) {
+    document.body.appendChild(div);
+    MathJax.Hub.Queue(["Typeset", MathJax.Hub, div]);
+    MathJax.Hub.Queue(function() {
+      popover.setAttribute('data-content', div.innerHTML);
+      document.body.removeChild(div);
+    })
+  }
+}
+</script>
+</body>
+</html>

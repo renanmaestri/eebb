@@ -1,6 +1,6 @@
 # (PART) PARTE II - Introdução ao R {-}
 
-# Uma breve introdução ao R
+# Uma breve introdução ao R {#cap2}
 
 O R pode ser instalado a partir do website: <https://www.r-project.org/> Nós vamos usar também o RStudio: <https://www.rstudio.com/>
 
@@ -201,7 +201,7 @@ seguido do nome da função.
 
 ```r
 ?mean
-#> starting httpd help server ... done
+#> démarrage du serveur d'aide httpd ... fini
 ?matrix
 ```
 
@@ -336,7 +336,7 @@ install.packages("geiger")
 ```r
 # Carregar ape 
 require(ape) 
-#> Carregando pacotes exigidos: ape
+#> Le chargement a nécessité le package : ape
 # Construindo uma árvore newick via texto 
 texto<-"(((((((vaca, cavalo),baleia),(morcego,(camundongo,humano))),(pardal,tartaruga)),celacanto),nemo),tubarão);"
 # Função read.tree lê o arquivo contendo a árvore 

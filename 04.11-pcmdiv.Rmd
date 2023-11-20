@@ -10,7 +10,7 @@ bibliography: references.bib
 ## Diversificação constante
 
 Primeiro, vamos carregar alguns dados e calcular uma diversificação
-líquida simples, esperada sobr um modelo *pure-birth* [@magallon2001.
+líquida simples, esperada sobr um modelo *pure-birth* [@magallon2001].
 
 ```{r, results='hide', warning=FALSE}
 require(ape)
@@ -29,15 +29,10 @@ r1*stem_age
 log(n_sp)
 ```
 
-Agora, vamos estimar extinção constante com um modelo *birth-death*. No
-pacote *ape*, a função birthdeath estima taxas de extinção e especiação
-em uma filogenia (método de @nee1994). As estimativas são confiáveis se
-a premissas do modelo forem reais (especiação e extinção constantes no
-tempo). O método também assume uma filogenia completa. *b* é a taxa de
-especiação e *d* é a taxa de extinção.
+Agora, vamos estimar extinção constante com um modelo *birth-death*. No pacote *ape*, a função birthdeath estima taxas de extinção e especiação em uma filogenia (método de @nee1994). As estimativas são confiáveis se as premissas do modelo forem reais (especiação e extinção constantes no tempo). O método também assume uma filogenia completa. *b* é a taxa de especiação e *d* é a taxa de extinção.
 
 ```{r, results='hide', warning=FALSE}
-nee<-birthdeath(tree)
+#nee<-birthdeath(tree)
 ```
 
 A árvore contem algumas politomias. Vamos resolver as politomias e
@@ -51,35 +46,23 @@ nee
 ```
 
 Por motivos computacionais, a função birthdeath estima os parâmetros
-derivados b-d e d/b (a diferença entre especiação e extinção [*net
-diversification*] e a razão entre extinção e especiação [*relative
-extinction rate*], respectivamente). Para encontrar b e d podemos usar a
-função bd do pacote *phytools*:
+derivados b-d e d/b (a diferença entre especiação e extinção (*net
+diversification*) e a razão entre extinção e especiação (*relative
+extinction rate*), respectivamente). Para encontrar b e d podemos usar a função bd do pacote *phytools*:
 
 ```{r, results='hide', warning=FALSE}
 bd(nee)
 ```
 
-As unidades dos valores dependem da unidade do comprimento dos ramos (ln
-para número de espécies).Só é possível comparar árvores diferentes
-quando o comprimento dos ramos está na mesma unidade.
+As unidades dos valores dependem da unidade do comprimento dos ramos (ln para número de espécies).Só é possível comparar árvores diferentes quando o comprimento dos ramos está na mesma unidade.
 
-Pacote *diversitree*. O pacote diversitree possui múltiplas funções para
-realizar vários tipos de análises de diversificação com filogenias. Uma
-das vantagens do diversitree é que ele permite levar em consideração a
-incompletude no número de espécies amostradas. Na nossa filogenia dos
-primatas, existem 226 espécies amostradas de um total de \~300 (o número
-variava de 190 até 350 da última vez que conferi; vamos considerar 300
-para exemplo). Isso é cerca de 75% de espécies presentes. O diversitree
-também permite ajustar modelos pure-birth (Yule) e birth-death (BD) e
-compará-los.
+Pacote *diversitree*. O pacote diversitree possui múltiplas funções para realizar vários tipos de análises de diversificação com filogenias. Uma das vantagens do diversitree é que ele permite levar em consideração a incompletude no número de espécies amostradas. Na nossa filogenia dos primatas, existem 226 espécies amostradas de um total de aprox. 300 (o número variava de 190 até 350 da última vez que conferi; vamos considerar 300 para exemplo). Isso é cerca de 75% de espécies presentes. O diversitree também permite ajustar modelos pure-birth (Yule) e birth-death (BD) e compará-los.
 
 ```{r, results='hide', warning=FALSE}
 require(diversitree)
 # Yule (pure-birth -- somente especiação)
 modelo.pb<-make.yule(tree,sampling.f = 226/300)
-param.pb<-find.mle(modelo.pb,x.init=0.1) # Estimar os valores dos parâmetros por 
-ML # x.init é um valor arbitrário para iniciar o otimização
+param.pb<-find.mle(modelo.pb,x.init=0.1) # Estimar os valores dos parâmetros por ML # x.init é um valor arbitrário para iniciar o otimização
 param.pb
 ```
 
@@ -98,10 +81,7 @@ Comparar modelos.
 anova(param.bd,pure.birth=param.pb)
 ```
 
-O modelo que incluí extinção (birth-death) aumentou significativamente o
-seu ajuste em comparação com o modelo *pure-birth*. Esse é
-essencialmente um sinal de que a extinção é importante (o parâmetro
-adicional *d* se justifica).
+O modelo que incluí extinção (birth-death) aumentou significativamente o seu ajuste em comparação com o modelo *pure-birth*. Esse é essencialmente um sinal de que a extinção é importante (o parâmetro adicional *d* se justifica).
 
 MCMC.O pacote *diversitree* também permite rodar analises bayesianas
 para estimar os parâmetros de diversificação usando a distribuição
@@ -139,8 +119,7 @@ usando verossimilhança.
 require(RPANDA)
 ```
 
-Nós vamos ajustar modelos com combinações de lambda e mu constantes e
-variáveis. Os modelos podem ser consultados no help do *RPANDA*.
+Nós vamos ajustar modelos com combinações de lambda e mu constantes e variáveis. Os modelos podem ser consultados no help do *RPANDA*.
 
 ```{r, results='hide', warning=FALSE}
 lambda.cst <- function(t,y){y[1]} # lambda constante
@@ -246,14 +225,9 @@ aic.w(macro_aic)
 aic.w(resto_aic)
 ```
 
-Novamente os resultados são um pouco inconclusivos. Parece haver maior
-suporte para modelos com taxas variáveis do que constantes. Para o clado
-Macropodidae uma variação exponencial nas taxas de especiação parece bem
-provável, enquanto que para o resto da árvore, uma variação em ambas as
-taxas (especiação e extinção) é mais provável.
+Novamente os resultados são um pouco inconclusivos. Parece haver maior suporte para modelos com taxas variáveis do que constantes. Para o clado Macropodidae uma variação exponencial nas taxas de especiação parece bem provável, enquanto que para o resto da árvore, uma variação em ambas as taxas (especiação e extinção) é mais provável.
 
-Podemos plotar as taxas de especiação, extinção, e diversificação (b-d)
-ao longo do tempo para os modelos mais prováveis de cada clado.
+Podemos plotar as taxas de especiação, extinção, e diversificação (b-d) ao longo do tempo para os modelos mais prováveis de cada clado.
 
 ```{r, results='hide', warning=FALSE}
 plot_fit_bd(macropodidae_panda$bvdc,max(branching.times(macropodidae.tree)))
@@ -264,29 +238,26 @@ plot(resto.tree)
 
 ## Exercício - Diversificação dependente de variável ambiental
 
-RPANDA pode ser usado para ajustar modelos de diversificação dependente
-de variável ambiental (fit_env). Como variável adicional, esse modelo
-requer uma estimativa da variação em uma variável ambiental de interesse
-ao longo do tempo. Zachos et al (2008) fornecem uma estimativa de
-variação de temperatura ao longo do Cenozóico baseada em isótopos de
-oxigênio.
+RPANDA pode ser usado para ajustar modelos de diversificação dependente de variável ambiental (fit_env). Como variável adicional, esse modelo requer uma estimativa da variação em uma variável ambiental de interesse ao longo do tempo. Zachos et al (2008) fornecem uma estimativa de variação de temperatura ao longo do Cenozóico baseada em isótopos de oxigênio.
 
-Baseado nos dados: Árvore para roedores sigmodontíneos:
-sigmodontinae-tree.tre Dados de temperatura, duas colunas com tempo e
-temperatura: Cenozoic_Temp.txt
+Baseado nos dados: 
+Árvore para roedores sigmodontíneos:
+sigmodontinae-tree.tre 
+Dados de temperatura, duas colunas com tempo e
+temperatura: 
+Cenozoic_Temp.txt
 
 Ajuste um modelo com variação nas taxas de especiação dependentes da
 temperatura, sem dependência temporal e sem extinção:
 
-lambda.env\<-function(t,x,y){y[1]*exp(y[2]*x)} e
-
-mu.zero\<-function(t,x,y){0}
+lambda.env<-function(t,x,y){y[1]*exp(y[2]*x)} 
+e
+mu.zero<-function(t,x,y){0}
 
 Com os parâmetros iniciais:
 
-lamb_par_init\<-c(0.10,0.01)
+lamb_par_init<-c(0.10,0.01)
 
-mu_par_init\<-c()
+mu_par_init<-c()
 
-O modelo deve ser ajustado com a função fit_env do pacote RPANDA. Plote
-os resultados com plot_fit_env e interprete os resultados.
+O modelo deve ser ajustado com a função fit_env do pacote RPANDA. Faça um gráfico dos resultados com plot_fit_env e interprete os resultados.

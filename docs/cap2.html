@@ -1,0 +1,582 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>Capítulo 2 Uma breve introdução ao R | Manual de Ecologia Evolutiva, Biometria e Biogeografia</title>
+<meta name="author" content="Renan Maestri">
+<meta name="description" content="O R pode ser instalado a partir do website: https://www.r-project.org/ Nós vamos usar também o RStudio: https://www.rstudio.com/ O R é um ambiente para análise computacional e produção de gráficos...">
+<meta name="generator" content="bookdown 0.36 with bs4_book()">
+<meta property="og:title" content="Capítulo 2 Uma breve introdução ao R | Manual de Ecologia Evolutiva, Biometria e Biogeografia">
+<meta property="og:type" content="book">
+<meta property="og:url" content="https://renanmaestri.github.io/eebb/cap2.html">
+<meta property="og:image" content="https://renanmaestri.github.io/eebb/images/Slogan_oficial_sologo.jpg">
+<meta property="og:description" content="O R pode ser instalado a partir do website: https://www.r-project.org/ Nós vamos usar também o RStudio: https://www.rstudio.com/ O R é um ambiente para análise computacional e produção de gráficos...">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Capítulo 2 Uma breve introdução ao R | Manual de Ecologia Evolutiva, Biometria e Biogeografia">
+<meta name="twitter:description" content="O R pode ser instalado a partir do website: https://www.r-project.org/ Nós vamos usar também o RStudio: https://www.rstudio.com/ O R é um ambiente para análise computacional e produção de gráficos...">
+<meta name="twitter:image" content="https://renanmaestri.github.io/eebb/images/Slogan_oficial_sologo.jpg">
+<!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.5.1/transition.js"></script><script src="libs/bs3compat-0.5.1/tabs.js"></script><script src="libs/bs3compat-0.5.1/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><style type="text/css">
+    
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  </style>
+<style type="text/css">
+    /* Used with Pandoc 2.11+ new --citeproc when CSL is used */
+    div.csl-bib-body { }
+    div.csl-entry {
+      clear: both;
+        }
+    .hanging div.csl-entry {
+      margin-left:2em;
+      text-indent:-2em;
+    }
+    div.csl-left-margin {
+      min-width:2em;
+      float:left;
+    }
+    div.csl-right-inline {
+      margin-left:2em;
+      padding-left:1em;
+    }
+    div.csl-indent {
+      margin-left: 2em;
+    }
+  </style>
+<link rel="stylesheet" href="style.css">
+</head>
+<body data-spy="scroll" data-target="#toc">
+
+<div class="container-fluid">
+<div class="row">
+  <header class="col-sm-12 col-lg-3 sidebar sidebar-book"><a class="sr-only sr-only-focusable" href="#content">Skip to main content</a>
+
+    <div class="d-flex align-items-start justify-content-between">
+      <h1>
+        <a href="index.html" title="">Manual de Ecologia Evolutiva, Biometria e Biogeografia</a>
+      </h1>
+      <button class="btn btn-outline-primary d-lg-none ml-2 mt-1" type="button" data-toggle="collapse" data-target="#main-nav" aria-expanded="true" aria-controls="main-nav"><i class="fas fa-bars"></i><span class="sr-only">Show table of contents</span></button>
+    </div>
+
+    <div id="main-nav" class="collapse-lg">
+      <form role="search">
+        <input id="search" class="form-control" type="search" placeholder="Search" aria-label="Search">
+</form>
+
+      <nav aria-label="Table of contents"><h2>Table of contents</h2>
+        <ul class="book-toc list-unstyled">
+<li><a class="" href="index.html">Prefácio</a></li>
+<li class="book-part">PARTE I - Conceitos básicos</li>
+<li><a class="" href="conceitos-b%C3%A1sicos.html"><span class="header-section-number">1</span> Conceitos básicos</a></li>
+<li class="book-part">PARTE II - Introdução ao R</li>
+<li><a class="active" href="cap2.html"><span class="header-section-number">2</span> Uma breve introdução ao R</a></li>
+<li class="book-part">PARTE III - Morfometria Geométrica</li>
+<li><a class="" href="cap3.html"><span class="header-section-number">3</span> Morfometria Geométrica</a></li>
+<li><a class="" href="digitaliza%C3%A7%C3%A3o-de-landmarks.html"><span class="header-section-number">4</span> Digitalização de landmarks</a></li>
+<li><a class="" href="an%C3%A1lise-de-procrustes.html"><span class="header-section-number">5</span> Análise de Procrustes</a></li>
+<li><a class="" href="visualiza%C3%A7%C3%A3o-da-forma.html"><span class="header-section-number">6</span> Visualização da forma</a></li>
+<li><a class="" href="assimetria-e-quantifica%C3%A7%C3%A3o-de-erro.html"><span class="header-section-number">7</span> Assimetria e quantificação de erro</a></li>
+<li><a class="" href="semilandmarks.html"><span class="header-section-number">8</span> Semilandmarks</a></li>
+<li><a class="" href="tamanho-do-centr%C3%B3ide.html"><span class="header-section-number">9</span> Tamanho do Centróide</a></li>
+<li><a class="" href="m%C3%A9todos-de-ordena%C3%A7%C3%A3o.html"><span class="header-section-number">10</span> Métodos de ordenação</a></li>
+<li><a class="" href="partial-least-squares.html"><span class="header-section-number">11</span> Partial Least Squares</a></li>
+<li><a class="" href="modelos-lineares-para-discrimina%C3%A7%C3%A3o-de-grupos.html"><span class="header-section-number">12</span> Modelos lineares para discriminação de grupos</a></li>
+<li><a class="" href="alometria.html"><span class="header-section-number">13</span> Alometria</a></li>
+<li><a class="" href="an%C3%A1lise-de-trajet%C3%B3ria.html"><span class="header-section-number">14</span> Análise de Trajetória</a></li>
+<li><a class="" href="integra%C3%A7%C3%A3o-morfol%C3%B3gica-e-modularidade.html"><span class="header-section-number">15</span> Integração morfológica e modularidade</a></li>
+<li><a class="" href="disparidade-e-varia%C3%A7%C3%A3o-morfol%C3%B3gica.html"><span class="header-section-number">16</span> Disparidade e variação morfológica</a></li>
+<li><a class="" href="morfometria-geom%C3%A9trica-e-filogenias.html"><span class="header-section-number">17</span> Morfometria geométrica e filogenias</a></li>
+<li class="book-part">PARTE IV - Macroevolução</li>
+<li><a class="" href="macroevolu%C3%A7%C3%A3o.html"><span class="header-section-number">18</span> Macroevolução</a></li>
+<li><a class="" href="lendo-e-manipulando-%C3%A1rvores-filogen%C3%A9ticas-no-r.html"><span class="header-section-number">19</span> Lendo e manipulando árvores filogenéticas no R</a></li>
+<li><a class="" href="sinal-filogen%C3%A9tico.html"><span class="header-section-number">20</span> Sinal filogenético</a></li>
+<li><a class="" href="modelos-para-evolu%C3%A7%C3%A3o-de-fen%C3%B3tipos-cont%C3%ADnuos.html"><span class="header-section-number">21</span> Modelos para evolução de fenótipos contínuos</a></li>
+<li><a class="" href="modelos-para-evolu%C3%A7%C3%A3o-de-fen%C3%B3tipos-discretos.html"><span class="header-section-number">22</span> Modelos para evolução de fenótipos discretos</a></li>
+<li><a class="" href="regress%C3%A3o-filogen%C3%A9tica.html"><span class="header-section-number">23</span> Regressão filogenética</a></li>
+<li><a class="" href="correla%C3%A7%C3%A3o-de-fen%C3%B3tipos-discretos.html"><span class="header-section-number">24</span> Correlação de fenótipos discretos</a></li>
+<li><a class="" href="evolu%C3%A7%C3%A3o-multi-taxa-e-multi-regime.html"><span class="header-section-number">25</span> Evolução multi-taxa e multi-regime</a></li>
+<li><a class="" href="m%C3%A9todos-filogen%C3%A9ticos-multivariados.html"><span class="header-section-number">26</span> Métodos filogenéticos multivariados</a></li>
+<li><a class="" href="disparidade-fenot%C3%ADpica-ao-longo-do-tempo.html"><span class="header-section-number">27</span> Disparidade fenotípica ao longo do tempo</a></li>
+<li><a class="" href="diversifica%C3%A7%C3%A3o-de-linhagens.html"><span class="header-section-number">28</span> Diversificação de linhagens</a></li>
+<li><a class="" href="taxas-de-especia%C3%A7%C3%A3o-e-extin%C3%A7%C3%A3o-constantes-e-vari%C3%A1veis.html"><span class="header-section-number">29</span> Taxas de especiação e extinção constantes e variáveis</a></li>
+<li><a class="" href="diversifica%C3%A7%C3%A3o-dependente-de-estado.html"><span class="header-section-number">30</span> Diversificação dependente de estado</a></li>
+<li><a class="" href="diversifica%C3%A7%C3%A3o-baseada-em-terminais-tip-speciation.html"><span class="header-section-number">31</span> Diversificação baseada em terminais (tip-speciation)</a></li>
+<li><a class="" href="co-diversifica%C3%A7%C3%A3o.html"><span class="header-section-number">32</span> Co-diversificação</a></li>
+<li class="book-part">PARTE IV - Biogeografia e Macroecologia</li>
+<li><a class="" href="biogeografia-e-macroecologia.html"><span class="header-section-number">33</span> Biogeografia e Macroecologia</a></li>
+<li class="book-part">Conclusão</li>
+<li><a class="" href="considera%C3%A7%C3%B5es-finais.html"><span class="header-section-number">34</span> Considerações finais</a></li>
+<li><a class="" href="refer%C3%AAncias.html">Referências</a></li>
+</ul>
+
+        <div class="book-extra">
+          <p><a id="book-repo" href="https://github.com/renanmaestri/eebb">View book source <i class="fab fa-github"></i></a></p>
+        </div>
+      </nav>
+</div>
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="cap2" class="section level1" number="2">
+<h1>
+<span class="header-section-number">Capítulo 2</span> Uma breve introdução ao R<a class="anchor" aria-label="anchor" href="#cap2"><i class="fas fa-link"></i></a>
+</h1>
+<p>O R pode ser instalado a partir do website: <a href="https://www.r-project.org/" class="uri">https://www.r-project.org/</a> Nós vamos usar também o RStudio: <a href="https://www.rstudio.com/" class="uri">https://www.rstudio.com/</a></p>
+<p>O R é um ambiente para análise computacional e produção de gráficos baseado em linguagem de programação.
+Hoje, o R é o programa predominante em ecologia e evolução, em larga medida porque é e adaptável para várias necessidades, e existe uma comunidade grande de indivíduos dispostos a fornecer ajuda.
+No contexto da biometria e de análises filogenéticas comparativas, o R tem sido a área primária de desenvolvimento de novos métodos.</p>
+<p>Aqui, você vai encontrar um breve tutorial sobre o R para conseguir realizar as atividades práticas da disciplina.
+No entanto, há material muito mais completo disponível.
+Existem vários bons livros e cursos gratuitos de R e de estatística disponibilizados na web.
+Tire proveito deles!
+Por exemplo: - <a href="https://www.youtube.com/playlist?list=PL3U7PUKvYnzAZAEoFcjGLVkIML2ZGGl6t">Curso de Programação em R, prof. Bruno Vilela</a> - <a href="https://analises-ecologicas.com/">Livro Análises Ecológicas no R</a> - <a href="http://estat.bio.br/">Curso de Estatística para Pesquisa Científica, prof. Thiago Rangel</a></p>
+<div id="definindo-um-diretório-de-trabalho" class="section level2" number="2.1">
+<h2>
+<span class="header-section-number">2.1</span> Definindo um diretório de trabalho<a class="anchor" aria-label="anchor" href="#definindo-um-diret%C3%B3rio-de-trabalho"><i class="fas fa-link"></i></a>
+</h2>
+<p>É conveniente criar uma pasta única com todos os arquivos das aulas práticas.
+Nós vamos informar ao R para carregar os dados a partir desta pasta.
+Isso pode ser feito no RStudio com o menu: Session&gt;Set Working Directory&gt;Choose Directory.
+Ou com o código setwd().</p>
+</div>
+<div id="roteiros-scripts" class="section level2" number="2.2">
+<h2>
+<span class="header-section-number">2.2</span> Roteiros (scripts)<a class="anchor" aria-label="anchor" href="#roteiros-scripts"><i class="fas fa-link"></i></a>
+</h2>
+<p>Um script é um bloco de texto que pode ser editado em qualquer editor de texto comum (ex: bloco de notas), ou com o editor de texto do próprio R ou RStudio.
+Você vai escrever os códigos dentro do script, e depois enviar para o console do R - selecione a linha ou parte do código a ser enviada ao console do R e pressione ‘Run’ ou use crtl+r ou ctrl+Enter.
+Ao salvar o script você mantém um registro do código utilizado.
+Se você quiser adicionar comentários ao código basta adicionar o sinal # na frente do comentário.
+Uma ótima alternativa ao script comum é utilizar o R Markdown, onde é possível diferenciar facilmente códigos e textos explicativos.</p>
+</div>
+<div id="funcionamento-básico-do-r" class="section level2" number="2.3">
+<h2>
+<span class="header-section-number">2.3</span> Funcionamento básico do R<a class="anchor" aria-label="anchor" href="#funcionamento-b%C3%A1sico-do-r"><i class="fas fa-link"></i></a>
+</h2>
+<p>Objetos e funções são os principais componentes do R.
+Objetos são variáveis como dados ou resultados.
+Eles podem estar formatados de diferentes maneiras, formando estruturas diferentes.
+Por exemplo, vetores, matrizes, ‘dataframes’, listas, etc. são todos exemplos de estruturas de objetos.
+Funções são tipos especiais de objetos que usam um ou mais argumentos para fazer alguma coisa dentro do R.</p>
+<div class="alert alert-success" role="alert" style="color: black;">
+<p>Objetos são como proteínas e funções são como enzimas.
+Os aminoácidos são números ou letras.</p>
+</div>
+<p>Compilados de funções são organizados dentro de pacotes criados por diversos autores.</p>
+<p>O R funciona através de comandos, que são normalmente acompanhados de funções ou operações (+,-,*,etc).
+Um comando retorna um objeto na tela, ou armazena o objeto na memória quando um nome é atribuído com o operador &lt;- ou =.</p>
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fl">2</span><span class="op">+</span><span class="fl">5</span></span>
+<span><span class="co">#&gt; [1] 7</span></span>
+<span><span class="va">x</span><span class="op">&lt;-</span><span class="fl">2</span><span class="op">+</span><span class="fl">5</span></span>
+<span><span class="va">x</span></span>
+<span><span class="co">#&gt; [1] 7</span></span></code></pre></div>
+<p>Cuidado, os objetos distinguem letras maiúsculas de minúsculas.</p>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">x</span><span class="op">&lt;-</span><span class="fl">1</span></span>
+<span><span class="va">X</span><span class="op">&lt;-</span><span class="fl">10</span></span>
+<span><span class="va">x</span></span>
+<span><span class="co">#&gt; [1] 1</span></span>
+<span><span class="va">X</span></span>
+<span><span class="co">#&gt; [1] 10</span></span></code></pre></div>
+</div>
+<div id="tipos-de-objeto-no-r" class="section level2" number="2.4">
+<h2>
+<span class="header-section-number">2.4</span> Tipos de objeto no R<a class="anchor" aria-label="anchor" href="#tipos-de-objeto-no-r"><i class="fas fa-link"></i></a>
+</h2>
+<p>O R classifica objetos em tipos/classes dependendo de sua estrutura.
+Vamos encontrar frequentemente alguns tipos de objetos mais comuns, como vector, factor, matrix, data.frame, array e list.</p>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Vetores:</span></span>
+<span><span class="va">x</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">2</span>,<span class="fl">3</span>,<span class="fl">4</span>,<span class="fl">5</span><span class="op">)</span></span>
+<span><span class="va">x</span><span class="op">&lt;-</span><span class="fl">1</span><span class="op">:</span><span class="fl">5</span></span>
+<span><span class="va">x</span></span>
+<span><span class="co">#&gt; [1] 1 2 3 4 5</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/class.html">class</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span>
+<span><span class="co">#&gt; [1] "integer"</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span>
+<span><span class="co">#&gt; [1] 5</span></span>
+<span><span class="co"># A função which é útil para selecionar alguns dados de um vetor</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/which.html">which</a></span><span class="op">(</span><span class="va">x</span><span class="op">&gt;</span><span class="fl">3</span><span class="op">)</span></span>
+<span><span class="co">#&gt; [1] 4 5</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/which.html">which</a></span><span class="op">(</span><span class="va">x</span><span class="op">&gt;=</span><span class="fl">3</span><span class="op">)</span></span>
+<span><span class="co">#&gt; [1] 3 4 5</span></span></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Fatores possuem níveis</span></span>
+<span><span class="va">f</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Sp1"</span>,<span class="st">"Sp1"</span>,<span class="st">"Sp2"</span>,<span class="st">"Sp3"</span>,<span class="st">"Sp3"</span><span class="op">)</span></span>
+<span><span class="va">f</span></span>
+<span><span class="co">#&gt; [1] "Sp1" "Sp1" "Sp2" "Sp3" "Sp3"</span></span>
+<span><span class="va">f</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/base/factor.html">factor</a></span><span class="op">(</span><span class="va">f</span><span class="op">)</span></span>
+<span><span class="va">f</span></span>
+<span><span class="co">#&gt; [1] Sp1 Sp1 Sp2 Sp3 Sp3</span></span>
+<span><span class="co">#&gt; Levels: Sp1 Sp2 Sp3</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/table.html">table</a></span><span class="op">(</span><span class="va">f</span><span class="op">)</span></span>
+<span><span class="co">#&gt; f</span></span>
+<span><span class="co">#&gt; Sp1 Sp2 Sp3 </span></span>
+<span><span class="co">#&gt;   2   1   2</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/class.html">class</a></span><span class="op">(</span><span class="va">f</span><span class="op">)</span></span>
+<span><span class="co">#&gt; [1] "factor"</span></span></code></pre></div>
+<p>Os objetos podem conter nomes internos, o que é bastante útil com dados biológicos já que eles podem fornecer rótulos para os dados, ex: espécies ou localidades.</p>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span><span class="op">=</span><span class="va">f</span></span>
+<span><span class="va">x</span></span>
+<span><span class="co">#&gt; Sp1 Sp1 Sp2 Sp3 Sp3 </span></span>
+<span><span class="co">#&gt;   1   2   3   4   5</span></span></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Matrizes</span></span>
+<span><span class="va">m</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">9</span>,<span class="fl">3</span>,<span class="fl">3</span><span class="op">)</span> <span class="co"># dados, n-linhas, n-colunas</span></span>
+<span><span class="va">m</span></span>
+<span><span class="co">#&gt;      [,1] [,2] [,3]</span></span>
+<span><span class="co">#&gt; [1,]    1    4    7</span></span>
+<span><span class="co">#&gt; [2,]    2    5    8</span></span>
+<span><span class="co">#&gt; [3,]    3    6    9</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/class.html">class</a></span><span class="op">(</span><span class="va">m</span><span class="op">)</span></span>
+<span><span class="co">#&gt; [1] "matrix" "array"</span></span>
+<span><span class="va">m</span><span class="op">[</span>,<span class="fl">2</span><span class="op">]</span> <span class="co"># a segunda coluna</span></span>
+<span><span class="co">#&gt; [1] 4 5 6</span></span>
+<span><span class="va">m</span><span class="op">[</span><span class="fl">3</span>,<span class="op">]</span> <span class="co"># a terceira linha</span></span>
+<span><span class="co">#&gt; [1] 3 6 9</span></span></code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Data frames suportam vários tipos de dados distintos</span></span>
+<span><span class="va">d</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span><span class="va">f</span>,<span class="va">x</span><span class="op">)</span></span>
+<span><span class="va">d</span></span>
+<span><span class="co">#&gt;     f x</span></span>
+<span><span class="co">#&gt; 1 Sp1 1</span></span>
+<span><span class="co">#&gt; 2 Sp1 2</span></span>
+<span><span class="co">#&gt; 3 Sp2 3</span></span>
+<span><span class="co">#&gt; 4 Sp3 4</span></span>
+<span><span class="co">#&gt; 5 Sp3 5</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/class.html">class</a></span><span class="op">(</span><span class="va">d</span><span class="op">)</span></span>
+<span><span class="co">#&gt; [1] "data.frame"</span></span></code></pre></div>
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Lista é uma estrutura geral que pode carregar vários tipos de dados, incluindo, por ex. árvores filogenéticas</span></span>
+<span><span class="va">l</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="va">f</span>,<span class="va">x</span>,<span class="va">m</span>,<span class="va">d</span><span class="op">)</span></span>
+<span><span class="va">l</span></span>
+<span><span class="co">#&gt; [[1]]</span></span>
+<span><span class="co">#&gt; [1] Sp1 Sp1 Sp2 Sp3 Sp3</span></span>
+<span><span class="co">#&gt; Levels: Sp1 Sp2 Sp3</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; [[2]]</span></span>
+<span><span class="co">#&gt; Sp1 Sp1 Sp2 Sp3 Sp3 </span></span>
+<span><span class="co">#&gt;   1   2   3   4   5 </span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; [[3]]</span></span>
+<span><span class="co">#&gt;      [,1] [,2] [,3]</span></span>
+<span><span class="co">#&gt; [1,]    1    4    7</span></span>
+<span><span class="co">#&gt; [2,]    2    5    8</span></span>
+<span><span class="co">#&gt; [3,]    3    6    9</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; [[4]]</span></span>
+<span><span class="co">#&gt;     f x</span></span>
+<span><span class="co">#&gt; 1 Sp1 1</span></span>
+<span><span class="co">#&gt; 2 Sp1 2</span></span>
+<span><span class="co">#&gt; 3 Sp2 3</span></span>
+<span><span class="co">#&gt; 4 Sp3 4</span></span>
+<span><span class="co">#&gt; 5 Sp3 5</span></span>
+<span><span class="va">l</span><span class="op">[[</span><span class="fl">4</span><span class="op">]</span><span class="op">]</span> <span class="co"># quarto elemento da lista</span></span>
+<span><span class="co">#&gt;     f x</span></span>
+<span><span class="co">#&gt; 1 Sp1 1</span></span>
+<span><span class="co">#&gt; 2 Sp1 2</span></span>
+<span><span class="co">#&gt; 3 Sp2 3</span></span>
+<span><span class="co">#&gt; 4 Sp3 4</span></span>
+<span><span class="co">#&gt; 5 Sp3 5</span></span></code></pre></div>
+<p>A função ls() lista todos os objetos criados na seção.
+Você também pode conferir os objetos na aba Environment, ao lado.</p>
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/ls.html">ls</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<p>Todas as funções no R possuem uma página de ajuda descrevendo a função.
+A ajuda pode ser acessada com ?
+seguido do nome da função.</p>
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="op">?</span><span class="va">mean</span></span>
+<span><span class="co">#&gt; démarrage du serveur d'aide httpd ... fini</span></span>
+<span><span class="op">?</span><span class="va">matrix</span></span></code></pre></div>
+<div class="alert alert-danger" role="alert" style="color: black;">
+<p>Um dos aspectos importantes negligenciados por iniciantes no R são as páginas de ajuda!
+Sempre confira a ajuda da função que está tentando aplicar usando o operador ?
+antes do nome da função.
+Por exemplo, ?m
+ean.
+Preste atenção aos argumentos que a função usa, e quais tipos/estrutura de objetos são aceitos como argumentos.
+Estude a página de ajuda e entenda como ela funciona.</p>
+</div>
+<p>Algumas operações são úteis para reproduzir códigos/funções várias vezes.
+O <em>for</em> loop repete uma determinada operação por um número fixo de vezes.
+Por exemplo, para repetir a mesma operação em todas as filogenias de um conjunto de dados.</p>
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># For loop para calcular a média de atributos, ex: colunas de uma matriz</span></span>
+<span><span class="va">X</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">16</span>,<span class="fl">4</span>,<span class="fl">4</span><span class="op">)</span></span>
+<span><span class="va">X</span></span>
+<span><span class="co">#&gt;      [,1] [,2] [,3] [,4]</span></span>
+<span><span class="co">#&gt; [1,]    1    5    9   13</span></span>
+<span><span class="co">#&gt; [2,]    2    6   10   14</span></span>
+<span><span class="co">#&gt; [3,]    3    7   11   15</span></span>
+<span><span class="co">#&gt; [4,]    4    8   12   16</span></span>
+<span><span class="co"># vetor vazio para salvar os resultados</span></span>
+<span><span class="va">medias</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/base/vector.html">vector</a></span><span class="op">(</span>mode<span class="op">=</span><span class="st">"numeric"</span>,<span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/nrow.html">ncol</a></span><span class="op">(</span><span class="va">X</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="va">medias</span></span>
+<span><span class="co">#&gt; [1] 0</span></span>
+<span><span class="co"># loop</span></span>
+<span><span class="kw">for</span><span class="op">(</span><span class="va">i</span> <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span><span class="fu"><a href="https://rdrr.io/r/base/nrow.html">ncol</a></span><span class="op">(</span><span class="va">X</span><span class="op">)</span><span class="op">)</span><span class="op">{</span> </span>
+<span> <span class="va">medias</span><span class="op">[</span><span class="va">i</span><span class="op">]</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">X</span><span class="op">[</span>,<span class="va">i</span><span class="op">]</span><span class="op">)</span></span>
+<span><span class="op">}</span></span>
+<span><span class="co"># resultado</span></span>
+<span><span class="va">medias</span></span>
+<span><span class="co">#&gt; [1]  2.5  6.5 10.5 14.5</span></span></code></pre></div>
+</div>
+<div id="pacotes-no-r" class="section level2" number="2.5">
+<h2>
+<span class="header-section-number">2.5</span> Pacotes no R<a class="anchor" aria-label="anchor" href="#pacotes-no-r"><i class="fas fa-link"></i></a>
+</h2>
+<p>Os pacotes contêm compilados de funções que realizam tarefas sobre um determinado tema.
+Esses pacotes, criados por autores diversos, estão disponíveis para serem baixados e carregados no R.
+Os pacotes são baixados uma única vez no computador, porém, precisam ser carregados no console do R toda vez que se iniciar o R.</p>
+</div>
+<div id="pacotes-para-morfometria-geométrica" class="section level2" number="2.6">
+<h2>
+<span class="header-section-number">2.6</span> Pacotes para morfometria geométrica<a class="anchor" aria-label="anchor" href="#pacotes-para-morfometria-geom%C3%A9trica"><i class="fas fa-link"></i></a>
+</h2>
+<p>Um dos pacotes mais completos para morfometria geométrica é o <em>geomorph</em>.
+Vamos instalar esse pacote e carregar no R.
+Os pacotes podem ser instalados através de uma linha de comando ou clicando no botão Install da aba Packages.</p>
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"geomorph"</span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/geomorphR/geomorph">geomorph</a></span><span class="op">)</span></span></code></pre></div>
+<p>O <em>geomorph</em> é constantemente atualizado.
+Por isso, é recomendável checar frequentemente por atualizações nas funções.
+Com o comando ??
+seguido do nome do pacote (??geomorph) é possível acessar um resumo do pacote e de todas as suas funções.</p>
+</div>
+<div id="objetos-importantes-para-morfometria-geométrica" class="section level2" number="2.7">
+<h2>
+<span class="header-section-number">2.7</span> Objetos importantes para morfometria geométrica<a class="anchor" aria-label="anchor" href="#objetos-importantes-para-morfometria-geom%C3%A9trica"><i class="fas fa-link"></i></a>
+</h2>
+<p>Via de regra, dados obtidos via morfometria geométrica vão estar em um de 2 formatos no R: como <strong>3D array</strong> ou como <strong>matrix</strong>.
+No formato array, análogo ao formato .tps, cada indivíduo aparece de maneira individualizada e sequencial dentro do objeto; para cada indivíduo as linhas correspondem aos landmarks e as colunas às coordenadas x e y (e z se dados em 3D) de cada landmark.
+No formato matrix todos os indivíduos aparecem de uma única vez na matriz; as linhas correspondem aos indivíduos e as colunas correspondem às coordenadas dos landmarks de maneira sequencial: a coluna 1 corresponde ao landmark x1 de cada indivíduo (coordenada x do landmark 1), a coluna 2 = y1, coluna 3 = x2, coluna 4 = y2, coluna 5 = x3 etc.</p>
+<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Matrix </span></span>
+<span><span class="va">m</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">12</span>,<span class="fl">3</span>,<span class="fl">4</span><span class="op">)</span> <span class="co"># dados, n-linhas, n-colunas </span></span>
+<span><span class="va">m</span> <span class="co"># 3 indivíduos, 2 landmarks com coordenadas x,y </span></span>
+<span><span class="co">#&gt;      [,1] [,2] [,3] [,4]</span></span>
+<span><span class="co">#&gt; [1,]    1    4    7   10</span></span>
+<span><span class="co">#&gt; [2,]    2    5    8   11</span></span>
+<span><span class="co">#&gt; [3,]    3    6    9   12</span></span>
+<span><span class="co"># Array </span></span>
+<span><span class="va">n</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/base/array.html">array</a></span><span class="op">(</span><span class="va">m</span>,<span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">4</span>,<span class="fl">2</span>,<span class="fl">3</span><span class="op">)</span><span class="op">)</span> <span class="co">#dados, dimensões(p,k,n) (p=pontos,k=dimensões,n=amostra) </span></span>
+<span><span class="va">n</span> <span class="co"># 3 indivíduos, 2 landmarks com coordenadas x,y </span></span>
+<span><span class="co">#&gt; , , 1</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt;      [,1] [,2]</span></span>
+<span><span class="co">#&gt; [1,]    1    5</span></span>
+<span><span class="co">#&gt; [2,]    2    6</span></span>
+<span><span class="co">#&gt; [3,]    3    7</span></span>
+<span><span class="co">#&gt; [4,]    4    8</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; , , 2</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt;      [,1] [,2]</span></span>
+<span><span class="co">#&gt; [1,]    9    1</span></span>
+<span><span class="co">#&gt; [2,]   10    2</span></span>
+<span><span class="co">#&gt; [3,]   11    3</span></span>
+<span><span class="co">#&gt; [4,]   12    4</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; , , 3</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt;      [,1] [,2]</span></span>
+<span><span class="co">#&gt; [1,]    5    9</span></span>
+<span><span class="co">#&gt; [2,]    6   10</span></span>
+<span><span class="co">#&gt; [3,]    7   11</span></span>
+<span><span class="co">#&gt; [4,]    8   12</span></span>
+<span><span class="va">n</span><span class="op">[</span>,,<span class="fl">1</span><span class="op">]</span> <span class="co"># indivíduo número 1</span></span>
+<span><span class="co">#&gt;      [,1] [,2]</span></span>
+<span><span class="co">#&gt; [1,]    1    5</span></span>
+<span><span class="co">#&gt; [2,]    2    6</span></span>
+<span><span class="co">#&gt; [3,]    3    7</span></span>
+<span><span class="co">#&gt; [4,]    4    8</span></span></code></pre></div>
+</div>
+<div id="pacotes-filogenéticos-no-r" class="section level2" number="2.8">
+<h2>
+<span class="header-section-number">2.8</span> Pacotes filogenéticos no R<a class="anchor" aria-label="anchor" href="#pacotes-filogen%C3%A9ticos-no-r"><i class="fas fa-link"></i></a>
+</h2>
+<p>Existem muitos pacote lidando com métodos filogenéticos no R.
+Alguns que serão usados para manipular e representar graficamente árvores filogenéticas serão instalados abaixo.
+O pacote <em>ape</em> é o pacote central mais importante, já que propõe a classe <em>phylo</em>, que é utilizada pela grande maioria dos demais pacotes.</p>
+<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Instalando pacotes: </span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"ape"</span><span class="op">)</span> </span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"phytools"</span><span class="op">)</span> </span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"geiger"</span><span class="op">)</span></span></code></pre></div>
+</div>
+<div id="o-objeto-phylo" class="section level2" number="2.9">
+<h2>
+<span class="header-section-number">2.9</span> O objeto <em>phylo</em><a class="anchor" aria-label="anchor" href="#o-objeto-phylo"><i class="fas fa-link"></i></a>
+</h2>
+<p>Árvores filogenéticas são lidas no R como um objeto <em>list</em> de classe <em>phylo</em>.</p>
+<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Carregar ape </span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">require</a></span><span class="op">(</span><span class="va"><a href="http://ape-package.ird.fr/">ape</a></span><span class="op">)</span> </span>
+<span><span class="co">#&gt; Le chargement a nécessité le package : ape</span></span>
+<span><span class="co"># Construindo uma árvore newick via texto </span></span>
+<span><span class="va">texto</span><span class="op">&lt;-</span><span class="st">"(((((((vaca, cavalo),baleia),(morcego,(camundongo,humano))),(pardal,tartaruga)),celacanto),nemo),tubarão);"</span></span>
+<span><span class="co"># Função read.tree lê o arquivo contendo a árvore </span></span>
+<span><span class="va">arvore</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/pkg/ape/man/read.tree.html">read.tree</a></span><span class="op">(</span>text<span class="op">=</span><span class="va">texto</span><span class="op">)</span></span></code></pre></div>
+<p>Podemos representar a árvore graficamente, bem como estudar sua estrutura.</p>
+<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Representando a árvore graficamente </span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">arvore</span>,edge.width<span class="op">=</span><span class="fl">2</span><span class="op">)</span> </span></code></pre></div>
+<div class="inline-figure"><img src="02-intro-ao-R_files/figure-html/unnamed-chunk-16-1.png" width="672" style="display: block; margin: auto;"></div>
+<div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span></span>
+<span><span class="co"># Estrutura da árvore </span></span>
+<span><span class="va">arvore</span> </span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; Phylogenetic tree with 11 tips and 10 internal nodes.</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; Tip labels:</span></span>
+<span><span class="co">#&gt;   vaca, cavalo, baleia, morcego, camundongo, humano, ...</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; Rooted; no branch lengths.</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/str.html">str</a></span><span class="op">(</span><span class="va">arvore</span><span class="op">)</span> </span>
+<span><span class="co">#&gt; List of 3</span></span>
+<span><span class="co">#&gt;  $ edge     : int [1:20, 1:2] 12 13 14 15 16 17 18 18 17 16 ...</span></span>
+<span><span class="co">#&gt;  $ Nnode    : int 10</span></span>
+<span><span class="co">#&gt;  $ tip.label: chr [1:11] "vaca" "cavalo" "baleia" "morcego" ...</span></span>
+<span><span class="co">#&gt;  - attr(*, "class")= chr "phylo"</span></span>
+<span><span class="co">#&gt;  - attr(*, "order")= chr "cladewise"</span></span>
+<span></span>
+<span><span class="co"># Decompondo a árvore </span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/class.html">class</a></span><span class="op">(</span><span class="va">arvore</span><span class="op">)</span> </span>
+<span><span class="co">#&gt; [1] "phylo"</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">arvore</span><span class="op">)</span> </span>
+<span><span class="fu"><a href="https://rdrr.io/pkg/ape/man/nodelabels.html">tiplabels</a></span><span class="op">(</span><span class="op">)</span> </span>
+<span><span class="fu"><a href="https://rdrr.io/pkg/ape/man/nodelabels.html">nodelabels</a></span><span class="op">(</span><span class="op">)</span> </span></code></pre></div>
+<div class="inline-figure"><img src="02-intro-ao-R_files/figure-html/unnamed-chunk-16-2.png" width="672" style="display: block; margin: auto;"></div>
+<div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span></span>
+<span><span class="co"># ramos </span></span>
+<span><span class="va">arvore</span><span class="op">$</span><span class="va">edge</span> <span class="co"># matriz contendo os índices do nó inicial e final para cada ramo </span></span>
+<span><span class="co">#&gt;       [,1] [,2]</span></span>
+<span><span class="co">#&gt;  [1,]   12   13</span></span>
+<span><span class="co">#&gt;  [2,]   13   14</span></span>
+<span><span class="co">#&gt;  [3,]   14   15</span></span>
+<span><span class="co">#&gt;  [4,]   15   16</span></span>
+<span><span class="co">#&gt;  [5,]   16   17</span></span>
+<span><span class="co">#&gt;  [6,]   17   18</span></span>
+<span><span class="co">#&gt;  [7,]   18    1</span></span>
+<span><span class="co">#&gt;  [8,]   18    2</span></span>
+<span><span class="co">#&gt;  [9,]   17    3</span></span>
+<span><span class="co">#&gt; [10,]   16   19</span></span>
+<span><span class="co">#&gt; [11,]   19    4</span></span>
+<span><span class="co">#&gt; [12,]   19   20</span></span>
+<span><span class="co">#&gt; [13,]   20    5</span></span>
+<span><span class="co">#&gt; [14,]   20    6</span></span>
+<span><span class="co">#&gt; [15,]   15   21</span></span>
+<span><span class="co">#&gt; [16,]   21    7</span></span>
+<span><span class="co">#&gt; [17,]   21    8</span></span>
+<span><span class="co">#&gt; [18,]   14    9</span></span>
+<span><span class="co">#&gt; [19,]   13   10</span></span>
+<span><span class="co">#&gt; [20,]   12   11</span></span>
+<span><span class="co"># O número de linhas em tree$edge é igual o número de ramos; cada ramo começa e termina com um par de índices (nó-nó ou nó-terminal) </span></span>
+<span></span>
+<span><span class="co"># terminais </span></span>
+<span><span class="va">arvore</span><span class="op">$</span><span class="va">tip.label</span> </span>
+<span><span class="co">#&gt;  [1] "vaca"       "cavalo"     "baleia"     "morcego"   </span></span>
+<span><span class="co">#&gt;  [5] "camundongo" "humano"     "pardal"     "tartaruga" </span></span>
+<span><span class="co">#&gt;  [9] "celacanto"  "nemo"       "tubarão"</span></span>
+<span></span>
+<span><span class="co"># nós </span></span>
+<span><span class="va">arvore</span><span class="op">$</span><span class="va">Nnode</span> </span>
+<span><span class="co">#&gt; [1] 10</span></span>
+<span></span>
+<span><span class="co"># Um objeto "phylo" também pode conter o comprimento dos ramos: edge.length</span></span></code></pre></div>
+</div>
+<div id="é-errando-que-se-aprende" class="section level2" number="2.10">
+<h2>
+<span class="header-section-number">2.10</span> É eRrando que se aprende<a class="anchor" aria-label="anchor" href="#%C3%A9-errando-que-se-aprende"><i class="fas fa-link"></i></a>
+</h2>
+<p>A curva de aprendizado do R é bastante íngreme no início.
+Quando as mensagens de erro começarem a aparecer, é importante não se desesperar.
+Tente ler e interpretar as mensagens de erro.
+Volte ao código e o leia com calma etapa por etapa.
+Procure por erros comuns, como um nome de objeto errado, um espaço extra, uma vírgula mal colocada, etc.
+Lembre-se que não estás aprendendo a “mexer num programa”, estás aprendendo uma língua nova.</p>
+
+</div>
+</div>
+
+
+
+  <div class="chapter-nav">
+<div class="prev"><a href="conceitos-b%C3%A1sicos.html"><span class="header-section-number">1</span> Conceitos básicos</a></div>
+<div class="next"><a href="cap3.html"><span class="header-section-number">3</span> Morfometria Geométrica</a></div>
+</div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
+    <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
+      <ul class="nav navbar-nav">
+<li><a class="nav-link" href="#cap2"><span class="header-section-number">2</span> Uma breve introdução ao R</a></li>
+<li><a class="nav-link" href="#definindo-um-diret%C3%B3rio-de-trabalho"><span class="header-section-number">2.1</span> Definindo um diretório de trabalho</a></li>
+<li><a class="nav-link" href="#roteiros-scripts"><span class="header-section-number">2.2</span> Roteiros (scripts)</a></li>
+<li><a class="nav-link" href="#funcionamento-b%C3%A1sico-do-r"><span class="header-section-number">2.3</span> Funcionamento básico do R</a></li>
+<li><a class="nav-link" href="#tipos-de-objeto-no-r"><span class="header-section-number">2.4</span> Tipos de objeto no R</a></li>
+<li><a class="nav-link" href="#pacotes-no-r"><span class="header-section-number">2.5</span> Pacotes no R</a></li>
+<li><a class="nav-link" href="#pacotes-para-morfometria-geom%C3%A9trica"><span class="header-section-number">2.6</span> Pacotes para morfometria geométrica</a></li>
+<li><a class="nav-link" href="#objetos-importantes-para-morfometria-geom%C3%A9trica"><span class="header-section-number">2.7</span> Objetos importantes para morfometria geométrica</a></li>
+<li><a class="nav-link" href="#pacotes-filogen%C3%A9ticos-no-r"><span class="header-section-number">2.8</span> Pacotes filogenéticos no R</a></li>
+<li><a class="nav-link" href="#o-objeto-phylo"><span class="header-section-number">2.9</span> O objeto phylo</a></li>
+<li><a class="nav-link" href="#%C3%A9-errando-que-se-aprende"><span class="header-section-number">2.10</span> É eRrando que se aprende</a></li>
+</ul>
+
+      <div class="book-extra">
+        <ul class="list-unstyled">
+<li><a id="book-source" href="https://github.com/renanmaestri/eebb/blob/master/02-intro-ao-R.Rmd">View source <i class="fab fa-github"></i></a></li>
+          <li><a id="book-edit" href="https://github.com/renanmaestri/eebb/edit/master/02-intro-ao-R.Rmd">Edit this page <i class="fab fa-github"></i></a></li>
+        </ul>
+</div>
+    </nav>
+</div>
+
+</div>
+</div> <!-- .container -->
+
+<footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>"<strong>Manual de Ecologia Evolutiva, Biometria e Biogeografia</strong>" was written by Renan Maestri. It was last built on 2023-11-14.</p>
+  </div>
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>This book was built by the <a class="text-light" href="https://bookdown.org">bookdown</a> R package.</p>
+  </div>
+
+</div></div>
+</footer><!-- dynamically load mathjax for compatibility with self-contained --><script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script><script type="text/x-mathjax-config">const popovers = document.querySelectorAll('a.footnote-ref[data-toggle="popover"]');
+for (let popover of popovers) {
+  const div = document.createElement('div');
+  div.setAttribute('style', 'position: absolute; top: 0, left:0; width:0, height:0, overflow: hidden; visibility: hidden;');
+  div.innerHTML = popover.getAttribute('data-content');
+
+  var has_math = div.querySelector("span.math");
+  if (has_math) {
+    document.body.appendChild(div);
+    MathJax.Hub.Queue(["Typeset", MathJax.Hub, div]);
+    MathJax.Hub.Queue(function() {
+      popover.setAttribute('data-content', div.innerHTML);
+      document.body.removeChild(div);
+    })
+  }
+}
+</script>
+</body>
+</html>

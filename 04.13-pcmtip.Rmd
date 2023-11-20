@@ -12,11 +12,16 @@ Carregar dados.
 require(ape)
 require(phytools)
 require(picante)
+require(geiger)
 # Filogenia
 tree<-read.tree("dadospcm/primate-tree.txt")
 plotTree(tree,fsize=0.4,ftype="i",type="fan",lwd=1)
 # Atributos
 dados<-read.table("dadospcm/primate-data.txt",h=T,row.names=1)
+# Recortar filogenia
+match.species<-treedata(tree,dados)
+tree<-match.species$phy
+plotTree(tree,fsize=0.5,ftype="i",type="fan",lwd=1)
 ```
 
 DR.

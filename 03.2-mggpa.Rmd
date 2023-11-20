@@ -194,4 +194,3 @@ plotRefToTarget(ref.y,Y.gpa$coords[,,39], gridPars=GP4, mag=3, outline=plethodon
 plotRefToTarget(ref,shape[,,8],outline=outline$outline, method="points",gridPars=GP1,mag=3)
 ```
 
-\newpage

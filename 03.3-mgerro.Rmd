@@ -113,5 +113,3 @@ R1
 ## Exercício - Erro e Assimetria
 
 Usando os dados de asas de Drosophila já carregados (arquivo "fly wing replicates Proc.txt") construa um modelo incluindo, além dos lados direto e esquerdo (assimetria) e da repetição das fotos entre indivíduos, também o fator imagem (3° coluna dos dados), que representa a repetição da captura de fotos, i.e. fotos diferentes do mesmo indivíduo. Uma maneira equivalente de representar a Procrustes ANOVA [bilat.symmetry(fly.tps,ind=fly.ind,side=fly.side,replicate=fly.rep] com modelos lineares em linguagem geomoph é usando procD.lm: procD.lm(fly.gpa\$coords\~fly.ind/fly.side+fly.side/fly.ind). Note que não é necessário usar o fator repetição explicitamente, uma vez que ele está dentro de indivíduos (compare os resíduos da primeira e da segunda função).
-
-\newpage
