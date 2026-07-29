@@ -21,4 +21,25 @@ li.appendix span, li.part span { /* for TOC part names */
 /* grabs first .chapter immediately after .part...but only those ch without numbers */
 .part + li[data-level=""] { 
  text-transform: uppercase;
+}@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap');
+
+body {
+  font-family: 'Inter', sans-serif !important;
+}
+
+.callout-note {
+  background-color: #f0f7f9 !important;
+  border-left-color: #096B72 !important;
+}
+
+.callout-tip {
+  background-color: #f1f8ed !important;
+  border-left-color: #2e7d32 !important;
+}
+
+main {
+  background: white;
+  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
 }
