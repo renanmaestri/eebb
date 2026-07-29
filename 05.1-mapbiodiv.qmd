@@ -1,0 +1,318 @@
+# Mapeando a Biodiversidade
+
+Este tutorial tem como objetivo a criação de mapas de biodiversidade usando (i) mapas de distribuição de espécies (*range maps*) ou (ii) coordenadas de pontos como entrada.
+
+## Carregar pacotes
+
+```{r, eval=FALSE}
+library(epm)
+library(sf)
+library(tmap)
+library(terra)
+library(raster)
+library(sp)
+source("dadosbiogeo/map_grid_function.R")
+```
+
+## (i) Criando mapas usando mapas de distribuição de espécies
+
+### Carregar Shapefiles
+
+```{r, eval=FALSE}
+phyllomedusinae <- st_read("dadosbiogeo/Phyllomedusinae Range Maps/phyllomedusinae_allspp.shp") # todas as espécies no mesmo shapefile
+phyllomedusinae # objeto do tipo multipolygon
+st_bbox(phyllomedusinae) # coordenadas geográficas do shapefile
+```
+
+### Criar polígonos separados para cada espécie
+
+A localização do nome da espécie pode variar (ex., binomial), verifique seus dados.
+
+```{r, eval=FALSE}
+class(phyllomedusinae$sci_name) # deve ser character
+spp.names <- unique(phyllomedusinae$sci_name) # uma vez para cada espécie
+spp.names
+
+spp.list <- vector('list', length(spp.names)) # lista com o mesmo tamanho de 'spp.names'
+names(spp.list) <- spp.names
+
+for (i in 1:length(spp.names)) {
+  ind <- which(phyllomedusinae$sci_name == spp.names[i]) # cada espécie em polígonos separados
+  spp.list[[i]] <- phyllomedusinae[ind,]
+}
+```
+
+### Testar cada polígono para problemas de geometria
+
+```{r, eval=FALSE}
+for (i in 1:length(spp.list)) {
+  if (!any(st_is_valid(spp.list[[i]]))) {
+    message('\t reparando polígono ', i)
+    spp.list[[i]] <- st_make_valid(spp.list[[i]])
+  }
+}
+```
+
+### Alterar projeção (do mapa)
+
+A definição de uma projeção de mapa é feita por um CRS (Coordinate Reference System - Sistema de Referência de Coordenadas). Diferentes CRSs definem como coordenadas geográficas aparecerão em um mapa 2D. Você pode facilmente encontrar códigos para diferentes CRSs na internet. A escolha de um CRS depende da área geográfica em que você está trabalhando, além das suas preferências pessoais. Geralmente, mapas que preservam a área são preferidos. Vamos usar a projeção Mollweide, que representa as áreas com mais precisão do que projeções de mapa padrão.
+
+```{r, eval=FALSE}
+EAprojmol <- '+proj=moll +lon_0=0 +x_0=0 +y_0=0 +ellps=WGS84 +datum=WGS84 +units=m no_defs' # projeção de área igual
+# Aplicar a projeção a cada mapa de distribuição
+EAspp <- lapply(spp.list, function(x) st_transform(x, st_crs(EAprojmol))) # projeção de área igual para todos
+```
+
+Substitua os espaços em branco por sublinhados (underscores) nos nomes das espécies.
+
+```{r, eval=FALSE}
+names(EAspp) <- gsub('\\s+', '_', names(EAspp))
+```
+
+### Criar a grade geográfica (grid)
+
+Você pode fazer diversas escolhas ao criar um mapa de grade. As mais importantes são: 1. A resolução, que depende da natureza dos seus dados e da extensão geográfica da sua área. Quanto mais brutos os dados e maior a extensão geográfica, maior deve ser a resolução. Note que uma resolução pequena e não justificada (células pequenas) apenas aumenta (inflaciona) desnecessariamente os graus de liberdade de modelos futuros. 2. Quanto da célula deve ser coberta pela distribuição para que a espécie seja considerada presente nela.
+
+```{r, eval=FALSE}
+grid.spp <- createEPMgrid(EAspp, 
+                          resolution = 110000, # resolução 110k metros, 110km, ~ 1 grau
+                          retainSmallRanges = TRUE,
+                          extent = "auto",
+                          method = "percentOverlap",
+                          percentThreshold = 0.30,
+                          cellType = 'square')
+grid.spp
+class(grid.spp)
+```
+
+Salvar a grade geográfica no formato epm.
+
+```{r, eval=FALSE}
+write.epmGrid(grid.spp, "dadosbiogeo/grid_phyllomedusinae")
+```
+
+### Mapear a Riqueza de Espécies
+
+```{r, eval=FALSE}
+plot.epmGrid(grid.spp, use_tmap = FALSE) # Usando o pacote sf
+```
+
+Você pode desejar usar cores que são adequadas para daltônicos. Tente o viridisLite.
+
+```{r, eval=FALSE}
+plot(grid.spp, legend = FALSE, use_tmap = FALSE, col = viridisLite::turbo)
+addLegend(grid.spp, location = 'topright', ramp = viridisLite::turbo)
+```
+
+Também podemos mapear uma espécie particular.
+
+```{r, eval=FALSE}
+plotSpRange(grid.spp, taxon = 'Phyllomedusa_boliviana')
+```
+
+### Gerar matriz de ocorrência ( = matriz de presença/ausência)
+
+Isso é fundamental em análises macroecológicas em nível de assembleia. Extrair a matriz de ocorrência mais as coordenadas geográficas de cada célula lhe dá liberdade para trabalhar com qualquer pacote e fazer análises personalizadas.
+
+```{r, eval=FALSE}
+occurrence.spp <- generateOccurrenceMatrix(grid.spp, sites = "all")
+# A função retorna todos os sites, incluindo os desocupados
+site.sums <- rowSums(occurrence.spp)
+occurrence.spp <- occurrence.spp[site.sums > 0, ]
+dim(occurrence.spp)
+```
+
+Salvar matriz de ocorrência
+
+```{r, eval=FALSE}
+write.table(occurrence.spp, file = "dadosbiogeo/occurrence.spp.txt") # salva a tabela
+```
+
+### Recuperar coordenadas geográficas - centróide de cada célula
+
+```{r, eval=FALSE}
+coords <- coordsFromEpmGrid(grid.spp, sites = "all")
+# Novamente, remova células com 0 espécies.
+sites_to_keep <- site.sums != 0
+coords <- coords[sites_to_keep, ]
+dim(coords)
+```
+
+Salvar coordenadas geográficas
+
+```{r, eval=FALSE}
+write.table(coords, file = "dadosbiogeo/coords.txt") 
+```
+
+### Usando as coordenadas geográficas e a matriz de presença/ausência
+
+A estrutura em `coords` + `occurrence.spp` pode ser usada na maioria dos pacotes para executar diversas funções. Vamos tentar algumas.
+
+```{r, eval=FALSE}
+# Riqueza
+sr <- rowSums(occurrence.spp)
+# Riqueza média
+mean(sr)
+# Tamanhos das distribuições das espécies
+rangesize <- colSums(occurrence.spp)
+# Tamanho médio da distribuição
+mean(rangesize)
+```
+
+### Mapeamento usando R base
+
+Defina as cores manualmente.
+
+```{r, eval=FALSE}
+colfunc <- colorRampPalette(c("#00007F", "blue", "#007FFF", "cyan","#7FFF7F",
+                              "yellow", "#FF7F00", "red", "#7F0000"))
+colors <- c("white", colfunc(max(sr)))
+```
+
+Mapear a riqueza de espécies.
+
+```{r, eval=FALSE}
+plot(coords$x, coords$y, col=colors[sr+1], cex=1.0, pch=15) # +1 atributos 0=white
+# Mapear um shapefile de contorno
+worldmapEA <- st_transform(epm:::worldmap, attributes(grid.spp)$crs)
+plot(worldmapEA, lwd = 0.8, add=TRUE)
+# Adicionar uma legenda
+unique_sr_values <- sort(unique(sr))
+legend_colors <- colors[unique_sr_values + 1] # 0 é branco
+legend_labels <- as.character(unique_sr_values)
+legend("bottomleft", 
+       legend = legend_labels,
+       fill = legend_colors, 
+       title = "SR",
+       bty = "n") 
+```
+
+Alternativamente, use `map_grid` para o mesmo resultado com eixos lat/lon e código mais curto:
+
+```{r, eval=FALSE}
+map_grid(coords[,1], coords[,2], sr, worldmap = epm:::worldmap,
+         xlab = "Longitude", ylab = "Latitude",
+         legend_title = "SR", main = "Species Richness", cex=1.4)
+```
+
+Quer ver a evidência para um gradiente latitudinal de diversidade?
+
+```{r, eval=FALSE}
+# Primeiro, vamos colocar a latitude de volta em graus decimais corretos (está em metros Mollweide)
+division_factor <- 100000
+# Correção
+latitude <- coords$y / division_factor
+# Plotar riqueza de espécies vs latitude
+plot(latitude, sr)
+```
+
+### Mapeando o turnover (diversidade beta)
+
+Agora, vamos voltar ao `epm` e calcular a diversidade beta como turnover.
+
+```{r, eval=FALSE}
+turnover <- betadiv_taxonomic(grid.spp,
+                              radius = 160000, # 160.000 metros = 160 km
+                              component="turnover")
+```
+
+As 8 células vizinhas da célula focal; com resolução de célula de 110km.
+
+Mapear turnover de espécies.
+
+```{r, eval=FALSE}
+# cor amigável
+terra::plot(turnover, col = sf::sf.colors(100))
+
+# Mapear um shapefile de contorno
+worldmapEA <- st_transform(epm:::worldmap, attributes(grid.spp)$crs)
+plot(worldmapEA, lwd = 0.5, add=TRUE)
+```
+
+## (ii) Criando mapas usando coordenadas de pontos de espécies
+
+### Carregar coordenadas de pontos
+
+```{r, eval=FALSE}
+points <- read.table("dadosbiogeo/point_example.txt", h=T)
+```
+
+### Definir projeção do mapa
+
+Albers Equal Area. Bom para a América do Norte.
+
+```{r, eval=FALSE}
+AEA <- "+proj=aea +lat_1=20 +lat_2=60 +lat_0=40 +lon_0=-96 +x_0=0 +y_0=0 +ellps=GRS80 +datum=NAD83 +units=m"
+```
+
+### Gerar grade geográfica
+
+```{r, eval=FALSE}
+grid_spp <- createEPMgrid(points,
+                          resolution = 100000,
+                          cellType = 'square',
+                          crs = st_crs(AEA))
+```
+
+Plotar mapa.
+
+```{r, eval=FALSE}
+plot(grid_spp)
+```
+
+Você pode usar o código da primeira parte do exercício para obter a matriz de ocorrência, coords e todo o resto.
+
+### Criar polígonos a partir de pontos
+
+Alternativamente, você pode desejar usar as coordenadas de pontos para criar polígonos geográficos para cada espécie.
+Primeiro, transforme as coordenadas em uma lista com as espécies como elementos contendo as coordenadas (X, Y) para cada espécie.
+
+```{r, eval=FALSE}
+spcoords <- split(points[, c("X", "Y")], points$taxon)
+
+# Iterar a transformação para todos
+xys <- vector(mode = "list", length(spcoords))
+polys <- vector(mode = "list", length(spcoords))
+for (i in 1:length(spcoords)){
+  xys[[i]] = st_as_sf(spcoords[[i]], coords=c("X","Y"))
+  polys[[i]] = xys[[i]] |> 
+    dplyr::summarise() |> 
+    st_cast("POLYGON")
+  polys[[i]] = polys[[i]] |> 
+    st_convex_hull()
+}
+# Recuperar os nomes
+species_names <- names(spcoords)
+names(polys) <- species_names
+```
+
+### Criar a grade usando polígonos
+
+```{r, eval=FALSE}
+# Atribuir CRS para cada polígono sf
+polys <- lapply(polys, function(p) {
+  st_set_crs(p, AEA)
+})
+
+# Criar a grade
+grid_spp2 <- createEPMgrid(polys,
+                           resolution = 100000,
+                           cellType = 'square',
+                           crs = st_crs(AEA))
+```
+
+Mapear a grade criada com polígonos.
+
+```{r, eval=FALSE}
+plot(grid_spp2)
+```
+
+Comparar com o mapa de coordenadas de pontos.
+
+```{r, eval=FALSE}
+plot(grid_spp)
+```
+
+## Desafio 1
+
+Usando seus próprios dados, crie uma grade geográfica e mapeie a riqueza e turnover. Se você não tem seus próprios dados, use os dados de roedores Sigmodontinae na pasta do curso.

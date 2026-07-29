@@ -1,0 +1,56 @@
+#' Compute Evolutionary Standardized Effect Size (SES) for Rao's Functional Diversity
+#'
+#' @param phylogeny A phylogenetic tree (ape::phylo format).
+#' @param traits A vector of observed trait values (named with species).
+#' @param occurrence.spp A community matrix (sites × species).
+#' @param nsim Number of Brownian motion simulations (default: 100).
+#' @return A data frame with observed Rao, simulated mean Rao, SD, and SES.
+#' @examples
+#' # Example usage:
+#' # evo_ses_results <- compute_evo_ses(phylogeny, bodysize, occurrence.spp, nsim=100)
+compute_evo_ses <- function(phylogeny, traits, occurrence.spp, nsim = 100) {
+  
+  # --- Step 1: Fit BM model to estimate parameters ---
+  simul_param_BM <- geiger::fitContinuous(
+    phy = phylogeny,
+    dat = traits,
+    model = "BM"
+  )
+  
+  # --- Step 2: Simulate traits under BM ---
+  simul_BM <- mvMORPH::mvSIM(
+    tree = phylogeny,
+    nsim = nsim,
+    model = "BM1",
+    param = list(
+      sigma = simul_param_BM$opt$sigsq,  # BM rate (σ²)
+      theta = simul_param_BM$opt$z0      # Root state (θ₀)
+    )
+  )
+  
+  # --- Step 3: Compute observed Rao diversity ---
+  rao_observed <- rao.diversity(occurrence.spp, traits = traits)$FunRao
+  
+  # --- Step 4: Compute Rao diversity for simulated traits ---
+  FunRao_simulated <- sapply(1:nsim, function(i) {
+    rao.diversity(occurrence.spp, traits = as.data.frame(simul_BM[, i]))$FunRao
+  })
+  
+  # --- Step 5: Calculate mean and sd across simulations (per site) ---
+  mean_simul <- rowMeans(FunRao_simulated)
+  sd_simul <- apply(FunRao_simulated, 1, sd)
+  
+  # --- Step 6: Compute SES (standardized effect size) ---
+  evo_ses <- (rao_observed - mean_simul) / sd_simul
+  
+  # --- Return results as a data frame ---
+  results <- data.frame(
+    Site = rownames(occurrence.spp),
+    Rao_Observed = rao_observed,
+    Rao_Simulated_Mean = mean_simul,
+    Rao_Simulated_SD = sd_simul,
+    SES = evo_ses
+  )
+  
+  return(results)
+}

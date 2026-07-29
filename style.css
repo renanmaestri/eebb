@@ -18,9 +18,7 @@ li.appendix span, li.part span { /* for TOC part names */
   opacity: 1 !important;
   text-transform: uppercase;
 }
-```style.css
 /* grabs first .chapter immediately after .part...but only those ch without numbers */
 .part + li[data-level=""] { 
  text-transform: uppercase;
 }
-```

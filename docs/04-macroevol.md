@@ -1,5 +1,0 @@
-# (PART) PARTE IV - Macroevolução {-}
-
-# Macroevolução
-
-Em construção.

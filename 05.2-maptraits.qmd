@@ -1,0 +1,280 @@
+# Mapeando Características (Traits)
+
+Este tutorial tem como objetivo mapear características (*traits*) na geografia. Aprenderemos como mapear métricas de tendência central de características (por exemplo, a média) e correlacioná-las com métricas de composição filogenética e preditores ambientais.
+
+## Carregar pacotes
+
+```{r, eval=FALSE}
+library(ape)
+library(geiger)
+library(dplyr)
+library(SYNCSA)
+library(phytools)
+library(PCPS)
+library(adespatial)
+library(vegan)
+source("dadosbiogeo/map_grid_function.R")
+```
+
+## Mapeando características
+
+### Métricas de tendência central
+
+Regras ecogeográficas podem ser investigadas mapeando características ao longo do espaço geográfico. Para assembleias compostas por espécies relacionadas, podemos calcular a média da característica em cada local (*site*). Essa abordagem é comum em macroecologia e também em áreas relacionadas, como a ecologia de metacomunidades, onde essas médias às vezes incorporam a abundância e são chamadas de Médias Ponderadas pela Comunidade (CWM - *Community Weighted-Means*). Em estudos macroecológicos, as médias das características são geralmente calculadas assumindo a média de todas as espécies descritas pelas ocorrências (presença/ausência). Vamos primeiro carregar nossos dados: características, matriz de ocorrência e filogenia.
+
+### Carregar dados
+
+Dados de características.
+
+```{r, eval=FALSE}
+morphology <- read.table("dadosbiogeo/morphology_phyllomedusinae.txt", h=T, row.names = 1)
+dim(morphology) # 49 espécies descritas por 21 medidas
+```
+
+Os dados geográficos gerados no Exercício 1.
+
+```{r, eval=FALSE}
+occurrence.spp <- read.table("dadosbiogeo/occurrence.spp.txt")
+coords <- read.table("dadosbiogeo/coords.txt")
+dim(occurrence.spp) # 1133 locais, 66 espécies
+row.names(coords) = row.names(occurrence.spp) # atribuir nomes de linha aos locais
+```
+
+Uma hipótese filogenética para o grupo.
+
+```{r, eval=FALSE}
+phylogeny <- read.nexus("dadosbiogeo/phylogeny_phyllomedusinae.tree")
+```
+
+Em estudos macroecológicos, é raro ter dados de ocorrência geográfica, dados de características e dados filogenéticos para a exata mesma amostra de espécies. Vamos cruzar os dados para o menor conjunto de dados.
+
+```{r, eval=FALSE}
+# Cruzar dados filogenéticos com características/geografia
+match <- treedata(phylogeny, morphology)
+phylogeny <- match$phy
+morphology <- match$data
+dim(morphology)
+
+# Cruzar dados de características e geografia
+common_species_names <- intersect(colnames(occurrence.spp), rownames(morphology))
+
+# Filtrar matriz de ocorrência
+occ_filtered <- occurrence.spp |>
+  dplyr::select(all_of(common_species_names))
+
+# Filtrar matriz de características
+traits_filtered <- morphology[common_species_names, ]
+
+# Checando e garantindo ordenação consistente, cortando locais com 0 presenças
+# Aproveitando a estrutura syncsa para cortar as coords também
+org <- organize.syncsa(comm=occ_filtered, traits=traits_filtered, envir=coords)
+occurrence.spp <- org$community
+coords <- org$environmental
+morphology <- org$traits
+
+# Checar dimensões e ordenação novamente
+dim(occurrence.spp)
+dim(coords)
+dim(morphology)
+colnames(occurrence.spp) == rownames(morphology)
+rownames(occurrence.spp) == rownames(coords)
+rownames(morphology) == phylogeny$tip.label
+```
+
+### Calculando a média das características entre os locais/células
+
+Vamos usar o tamanho corporal total de anuros, medido como o logaritmo de SVL (*snout-vent length* - comprimento focinho-cloaca).
+
+```{r, eval=FALSE}
+bodysize <- morphology$logCRC
+names(bodysize) = rownames(morphology) # Trazer de volta os nomes das espécies
+```
+
+Tirando a média ao longo dos locais.
+
+```{r, eval=FALSE}
+tmatrix <- matrix.t(occurrence.spp, as.data.frame(bodysize), scale=FALSE)
+cwm <- tmatrix$matrix.T
+```
+
+### Mapeando a variação geográfica do tamanho corporal
+
+```{r, eval=FALSE}
+map_grid(coords[,1], coords[,2], cwm[,1], worldmap = epm:::worldmap,
+         xlab = "Longitude", ylab = "Latitude",
+         legend_title = "Average Body Size", main = "Average Body Size", cex=1.3)
+```
+
+Lembre-se de que você pode alterar o mapa usando qualquer argumento passado para o plot básico do R. Por exemplo, você pode querer alterar a paleta de cores, manualmente ou usando uma função existente.
+
+```{r, eval=FALSE}
+map_grid(coords[,1], coords[,2], cwm[,1], worldmap = epm:::worldmap,
+         palette = colorRampPalette(c("yellow", "orange", "red")),
+         xlab = "Longitude", ylab = "Latitude",
+         legend_title = "Average Body Size", main = "Average Body Size", cex=1.3)
+
+map_grid(coords[,1], coords[,2], cwm[,1], worldmap = epm:::worldmap,
+         palette = viridisLite::turbo,
+         xlab = "Longitude", ylab = "Latitude",
+         legend_title = "Average Body Size", main = "Average Body Size", cex=1.3)
+```
+
+Ótimo. Temos a variação geográfica do tamanho médio corporal. Agora, vamos trabalhar com filogenias.
+
+## Filogenias em análises macroecológicas de tendência central
+
+O uso de filogenias em análises macroecológicas de tendência central, quando a variável resposta é uma estatística descritiva (como a média de uma característica), ainda é alvo de debate. As relações filogenéticas entre as espécies são frequentemente ignoradas neste tipo de abordagem. No entanto, há algumas alternativas. Filogenias podem ser usadas para: (1) estimar o componente filogenético e espécie-específico da variável de interesse antes de calcular a média por assembleia (Diniz-Filho et al. 1998, Diniz-Filho et al. 2007), ou (2) estimar a contribuição da composição filogenética (sensu Pillar & Duarte 2010) na média por assembleia (Maestri et al. 2016, 2018, Maestri 2017, Duarte et al 2018).
+
+Vamos implementar as duas abordagens:
+1 - Estimando os componentes filogenéticos e específicos da variação da característica;
+2 - Estimando a contribuição da composição filogenética para a variação da característica.
+
+Em qualquer um dos cenários acima, podemos:
+3 - Estimar a contribuição da variável ambiental/ecológica/bioclimática para a variação da característica.
+
+### 1 - Estimando os componentes filogenético (P) e específico (S)
+
+Podemos usar a regressão de autovetores filogenéticos (PVR) para estimar os componentes filogenético (P) e específico (S) da variação da característica. O componente filogenético (previsto pelo modelo de regressão da característica sobre os autovetores de uma matriz de distância filogenética) carrega o sinal filogenético, enquanto o componente específico (os resíduos da mesma regressão) pode ser considerado livre de sinal filogenético.
+
+A função `p_s_components` decompõe a matriz de distância filogenética em autovetores, realiza o PVR e retorna os componentes filogenéticos e específicos da variação da característica.
+
+```{r, eval=FALSE}
+source("dadosbiogeo/p_s_components.R")
+
+ps <- p.s.comps(phy=phylogeny, sppnames=names(bodysize),
+                data=as.matrix(bodysize))
+ps[[1]] # Porcentagem da característica explicada pela filogenia
+
+# Componentes filogenético e específico
+P.comp <- ps[[2]][,1]
+S.comp <- ps[[2]][,2]
+```
+
+Agora, podemos calcular a média dos componentes P e S nas assembleias. A média P representa regiões onde o conservadorismo filogenético foi mais evidente, enquanto a média S representa a variação da característica que é independente do sinal filogenético.
+
+```{r, eval=FALSE}
+# Média P por assembleia
+tmatrix.P <- matrix.t(occurrence.spp, as.data.frame(P.comp), scale=FALSE)
+cwm.P <- tmatrix.P$matrix.T
+
+# Média S por assembleia
+tmatrix.S <- matrix.t(occurrence.spp, as.data.frame(S.comp), scale=FALSE)
+cwm.S <- tmatrix.S$matrix.T
+```
+
+E mapear os componentes.
+
+```{r, eval=FALSE}
+map_grid(coords[,1], coords[,2], cwm.P[,1], worldmap = epm:::worldmap,
+         xlab = "Longitude", ylab = "Latitude",
+         legend_title = "Average Phylogenetic\nComponent",
+         main = "Average Phylogenetic Component")
+
+map_grid(coords[,1], coords[,2], cwm.S[,1], worldmap = epm:::worldmap,
+         xlab = "Longitude", ylab = "Latitude",
+         legend_title = "Average Specific\nComponent",
+         main = "Average Specific Component")
+```
+
+Comparando os mapas, notamos que o padrão do tamanho corporal médio bruto é semelhante ao padrão do componente específico. Isso sugere que o padrão bruto é robusto, independentemente da distribuição da característica na filogenia. Podemos testar o sinal filogenético na característica.
+
+```{r, eval=FALSE}
+phylosig(phylogeny, bodysize)
+```
+
+### 2 - Estimando a contribuição da composição filogenética
+
+Podemos estimar a contribuição da composição filogenética das assembleias para a variação da característica. A vantagem desta abordagem é que a composição filogenética entra como um preditor no modelo final, evitando questões problemáticas/debatidas sobre o uso de resíduos livres de sinal filogenético e/ou a remoção de efeitos filogenéticos. Ao mesmo tempo, esta abordagem permite estimar as contribuições conjuntas e exclusivas da composição filogenética e ecologia/ambiente sobre a variação da característica. As contribuições únicas representam (i) a variação da característica que pode ser explicada apenas pela composição filogenética dentro da assembleia (história biogeográfica) em oposição à (ii) variação que é explicada apenas pela variação ecológica/ambiental (adaptação macroecológica), enquanto a contribuição conjunta (iii) pode ser interpretada como conservadorismo de nicho filogenético ao nível da assembleia/metacomunidade.
+
+Primeiro, vamos construir autovetores que representam a variação na composição filogenética das assembleias.
+
+```{r, eval=FALSE}
+all_pcps <- pcps(occurrence.spp, cophenetic(phylogeny))
+# Correlação entre locais e espécies
+plot(all_pcps)
+```
+
+Esses autovetores (chamados PCPS - *Principal Component of Phylogenetic Structure*) representam os eixos da composição filogenética. Outra maneira de interpretar é que, de um extremo ao outro do vetor, eles representam gradientes de diversidade beta filogenética (turnover) entre as assembleias. Os primeiros eixos de PCPS, com maior explicação da matriz de composição filogenética total, descrevem gradientes relacionados a diferenças geográficas entre nós basais/antigos, enquanto os eixos posteriores de PCPS descrevem gradientes relacionados a diferenças geográficas entre nós terminais, próximos ao presente, na composição filogenética das assembleias. Podemos mapear o PCPS na filogenia e no espaço geográfico.
+
+```{r, eval=FALSE}
+# Mapear na filogenia, primeiro gradiente PCPS
+plot.frogs <- phytools::contMap(phylogeny, all_pcps$correlations[,1], lwd = 2, outline=TRUE)
+set.frogs <- setMap(plot.frogs, c("darkblue", "white", "darkred")) # de - para +
+plot.contMap(set.frogs, lwd=1, fsize=0.6, outline=FALSE)
+
+# Mapear na filogenia, segundo gradiente PCPS
+plot.frogs <- phytools::contMap(phylogeny, all_pcps$correlations[,2], lwd = 2, outline=TRUE)
+set.frogs <- setMap(plot.frogs, c("darkblue", "white", "darkred")) # de - para +
+plot.contMap(set.frogs, lwd=1, fsize=0.6, outline=FALSE)
+```
+
+Agora, vamos mapeá-lo na geografia. Podemos repetir o processo para cada PCPS desejado.
+
+```{r, eval=FALSE}
+# Definir limites do PCPS 2
+pcps_x <- all_pcps$vectors[,2]
+
+map_grid(coords[,1], coords[,2], pcps_x, worldmap = epm:::worldmap,
+         xlab = "Longitude", ylab = "Latitude",
+         legend_title = "PCPS 2\n(Phylogenetic turnover)",
+         main = "PCPS 2: Phylogenetic Turnover")
+```
+
+Ótimo. Agora vamos particionar a contribuição da composição filogenética e ambiente para a variação da característica. Por simplicidade, usaremos a latitude como nossa variável ambiental. Será que a adaptação relacionada à latitude (adaptação macroecológica) ou os gradientes selecionados de composição filogenética (história biogeográfica) explicam melhor a variação do tamanho corporal de sapos na região Neotropical?
+
+```{r, eval=FALSE}
+# Selecionar apenas os PCPS importantes
+pcps_sel <- forward.sel(cwm, all_pcps$vectors, R2more=0.05)
+pcps_sel # PCPS 2 e 10 foram selecionados
+pcps_important <- cbind(all_pcps$vectors[, c(2,10), drop=FALSE])
+
+# Preditor ecológico
+latitude <- coords$y
+
+# Partição de variância
+cwm_part <- varpart(cwm, pcps_important, latitude)
+cwm_part
+plot(cwm_part)
+```
+
+Olhe novamente.
+
+```{r, eval=FALSE}
+par(mfrow = c(1, 3)) # 1 linha, 3 colunas
+
+# Mapear o tamanho corporal médio
+map_grid(coords[,1], coords[,2], cwm[,1], worldmap = epm:::worldmap,
+         xlab = "Longitude", ylab = "Latitude",
+         legend_title = "Average Body Size",
+         main = "Average Body Size", cex = 2)
+
+# Mapear o turnover filogenético
+map_grid(coords[,1], coords[,2], pcps_x, worldmap = epm:::worldmap,
+         xlab = "Longitude", ylab = "Latitude",
+         legend_title = "PCPS 2\n(Phylogenetic turnover)",
+         main = "PCPS 2: Phylogenetic Turnover", cex = 2)
+
+# Mapear o turnover filogenético na filogenia
+plot.contMap(set.frogs, lwd=1, fsize=0.6, outline=FALSE)
+par(mfrow = c(1, 1))
+```
+
+## Desafio 2
+
+Em vez de mapear usando a matriz de ocorrência (presença/ausência) junto com funções R personalizadas, você também pode usar o pacote `epm` do Exercício 1 para mapear. Tente incorporar a morfologia na estrutura `epm` usando a função `addTraits` do `epm`, e então tente mapear o tamanho corporal médio nas células.
+
+## Referências
+
+Diniz-Filho, J. A. F., C. E. R. Sant’Ana, and L. M. Bini. 1998. An eigenvector method for estimating phylogenetic inertia. Evolution 52:1247-1262.
+
+Diniz-Filho, J.A.F., Bini, L.M., Rodríguez, M.Á., Rangel, T.F.L.V.B. and Hawkins, B.A. (2007), Seeing the forest for the trees: partitioning ecological and phylogenetic components of Bergmann’s rule in European Carnivora. Ecography, 30: 598-608.
+
+Duarte, L. D. S., Debastiani, V. J., Carlucci, M. B. and Diniz-Filho, J. A. F. 2018. Analyzing community weighted trait means across environmental gradients: should phylogeny stay or should it go? Ecology 99: 385-398.
+
+Maestri, R. (2017). Using phylogenetic clade composition to understand biogeographical variation in functional traits. Frontiers of Biogeography, 9(3).
+
+Maestri, R. et al. 2016. Geographical variation of body size in sigmodontine rodents depends on both environment and phylogenetic composition of communities. Journal of Biogeography 43: 1192-1202.
+
+Maestri, R., Monteiro, L.R., Fornel, R., de Freitas, T.R.O. and Patterson, B.D. (2018), Geometric morphometrics meets metacommunity ecology: environment and lineage distribution affects spatial variation in shape. Ecography, 41: 90-100.
+
+Pillar, V. D. and Duarte, L. D. S. 2010. A framework for metacommunity analysis of phylogenetic structure. Ecology Letters 13: 587-596.

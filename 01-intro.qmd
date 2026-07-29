@@ -1,0 +1,142 @@
+# Conceitos Básicos em Ecologia Evolutiva
+
+A **Ecologia Evolutiva**, sob a perspectiva moderna das *dinâmicas eco-evolutivas* [@hendry2016], é definida como o estudo do **acoplamento recíproco e bidirecional em escalas de tempo contemporâneas** entre processos ecológicos (ex: abundância populacional, interações entre espécies) e processos evolutivos (mudanças microevolutivas nas frequências alélicas e características fenotípicas hereditárias).
+
+Tradicionalmente, a ecologia era vista como o "cenário" ou pano de fundo estático no qual o "jogo evolutivo" ocorria em escalas de tempo extremamente lentas ($\text{Ecologia} \rightarrow \text{Evolução}$). Hoje, contudo, reconhece-se que a evolução adaptativa pode ocorrer rapidamente — ao longo de poucas gerações ou anos — e que alterações evolutivas nos traços dos organismos alteram diretamente a dinâmica populacional e a estrutura ecológica das populações e comunidades ($\text{Ecologia} \leftrightarrow \text{Evolução}$).
+
+---
+
+## Processos Evolutivos
+
+Em nível microevolutivo, a evolução é a alteração na composição genética (frequências alélicas e genotípicas) de uma população ao longo das gerações. Quatro processos evolutivos fundamentais são definidos:
+
+1. **Mutação**: É a fonte primária e original de toda a variação genética. Mutações são alterações estocásticas na sequência de nucleotídeos do DNA que ocorrem independentemente da sua utilidade adaptativa. Embora a maioria seja neutra ou deletéria, mutações benéficas fornecem a matéria-prima sobre a qual a seleção positiva atua. Outro processo que não gera informação genética nova, mas que gera combinações genéticas novas e, portanto, indivíduos geneticamente distintos, é a recombinação genética. 
+2. **Seleção Natural**: É o processo evolutivo que gera adaptação. Ocorre a partir da variação nos traços fenotípicos de uma população, quando um tipo de traço causa sucesso reprodutivo diferencial (maior aptidão/*fitness*) de seu portador (um indivíduo) em comparação com outros indivíduos em um determinado contexto ambiental, e esse traço é passado adiante por herediariedade e aumenta de frequência na população da próxima geração.
+3. **Deriva Genética**: Corresponde às flutuações estocásticas nas frequências alélicas de uma geração para a seguinte. É um processo não-adaptativo cuja intensidade é inversamente proporcional ao tamanho efetivo da população ($N_e$).
+4. **Fluxo Gênico**: É a movimentação e incorporação de alelos entre populações via migração de indivíduos ou dispersão de gametas (ex: pólen, sementes). O fluxo gênico introduz variabilidade genética em uma população e tende a homogeneizar as frequências alélicas entre populações conectadas, podendo contrapor a diferenciação gerada pela seleção local ou pela deriva.
+
+> [!NOTE]
+> **Unidade da evolução**:
+> Quem evolui é a população. Se evolução é alteração na frequência de alelos/fenótipos de uma geração pra outra, logo, por definição precisamos de uma população pra mudar uma frequência.
+> **Unidade da seleção natural**
+> O alvo da seleção é o indivíduo. É o indivíduo que se reproduz mais ou menos dependendo de sua aptidão.
+
+---
+
+## Seleção Natural
+
+A seleção natural não é um processo intencional, mas uma consequência matemática e biológica inevitável quando quatro postulados (as **quatro condições necessárias e suficientes**) são satisfeitos na natureza:
+
+1. **Variação Fenotípica**: Os indivíduos dentro da população diferem em suas características morfológicas, fisiológicas, comportamentais ou moleculares.
+2. **Variação no Sucesso Reprodutivo**: Os indivíduos apresentam taxas desiguais de fecundidade (e/ou sobrevivência, pois só se reproduz quem está vivo); alguns deixam mais descendentes do que outros.
+3. **Hereditariedade**: Ao menos uma parcela da variação fenotípica é geneticamente transmissível dos pais para a prole (herdabilidade no sentido restrito, $h^2 = V_A / V_P > 0$).
+4. **Correlação entre Fenótipo e Sucesso Reprodutivo (Aptidão Diferencial)**: A variação na aptidão não é puramente estocástica, mas correlacionada de forma não-aleatória com o valor fenotípico do indivíduo; alguns fenotópicos causam o aumento do sucesso reprodutivo dos indivíduos portadores daquele fenótipo.
+
+**Exemplo**
+**Variação fenotípica:** Em uma população de roedores, alguns têm cauda curta e outros têm cauda longa.
+**Hereditariedade:** A característica comprimento da cauda tem base genética. Roedores com cauda longa geram predominantemente descendentes com cauda longa, e vice-versa.
+**Variação no sucesso reprodutivo** Alguns roedores deixam mais descendentes do que outros.
+**Reprodução diferencial dependente do fenótipo:** Roedores com cauda longa conseguiram escalar árvores com sua cauda e acessar frutos no topo das árvores, obtendo mais alimento do que os roedores de cauda curta. Assim, roedores de cauda longa conseguiram mais energia, gastaram mais energia em reprodução, e deixaram mais descendentes do que os indívuos de cauda curta.
+
+> [!NOTE]
+> **Resposta à Seleção**:
+> Quando os quatro postulados são atendidos, a resposta evolutiva por geração ($R$) é descrita pela "Equação do Criador" (*Breeder's Equation*):
+> $$R = h^2 S$$
+> onde $h^2$ é a herdabilidade no sentido restrito e $S$ é o diferencial de seleção (diferença entre a média dos reprodutores selecionados e a média da população original).
+
+### Tipos de Seleção Natural
+Como vimos, a seleção natural ocorre de forma inevitável quando há variação, reprodução diferenciada e hereditariedade na população. Dependendo de quais variações fenotípicas conferem maior sucesso reprodutivo em um ambiente específico, a seleção pode alterar a distribuição dessas características de três maneiras principais:
+
+### Seleção Direcional
+
+A **Seleção Direcional** favorece os indivíduos situados na direção de um dos extremos da distribuição fenotípica, deslocando a média populacional em direção a esse extremo ao longo das gerações.
+
+- **Exemplo Empírico Clássico (Os Tentilhões de Galápagos)**: O célebre estudo de longo prazo de Peter e Rosemary Grant com o tentilhão *Geospiza fortis* na ilha Daphne Major [retratado no livro *"O Bico do Tentilhão"*, @weiner1994]. Durante a severa seca de 1977 provocada pelo *El Niño/La Niña*, sementes pequenas e macias diminuiram muito em abundância, restando apenas sementes grandes e duras da planta *Tribulus cistoides*. Aves com bicos mais profundos e fortes apresentaram taxas de sobrevivência dramaticamente superiores, resultando em uma resposta evolutiva direta de aumento na profundidade média do bico na geração seguinte.
+
+### Seleção Estabilizadora
+
+A **Seleção Estabilizadora** favorece os indivíduos com valores fenotípicos intermediários e atua contra ambos os extremos da distribuição. A média populacional permanece constante, mas a variância fenotípica é reduzida.
+
+- **Exemplo**: O trabalho clássico do ornitólogo David Lack [@lack1947] demonstrou como a seleção estabilizadora atua no número de ovos colocados por aves, como os estorninhos ou tordos (que geralmente colocam de 4 a 5 ovos). Se a ave coloca muitos ovos (extremo superior), a quantidade de alimento que os pais conseguem trazer não é suficiente para todos, resultando em filhotes desnutridos e em uma alta taxa de mortalidade no ninho. Se a ave coloca poucos ovos (extremo inferior), o esforço despendido pelos pais rende um sucesso reprodutivo muito baixo, limitando a propagação de seus genes. Como resultado, a seleção natural atua desfavorecendo as aves que põem ovos demais ou de menos, estabilizando o tamanho da ninhada em um número intermediário ótimo que maximiza a sobrevivência dos filhotes e o sucesso reprodutivo a longo prazo.
+
+### Seleção Disruptiva
+
+A **Seleção Disruptiva** (ou diversificadora) favorece simultaneamente ambos os extremos fenotípicos em detrimento dos indivíduos intermediários. Aumenta a variância fenotípica e produz uma distribuição bimodal, desempenhando papel crucial na manutenção de polimorfismos e em processos de especiação simpátrica.
+
+- **Exemplo**: Tentilhões *Pyrenestes ostrinus* na África ocidental [@smith1993], que exibem polimorfismo bimodal bico-pequeno / bico-grande adaptado ao consumo de duas espécies de ciperáceas (*Scleria*) com diferentes durezas de semente. Indivíduos com bico intermediário são ineficientes na manipulação de ambos os tipos de sementes e sofrem forte seleção desfavorável.
+
+## Seleção Sexual e Investimento Parental
+
+A **Seleção Sexual** é a forma de seleção decorrente de variações no sucesso de acasalamento onde quem gera a pressão de seleção é um outro indivíduo da mesma espécie. 
+Originalmente proposta por Darwin, a seleção sexual explica a evolução de características que muitas vezes parecem desvantajosas para a sobrevivência diária (como cores vibrantes que atraem predadores ou chifres excessivamente pesados), mas que garantem aos seus portadores um sucesso maior no acasalamento e reprodução.
+
+Conforme sintetizado por Glauco Machado em *"Darwin vai ao cinema"* [@machado2025], a força motriz subjacente à seleção sexual reside na **assimetria de investimento parental** [Princípio de Bateman e Teoria de Trivers, @bateman1948; @trivers1972]:
+
+- **Anisogamia**: Fêmeas investem recursos consideráveis em poucos gametas grandes e ricos em nutrientes (óvulos), enquanto machos produzem milhões de gametas minúsculos e metabolicamente "baratos" (espermatozoides).
+
+Como o investimento fisiológico inicial da fêmea é muito superior (frequentemente agravado pela gestação e cuidado parental), ela se torna o "recurso limitante" da reprodução na população. Essa diferença no custo reprodutivo gera duas dinâmicas evolutivas distintas:
+
+- **Seleção Intrassexual (Competição Macho-Macho)**: Ocorre quando indivíduos do sexo de menor investimento (geralmente machos) competem diretamente pelo acesso ao sexo limitante. Como um único macho tem potencial para fecundar muitas fêmeas com um custo biológico mínimo, o sucesso reprodutivo dos machos varia intensamente e eles competem de forma feroz entre si pelo acesso às fêmeas. Esse processo favorece a evolução de "armas", grande porte físico e comportamentos agressivos (ex: embates de chifres em cervídeos, brigas territoriais entre leões marinhos).
+- **Seleção Intersexual (Escolha da Fêmea)**: Ocorre quando o sexo de maior investimento, normalmente a fêmea, escolhe parceiros com base em ornamentos ou exibições de corte. Como as fêmeas possuem um número limitado de tentativas reprodutivas ao longo da vida, qualquer erro na escolha do parceiro tem um custo evolutivo alto. Portanto, elas se tornam extremamente criteriosas, escolhendo acasalar apenas com machos que apresentem os melhores ornamentos, cores ou rituais de cortejo (ex: a dança dos pássaros-do-paraíso).
+
+Mas por que as fêmeas preferem traços exagerados que muitas vezes prejudicam a sobrevivência do macho? A resposta está na Teoria do Handicap proposta por Amotz Zahavi [@zahavi1975]. Segundo essa teoria, ornamentos custosos, como a imensa cauda do pavão, funcionam como sinais honestos de qualidade genética. Para a fêmea, a mensagem é clara: apenas um macho com saúde impecável, carga genética superior e excelente resistência a parasitas consegue sobreviver apesar do "handicap" (desvantagem) de carregar uma estrutura tão pesada e chamativa para os predadores.
+
+---
+
+## Deriva Genética
+
+A **Deriva Genética** é a mudança aleatória nas frequências dos genes de uma população de uma geração para a seguinte. Como resumo no *Princeton Guide to Evolution* [@losos2013], o impacto da deriva depende fundamentalmente do **tamanho efetivo da população** ($N_e$):
+
+A taxa de perda de heterozigosidade neutra ao longo do tempo ($t$) em uma população finita é dada por:
+$$H_t = H_0 \left(1 - \frac{1}{2N_e}\right)^t$$
+
+- Em populações pequenas ($N_e \ll 100$), flutuações estocásticas dominam, podendo levar à rápida fixação de alelos (frequência $p = 1.0$) ou à perda definitiva ($p = 0.0$), reduzindo a variabilidade genética e elevando o endocruzamento (*inbreeding*).
+
+Ou seja, o impacto da deriva depende muito do tamanho da população:
+Em populações pequenas, as flutuações ao acaso (a pura "sorte" de quem consegue se reproduzir) dominam o processo. Isso pode levar rapidamente à fixação de uma característica (quando ela se torna a única existente na população) ou à sua perda definitiva. Esse processo reduz a variabilidade genética e aumenta o endocruzamento (cruzamento entre indivíduos aparentados).
+
+Podemos classificar os efeitos da deriva genética de duas maneiras principais:
+- **Efeito Gargalo (Bottleneck)**: Ocorre após eventos drásticos que reduzem temporária e severamente o tamanho da população (como desastres ambientais ou epidemias), provocando a perda aleatória de características genéticas raras.
+- **Efeito Fundador**: Acontece quando um grupo muito pequeno de indivíduos se isola para formar uma nova população. Essa nova população carrega apenas uma amostra limitada (e muitas vezes não representativa) da diversidade da população original.
+
+### Simulação de Deriva e Seleção
+
+A dinâmica evolutiva é influenciada tanto pela força da seleção natural quanto pelo efeito do acaso (deriva). Quando a população é pequena, o acaso pode "vencer" a seleção natural, fixando até mesmo características levemente desfavoráveis. Por outro lado, em populações grandes, a seleção atua de forma muito mais direta e previsível. A dinâmica combinada entre a força seletiva ($s$) e o efeito estocástico da deriva ($N_e$) pode ser simulada computacionalmente. Quando $N_e$ é pequeno, o acaso pode anular a seleção natural e até fixar alelos levemente desfavoráveis. Em contrapartida, quando $N_e$ é grande, a seleção atua de modo determinístico.
+
+> [!TIP]
+> **Ferramenta de Simulação Interativa**:
+> Para explorar interativamente o efeito do tamanho populacional ($N$), frequências alélicas iniciais ($p_0$), coeficientes de aptidão ($w_{AA}, w_{Aa}, w_{aa}$) e número de gerações, utilize o aplicativo Shiny:
+> 
+> 🌐 [**Simulador de Deriva e Seleção (phytools Shiny App)**](https://phytools.shinyapps.io/drift-selection/)
+
+---
+
+## Ecologia Evolutiva do Desenvolvimento
+
+A **Ecologia Evolutiva do Desenvolvimento** (Eco-Evo-Devo) investiga como a arquitetura ontogenética e os processos de desenvolvimento, afetados por condições ecológicas, mediam a conversão da variação genotípica em variação fenotípica, determinando a acessibilidade e a direção das trajetórias evolutivas.
+Essa disciplina rompe com a visão tradicional de que os genes são a única explicação para a diversidade biológica e de que o ambiente atua apenas como um "filtro" ou agente seletor. Na perspectiva da Eco-Evo-Devo, o ambiente desempenha um papel criador e ativo, atuando como um **indutor de variação fenotípica** direta durante o desenvolvimento dos organismos
+Vários assuntos interessantes e integrados podem ser explorados dentro de eco-evo-devo. Por exemplo:
+
+### Interações Genótipo-Fenótipo-Ambiente
+
+O mapeamento entre genótipo e fenótipo é não-linear e altamente complexo, envolvendo interações genéticas e modulações ecológicas:
+
+- **Arquitetura Genética**: Composta por efeitos aditivos ($V_A$), de dominância ($V_D$) e epistáticos ($V_I$, interações gene-gene), além de efeitos pleiotrópicos (um único gene afetando múltiplos traços fenotípicos).
+- **Restrições do Desenvolvimento (Developmental Constraints)**: Limitações físicas, morfológicas ou moleculares impostas pela maquinaria do desenvolvimento que restringem a geração de certos fenótipos teóricos, canalizando a evolução ao longo de "linhas de menor resistência genética".
+- **Canalização de Waddington**: A canalização é a capacidade dos sistemas de desenvolvimento de amortecer perturbações genéticas ou ambientais, assegurando a produção de um fenótipo normal e estável. Perturbações extremas podem romper essa canalização, liberando variação genética oculta ou desencadeando o reaparecimento de traços ancestrais (atavismos).
+**Construção de Nicho e Herança Ecológica**: Os organismos não são apenas produtos passivos da seleção; eles modificam ativamente o seu ambiente (ex: construindo ninhos, alterando nutrientes ou os níveis de gases). Ao alterar o ambiente, o organismo altera as próprias pressões seletivas às quais ele e sua prole estarão sujeitos. Essa modificação ambiental legada às próximas gerações é chamada de Herança Ecológica, demonstrando que os descendentes herdam não apenas genes, mas também um "nicho de partida".
+
+### Plasticidade Fenotípica
+
+A **Plasticidade Fenotípica** é a capacidade de um mesmo genótipo expressar diferentes fenótipos em resposta a variações nas condições ambientais ecológicas.
+
+- **Norma de Reação**: É a função matemática ou gráfica que descreve o perfil fenotípico produzido por um genótipo através de um gradiente ambiental.
+- **Plasticidade Adaptativa vs. Não-Adaptativa**: A plasticidade é considerada adaptativa quando o ajuste fenotípico induzido pelo ambiente aproxima o indivíduo do ótimo adaptativo naquele ambiente (ex: desenvolvimento de espinhos e defesas induzidas em plantas/dáfnias sob presença de predadores).
+
+### Epigenética
+
+A **Epigenética** abrange as alterações quimicamente herdáveis na expressão gênica ou estrutura da cromatina que ocorrem sem modificações na sequência de nucleotídeos do DNA.
+
+- **Mecanismos Epigenéticos**: Incluem a metilação do DNA (frequentemente a adição de um grupo metil à citosina, reprimindo a expressão gênica), modificações nas caudas de histonas (como acetilação e metilação, que alteram a compactação da cromatina) e a regulação por RNAs não-codificantes. O epigenoma atua como uma interface altamente sensível aos sinais do ambiente, sendo particularmente moldável durante as janelas iniciais de desenvolvimento (fases embrionárias e larvais).
+- **Ação Ambiental no Epigenoma**: Fatores como temperatura, estresse e nutrição alteram diretamente as marcas epigenéticas. Um exemplo clássico é o estudo com ratos Agouti [@waterland2003]: mães que receberam uma dieta rica em doadores de metil durante a gestação geraram filhotes com o gene agouti silenciado por metilação. Como resultado, a prole nasceu com pelagem escura e protegida contra a obesidade, provando que o ambiente materno altera o fenótipo da prole via epigenética, sem alterar o genoma.
+- **Herança Epigenética Transgeracional**: Alguns marcadores epigenéticos induzidos por fatores estressantes do ambiente podem escapar do apagamento (reprogramação) celular e ser transmitidos através da linha germinativa para as gerações filiais. Para ser considerada uma verdadeira herança transgeracional (e ter possível impacto evolutivo), a marca epigenética e o fenótipo resultante devem persistir em gerações futuras que nunca foram expostas ao estressor ambiental original que desencadeou a resposta nos ancestrais.

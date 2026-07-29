@@ -1,0 +1,82 @@
+project:
+  type: book
+  output-dir: docs
+
+book:
+  title: "Manual de Ecologia Evolutiva, Biometria e Biogeografia"
+  author: "Renan Maestri"
+  repo-url: "https://github.com/renanmaestri/eebb"
+  chapters:
+    - index.qmd
+    - part: "PARTE I - Conceitos básicos"
+      chapters:
+        - 01-intro.qmd
+    - part: "PARTE II - Introdução ao R"
+      chapters:
+        - 02-intro-ao-R.qmd
+    - part: "PARTE III - Morfometria Geométrica"
+      chapters:
+        - 03-m-geo.qmd
+        - 03.1-mgdig.qmd
+        - 03.2-mggpa.qmd
+        - 03.3-mgerro.qmd
+        - 03.4-mgsemi.qmd
+        - 03.5-mgcsize.qmd
+        - 03.6-mgord.qmd
+        - 03.7-mgpls.qmd
+        - 03.8-mgaov.qmd
+        - 03.9-mgalo.qmd
+        - 03.10-mgtraj.qmd
+        - 03.11-mgmod.qmd
+        - 03.12-mgdisp.qmd
+        - 03.13-mgpcm.qmd
+    - part: "PARTE IV - Macroevolução"
+      chapters:
+        - 04-macroevol.qmd
+        - 04.1-pcmtrees.qmd
+        - 04.2-pcmsinal.qmd
+        - 04.3-pcmcont.qmd
+        - 04.4-pcmdisc.qmd
+        - 04.5-pcmreg.qmd
+        - 04.6-pcmcordisc.qmd
+        - 04.7-pcmmulti.qmd
+        - 04.8-pcmmvar.qmd
+        - 04.9-pcmdtt.qmd
+        - 04.10-pcmltt.qmd
+        - 04.11-pcmdiv.qmd
+        - 04.12-pcmsse.qmd
+        - 04.13-pcmtip.qmd
+        - 04.14-pcmcodiv.qmd
+    - part: "PARTE V - Biogeografia e Macroecologia"
+      chapters:
+        - 05-biogeo.qmd
+        - 05.1-mapbiodiv.qmd
+        - 05.2-maptraits.qmd
+        - 05.3-divdiversif.qmd
+        - 05.4-evoregions.qmd
+        - 05.5-macroevolution.qmd
+    - part: "Conclusão"
+      chapters:
+        - 06-final.qmd
+    - 07-references.qmd
+
+bibliography:
+  - book.bib
+  - packages.bib
+  - references.bib
+csl: chicago-author-date.csl
+
+format:
+  html:
+    theme:
+      - default
+      - custom.scss
+    css: style.css
+  pdf:
+    keep-tex: true
+    include-in-header: preamble.tex
+
+language:
+  crossref-fig-title: "Figura "
+  crossref-tbl-title: "Tabela "
+  crossref-ch-prefix: "Capítulo "

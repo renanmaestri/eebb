@@ -1,0 +1,10 @@
+#NEXUS
+
+BEGIN TAXA;
+	DIMENSIONS ntax=19;
+	TAXLABELS  Andinomys Euneomys Aepeomys Chilomys Brucepattersonius Akodon Abrothrix Geoxus Chelemys Delomys Calomys Eligmodontia Graomys Andalgalomys Auliscomys Euryoryzomys Eremoryzomys Cerradomys Aegialomys;
+END;
+
+BEGIN TREES;
+	TREE tree_1 = ((Andinomys:7.848001,Euneomys:7.848)inode2:1.962,((Aepeomys:1.821857,Chilomys:1.821857)inode4:7.287428,((Brucepattersonius:7.007144,Akodon:7.007144)inode6:1.401429,(((Abrothrix:4.110857,(Geoxus:1.370286,Chelemys:1.370286)inode10:2.740572)inode9:2.740572,(Delomys:5.995,(Calomys:5.138572,(Eligmodontia:4.282143,(Graomys:3.425714,(Andalgalomys:0.856429,Auliscomys:0.856429)inode15:2.569287)inode14:0.856429)inode13:0.856429)inode12:0.856429)inode11:0.856429)inode8:0.856429,(Euryoryzomys:6.306429,(Eremoryzomys:5.605714,(Cerradomys:3.503571,Aegialomys:3.50357)inode18:2.102143)inode17:0.700715)inode16:1.401429)inode7:0.700715)inode5:0.700714)inode3:0.700714)root;
+END;
