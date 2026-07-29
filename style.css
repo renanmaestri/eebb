@@ -14,17 +14,126 @@ pre code {
 }
 li.appendix span, li.part span { /* for TOC part names */
   margin-top: 1em;
-  color: color: #1c3046 !important;
+  color: #1c3046 !important;
   opacity: 1 !important;
   text-transform: uppercase;
 }
 /* grabs first .chapter immediately after .part...but only those ch without numbers */
 .part + li[data-level=""] { 
  text-transform: uppercase;
-}@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap');
+}
 
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+/* Base Body */
 body {
   font-family: 'Inter', sans-serif !important;
+  background-color: #f4f7f6 !important; /* Soft gray modern background */
+  color: #2c3e50;
+}
+
+/* Glassmorphism Header */
+#quarto-header {
+  background: rgba(255, 255, 255, 0.85) !important;
+  backdrop-filter: blur(12px) !important;
+  -webkit-backdrop-filter: blur(12px) !important;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+}
+
+/* Sidebar Styling */
+#quarto-sidebar {
+  background-color: #f4f7f6 !important;
+  border-right: none !important;
+}
+
+/* Main Content Card */
+main {
+  background: white;
+  padding: 3rem 4rem !important;
+  border-radius: 20px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.04);
+  margin-top: 2rem;
+  margin-bottom: 4rem;
+}
+
+/* Mobile responsive padding */
+@media (max-width: 768px) {
+  main {
+    padding: 1.5rem 1.5rem !important;
+    border-radius: 12px;
+  }
+}
+
+/* Sidebar Parts (Sections) */
+.sidebar-item-section > .sidebar-item-container > a {
+  font-weight: 700 !important;
+  color: #1a252f !important;
+  text-transform: uppercase;
+  font-size: 0.85rem;
+  letter-spacing: 0.5px;
+  padding-top: 1.5rem;
+}
+
+/* Icons for the Parts */
+a[data-bs-target="#quarto-sidebar-section-1"] .menu-text::before { content: "📖 "; }
+a[data-bs-target="#quarto-sidebar-section-2"] .menu-text::before { content: "💻 "; }
+a[data-bs-target="#quarto-sidebar-section-3"] .menu-text::before { content: "📐 "; }
+a[data-bs-target="#quarto-sidebar-section-4"] .menu-text::before { content: "🕰️ "; }
+a[data-bs-target="#quarto-sidebar-section-5"] .menu-text::before { content: "🌍 "; }
+a[data-bs-target="#quarto-sidebar-section-6"] .menu-text::before { content: "🏁 "; }
+
+/* Chapter Badges (Numbers) */
+.chapter-number {
+  background: #e0f2f1;
+  color: #096B72;
+  padding: 2px 8px;
+  border-radius: 12px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  margin-right: 8px;
+}
+
+/* Hover effect on sidebar links */
+.sidebar-item-text:hover {
+  background-color: rgba(9, 107, 114, 0.08) !important;
+  border-radius: 8px;
+  color: #096B72 !important;
+  transition: all 0.2s ease;
+}
+
+.sidebar-item-text.active {
+  background-color: #096B72 !important;
+  color: white !important;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(9, 107, 114, 0.3);
+}
+
+.sidebar-item-text.active .chapter-number {
+  background: rgba(255,255,255,0.3);
+  color: white;
+}
+
+/* Right Sidebar (TOC) */
+#quarto-margin-sidebar {
+  padding-top: 2rem;
+}
+#quarto-margin-sidebar .nav-link {
+  font-size: 0.85rem;
+  color: #7f8c8d;
+}
+#quarto-margin-sidebar .nav-link.active {
+  color: #096B72;
+  font-weight: 600;
+  border-left: 2px solid #096B72;
+}
+
+/* Callouts Styling */
+.callout {
+  border-radius: 12px;
+  border: none !important;
+  border-left: 5px solid !important;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.03);
 }
 
 .callout-note {
@@ -37,12 +146,26 @@ body {
   border-left-color: #2e7d32 !important;
 }
 
-main {
-  background: white;
-  padding: 2rem;
-  border-radius: 12px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+/* Headings */
+h1, h2, h3, h4, h5 {
+  font-weight: 700;
+  letter-spacing: -0.5px;
+  color: #1a252f;
 }
-body {
-  background-color: #f1f5f9 !important;
+
+h1 {
+  font-size: 2.5rem;
+  margin-bottom: 1.5rem;
+}
+
+/* Code Blocks */
+pre.sourceCode {
+  border-radius: 10px;
+  box-shadow: inset 0 2px 4px rgba(0,0,0,0.05);
+}
+
+/* Button */
+.btn {
+  border-radius: 8px;
+  font-weight: 500;
 }
