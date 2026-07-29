@@ -1,13 +1,13 @@
 # Considerações finais
 
-Chegamos ao fim deste longo e intenso mergulho no mundo da Biologia Evolutiva, Biometria, Macroecologia e Biogeografia utilizando o ambiente R. Ao longo destas páginas, nossa jornada começou com a base fundacional do R e conceitos vitais de evolução e forma, antes de avançar para um conjunto robusto de ferramentas analíticas contemporâneas.
+Chegamos ao fim deste breve mergulho no mundo da Biologia Evolutiva, Biometria, Macroecologia e Biogeografia utilizando o ambiente R. Ao longo destas páginas, nossa jornada começou com a base fundacional do R e conceitos vitais de evolução e forma, antes de avançar para um conjunto de ferramentas analíticas contemporâneas para estudar ecologia evolutiva do ponto de vista macroevolutivo.
 
-Na **Morfometria Geométrica**, exploramos desde a digitalização de marcos anatômicos até a sobreposição de Procrustes, permitindo-nos quantificar e visualizar a disparidade morfológica e a alometria de maneira refinada. Posteriormente, ao entrarmos na **Macroevolução**, fundimos a forma ao tempo profundo: aprendemos a ler e manipular filogenias, medir sinais filogenéticos e ajustar modelos de evolução contínua e discreta, revelando os passos da diversificação de linhagens (PCM). 
+Na **Morfometria Geométrica**, exploramos desde a digitalização de marcos anatômicos até a sobreposição de Procrustes, permitindo-nos quantificar e visualizar a disparidade morfológica e a alometria de maneira refinada. Posteriormente, ao entrarmos na **Macroevolução**, fundimos a forma ao tempo profundo: aprendemos a ler e manipular filogenias, medir sinais filogenéticos e ajustar modelos de evolução contínua e discreta, finalizando com o estudo da diversificação de linhagens. 
 
-Por fim, a imersão na **Biogeografia e Macroecologia** uniu o espaço físico e os atributos ecológicos (traços) às teias filogenéticas, capacitando a elaboração de mapas globais de diversidade e a identificação de biorregiões evolutivas através de algoritmos de agrupamento espacial e filogenético.
+Por fim, a imersão na **Biogeografia e Macroecologia** uniu o espaço físico e os atributos ecológicos e fenotípicos das espécies às teias filogenéticas, capacitando a elaboração de mapas de diversidade e a identificação de biorregiões evolutivas através de algoritmos de agrupamento espacial e filogenético.
 
-Espero que os scripts, tutoriais e desafios propostos aqui não sirvam apenas como um manual estático, mas sim como um alicerce vivo. As metodologias (e os pacotes R) estão em constante evolução, e a chave para dominar essas análises é a experimentação constante com os seus próprios dados biológicos.
+Espero que os scripts, tutoriais e desafios propostos aqui não sirvam apenas como um manual estático, mas sim como um ponto de partida para novas análises e descobertas. As metodologias (e os pacotes de R) estão em constante evolução, e requerem um aprendizado contínuo.
 
-Continue explorando, questionando as premissas dos modelos, plotando os seus mapas e desvendando as fascinantes histórias que a diversidade biológica tem a nos contar. 
+Continue explorando, questionando as premissas dos modelos, gerando suas análises e mapas e desvendando os processos geradores da diversidade biológica. 
 
 *Boa sorte nas suas análises futuras!*

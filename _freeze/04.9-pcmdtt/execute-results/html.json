@@ -1,0 +1,17 @@
+{
+  "hash": "efdad7247226981de9eed8e18791a2da",
+  "result": {
+    "engine": "knitr",
+    "markdown": "---\nbibliography: references.bib\n---\n\n# Disparidade fenotípica ao longo do tempo\n\nEsse exemplo implementa a análise de disparidade morfológica ao longo do tempo (*Disparity through time plots*) de @harmon2003.\n\nCarregar dados.\n\n\n::: {.cell}\n\n```{.r .cell-code}\nrequire(ape)\n```\n\n::: {.cell-output .cell-output-stderr}\n\n```\nCarregando pacotes exigidos: ape\n```\n\n\n:::\n\n```{.r .cell-code}\nrequire(geiger)\n```\n\n::: {.cell-output .cell-output-stderr}\n\n```\nCarregando pacotes exigidos: geiger\n```\n\n\n:::\n\n::: {.cell-output .cell-output-stderr}\n\n```\nCarregando pacotes exigidos: phytools\n```\n\n\n:::\n\n::: {.cell-output .cell-output-stderr}\n\n```\nCarregando pacotes exigidos: maps\n```\n\n\n:::\n\n```{.r .cell-code}\nrequire(phytools)\n# Filogenia\ntree<-read.nexus(\"dadospcm/sigmodontinae-tree.tre\")\nplotTree(tree,fsize=0.4,ftype=\"i\",type=\"fan\",lwd=1)\n```\n\n::: {.cell-output-display}\n![](04.9-pcmdtt_files/figure-html/unnamed-chunk-1-1.png){width=672}\n:::\n\n```{.r .cell-code}\n# Dados morfológicos\ndados<-read.table(\"dadospcm/sigmodontinae-atributos.txt\",h=T,row.names=1)\nhead(dados)\nsize<-dados$Size\nnames(size)=rownames(dados)\nsize\n```\n:::\n\n\n*Disparity through time plots*.\n\n\n::: {.cell}\n\n```{.r .cell-code}\n# Tamanho\ndtt.size<-dtt(tree,size,nsim=999,calculateMDIp = TRUE)\n```\n\n::: {.cell-output-display}\n![](04.9-pcmdtt_files/figure-html/unnamed-chunk-2-1.png){width=672}\n:::\n\n```{.r .cell-code}\ndtt.size$MDI\ndtt.size$MDIpVal\n# DTT multivariado\ndados<-read.table(\"dadospcm/sigmodontinae-shape.txt\",h=T,row.names=1)\nhead(dados)\ndiet<-as.factor(dados$Diet) # A dieta é um código (Onivoro-1; Herbivoro-2; Insetivoro-3)\nnames(diet)=rownames(dados)\nforma<-dados[,3:28]\nforma\ndtt.shape<-dtt(tree,as.matrix(forma),nsim=999,calculateMDIp = TRUE)\n```\n\n::: {.cell-output-display}\n![](04.9-pcmdtt_files/figure-html/unnamed-chunk-2-2.png){width=672}\n:::\n\n```{.r .cell-code}\ndtt.shape$MDI\ndtt.shape$MDIpVal\n```\n:::\n\n",
+    "supporting": [
+      "04.9-pcmdtt_files"
+    ],
+    "filters": [
+      "rmarkdown/pagebreak.lua"
+    ],
+    "includes": {},
+    "engineDependencies": {},
+    "preserve": {},
+    "postProcess": true
+  }
+}

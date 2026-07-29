@@ -1040,7 +1040,7 @@ site1284 47.85216  2</code></pre>
 </div>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb94"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb94-1"><a href="#cb94-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cor</span>(ses_pd<span class="sc">$</span>pd.obs.z, pd<span class="sc">$</span>SR)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] -0.2067741</code></pre>
+<pre><code>[1] -0.1486269</code></pre>
 </div>
 </div>
 <p>Outra métrica de diversidade comum é a Distância Filogenética (pareada) Média (MPD - <em>Mean Phylogenetic Distance</em>) de espécies dentro de cada local. Esta métrica também tem seu equivalente para diversidade funcional/fenotípica.</p>
@@ -1057,7 +1057,7 @@ site1284 47.85216  2</code></pre>
 <span id="cb98-2"><a href="#cb98-2" aria-hidden="true" tabindex="-1"></a>                   <span class="at">null.model=</span><span class="st">"taxa.labels"</span>, <span class="at">runs=</span><span class="dv">99</span>) <span class="co"># aumente os runs na prática</span></span>
 <span id="cb98-3"><a href="#cb98-3" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(ses_mpd<span class="sc">$</span>mpd.obs.z)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] -2.9190803 -1.8014511 -0.3462659 -0.5929040 -2.2272155 -2.2272155</code></pre>
+<pre><code>[1] -2.6977025 -2.1205440 -0.1100651 -0.5068196 -1.7698939 -1.7698939</code></pre>
 </div>
 </div>
 <p>Quanto maior o valor, mais distantemente relacionadas estão as espécies em um local. Quanto menor o valor, mais proximamente relacionadas as espécies estão no local.</p>

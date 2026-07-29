@@ -1,0 +1,17 @@
+{
+  "hash": "c3f3b06960c8d6b023411ee915138a76",
+  "result": {
+    "engine": "knitr",
+    "markdown": "# Integração morfológica e modularidade\n\nIntegração morfológica e modularidade são conceitos próximos, mas que dão ênfase para aspectos diferentes da morfologia: associação e dissociação entre partes. A arquitetura do mapa genótipo-fenótipo dá origem aos padrões e magnitudes de integração morfológica. Desenvolvimento e função compartilhadas são também aspectos fundamentais para entendermos as origens da integração morfológica e da modularidade.\n\nExistem vários métodos para acessar a estrutura de integração morfológica em dados de morfometria. Alguns testam hipóteses *a priori* de modularidade, revisados em @zelditch2012. No exemplo, vamos usar um método que compara a variância entre módulos com a variância dentro de módulos.\n\nPara textos abrangentes sobre integração morfológica e modularidade no contexto de morfometria geométrica, veja: @zelditch2012; @klingenberg2014.\n\nVamos investigar integração morfológica e modularidade sobre uma hipótese de módulos crânianos usando landmarks em crânios de roedores sigmodontíneos.\n\n\n::: {.cell}\n\n```{.r .cell-code}\nrequire(geomorph)\n```\n\n::: {.cell-output .cell-output-stderr}\n\n```\nCarregando pacotes exigidos: geomorph\n```\n\n\n:::\n\n::: {.cell-output .cell-output-stderr}\n\n```\nCarregando pacotes exigidos: RRPP\n```\n\n\n:::\n\n::: {.cell-output .cell-output-stderr}\n\n```\nCarregando pacotes exigidos: Matrix\n```\n\n\n:::\n\n```{.r .cell-code}\n# Carregar arquivo tps com a vista ventral do crânio \ntps.v<-readland.tps(\"dadosmg/ventral.dig_curso.pls.tps\",specID = \"ID\", readcurves = FALSE)\n\n# Gerar matriz com os pares de landmarks simétricos\npairs.matrix<-matrix(c(2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,24,22,28,23,29,19,25,20,26,21,27,30,31,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,55,56),nrow=26,ncol=2,byrow=T)\nind.v<-c(1:dim(tps.v)[3]) # vetor indivíduos\n# GPA - Simetria bilateral - Extrair componente simetrico da forma\nb.s<-bilat.symmetry(tps.v,ind=ind.v,object.sym=TRUE,land.pairs=pairs.matrix)\nshape.v<-b.s$symm.shape # componente sim?trico da forma\nref.ventral<-mshape(shape.v)\n```\n:::\n\n\nPrimeiro, precisamos definir a hipótese a ser testada. A função 'define.modules' permite desenharmos a hipótese de maneira interativa. Selecione os landmarks de um módulo, pressione esc, selecione os landmarks do segundo módulo, etc.\n\n\n::: {.cell}\n\n```{.r .cell-code}\npartition<-define.modules(ref.ventral,2)\n```\n:::\n\n\nTestando a hipótese nula de ausência de modularidade.\n\n\n::: {.cell}\n\n```{.r .cell-code}\npartition<-c(rep(1,36),rep(2,20))\nmod<-modularity.test(shape.v,partition,iter=999) \nmod\nplot(mod)\n```\n:::\n\n\nTestando a hipótese nula de ausência de integração morfológica.\n\n\n::: {.cell}\n\n```{.r .cell-code}\nint<-integration.test(shape.v,partition.gp=partition,iter=999) \nint\nplot(int)\n```\n:::\n\n\nFunção interativa para visualização da forma dos módulos.\n\n\n::: {.cell}\n\n```{.r .cell-code}\nplot(int)\n```\n\n```{.r .cell-code}\nint.plot<-plot(int,shape=TRUE)\n```\n\n```{.r .cell-code}\n#picknplot.shape(int.plot)\n```\n:::\n\n",
+    "supporting": [
+      "03.11-mgmod_files"
+    ],
+    "filters": [
+      "rmarkdown/pagebreak.lua"
+    ],
+    "includes": {},
+    "engineDependencies": {},
+    "preserve": {},
+    "postProcess": true
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "hash": "f4e1c58c76026edd28251a20e9d9212e",
+  "result": {
+    "engine": "knitr",
+    "markdown": "---\nbibliography: references.bib\n---\n\n# Diversificação baseada em terminais (*tip-speciation*)\n\nUma das medidas mais comuns de taxa de especiação/diversificação nos terminais (tipDR) é a de @jetz2012, que é o inverso da medida equal splits de @redding2006. Veja também uma outra medida de diversificação em terminais no ClaDS @maliet2019.\n\nCarregar dados.\n\n\n::: {.cell}\n\n```{.r .cell-code}\nrequire(ape)\n```\n\n::: {.cell-output .cell-output-stderr}\n\n```\nCarregando pacotes exigidos: ape\n```\n\n\n:::\n\n```{.r .cell-code}\nrequire(phytools)\n```\n\n::: {.cell-output .cell-output-stderr}\n\n```\nCarregando pacotes exigidos: phytools\n```\n\n\n:::\n\n::: {.cell-output .cell-output-stderr}\n\n```\nCarregando pacotes exigidos: maps\n```\n\n\n:::\n\n```{.r .cell-code}\nrequire(picante)\n```\n\n::: {.cell-output .cell-output-stderr}\n\n```\nCarregando pacotes exigidos: picante\n```\n\n\n:::\n\n::: {.cell-output .cell-output-stderr}\n\n```\nCarregando pacotes exigidos: vegan\n```\n\n\n:::\n\n::: {.cell-output .cell-output-stderr}\n\n```\nCarregando pacotes exigidos: permute\n```\n\n\n:::\n\n::: {.cell-output .cell-output-stderr}\n\n```\n\nAnexando pacote: 'vegan'\n```\n\n\n:::\n\n::: {.cell-output .cell-output-stderr}\n\n```\nO seguinte objeto é mascarado por 'package:phytools':\n\n    scores\n```\n\n\n:::\n\n::: {.cell-output .cell-output-stderr}\n\n```\nCarregando pacotes exigidos: nlme\n```\n\n\n:::\n\n```{.r .cell-code}\nrequire(geiger)\n```\n\n::: {.cell-output .cell-output-stderr}\n\n```\nCarregando pacotes exigidos: geiger\n```\n\n\n:::\n\n```{.r .cell-code}\n# Filogenia\ntree<-read.tree(\"dadospcm/primate-tree.txt\")\nplotTree(tree,fsize=0.4,ftype=\"i\",type=\"fan\",lwd=1)\n```\n\n::: {.cell-output-display}\n![](04.13-pcmtip_files/figure-html/unnamed-chunk-1-1.png){width=672}\n:::\n\n```{.r .cell-code}\n# Atributos\ndados<-read.table(\"dadospcm/primate-data.txt\",h=T,row.names=1)\n# Recortar filogenia\nmatch.species<-treedata(tree,dados)\ntree<-match.species$phy\nplotTree(tree,fsize=0.5,ftype=\"i\",type=\"fan\",lwd=1)\n```\n\n::: {.cell-output-display}\n![](04.13-pcmtip_files/figure-html/unnamed-chunk-1-2.png){width=672}\n:::\n:::\n\n\nDR.\n\n\n::: {.cell}\n\n```{.r .cell-code}\nES = evol.distinct(tree, type = \"equal.splits\")$w\nDR = 1/ES\n# Plot\nnames(DR)=tree$tip.label\ncontMap(tree,DR)\n```\n\n::: {.cell-output-display}\n![](04.13-pcmtip_files/figure-html/unnamed-chunk-2-1.png){width=672}\n:::\n:::\n\n\nO tamanho corporal influencia a diversificação?\n\n\n::: {.cell}\n\n```{.r .cell-code}\n# Massa corporal\nmassa<-dados$AdultBodyMass_g\nnames(massa)=rownames(dados)\ncontMap(tree,log(massa))\n```\n\n::: {.cell-output-display}\n![](04.13-pcmtip_files/figure-html/unnamed-chunk-3-1.png){width=672}\n:::\n\n```{.r .cell-code}\n# Correlação\ncor(DR,log(massa))\nplot(log(massa),DR)\n```\n\n::: {.cell-output-display}\n![](04.13-pcmtip_files/figure-html/unnamed-chunk-3-2.png){width=672}\n:::\n:::\n\n",
+    "supporting": [
+      "04.13-pcmtip_files"
+    ],
+    "filters": [
+      "rmarkdown/pagebreak.lua"
+    ],
+    "includes": {},
+    "engineDependencies": {},
+    "preserve": {},
+    "postProcess": true
+  }
+}
