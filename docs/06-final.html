@@ -44,7 +44,7 @@ ul.task-list li input[type="checkbox"] {
 <link href="site_libs/quarto-html/quarto-syntax-highlighting-845c23b38eaddc0f92fda52bfe77a8c8.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-33e0a5770a70c98d2c64c111916831ab.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-5ae73313094a37257e39b4f238667225.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -450,7 +450,12 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<p>Em construção.</p>
+<p>Chegamos ao fim deste longo e intenso mergulho no mundo da Biologia Evolutiva, Biometria, Macroecologia e Biogeografia utilizando o ambiente R. Ao longo destas páginas, nossa jornada começou com a base fundacional do R e conceitos vitais de evolução e forma, antes de avançar para um conjunto robusto de ferramentas analíticas contemporâneas.</p>
+<p>Na <strong>Morfometria Geométrica</strong>, exploramos desde a digitalização de marcos anatômicos até a sobreposição de Procrustes, permitindo-nos quantificar e visualizar a disparidade morfológica e a alometria de maneira refinada. Posteriormente, ao entrarmos na <strong>Macroevolução</strong>, fundimos a forma ao tempo profundo: aprendemos a ler e manipular filogenias, medir sinais filogenéticos e ajustar modelos de evolução contínua e discreta, revelando os passos da diversificação de linhagens (PCM).</p>
+<p>Por fim, a imersão na <strong>Biogeografia e Macroecologia</strong> uniu o espaço físico e os atributos ecológicos (traços) às teias filogenéticas, capacitando a elaboração de mapas globais de diversidade e a identificação de biorregiões evolutivas através de algoritmos de agrupamento espacial e filogenético.</p>
+<p>Espero que os scripts, tutoriais e desafios propostos aqui não sirvam apenas como um manual estático, mas sim como um alicerce vivo. As metodologias (e os pacotes R) estão em constante evolução, e a chave para dominar essas análises é a experimentação constante com os seus próprios dados biológicos.</p>
+<p>Continue explorando, questionando as premissas dos modelos, plotando os seus mapas e desvendando as fascinantes histórias que a diversidade fenotípica e filogenética têm a nos contar.</p>
+<p><em>Boa sorte nas suas análises futuras!</em></p>
 
 
 
@@ -542,6 +547,13 @@ ul.task-list li input[type="checkbox"] {
           if (link.dataset.originalHref !== undefined) {
             link.href = link.dataset.originalHref;
           }
+            // target, if specified
+            link.setAttribute("target", "_blank");
+            if (link.getAttribute("rel") === null) {
+              link.setAttribute("rel", "noopener");
+            }
+            // default icon
+            link.classList.add("external");
         }
       }
     function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {

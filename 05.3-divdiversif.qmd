@@ -4,8 +4,9 @@ Este tutorial é para o mapeamento da diversidade filogenética e fenotípica, a
 
 ## Carregar pacotes
 
-```{r, eval=FALSE}
+```{r}
 library(ape)
+library(sf)
 library(geiger)
 library(dplyr)
 library(SYNCSA)
@@ -20,14 +21,14 @@ source("dadosbiogeo/map_grid_function.R")
 
 Dados de características.
 
-```{r, eval=FALSE}
+```{r}
 morphology <- read.table("dadosbiogeo/morphology_phyllomedusinae.txt", h=T, row.names = 1)
 dim(morphology) # 49 espécies descritas por 21 medidas
 ```
 
 Os dados geográficos gerados no Exercício 1.
 
-```{r, eval=FALSE}
+```{r}
 occurrence.spp <- read.table("dadosbiogeo/occurrence.spp.txt")
 coords <- read.table("dadosbiogeo/coords.txt")
 dim(occurrence.spp) # 1133 locais, 66 espécies
@@ -36,13 +37,13 @@ row.names(coords) = row.names(occurrence.spp) # atribuir nomes de linha aos loca
 
 Uma hipótese filogenética para o grupo.
 
-```{r, eval=FALSE}
+```{r}
 phylogeny <- read.nexus("dadosbiogeo/phylogeny_phyllomedusinae.tree")
 ```
 
 Em estudos macroecológicos, é raro ter dados de ocorrência geográfica, dados de características e dados filogenéticos para a exata mesma amostra de espécies. Vamos cruzar os dados para o menor conjunto de dados.
 
-```{r, eval=FALSE}
+```{r}
 # Cruzar dados filogenéticos com características/geografia
 match <- treedata(phylogeny, morphology)
 phylogeny <- match$phy
@@ -76,7 +77,7 @@ rownames(morphology) == phylogeny$tip.label
 
 Para análises de diversidade, a diversidade é necessária. Locais com 0 espécies tornarão impossível o cálculo de algumas das métricas pretendidas. Mesmo locais com poucas espécies podem às vezes retornar valores estranhos. Vamos resolver isso filtrando locais com menos de 2 espécies.
 
-```{r, eval=FALSE}
+```{r}
 species_counts_per_site <- rowSums(occurrence.spp)
 sites_to_retain_logical <- species_counts_per_site >= 2
 sites_to_retain_names <- names(species_counts_per_site[sites_to_retain_logical])
@@ -93,7 +94,7 @@ dim(coords)
 
 Se esse procedimento removeu espécies (espécies com 0 presenças), precisamos garantir a consistência no conjunto de dados de morfologia e filogenia novamente.
 
-```{r, eval=FALSE}
+```{r}
 # Checando e garantindo ordenação consistente, cortando locais e espécies com 0 presenças
 org <- organize.syncsa(comm=occurrence.spp, traits=morphology, envir=coords)
 occurrence.spp <- org$community
@@ -120,21 +121,21 @@ rownames(morphology) == phylogeny$tip.label
 
 A métrica de diversidade filogenética mais comum é a PD de Faith (1992), a soma dos comprimentos dos ramos da árvore conectando todas as espécies dentro de cada local.
 
-```{r, eval=FALSE}
+```{r}
 pd <- pd(occurrence.spp, phylogeny)
 head(pd)
 ```
 
 Note que a PD é fortemente correlacionada com a riqueza de espécies.
 
-```{r, eval=FALSE}
+```{r}
 plot(pd$PD ~ pd$SR)
 cor(pd$PD, pd$SR)
 ```
 
 Um número de randomizações (modelos nulos) permite criar tamanhos de efeito padronizados (SES - *Standardized Effect Sizes*) para padronizar para riquezas desiguais entre os locais. O modelo nulo `taxa.labels` embaralha os rótulos das pontas da árvore.
 
-```{r, eval=FALSE}
+```{r}
 ses_pd <- ses.pd(occurrence.spp, phylogeny,
                  null.model="taxa.labels", runs=99) # aumente os runs na prática
 
@@ -145,14 +146,14 @@ cor(ses_pd$pd.obs.z, pd$SR)
 
 Outra métrica de diversidade comum é a Distância Filogenética (pareada) Média (MPD - *Mean Phylogenetic Distance*) de espécies dentro de cada local. Esta métrica também tem seu equivalente para diversidade funcional/fenotípica.
 
-```{r, eval=FALSE}
+```{r}
 mpd <- mpd(occurrence.spp, cophenetic(phylogeny))
 head(mpd)
 ```
 
 E a versão padronizada, controlando para a riqueza de espécies.
 
-```{r, eval=FALSE}
+```{r}
 ses_mpd <- ses.mpd(occurrence.spp, cophenetic(phylogeny),
                    null.model="taxa.labels", runs=99) # aumente os runs na prática
 head(ses_mpd$mpd.obs.z)
@@ -162,7 +163,7 @@ Quanto maior o valor, mais distantemente relacionadas estão as espécies em um 
 
 Podemos facilmente mapear cada métrica de diversidade filogenética. Mapear a PD.
 
-```{r, eval=FALSE}
+```{r}
 map_grid(coords[,1], coords[,2], pd$PD, worldmap = epm:::worldmap,
          palette = colorRampPalette(c(rev(rainbow(12)))),
          xlab = "Longitude", ylab = "Latitude",
@@ -171,7 +172,7 @@ map_grid(coords[,1], coords[,2], pd$PD, worldmap = epm:::worldmap,
 
 Mapear a SES MPD. É um gradiente de negativo a positivo, com 0 no meio.
 
-```{r, eval=FALSE}
+```{r}
 sesmpd <- ses_mpd$mpd.obs.z
 map_grid(coords[,1], coords[,2], sesmpd, worldmap = epm:::worldmap,
          xlab = "Longitude", ylab = "Latitude",
@@ -183,7 +184,7 @@ map_grid(coords[,1], coords[,2], sesmpd, worldmap = epm:::worldmap,
 
 Muitas métricas podem capturar a variação/diversidade de fenótipos em cada local. Uma comum é a entropia quadrática de Rao (Rao 1982), que é calculada somando as distâncias quadráticas entre cada par de espécies em uma assembleia, multiplicadas por 1/n (Botta-Dukát 2005), semelhante aos índices de disparidade comuns usados em morfometria e paleontologia. Para matrizes de incidência (ou seja, sem abundâncias, como no nosso caso), a entropia de Rao torna-se equivalente às médias das distâncias (fenotípicas) pareadas, o que a torna diretamente comparável às distâncias filogenéticas médias (MPD) vistas acima.
 
-```{r, eval=FALSE}
+```{r}
 # Vamos usar o bodysize, mas você também pode usar dados multivariados
 bodysize <- morphology[,1]
 disparity <- rao.diversity(occurrence.spp, traits=as.data.frame(bodysize))
@@ -192,7 +193,7 @@ rao.disparity <- disparity$FunRao
 
 Assim como nas métricas de diversidade filogenética, as métricas de diversidade fenotípica geralmente se correlacionam positivamente com a riqueza de espécies.
 
-```{r, eval=FALSE}
+```{r}
 plot(rao.disparity ~ pd$SR)
 cor(rao.disparity, pd$SR)
 ```
@@ -201,7 +202,7 @@ Comumente, estamos interessados em descobrir regiões geográficas com disparida
 
 Vamos calcular o SES informado evolutivamente. "À mão" primeiro, depois com uma função.
 
-```{r, eval=FALSE}
+```{r}
 # Ajustar movimento Browniano para recuperar os valores dos parâmetros
 simul_param_BM <- fitContinuous(phy=phylogeny, dat=bodysize, model="BM")
 
@@ -225,7 +226,7 @@ evo_ses <- ((rao.disparity - mean_simul_disparity) / sd_simul_disparity)
 
 Obter os mesmos resultados com uma função.
 
-```{r, eval=FALSE}
+```{r}
 source("dadosbiogeo/compute_evo_ses.txt")
 
 evo_ses_results <- compute_evo_ses(phylogeny = phylogeny,
@@ -237,7 +238,7 @@ evo_ses <- evo_ses_results$SES
 
 Mapear o tamanho de efeito padronizado evolutivamente para a disparidade do tamanho corporal.
 
-```{r, eval=FALSE}
+```{r}
 map_grid(coords[,1], coords[,2], evo_ses, worldmap = epm:::worldmap,
          xlab = "Longitude", ylab = "Latitude",
          legend_title = "Phenotypic Disparity\n(Evolutionarily\nStandardized)",
@@ -248,7 +249,7 @@ Em vermelho, áreas com maior disparidade do que o esperado pela riqueza e por e
 
 Mapear disparidade fenotípica bruta para comparação.
 
-```{r, eval=FALSE}
+```{r}
 map_grid(coords[,1], coords[,2], rao.disparity, worldmap = epm:::worldmap,
          palette = colorRampPalette(c(rev(rainbow(12)))),
          xlab = "Longitude", ylab = "Latitude",
@@ -258,7 +259,7 @@ map_grid(coords[,1], coords[,2], rao.disparity, worldmap = epm:::worldmap,
 
 Compare as duas disparidades com a riqueza de espécies.
 
-```{r, eval=FALSE}
+```{r}
 # Disparidade bruta e riqueza
 plot(pd$SR, rao.disparity)
 
@@ -270,20 +271,20 @@ plot(pd$SR, evo_ses)
 
 Lembre-se de que já vimos uma maneira de medir a diversidade beta filogenética como gradientes no Exercício 2. Agora usaremos uma abordagem diferente: a média absoluta da diversidade beta de cada célula em comparação com seus vizinhos mais próximos. Usaremos a estrutura de Baselga (2012) e Leprieur et al. (2012) para decompor a diversidade beta filogenética em turnover e aninhamento (nestedness).
 
-```{r, eval=FALSE}
+```{r}
 grid.spp <- read.epmGrid("dadosbiogeo/grid_phyllomedusinae.rds")
 ```
 
 Agora, adicione a filogenia e as características à estrutura `epm`.
 
-```{r, eval=FALSE}
+```{r}
 grid.spp <- addTraits(grid.spp, data=morphology)
 grid.spp <- addPhylo(grid.spp, tree=phylogeny)
 ```
 
 Componentes de turnover e aninhamento da diversidade beta filogenética.
 
-```{r, eval=FALSE}
+```{r}
 # Turnover (raio = 160.000 metros = 160 km = 8 células vizinhas)
 phylobd_turnover <- betadiv_phylogenetic(grid.spp,
                                          radius = 160000,
@@ -306,7 +307,7 @@ plot(phylobd_nestedness)
 
 Por fim, podemos estimar taxas de diversificação/especiação nas pontas da árvore (baseadas nos terminais), como a métrica DR (Jetz et al. 2012).
 
-```{r, eval=FALSE}
+```{r}
 mDR <- gridMetrics(grid.spp, metric="DR")
 plot(mDR)
 ```
@@ -315,7 +316,7 @@ plot(mDR)
 
 Também podemos calcular taxas nas pontas para a evolução da característica, usando o pacote `RRphylo`.
 
-```{r, eval=FALSE}
+```{r}
 # Calcular taxas nas pontas da evolução do tamanho corporal
 bodysize_rates <- RRphylo(tree=phylogeny, y=bodysize)
 bs_rates <- bodysize_rates$rates # taxa de evolução da característica por ramo
@@ -331,7 +332,7 @@ mean_rates <- tmatrix_rates$matrix.T
 
 Mapear taxas de evolução do tamanho corporal.
 
-```{r, eval=FALSE}
+```{r}
 map_grid(coords[,1], coords[,2], mean_rates[,1], worldmap = epm:::worldmap,
          xlab = "Longitude", ylab = "Latitude",
          legend_title = "Rates of Evolution\nfor Body Size",

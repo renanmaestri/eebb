@@ -79,7 +79,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="site_libs/quarto-html/quarto-syntax-highlighting-845c23b38eaddc0f92fda52bfe77a8c8.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-33e0a5770a70c98d2c64c111916831ab.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-5ae73313094a37257e39b4f238667225.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -518,13 +518,34 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="carregar-pacotes" class="level2" data-number="34.1">
 <h2 data-number="34.1" class="anchored" data-anchor-id="carregar-pacotes"><span class="header-section-number">34.1</span> Carregar pacotes</h2>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(epm)</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(sf)</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tmap)</span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(terra)</span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(raster)</span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(sp)</span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(<span class="st">"dadosbiogeo/map_grid_function.R"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(epm)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: pacote 'epm' foi compilado no R versão 4.6.1</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(sf)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Linking to GEOS 3.14.1, GDAL 3.12.1, PROJ 9.7.1; sf_use_s2() is TRUE</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tmap)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: pacote 'tmap' foi compilado no R versão 4.6.1</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(terra)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>terra 1.9.27</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(raster)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: pacote 'raster' foi compilado no R versão 4.6.1</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Carregando pacotes exigidos: sp</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: pacote 'sp' foi compilado no R versão 4.6.1</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(sp)</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(<span class="st">"dadosbiogeo/map_grid_function.R"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </section>
 <section id="i-criando-mapas-usando-mapas-de-distribuição-de-espécies" class="level2" data-number="34.2">
@@ -532,186 +553,488 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="carregar-shapefiles" class="level3" data-number="34.2.1">
 <h3 data-number="34.2.1" class="anchored" data-anchor-id="carregar-shapefiles"><span class="header-section-number">34.2.1</span> Carregar Shapefiles</h3>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>phyllomedusinae <span class="ot">&lt;-</span> <span class="fu">st_read</span>(<span class="st">"dadosbiogeo/Phyllomedusinae Range Maps/phyllomedusinae_allspp.shp"</span>) <span class="co"># todas as espécies no mesmo shapefile</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>phyllomedusinae <span class="co"># objeto do tipo multipolygon</span></span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="fu">st_bbox</span>(phyllomedusinae) <span class="co"># coordenadas geográficas do shapefile</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>phyllomedusinae <span class="ot">&lt;-</span> <span class="fu">st_read</span>(<span class="st">"dadosbiogeo/Phyllomedusinae Range Maps/phyllomedusinae_allspp.shp"</span>) <span class="co"># todas as espécies no mesmo shapefile</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Reading layer `phyllomedusinae_allspp' from data source 
+  `C:\Users\renan\.gemini\antigravity-ide\eebb_temp\dadosbiogeo\Phyllomedusinae Range Maps\phyllomedusinae_allspp.shp' 
+  using driver `ESRI Shapefile'
+Simple feature collection with 92 features and 31 fields
+Geometry type: MULTIPOLYGON
+Dimension:     XY
+Bounding box:  xmin: -109.7004 ymin: -34.90977 xmax: -34.79291 ymax: 27.25544
+Geodetic CRS:  WGS 84</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>phyllomedusinae <span class="co"># objeto do tipo multipolygon</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Simple feature collection with 92 features and 31 fields
+Geometry type: MULTIPOLYGON
+Dimension:     XY
+Bounding box:  xmin: -109.7004 ymin: -34.90977 xmax: -34.79291 ymax: 27.25544
+Geodetic CRS:  WGS 84
+First 10 features:
+   fid id_no              sci_name presence origin seasonal
+1   49 55288      Agalychnis annae        4      1        1
+2   50 55288      Agalychnis annae        1      1        1
+3    1 55843   Agalychnis buckleyi        1      1        1
+4   21 55290 Agalychnis callidryas        1      1        1
+5    5 55813 Agalychnis dacnicolor        1      1        1
+6   25 55848    Agalychnis danieli        1      1        1
+7   36 55852      Agalychnis hulli        1      1        1
+8   14 55855      Agalychnis lemur        5      1        1
+9   15 55855      Agalychnis lemur        5      1        1
+10  16 55855      Agalychnis lemur        1      1        1
+                                compiler yrcompiled
+1                            Kelsey Neam       2019
+2                            Kelsey Neam       2019
+3                            Kelsey Neam       2021
+4  IUCN, Paulina Arias Caballero-CONABIO       2014
+5                                   IUCN       2019
+6                            Kelsey Neam       2018
+7                                   IUCN       2017
+8                            Kelsey Neam       2019
+9                                   IUCN       2019
+10                                  IUCN       2019
+                                                                                                                                                                      citation
+1                                                                              IUCN (International Union for Conservation of Nature), Conservation International &amp; NatureServe
+2                                                                              IUCN (International Union for Conservation of Nature), Conservation International &amp; NatureServe
+3                                                                                                                        IUCN (International Union for Conservation of Nature)
+4  IUCN (International Union for Conservation of Nature), Conservation International &amp; NatureServe, CONABIO (Comisión Nacional para el Conocimiento y Uso de la Biodiversidad)
+5                                                                                           IUCN (International Union for Conservation of Nature) &amp; Conservation International
+6                                                                             IUCN (International Union for Conservation of Nature), Conservation International &amp; NatureServe.
+7                                                                             IUCN (International Union for Conservation of Nature), Conservation International &amp; NatureServe.
+8                                                                              IUCN (International Union for Conservation of Nature), Conservation International &amp; NatureServe
+9                                                                              IUCN (International Union for Conservation of Nature), Conservation International &amp; NatureServe
+10                                                                             IUCN (International Union for Conservation of Nature), Conservation International &amp; NatureServe
+   subspecies subpop source island tax_comm dist_comm generalisd
+1        &lt;NA&gt;   &lt;NA&gt;   &lt;NA&gt;   &lt;NA&gt;     &lt;NA&gt;      &lt;NA&gt;          0
+2        &lt;NA&gt;   &lt;NA&gt;   &lt;NA&gt;   &lt;NA&gt;     &lt;NA&gt;      &lt;NA&gt;          0
+3        &lt;NA&gt;   &lt;NA&gt;   &lt;NA&gt;   &lt;NA&gt;     &lt;NA&gt;      &lt;NA&gt;          0
+4        &lt;NA&gt;   &lt;NA&gt;   &lt;NA&gt;   &lt;NA&gt;     &lt;NA&gt;      &lt;NA&gt;          0
+5        &lt;NA&gt;   &lt;NA&gt;   &lt;NA&gt;   &lt;NA&gt;     &lt;NA&gt;      &lt;NA&gt;          0
+6        &lt;NA&gt;   &lt;NA&gt;   &lt;NA&gt;   &lt;NA&gt;     &lt;NA&gt;      &lt;NA&gt;          0
+7        &lt;NA&gt;   &lt;NA&gt;   &lt;NA&gt;   &lt;NA&gt;     &lt;NA&gt;      &lt;NA&gt;          0
+8        &lt;NA&gt;   &lt;NA&gt;   &lt;NA&gt;   &lt;NA&gt;     &lt;NA&gt;      &lt;NA&gt;          0
+9        &lt;NA&gt;   &lt;NA&gt;   &lt;NA&gt;   &lt;NA&gt;     &lt;NA&gt;      &lt;NA&gt;          0
+10       &lt;NA&gt;   &lt;NA&gt;   &lt;NA&gt;   &lt;NA&gt;     &lt;NA&gt;      &lt;NA&gt;          0
+              legend  kingdom   phylum    class order_          family
+1   Possibly Extinct ANIMALIA CHORDATA AMPHIBIA  ANURA PHYLLOMEDUSIDAE
+2  Extant (resident) ANIMALIA CHORDATA AMPHIBIA  ANURA PHYLLOMEDUSIDAE
+3  Extant (resident) ANIMALIA CHORDATA AMPHIBIA  ANURA PHYLLOMEDUSIDAE
+4  Extant (resident) ANIMALIA CHORDATA AMPHIBIA  ANURA PHYLLOMEDUSIDAE
+5  Extant (resident) ANIMALIA CHORDATA AMPHIBIA  ANURA PHYLLOMEDUSIDAE
+6  Extant (resident) ANIMALIA CHORDATA AMPHIBIA  ANURA PHYLLOMEDUSIDAE
+7  Extant (resident) ANIMALIA CHORDATA AMPHIBIA  ANURA PHYLLOMEDUSIDAE
+8            Extinct ANIMALIA CHORDATA AMPHIBIA  ANURA PHYLLOMEDUSIDAE
+9            Extinct ANIMALIA CHORDATA AMPHIBIA  ANURA PHYLLOMEDUSIDAE
+10 Extant (resident) ANIMALIA CHORDATA AMPHIBIA  ANURA PHYLLOMEDUSIDAE
+        genus category marine terrestria freshwater SHAPE_Leng   SHAPE_Area
+1  Agalychnis       VU  false       true       true  2.3330537 1.441379e-01
+2  Agalychnis       VU  false       true       true  1.3724665 7.915897e-02
+3  Agalychnis       LC  false       true       true 22.2496193 4.230196e+00
+4  Agalychnis       LC  false       true       true 99.1340020 4.221338e+01
+5  Agalychnis       LC  false       true       true 56.1711027 1.301636e+01
+6  Agalychnis       DD  false       true       true  0.1030200 8.445341e-04
+7  Agalychnis       LC  false       true       true  7.5516258 2.870744e+00
+8  Agalychnis       CR  false       true       true  5.7927817 5.792819e-01
+9  Agalychnis       CR  false       true       true  0.1827397 2.657327e-03
+10 Agalychnis       CR  false       true       true  8.8396927 7.190875e-01
+                            layer
+1       sci_name_Agalychnis annae
+2       sci_name_Agalychnis annae
+3    sci_name_Agalychnis buckleyi
+4  sci_name_Agalychnis callidryas
+5  sci_name_Agalychnis dacnicolor
+6     sci_name_Agalychnis danieli
+7       sci_name_Agalychnis hulli
+8       sci_name_Agalychnis lemur
+9       sci_name_Agalychnis lemur
+10      sci_name_Agalychnis lemur
+                                                                                                                                             path
+1            C:/Users/User/Desktop/Mestrado/Shapefile IUCN/phyllomedusinae_spp/sci_name_Agalychnis annae.gpkg|layername=sci_name_Agalychnis annae
+2            C:/Users/User/Desktop/Mestrado/Shapefile IUCN/phyllomedusinae_spp/sci_name_Agalychnis annae.gpkg|layername=sci_name_Agalychnis annae
+3      C:/Users/User/Desktop/Mestrado/Shapefile IUCN/phyllomedusinae_spp/sci_name_Agalychnis buckleyi.gpkg|layername=sci_name_Agalychnis buckleyi
+4  C:/Users/User/Desktop/Mestrado/Shapefile IUCN/phyllomedusinae_spp/sci_name_Agalychnis callidryas.gpkg|layername=sci_name_Agalychnis callidryas
+5  C:/Users/User/Desktop/Mestrado/Shapefile IUCN/phyllomedusinae_spp/sci_name_Agalychnis dacnicolor.gpkg|layername=sci_name_Agalychnis dacnicolor
+6        C:/Users/User/Desktop/Mestrado/Shapefile IUCN/phyllomedusinae_spp/sci_name_Agalychnis danieli.gpkg|layername=sci_name_Agalychnis danieli
+7            C:/Users/User/Desktop/Mestrado/Shapefile IUCN/phyllomedusinae_spp/sci_name_Agalychnis hulli.gpkg|layername=sci_name_Agalychnis hulli
+8            C:/Users/User/Desktop/Mestrado/Shapefile IUCN/phyllomedusinae_spp/sci_name_Agalychnis lemur.gpkg|layername=sci_name_Agalychnis lemur
+9            C:/Users/User/Desktop/Mestrado/Shapefile IUCN/phyllomedusinae_spp/sci_name_Agalychnis lemur.gpkg|layername=sci_name_Agalychnis lemur
+10           C:/Users/User/Desktop/Mestrado/Shapefile IUCN/phyllomedusinae_spp/sci_name_Agalychnis lemur.gpkg|layername=sci_name_Agalychnis lemur
+                         geometry
+1  MULTIPOLYGON (((-83.80395 1...
+2  MULTIPOLYGON (((-81.81016 8...
+3  MULTIPOLYGON (((-77.82172 -...
+4  MULTIPOLYGON (((-75.35138 1...
+5  MULTIPOLYGON (((-98.46731 1...
+6  MULTIPOLYGON (((-76.32105 6...
+7  MULTIPOLYGON (((-75.72918 -...
+8  MULTIPOLYGON (((-84.59085 1...
+9  MULTIPOLYGON (((-84.44062 1...
+10 MULTIPOLYGON (((-82.56696 9...</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">st_bbox</span>(phyllomedusinae) <span class="co"># coordenadas geográficas do shapefile</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>      xmin       ymin       xmax       ymax 
+-109.70042  -34.90977  -34.79291   27.25544 </code></pre>
+</div>
 </div>
 </section>
 <section id="criar-polígonos-separados-para-cada-espécie" class="level3" data-number="34.2.2">
 <h3 data-number="34.2.2" class="anchored" data-anchor-id="criar-polígonos-separados-para-cada-espécie"><span class="header-section-number">34.2.2</span> Criar polígonos separados para cada espécie</h3>
 <p>A localização do nome da espécie pode variar (ex., binomial), verifique seus dados.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(phyllomedusinae<span class="sc">$</span>sci_name) <span class="co"># deve ser character</span></span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>spp.names <span class="ot">&lt;-</span> <span class="fu">unique</span>(phyllomedusinae<span class="sc">$</span>sci_name) <span class="co"># uma vez para cada espécie</span></span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>spp.names</span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>spp.list <span class="ot">&lt;-</span> <span class="fu">vector</span>(<span class="st">'list'</span>, <span class="fu">length</span>(spp.names)) <span class="co"># lista com o mesmo tamanho de 'spp.names'</span></span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(spp.list) <span class="ot">&lt;-</span> spp.names</span>
-<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">length</span>(spp.names)) {</span>
-<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>  ind <span class="ot">&lt;-</span> <span class="fu">which</span>(phyllomedusinae<span class="sc">$</span>sci_name <span class="sc">==</span> spp.names[i]) <span class="co"># cada espécie em polígonos separados</span></span>
-<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>  spp.list[[i]] <span class="ot">&lt;-</span> phyllomedusinae[ind,]</span>
-<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(phyllomedusinae<span class="sc">$</span>sci_name) <span class="co"># deve ser character</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "character"</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>spp.names <span class="ot">&lt;-</span> <span class="fu">unique</span>(phyllomedusinae<span class="sc">$</span>sci_name) <span class="co"># uma vez para cada espécie</span></span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>spp.names</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> [1] "Agalychnis annae"           "Agalychnis buckleyi"       
+ [3] "Agalychnis callidryas"      "Agalychnis dacnicolor"     
+ [5] "Agalychnis danieli"         "Agalychnis hulli"          
+ [7] "Agalychnis lemur"           "Agalychnis medinae"        
+ [9] "Agalychnis moreletii"       "Agalychnis psilopygion"    
+[11] "Agalychnis saltator"        "Agalychnis spurrelli"      
+[13] "Agalychnis terranova"       "Callimedusa atelopoides"   
+[15] "Callimedusa baltea"         "Callimedusa duellmani"     
+[17] "Callimedusa ecuatoriana"    "Callimedusa perinesos"     
+[19] "Callimedusa tomopterna"     "Cruziohyla calcarifer"     
+[21] "Cruziohyla craspedopus"     "Cruziohyla sylviae"        
+[23] "Hylomantis aspera"          "Hylomantis granulosa"      
+[25] "Phasmahyla cochranae"       "Phasmahyla cruzi"          
+[27] "Phasmahyla exilis"          "Phasmahyla guttata"        
+[29] "Phasmahyla jandaia"         "Phasmahyla lisbella"       
+[31] "Phasmahyla spectabilis"     "Phasmahyla timbo"          
+[33] "Phrynomedusa appendiculata" "Phrynomedusa bokermanni"   
+[35] "Phrynomedusa dryade"        "Phrynomedusa fimbriata"    
+[37] "Phrynomedusa marginata"     "Phrynomedusa vanzolinii"   
+[39] "Phyllomedusa bahiana"       "Phyllomedusa bicolor"      
+[41] "Phyllomedusa boliviana"     "Phyllomedusa burmeisteri"  
+[43] "Phyllomedusa camba"         "Phyllomedusa chaparroi"    
+[45] "Phyllomedusa coelestis"     "Phyllomedusa distincta"    
+[47] "Phyllomedusa iheringii"     "Phyllomedusa neildi"       
+[49] "Phyllomedusa sauvagii"      "Phyllomedusa tarsius"      
+[51] "Phyllomedusa tetraploidea"  "Phyllomedusa trinitatis"   
+[53] "Phyllomedusa vaillantii"    "Phyllomedusa venusta"      
+[55] "Pithecopus araguaius"       "Pithecopus ayeaye"         
+[57] "Pithecopus azureus"         "Pithecopus centralis"      
+[59] "Pithecopus gonzagai"        "Pithecopus hypochondrialis"
+[61] "Pithecopus megacephalus"    "Pithecopus nordestinus"    
+[63] "Pithecopus oreades"         "Pithecopus palliatus"      
+[65] "Pithecopus rohdei"          "Pithecopus rusticus"       </code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>spp.list <span class="ot">&lt;-</span> <span class="fu">vector</span>(<span class="st">'list'</span>, <span class="fu">length</span>(spp.names)) <span class="co"># lista com o mesmo tamanho de 'spp.names'</span></span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(spp.list) <span class="ot">&lt;-</span> spp.names</span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">length</span>(spp.names)) {</span>
+<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a>  ind <span class="ot">&lt;-</span> <span class="fu">which</span>(phyllomedusinae<span class="sc">$</span>sci_name <span class="sc">==</span> spp.names[i]) <span class="co"># cada espécie em polígonos separados</span></span>
+<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a>  spp.list[[i]] <span class="ot">&lt;-</span> phyllomedusinae[ind,]</span>
+<span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </section>
 <section id="testar-cada-polígono-para-problemas-de-geometria" class="level3" data-number="34.2.3">
 <h3 data-number="34.2.3" class="anchored" data-anchor-id="testar-cada-polígono-para-problemas-de-geometria"><span class="header-section-number">34.2.3</span> Testar cada polígono para problemas de geometria</h3>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">length</span>(spp.list)) {</span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (<span class="sc">!</span><span class="fu">any</span>(<span class="fu">st_is_valid</span>(spp.list[[i]]))) {</span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">message</span>(<span class="st">'</span><span class="sc">\t</span><span class="st"> reparando polígono '</span>, i)</span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>    spp.list[[i]] <span class="ot">&lt;-</span> <span class="fu">st_make_valid</span>(spp.list[[i]])</span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>  }</span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">length</span>(spp.list)) {</span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (<span class="sc">!</span><span class="fu">any</span>(<span class="fu">st_is_valid</span>(spp.list[[i]]))) {</span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">message</span>(<span class="st">'</span><span class="sc">\t</span><span class="st"> reparando polígono '</span>, i)</span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a>    spp.list[[i]] <span class="ot">&lt;-</span> <span class="fu">st_make_valid</span>(spp.list[[i]])</span>
+<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </section>
 <section id="alterar-projeção-do-mapa" class="level3" data-number="34.2.4">
 <h3 data-number="34.2.4" class="anchored" data-anchor-id="alterar-projeção-do-mapa"><span class="header-section-number">34.2.4</span> Alterar projeção (do mapa)</h3>
 <p>A definição de uma projeção de mapa é feita por um CRS (Coordinate Reference System - Sistema de Referência de Coordenadas). Diferentes CRSs definem como coordenadas geográficas aparecerão em um mapa 2D. Você pode facilmente encontrar códigos para diferentes CRSs na internet. A escolha de um CRS depende da área geográfica em que você está trabalhando, além das suas preferências pessoais. Geralmente, mapas que preservam a área são preferidos. Vamos usar a projeção Mollweide, que representa as áreas com mais precisão do que projeções de mapa padrão.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>EAprojmol <span class="ot">&lt;-</span> <span class="st">'+proj=moll +lon_0=0 +x_0=0 +y_0=0 +ellps=WGS84 +datum=WGS84 +units=m no_defs'</span> <span class="co"># projeção de área igual</span></span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Aplicar a projeção a cada mapa de distribuição</span></span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>EAspp <span class="ot">&lt;-</span> <span class="fu">lapply</span>(spp.list, <span class="cf">function</span>(x) <span class="fu">st_transform</span>(x, <span class="fu">st_crs</span>(EAprojmol))) <span class="co"># projeção de área igual para todos</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>EAprojmol <span class="ot">&lt;-</span> <span class="st">'+proj=moll +lon_0=0 +x_0=0 +y_0=0 +ellps=WGS84 +datum=WGS84 +units=m no_defs'</span> <span class="co"># projeção de área igual</span></span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Aplicar a projeção a cada mapa de distribuição</span></span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>EAspp <span class="ot">&lt;-</span> <span class="fu">lapply</span>(spp.list, <span class="cf">function</span>(x) <span class="fu">st_transform</span>(x, <span class="fu">st_crs</span>(EAprojmol))) <span class="co"># projeção de área igual para todos</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>Substitua os espaços em branco por sublinhados (underscores) nos nomes das espécies.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(EAspp) <span class="ot">&lt;-</span> <span class="fu">gsub</span>(<span class="st">'</span><span class="sc">\\</span><span class="st">s+'</span>, <span class="st">'_'</span>, <span class="fu">names</span>(EAspp))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(EAspp) <span class="ot">&lt;-</span> <span class="fu">gsub</span>(<span class="st">'</span><span class="sc">\\</span><span class="st">s+'</span>, <span class="st">'_'</span>, <span class="fu">names</span>(EAspp))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </section>
 <section id="criar-a-grade-geográfica-grid" class="level3" data-number="34.2.5">
 <h3 data-number="34.2.5" class="anchored" data-anchor-id="criar-a-grade-geográfica-grid"><span class="header-section-number">34.2.5</span> Criar a grade geográfica (grid)</h3>
 <p>Você pode fazer diversas escolhas ao criar um mapa de grade. As mais importantes são: 1. A resolução, que depende da natureza dos seus dados e da extensão geográfica da sua área. Quanto mais brutos os dados e maior a extensão geográfica, maior deve ser a resolução. Note que uma resolução pequena e não justificada (células pequenas) apenas aumenta (inflaciona) desnecessariamente os graus de liberdade de modelos futuros. 2. Quanto da célula deve ser coberta pela distribuição para que a espécie seja considerada presente nela.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>grid.spp <span class="ot">&lt;-</span> <span class="fu">createEPMgrid</span>(EAspp, </span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>                          <span class="at">resolution =</span> <span class="dv">110000</span>, <span class="co"># resolução 110k metros, 110km, ~ 1 grau</span></span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>                          <span class="at">retainSmallRanges =</span> <span class="cn">TRUE</span>,</span>
-<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>                          <span class="at">extent =</span> <span class="st">"auto"</span>,</span>
-<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>                          <span class="at">method =</span> <span class="st">"percentOverlap"</span>,</span>
-<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>                          <span class="at">percentThreshold =</span> <span class="fl">0.30</span>,</span>
-<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>                          <span class="at">cellType =</span> <span class="st">'square'</span>)</span>
-<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>grid.spp</span>
-<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(grid.spp)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>grid.spp <span class="ot">&lt;-</span> <span class="fu">createEPMgrid</span>(EAspp, </span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>                          <span class="at">resolution =</span> <span class="dv">110000</span>, <span class="co"># resolução 110k metros, 110km, ~ 1 grau</span></span>
+<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a>                          <span class="at">retainSmallRanges =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a>                          <span class="at">extent =</span> <span class="st">"auto"</span>,</span>
+<span id="cb28-5"><a href="#cb28-5" aria-hidden="true" tabindex="-1"></a>                          <span class="at">method =</span> <span class="st">"percentOverlap"</span>,</span>
+<span id="cb28-6"><a href="#cb28-6" aria-hidden="true" tabindex="-1"></a>                          <span class="at">percentThreshold =</span> <span class="fl">0.30</span>,</span>
+<span id="cb28-7"><a href="#cb28-7" aria-hidden="true" tabindex="-1"></a>                          <span class="at">cellType =</span> <span class="st">'square'</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+  |                                                                            
+  |                                                                      |   0%
+  |                                                                            
+  |====                                                                  |   5%
+  |                                                                            
+  |=======                                                               |  11%
+  |                                                                            
+  |===========                                                           |  16%
+  |                                                                            
+  |===============                                                       |  21%
+  |                                                                            
+  |==================                                                    |  26%
+  |                                                                            
+  |======================                                                |  32%
+  |                                                                            
+  |==========================                                            |  37%
+  |                                                                            
+  |=============================                                         |  42%
+  |                                                                            
+  |=================================                                     |  47%
+  |                                                                            
+  |=====================================                                 |  53%
+  |                                                                            
+  |=========================================                             |  58%
+  |                                                                            
+  |============================================                          |  63%
+  |                                                                            
+  |================================================                      |  68%
+  |                                                                            
+  |====================================================                  |  74%
+  |                                                                            
+  |=======================================================               |  79%
+  |                                                                            
+  |===========================================================           |  84%
+  |                                                                            
+  |===============================================================       |  89%
+  |                                                                            
+  |==================================================================    |  95%
+  |                                                                            
+  |======================================================================| 100%</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>19 small-ranged species were preserved:
+    Agalychnis_annae
+    Agalychnis_danieli
+    Agalychnis_medinae
+    Callimedusa_baltea
+    Callimedusa_duellmani
+    Callimedusa_ecuatoriana
+    Callimedusa_perinesos
+    Phasmahyla_cruzi
+    Phasmahyla_exilis
+    Phasmahyla_spectabilis
+    Phrynomedusa_appendiculata
+    Phrynomedusa_bokermanni
+    Phrynomedusa_dryade
+    Phrynomedusa_fimbriata
+    Phrynomedusa_marginata
+    Phrynomedusa_vanzolinii
+    Phyllomedusa_neildi
+    Pithecopus_centralis
+    Pithecopus_rusticus</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>grid.spp</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    Summary of epm object:
+
+    metric: spRichness 
+    grid type:  square 
+    number of grid cells: 4347 
+    grid resolution: 110000 by 110000 
+    projected: TRUE 
+    crs: +proj=moll +lon_0=0 +x_0=0 +y_0=0 +datum=WGS84 +units=m +no_defs 
+
+    number of unique species: 66 (richness range: 1 - 8) 
+    data present: No 
+    phylogeny present: No </code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(grid.spp)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "epmGrid"</code></pre>
+</div>
 </div>
 <p>Salvar a grade geográfica no formato epm.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">write.epmGrid</span>(grid.spp, <span class="st">"dadosbiogeo/grid_phyllomedusinae"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="fu">write.epmGrid</span>(grid.spp, <span class="st">"dadosbiogeo/grid_phyllomedusinae"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </section>
 <section id="mapear-a-riqueza-de-espécies" class="level3" data-number="34.2.6">
 <h3 data-number="34.2.6" class="anchored" data-anchor-id="mapear-a-riqueza-de-espécies"><span class="header-section-number">34.2.6</span> Mapear a Riqueza de Espécies</h3>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot.epmGrid</span>(grid.spp, <span class="at">use_tmap =</span> <span class="cn">FALSE</span>) <span class="co"># Usando o pacote sf</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot.epmGrid</span>(grid.spp, <span class="at">use_tmap =</span> <span class="cn">FALSE</span>) <span class="co"># Usando o pacote sf</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="05.1-mapbiodiv_files/figure-html/unnamed-chunk-9-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
 </div>
 <p>Você pode desejar usar cores que são adequadas para daltônicos. Tente o viridisLite.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(grid.spp, <span class="at">legend =</span> <span class="cn">FALSE</span>, <span class="at">use_tmap =</span> <span class="cn">FALSE</span>, <span class="at">col =</span> viridisLite<span class="sc">::</span>turbo)</span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="fu">addLegend</span>(grid.spp, <span class="at">location =</span> <span class="st">'topright'</span>, <span class="at">ramp =</span> viridisLite<span class="sc">::</span>turbo)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(grid.spp, <span class="at">legend =</span> <span class="cn">FALSE</span>, <span class="at">use_tmap =</span> <span class="cn">FALSE</span>, <span class="at">col =</span> viridisLite<span class="sc">::</span>turbo)</span>
+<span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a><span class="fu">addLegend</span>(grid.spp, <span class="at">location =</span> <span class="st">'topright'</span>, <span class="at">ramp =</span> viridisLite<span class="sc">::</span>turbo)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="05.1-mapbiodiv_files/figure-html/unnamed-chunk-10-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
 </div>
 <p>Também podemos mapear uma espécie particular.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plotSpRange</span>(grid.spp, <span class="at">taxon =</span> <span class="st">'Phyllomedusa_boliviana'</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plotSpRange</span>(grid.spp, <span class="at">taxon =</span> <span class="st">'Phyllomedusa_boliviana'</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="05.1-mapbiodiv_files/figure-html/unnamed-chunk-11-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
 </div>
 </section>
 <section id="gerar-matriz-de-ocorrência-matriz-de-presençaausência" class="level3" data-number="34.2.7">
 <h3 data-number="34.2.7" class="anchored" data-anchor-id="gerar-matriz-de-ocorrência-matriz-de-presençaausência"><span class="header-section-number">34.2.7</span> Gerar matriz de ocorrência ( = matriz de presença/ausência)</h3>
 <p>Isso é fundamental em análises macroecológicas em nível de assembleia. Extrair a matriz de ocorrência mais as coordenadas geográficas de cada célula lhe dá liberdade para trabalhar com qualquer pacote e fazer análises personalizadas.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>occurrence.spp <span class="ot">&lt;-</span> <span class="fu">generateOccurrenceMatrix</span>(grid.spp, <span class="at">sites =</span> <span class="st">"all"</span>)</span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="co"># A função retorna todos os sites, incluindo os desocupados</span></span>
-<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>site.sums <span class="ot">&lt;-</span> <span class="fu">rowSums</span>(occurrence.spp)</span>
-<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>occurrence.spp <span class="ot">&lt;-</span> occurrence.spp[site.sums <span class="sc">&gt;</span> <span class="dv">0</span>, ]</span>
-<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(occurrence.spp)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb39"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a>occurrence.spp <span class="ot">&lt;-</span> <span class="fu">generateOccurrenceMatrix</span>(grid.spp, <span class="at">sites =</span> <span class="st">"all"</span>)</span>
+<span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a><span class="co"># A função retorna todos os sites, incluindo os desocupados</span></span>
+<span id="cb39-3"><a href="#cb39-3" aria-hidden="true" tabindex="-1"></a>site.sums <span class="ot">&lt;-</span> <span class="fu">rowSums</span>(occurrence.spp)</span>
+<span id="cb39-4"><a href="#cb39-4" aria-hidden="true" tabindex="-1"></a>occurrence.spp <span class="ot">&lt;-</span> occurrence.spp[site.sums <span class="sc">&gt;</span> <span class="dv">0</span>, ]</span>
+<span id="cb39-5"><a href="#cb39-5" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(occurrence.spp)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 1133   66</code></pre>
+</div>
 </div>
 <p>Salvar matriz de ocorrência</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">write.table</span>(occurrence.spp, <span class="at">file =</span> <span class="st">"dadosbiogeo/occurrence.spp.txt"</span>) <span class="co"># salva a tabela</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb41"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="fu">write.table</span>(occurrence.spp, <span class="at">file =</span> <span class="st">"dadosbiogeo/occurrence.spp.txt"</span>) <span class="co"># salva a tabela</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </section>
 <section id="recuperar-coordenadas-geográficas---centróide-de-cada-célula" class="level3" data-number="34.2.8">
 <h3 data-number="34.2.8" class="anchored" data-anchor-id="recuperar-coordenadas-geográficas---centróide-de-cada-célula"><span class="header-section-number">34.2.8</span> Recuperar coordenadas geográficas - centróide de cada célula</h3>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>coords <span class="ot">&lt;-</span> <span class="fu">coordsFromEpmGrid</span>(grid.spp, <span class="at">sites =</span> <span class="st">"all"</span>)</span>
-<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Novamente, remova células com 0 espécies.</span></span>
-<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>sites_to_keep <span class="ot">&lt;-</span> site.sums <span class="sc">!=</span> <span class="dv">0</span></span>
-<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>coords <span class="ot">&lt;-</span> coords[sites_to_keep, ]</span>
-<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(coords)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb42"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a>coords <span class="ot">&lt;-</span> <span class="fu">coordsFromEpmGrid</span>(grid.spp, <span class="at">sites =</span> <span class="st">"all"</span>)</span>
+<span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Novamente, remova células com 0 espécies.</span></span>
+<span id="cb42-3"><a href="#cb42-3" aria-hidden="true" tabindex="-1"></a>sites_to_keep <span class="ot">&lt;-</span> site.sums <span class="sc">!=</span> <span class="dv">0</span></span>
+<span id="cb42-4"><a href="#cb42-4" aria-hidden="true" tabindex="-1"></a>coords <span class="ot">&lt;-</span> coords[sites_to_keep, ]</span>
+<span id="cb42-5"><a href="#cb42-5" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(coords)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 1133    2</code></pre>
+</div>
 </div>
 <p>Salvar coordenadas geográficas</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">write.table</span>(coords, <span class="at">file =</span> <span class="st">"dadosbiogeo/coords.txt"</span>) </span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb44"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a><span class="fu">write.table</span>(coords, <span class="at">file =</span> <span class="st">"dadosbiogeo/coords.txt"</span>) </span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </section>
 <section id="usando-as-coordenadas-geográficas-e-a-matriz-de-presençaausência" class="level3" data-number="34.2.9">
 <h3 data-number="34.2.9" class="anchored" data-anchor-id="usando-as-coordenadas-geográficas-e-a-matriz-de-presençaausência"><span class="header-section-number">34.2.9</span> Usando as coordenadas geográficas e a matriz de presença/ausência</h3>
 <p>A estrutura em <code>coords</code> + <code>occurrence.spp</code> pode ser usada na maioria dos pacotes para executar diversas funções. Vamos tentar algumas.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Riqueza</span></span>
-<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>sr <span class="ot">&lt;-</span> <span class="fu">rowSums</span>(occurrence.spp)</span>
-<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Riqueza média</span></span>
-<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(sr)</span>
-<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Tamanhos das distribuições das espécies</span></span>
-<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>rangesize <span class="ot">&lt;-</span> <span class="fu">colSums</span>(occurrence.spp)</span>
-<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Tamanho médio da distribuição</span></span>
-<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(rangesize)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb45"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Riqueza</span></span>
+<span id="cb45-2"><a href="#cb45-2" aria-hidden="true" tabindex="-1"></a>sr <span class="ot">&lt;-</span> <span class="fu">rowSums</span>(occurrence.spp)</span>
+<span id="cb45-3"><a href="#cb45-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Riqueza média</span></span>
+<span id="cb45-4"><a href="#cb45-4" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(sr)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 2.810238</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb47"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Tamanhos das distribuições das espécies</span></span>
+<span id="cb47-2"><a href="#cb47-2" aria-hidden="true" tabindex="-1"></a>rangesize <span class="ot">&lt;-</span> <span class="fu">colSums</span>(occurrence.spp)</span>
+<span id="cb47-3"><a href="#cb47-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Tamanho médio da distribuição</span></span>
+<span id="cb47-4"><a href="#cb47-4" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(rangesize)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 48.24242</code></pre>
+</div>
 </div>
 </section>
 <section id="mapeamento-usando-r-base" class="level3" data-number="34.2.10">
 <h3 data-number="34.2.10" class="anchored" data-anchor-id="mapeamento-usando-r-base"><span class="header-section-number">34.2.10</span> Mapeamento usando R base</h3>
 <p>Defina as cores manualmente.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>colfunc <span class="ot">&lt;-</span> <span class="fu">colorRampPalette</span>(<span class="fu">c</span>(<span class="st">"#00007F"</span>, <span class="st">"blue"</span>, <span class="st">"#007FFF"</span>, <span class="st">"cyan"</span>,<span class="st">"#7FFF7F"</span>,</span>
-<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>                              <span class="st">"yellow"</span>, <span class="st">"#FF7F00"</span>, <span class="st">"red"</span>, <span class="st">"#7F0000"</span>))</span>
-<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>colors <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"white"</span>, <span class="fu">colfunc</span>(<span class="fu">max</span>(sr)))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb49"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a>colfunc <span class="ot">&lt;-</span> <span class="fu">colorRampPalette</span>(<span class="fu">c</span>(<span class="st">"#00007F"</span>, <span class="st">"blue"</span>, <span class="st">"#007FFF"</span>, <span class="st">"cyan"</span>,<span class="st">"#7FFF7F"</span>,</span>
+<span id="cb49-2"><a href="#cb49-2" aria-hidden="true" tabindex="-1"></a>                              <span class="st">"yellow"</span>, <span class="st">"#FF7F00"</span>, <span class="st">"red"</span>, <span class="st">"#7F0000"</span>))</span>
+<span id="cb49-3"><a href="#cb49-3" aria-hidden="true" tabindex="-1"></a>colors <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"white"</span>, <span class="fu">colfunc</span>(<span class="fu">max</span>(sr)))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>Mapear a riqueza de espécies.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(coords<span class="sc">$</span>x, coords<span class="sc">$</span>y, <span class="at">col=</span>colors[sr<span class="sc">+</span><span class="dv">1</span>], <span class="at">cex=</span><span class="fl">1.0</span>, <span class="at">pch=</span><span class="dv">15</span>) <span class="co"># +1 atributos 0=white</span></span>
-<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Mapear um shapefile de contorno</span></span>
-<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>worldmapEA <span class="ot">&lt;-</span> <span class="fu">st_transform</span>(epm<span class="sc">:::</span>worldmap, <span class="fu">attributes</span>(grid.spp)<span class="sc">$</span>crs)</span>
-<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(worldmapEA, <span class="at">lwd =</span> <span class="fl">0.8</span>, <span class="at">add=</span><span class="cn">TRUE</span>)</span>
-<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Adicionar uma legenda</span></span>
-<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a>unique_sr_values <span class="ot">&lt;-</span> <span class="fu">sort</span>(<span class="fu">unique</span>(sr))</span>
-<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a>legend_colors <span class="ot">&lt;-</span> colors[unique_sr_values <span class="sc">+</span> <span class="dv">1</span>] <span class="co"># 0 é branco</span></span>
-<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a>legend_labels <span class="ot">&lt;-</span> <span class="fu">as.character</span>(unique_sr_values)</span>
-<span id="cb18-9"><a href="#cb18-9" aria-hidden="true" tabindex="-1"></a><span class="fu">legend</span>(<span class="st">"bottomleft"</span>, </span>
-<span id="cb18-10"><a href="#cb18-10" aria-hidden="true" tabindex="-1"></a>       <span class="at">legend =</span> legend_labels,</span>
-<span id="cb18-11"><a href="#cb18-11" aria-hidden="true" tabindex="-1"></a>       <span class="at">fill =</span> legend_colors, </span>
-<span id="cb18-12"><a href="#cb18-12" aria-hidden="true" tabindex="-1"></a>       <span class="at">title =</span> <span class="st">"SR"</span>,</span>
-<span id="cb18-13"><a href="#cb18-13" aria-hidden="true" tabindex="-1"></a>       <span class="at">bty =</span> <span class="st">"n"</span>) </span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb50"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(coords[,<span class="dv">1</span>], coords[,<span class="dv">2</span>], <span class="at">col=</span>colors[sr<span class="sc">+</span><span class="dv">1</span>], <span class="at">cex=</span><span class="fl">1.0</span>, <span class="at">pch=</span><span class="dv">15</span>) <span class="co"># +1 atributos 0=white</span></span>
+<span id="cb50-2"><a href="#cb50-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Mapear um shapefile de contorno</span></span>
+<span id="cb50-3"><a href="#cb50-3" aria-hidden="true" tabindex="-1"></a>worldmapEA <span class="ot">&lt;-</span> <span class="fu">st_transform</span>(epm<span class="sc">:::</span>worldmap, <span class="fu">attributes</span>(grid.spp)<span class="sc">$</span>crs)</span>
+<span id="cb50-4"><a href="#cb50-4" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(worldmapEA, <span class="at">lwd =</span> <span class="fl">0.8</span>, <span class="at">add=</span><span class="cn">TRUE</span>)</span>
+<span id="cb50-5"><a href="#cb50-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Adicionar uma legenda</span></span>
+<span id="cb50-6"><a href="#cb50-6" aria-hidden="true" tabindex="-1"></a>unique_sr_values <span class="ot">&lt;-</span> <span class="fu">sort</span>(<span class="fu">unique</span>(sr))</span>
+<span id="cb50-7"><a href="#cb50-7" aria-hidden="true" tabindex="-1"></a>legend_colors <span class="ot">&lt;-</span> colors[unique_sr_values <span class="sc">+</span> <span class="dv">1</span>] <span class="co"># 0 é branco</span></span>
+<span id="cb50-8"><a href="#cb50-8" aria-hidden="true" tabindex="-1"></a>legend_labels <span class="ot">&lt;-</span> <span class="fu">as.character</span>(unique_sr_values)</span>
+<span id="cb50-9"><a href="#cb50-9" aria-hidden="true" tabindex="-1"></a><span class="fu">legend</span>(<span class="st">"bottomleft"</span>, </span>
+<span id="cb50-10"><a href="#cb50-10" aria-hidden="true" tabindex="-1"></a>       <span class="at">legend =</span> legend_labels,</span>
+<span id="cb50-11"><a href="#cb50-11" aria-hidden="true" tabindex="-1"></a>       <span class="at">fill =</span> legend_colors, </span>
+<span id="cb50-12"><a href="#cb50-12" aria-hidden="true" tabindex="-1"></a>       <span class="at">title =</span> <span class="st">"SR"</span>,</span>
+<span id="cb50-13"><a href="#cb50-13" aria-hidden="true" tabindex="-1"></a>       <span class="at">bty =</span> <span class="st">"n"</span>) </span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>Alternativamente, use <code>map_grid</code> para o mesmo resultado com eixos lat/lon e código mais curto:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">map_grid</span>(coords[,<span class="dv">1</span>], coords[,<span class="dv">2</span>], sr, <span class="at">worldmap =</span> epm<span class="sc">:::</span>worldmap,</span>
-<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>         <span class="at">xlab =</span> <span class="st">"Longitude"</span>, <span class="at">ylab =</span> <span class="st">"Latitude"</span>,</span>
-<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>         <span class="at">legend_title =</span> <span class="st">"SR"</span>, <span class="at">main =</span> <span class="st">"Species Richness"</span>, <span class="at">cex=</span><span class="fl">1.4</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb51"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb51-1"><a href="#cb51-1" aria-hidden="true" tabindex="-1"></a><span class="fu">map_grid</span>(coords[,<span class="dv">1</span>], coords[,<span class="dv">2</span>], sr, <span class="at">worldmap =</span> epm<span class="sc">:::</span>worldmap,</span>
+<span id="cb51-2"><a href="#cb51-2" aria-hidden="true" tabindex="-1"></a>         <span class="at">xlab =</span> <span class="st">"Longitude"</span>, <span class="at">ylab =</span> <span class="st">"Latitude"</span>,</span>
+<span id="cb51-3"><a href="#cb51-3" aria-hidden="true" tabindex="-1"></a>         <span class="at">legend_title =</span> <span class="st">"SR"</span>, <span class="at">main =</span> <span class="st">"Species Richness"</span>, <span class="at">cex=</span><span class="fl">1.4</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="05.1-mapbiodiv_files/figure-html/unnamed-chunk-19-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
 </div>
 <p>Quer ver a evidência para um gradiente latitudinal de diversidade?</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Primeiro, vamos colocar a latitude de volta em graus decimais corretos (está em metros Mollweide)</span></span>
-<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>division_factor <span class="ot">&lt;-</span> <span class="dv">100000</span></span>
-<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Correção</span></span>
-<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>latitude <span class="ot">&lt;-</span> coords<span class="sc">$</span>y <span class="sc">/</span> division_factor</span>
-<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Plotar riqueza de espécies vs latitude</span></span>
-<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(latitude, sr)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb52"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb52-1"><a href="#cb52-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Primeiro, vamos colocar a latitude de volta em graus decimais corretos (está em metros Mollweide)</span></span>
+<span id="cb52-2"><a href="#cb52-2" aria-hidden="true" tabindex="-1"></a>division_factor <span class="ot">&lt;-</span> <span class="dv">100000</span></span>
+<span id="cb52-3"><a href="#cb52-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Correção</span></span>
+<span id="cb52-4"><a href="#cb52-4" aria-hidden="true" tabindex="-1"></a>latitude <span class="ot">&lt;-</span> coords[,<span class="dv">2</span>] <span class="sc">/</span> division_factor</span>
+<span id="cb52-5"><a href="#cb52-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Plotar riqueza de espécies vs latitude</span></span>
+<span id="cb52-6"><a href="#cb52-6" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(latitude, sr)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="05.1-mapbiodiv_files/figure-html/unnamed-chunk-20-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
 </div>
 </section>
 <section id="mapeando-o-turnover-diversidade-beta" class="level3" data-number="34.2.11">
 <h3 data-number="34.2.11" class="anchored" data-anchor-id="mapeando-o-turnover-diversidade-beta"><span class="header-section-number">34.2.11</span> Mapeando o turnover (diversidade beta)</h3>
 <p>Agora, vamos voltar ao <code>epm</code> e calcular a diversidade beta como turnover.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>turnover <span class="ot">&lt;-</span> <span class="fu">betadiv_taxonomic</span>(grid.spp,</span>
-<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>                              <span class="at">radius =</span> <span class="dv">160000</span>, <span class="co"># 160.000 metros = 160 km</span></span>
-<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>                              <span class="at">component=</span><span class="st">"turnover"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb53"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb53-1"><a href="#cb53-1" aria-hidden="true" tabindex="-1"></a>turnover <span class="ot">&lt;-</span> <span class="fu">betadiv_taxonomic</span>(grid.spp,</span>
+<span id="cb53-2"><a href="#cb53-2" aria-hidden="true" tabindex="-1"></a>                              <span class="at">radius =</span> <span class="dv">160000</span>, <span class="co"># 160.000 metros = 160 km</span></span>
+<span id="cb53-3"><a href="#cb53-3" aria-hidden="true" tabindex="-1"></a>                              <span class="at">component=</span><span class="st">"turnover"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning in spdep::dnearneigh(gridCentroids, d1 = 0, d2 = radius): neighbour
+object has 5 sub-graphs</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>    gridcell neighborhoods: median 8, range 1 - 8 cells</code></pre>
+</div>
 </div>
 <p>As 8 células vizinhas da célula focal; com resolução de célula de 110km.</p>
 <p>Mapear turnover de espécies.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="co"># cor amigável</span></span>
-<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>terra<span class="sc">::</span><span class="fu">plot</span>(turnover, <span class="at">col =</span> sf<span class="sc">::</span><span class="fu">sf.colors</span>(<span class="dv">100</span>))</span>
-<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Mapear um shapefile de contorno</span></span>
-<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a>worldmapEA <span class="ot">&lt;-</span> <span class="fu">st_transform</span>(epm<span class="sc">:::</span>worldmap, <span class="fu">attributes</span>(grid.spp)<span class="sc">$</span>crs)</span>
-<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(worldmapEA, <span class="at">lwd =</span> <span class="fl">0.5</span>, <span class="at">add=</span><span class="cn">TRUE</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb56"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb56-1"><a href="#cb56-1" aria-hidden="true" tabindex="-1"></a><span class="co"># cor amigável</span></span>
+<span id="cb56-2"><a href="#cb56-2" aria-hidden="true" tabindex="-1"></a>terra<span class="sc">::</span><span class="fu">plot</span>(turnover, <span class="at">col =</span> sf<span class="sc">::</span><span class="fu">sf.colors</span>(<span class="dv">100</span>))</span>
+<span id="cb56-3"><a href="#cb56-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb56-4"><a href="#cb56-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Mapear um shapefile de contorno</span></span>
+<span id="cb56-5"><a href="#cb56-5" aria-hidden="true" tabindex="-1"></a>worldmapEA <span class="ot">&lt;-</span> <span class="fu">st_transform</span>(epm<span class="sc">:::</span>worldmap, <span class="fu">attributes</span>(grid.spp)<span class="sc">$</span>crs)</span>
+<span id="cb56-6"><a href="#cb56-6" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(worldmapEA, <span class="at">lwd =</span> <span class="fl">0.5</span>, <span class="at">add=</span><span class="cn">TRUE</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="05.1-mapbiodiv_files/figure-html/unnamed-chunk-22-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
 </div>
 </section>
 </section>
@@ -720,27 +1043,37 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="carregar-coordenadas-de-pontos" class="level3" data-number="34.3.1">
 <h3 data-number="34.3.1" class="anchored" data-anchor-id="carregar-coordenadas-de-pontos"><span class="header-section-number">34.3.1</span> Carregar coordenadas de pontos</h3>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>points <span class="ot">&lt;-</span> <span class="fu">read.table</span>(<span class="st">"dadosbiogeo/point_example.txt"</span>, <span class="at">h=</span>T)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb57"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb57-1"><a href="#cb57-1" aria-hidden="true" tabindex="-1"></a>points <span class="ot">&lt;-</span> <span class="fu">read.table</span>(<span class="st">"dadosbiogeo/point_example.txt"</span>, <span class="at">h=</span>T)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </section>
 <section id="definir-projeção-do-mapa" class="level3" data-number="34.3.2">
 <h3 data-number="34.3.2" class="anchored" data-anchor-id="definir-projeção-do-mapa"><span class="header-section-number">34.3.2</span> Definir projeção do mapa</h3>
 <p>Albers Equal Area. Bom para a América do Norte.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>AEA <span class="ot">&lt;-</span> <span class="st">"+proj=aea +lat_1=20 +lat_2=60 +lat_0=40 +lon_0=-96 +x_0=0 +y_0=0 +ellps=GRS80 +datum=NAD83 +units=m"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb58"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb58-1"><a href="#cb58-1" aria-hidden="true" tabindex="-1"></a>AEA <span class="ot">&lt;-</span> <span class="st">"+proj=aea +lat_1=20 +lat_2=60 +lat_0=40 +lon_0=-96 +x_0=0 +y_0=0 +ellps=GRS80 +datum=NAD83 +units=m"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </section>
 <section id="gerar-grade-geográfica" class="level3" data-number="34.3.3">
 <h3 data-number="34.3.3" class="anchored" data-anchor-id="gerar-grade-geográfica"><span class="header-section-number">34.3.3</span> Gerar grade geográfica</h3>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>grid_spp <span class="ot">&lt;-</span> <span class="fu">createEPMgrid</span>(points,</span>
-<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>                          <span class="at">resolution =</span> <span class="dv">100000</span>,</span>
-<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>                          <span class="at">cellType =</span> <span class="st">'square'</span>,</span>
-<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a>                          <span class="at">crs =</span> <span class="fu">st_crs</span>(AEA))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb59"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb59-1"><a href="#cb59-1" aria-hidden="true" tabindex="-1"></a>grid_spp <span class="ot">&lt;-</span> <span class="fu">createEPMgrid</span>(points,</span>
+<span id="cb59-2"><a href="#cb59-2" aria-hidden="true" tabindex="-1"></a>                          <span class="at">resolution =</span> <span class="dv">100000</span>,</span>
+<span id="cb59-3"><a href="#cb59-3" aria-hidden="true" tabindex="-1"></a>                          <span class="at">cellType =</span> <span class="st">'square'</span>,</span>
+<span id="cb59-4"><a href="#cb59-4" aria-hidden="true" tabindex="-1"></a>                          <span class="at">crs =</span> <span class="fu">st_crs</span>(AEA))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>    Detected 23 taxa with point data.</code></pre>
+</div>
 </div>
 <p>Plotar mapa.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(grid_spp)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb61"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb61-1"><a href="#cb61-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(grid_spp)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="05.1-mapbiodiv_files/figure-html/unnamed-chunk-26-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
 </div>
 <p>Você pode usar o código da primeira parte do exercício para obter a matriz de ocorrência, coords e todo o resto.</p>
 </section>
@@ -748,45 +1081,82 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h3 data-number="34.3.4" class="anchored" data-anchor-id="criar-polígonos-a-partir-de-pontos"><span class="header-section-number">34.3.4</span> Criar polígonos a partir de pontos</h3>
 <p>Alternativamente, você pode desejar usar as coordenadas de pontos para criar polígonos geográficos para cada espécie. Primeiro, transforme as coordenadas em uma lista com as espécies como elementos contendo as coordenadas (X, Y) para cada espécie.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>spcoords <span class="ot">&lt;-</span> <span class="fu">split</span>(points[, <span class="fu">c</span>(<span class="st">"X"</span>, <span class="st">"Y"</span>)], points<span class="sc">$</span>taxon)</span>
-<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Iterar a transformação para todos</span></span>
-<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a>xys <span class="ot">&lt;-</span> <span class="fu">vector</span>(<span class="at">mode =</span> <span class="st">"list"</span>, <span class="fu">length</span>(spcoords))</span>
-<span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a>polys <span class="ot">&lt;-</span> <span class="fu">vector</span>(<span class="at">mode =</span> <span class="st">"list"</span>, <span class="fu">length</span>(spcoords))</span>
-<span id="cb27-6"><a href="#cb27-6" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">length</span>(spcoords)){</span>
-<span id="cb27-7"><a href="#cb27-7" aria-hidden="true" tabindex="-1"></a>  xys[[i]] <span class="ot">=</span> <span class="fu">st_as_sf</span>(spcoords[[i]], <span class="at">coords=</span><span class="fu">c</span>(<span class="st">"X"</span>,<span class="st">"Y"</span>))</span>
-<span id="cb27-8"><a href="#cb27-8" aria-hidden="true" tabindex="-1"></a>  polys[[i]] <span class="ot">=</span> xys[[i]] <span class="sc">|&gt;</span> </span>
-<span id="cb27-9"><a href="#cb27-9" aria-hidden="true" tabindex="-1"></a>    dplyr<span class="sc">::</span><span class="fu">summarise</span>() <span class="sc">|&gt;</span> </span>
-<span id="cb27-10"><a href="#cb27-10" aria-hidden="true" tabindex="-1"></a>    <span class="fu">st_cast</span>(<span class="st">"POLYGON"</span>)</span>
-<span id="cb27-11"><a href="#cb27-11" aria-hidden="true" tabindex="-1"></a>  polys[[i]] <span class="ot">=</span> polys[[i]] <span class="sc">|&gt;</span> </span>
-<span id="cb27-12"><a href="#cb27-12" aria-hidden="true" tabindex="-1"></a>    <span class="fu">st_convex_hull</span>()</span>
-<span id="cb27-13"><a href="#cb27-13" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb27-14"><a href="#cb27-14" aria-hidden="true" tabindex="-1"></a><span class="co"># Recuperar os nomes</span></span>
-<span id="cb27-15"><a href="#cb27-15" aria-hidden="true" tabindex="-1"></a>species_names <span class="ot">&lt;-</span> <span class="fu">names</span>(spcoords)</span>
-<span id="cb27-16"><a href="#cb27-16" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(polys) <span class="ot">&lt;-</span> species_names</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb62"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb62-1"><a href="#cb62-1" aria-hidden="true" tabindex="-1"></a>spcoords <span class="ot">&lt;-</span> <span class="fu">split</span>(points[, <span class="fu">c</span>(<span class="st">"X"</span>, <span class="st">"Y"</span>)], points<span class="sc">$</span>taxon)</span>
+<span id="cb62-2"><a href="#cb62-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb62-3"><a href="#cb62-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Iterar a transformação para todos</span></span>
+<span id="cb62-4"><a href="#cb62-4" aria-hidden="true" tabindex="-1"></a>xys <span class="ot">&lt;-</span> <span class="fu">vector</span>(<span class="at">mode =</span> <span class="st">"list"</span>, <span class="fu">length</span>(spcoords))</span>
+<span id="cb62-5"><a href="#cb62-5" aria-hidden="true" tabindex="-1"></a>polys <span class="ot">&lt;-</span> <span class="fu">vector</span>(<span class="at">mode =</span> <span class="st">"list"</span>, <span class="fu">length</span>(spcoords))</span>
+<span id="cb62-6"><a href="#cb62-6" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">length</span>(spcoords)){</span>
+<span id="cb62-7"><a href="#cb62-7" aria-hidden="true" tabindex="-1"></a>  xys[[i]] <span class="ot">=</span> <span class="fu">st_as_sf</span>(spcoords[[i]], <span class="at">coords=</span><span class="fu">c</span>(<span class="st">"X"</span>,<span class="st">"Y"</span>))</span>
+<span id="cb62-8"><a href="#cb62-8" aria-hidden="true" tabindex="-1"></a>  polys[[i]] <span class="ot">=</span> xys[[i]] <span class="sc">|&gt;</span> </span>
+<span id="cb62-9"><a href="#cb62-9" aria-hidden="true" tabindex="-1"></a>    dplyr<span class="sc">::</span><span class="fu">summarise</span>() <span class="sc">|&gt;</span> </span>
+<span id="cb62-10"><a href="#cb62-10" aria-hidden="true" tabindex="-1"></a>    <span class="fu">st_cast</span>(<span class="st">"POLYGON"</span>)</span>
+<span id="cb62-11"><a href="#cb62-11" aria-hidden="true" tabindex="-1"></a>  polys[[i]] <span class="ot">=</span> polys[[i]] <span class="sc">|&gt;</span> </span>
+<span id="cb62-12"><a href="#cb62-12" aria-hidden="true" tabindex="-1"></a>    <span class="fu">st_convex_hull</span>()</span>
+<span id="cb62-13"><a href="#cb62-13" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb62-14"><a href="#cb62-14" aria-hidden="true" tabindex="-1"></a><span class="co"># Recuperar os nomes</span></span>
+<span id="cb62-15"><a href="#cb62-15" aria-hidden="true" tabindex="-1"></a>species_names <span class="ot">&lt;-</span> <span class="fu">names</span>(spcoords)</span>
+<span id="cb62-16"><a href="#cb62-16" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(polys) <span class="ot">&lt;-</span> species_names</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </section>
 <section id="criar-a-grade-usando-polígonos" class="level3" data-number="34.3.5">
 <h3 data-number="34.3.5" class="anchored" data-anchor-id="criar-a-grade-usando-polígonos"><span class="header-section-number">34.3.5</span> Criar a grade usando polígonos</h3>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Atribuir CRS para cada polígono sf</span></span>
-<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>polys <span class="ot">&lt;-</span> <span class="fu">lapply</span>(polys, <span class="cf">function</span>(p) {</span>
-<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">st_set_crs</span>(p, AEA)</span>
-<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a>})</span>
-<span id="cb28-5"><a href="#cb28-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb28-6"><a href="#cb28-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Criar a grade</span></span>
-<span id="cb28-7"><a href="#cb28-7" aria-hidden="true" tabindex="-1"></a>grid_spp2 <span class="ot">&lt;-</span> <span class="fu">createEPMgrid</span>(polys,</span>
-<span id="cb28-8"><a href="#cb28-8" aria-hidden="true" tabindex="-1"></a>                           <span class="at">resolution =</span> <span class="dv">100000</span>,</span>
-<span id="cb28-9"><a href="#cb28-9" aria-hidden="true" tabindex="-1"></a>                           <span class="at">cellType =</span> <span class="st">'square'</span>,</span>
-<span id="cb28-10"><a href="#cb28-10" aria-hidden="true" tabindex="-1"></a>                           <span class="at">crs =</span> <span class="fu">st_crs</span>(AEA))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb63"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb63-1"><a href="#cb63-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Atribuir CRS para cada polígono sf</span></span>
+<span id="cb63-2"><a href="#cb63-2" aria-hidden="true" tabindex="-1"></a>polys <span class="ot">&lt;-</span> <span class="fu">lapply</span>(polys, <span class="cf">function</span>(p) {</span>
+<span id="cb63-3"><a href="#cb63-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">st_set_crs</span>(p, AEA)</span>
+<span id="cb63-4"><a href="#cb63-4" aria-hidden="true" tabindex="-1"></a>})</span>
+<span id="cb63-5"><a href="#cb63-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb63-6"><a href="#cb63-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Criar a grade</span></span>
+<span id="cb63-7"><a href="#cb63-7" aria-hidden="true" tabindex="-1"></a>grid_spp2 <span class="ot">&lt;-</span> <span class="fu">createEPMgrid</span>(polys,</span>
+<span id="cb63-8"><a href="#cb63-8" aria-hidden="true" tabindex="-1"></a>                           <span class="at">resolution =</span> <span class="dv">100000</span>,</span>
+<span id="cb63-9"><a href="#cb63-9" aria-hidden="true" tabindex="-1"></a>                           <span class="at">cellType =</span> <span class="st">'square'</span>,</span>
+<span id="cb63-10"><a href="#cb63-10" aria-hidden="true" tabindex="-1"></a>                           <span class="at">crs =</span> <span class="fu">st_crs</span>(AEA))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+  |                                                                            
+  |                                                                      |   0%
+  |                                                                            
+  |==============                                                        |  20%
+  |                                                                            
+  |============================                                          |  40%
+  |                                                                            
+  |==========================================                            |  60%
+  |                                                                            
+  |========================================================              |  80%
+  |                                                                            
+  |======================================================================| 100%</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>5 small-ranged species were preserved:
+    Tamias_alpinus
+    Tamias_obscurus
+    Tamias_ochrogenys
+    Tamias_palmeri
+    Tamias_quadrimaculatus</code></pre>
+</div>
 </div>
 <p>Mapear a grade criada com polígonos.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(grid_spp2)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb66"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb66-1"><a href="#cb66-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(grid_spp2)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="05.1-mapbiodiv_files/figure-html/unnamed-chunk-29-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
 </div>
 <p>Comparar com o mapa de coordenadas de pontos.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(grid_spp)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb67"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb67-1"><a href="#cb67-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(grid_spp)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="05.1-mapbiodiv_files/figure-html/unnamed-chunk-30-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
 </div>
 </section>
 </section>
@@ -885,6 +1255,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           if (link.dataset.originalHref !== undefined) {
             link.href = link.dataset.originalHref;
           }
+            // target, if specified
+            link.setAttribute("target", "_blank");
+            if (link.getAttribute("rel") === null) {
+              link.setAttribute("rel", "noopener");
+            }
+            // default icon
+            link.classList.add("external");
         }
       }
     function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {

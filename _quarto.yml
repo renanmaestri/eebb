@@ -66,12 +66,17 @@ bibliography:
   - references.bib
 csl: chicago-author-date.csl
 
+execute:
+  freeze: auto
+
 format:
   html:
     theme:
-      - default
+      - cosmo
       - custom.scss
     css: style.css
+    link-external-newwindow: true
+    link-external-icon: true
   pdf:
     keep-tex: true
     include-in-header: preamble.tex

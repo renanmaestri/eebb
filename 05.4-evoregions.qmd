@@ -6,7 +6,7 @@ Este tutorial tem como objetivo a delimitação de evorregiões, estimação de 
 
 Certifique-se de instalar a versão de desenvolvimento do Herodotools a partir do github.
 
-```{r, eval=FALSE}
+```{r}
 if (!requireNamespace("devtools", quietly = TRUE)){
   install.packages("devtools")
 }
@@ -15,8 +15,9 @@ devtools::install_github("GabrielNakamura/Herodotools")
 
 As dependências também são importantes.
 
-```{r, eval=FALSE}
+```{r}
 library(ape)
+library(sf)
 library(geiger)
 library(dplyr)
 library(SYNCSA)
@@ -31,7 +32,7 @@ source("dadosbiogeo/map_grid_function.R")
 
 Os dados geográficos gerados no Exercício 1.
 
-```{r, eval=FALSE}
+```{r}
 occurrence.spp <- read.table("dadosbiogeo/occurrence.spp.txt")
 coords <- read.table("dadosbiogeo/coords.txt")
 dim(occurrence.spp) # 1133 locais, 66 espécies
@@ -40,13 +41,13 @@ row.names(coords) = row.names(occurrence.spp) # atribuir nomes de linha aos loca
 
 Uma hipótese filogenética para o grupo.
 
-```{r, eval=FALSE}
+```{r}
 phylogeny <- read.nexus("dadosbiogeo/phylogeny_phyllomedusinae.tree")
 ```
 
 Cruze os dados geográficos e a filogenia.
 
-```{r, eval=FALSE}
+```{r}
 # Cruzar dados filogenéticos com dados geográficos
 match <- treedata(phylogeny, t(occurrence.spp))
 phylogeny <- match$phy
@@ -72,7 +73,7 @@ colnames(occurrence.spp) == phylogeny$tip.label
 
 A função `calc_evoregions` implementa a delimitação de evorregiões de Maestri & Duarte (2020). Desse modo, ela realiza uma regionalização biogeográfica baseada em uma Análise Discriminante de Componentes Principais (DAPC), que se baseia em agrupamento não-hierárquico k-means, aplicado a uma matriz de composição filogenética (na verdade, aos PCPS que já encontramos) que define a frequência de espécies/nós nos locais. Evorregiões podem ser vistas como áreas de diversificação independente de linhagens, refletindo a radiação histórica de clados únicos (Maestri e Duarte, 2020).
 
-```{r, eval=FALSE}
+```{r}
 # Certifique-se de que sua matriz de ocorrência está no formato data.frame
 regions <- calc_evoregions(comm=as.data.frame(occurrence.spp),
                            phy=phylogeny,
@@ -91,7 +92,7 @@ names(reg_cols) <- levels(site_region)
 
 Agora, podemos mapear as evorregiões.
 
-```{r, eval=FALSE}
+```{r}
 map_grid(coords[,1], coords[,2], site_region, type = "categorical",
          palette = reg_cols, worldmap = epm:::worldmap,
          xlab = "Longitude", ylab = "Latitude",
@@ -100,7 +101,7 @@ map_grid(coords[,1], coords[,2], site_region, type = "categorical",
 
 A saída das evorregiões produziu um número de regiões distintas. No entanto, nem todas as células têm o mesmo grau de afiliação com a região em que foram classificadas. Células com alta afiliação indicam que as assembleias são mais semelhantes às outras células presentes em uma região. Por outro lado, assembleias com baixos valores de afiliação correspondem a áreas com alto turnover, ou seja, áreas com múltiplos eventos de colonização por diferentes linhagens (Maestri and Duarte, 2020).
 
-```{r, eval=FALSE}
+```{r}
 # Selecionando apenas os eixos com mais de 5% de variância explicada da saída da evorregião
 axis_sel <- which(regions$PCPS$prop_explainded >= regions$PCPS$tresh_dist)
 PCPS_thresh <- regions$PCPS$vectors[, axis_sel]
@@ -123,7 +124,7 @@ map_grid(coords[,1], coords[,2], sites$afilliation, worldmap = epm:::worldmap,
 
 É interessante observar a distribuição das evorregiões ao longo das pontas da filogenia. Vamos implementar uma maneira simples de fazer isso: primeiro, vamos descobrir quantas ocorrências de cada espécie caem em cada evorregião. Em seguida, definiremos a presença em uma única evorregião se mais de 70% das ocorrências da espécie estiverem lá. Caso contrário, as espécies amplamente distribuídas formarão uma nova classe.
 
-```{r, eval=FALSE}
+```{r}
 groups.vec.bray <- as.data.frame(site_region)
 n.groups <- length(levels(site_region))
 dummy.groups.vec.bray <-
@@ -154,7 +155,7 @@ d_0.7 <- ifelse(d_0.7 == 0, n.groups + 1, d_0.7)
 
 Agora, podemos mapear as evorregiões na filogenia.
 
-```{r, eval=FALSE}
+```{r}
 # Reconstrução ancestral usando simmap
 anc.tree_0.7 <-
   make.simmap(phylogeny, d_0.7, model = "ER", nsim = 500)
@@ -176,7 +177,7 @@ plot(
 
 Mapear lado a lado.
 
-```{r, eval=FALSE}
+```{r}
 par(mfrow = c(1, 2))
 # Mapear na filogenia
 plot(
@@ -202,7 +203,7 @@ Alguns métodos realizam reconstrução de áreas ancestrais. Nós usaremos a es
 
 BioGeoBEARS requer uma estrutura geográfica particular, no formato Phyllip. Veja como transformar nossas ocorrências de espécies por evorregiões neste formato.
 
-```{r, eval=FALSE}
+```{r}
 # Data frame espécies por evorregiões
 a_region <- get_region_occ(comm = occurrence.spp, site.region = site_region)
 
@@ -221,7 +222,7 @@ geogfn = np("dadosbiogeo/geo_area.data")
 
 BioGeoBEARS também exige um arquivo de filogenia específico, em formato newick, a ser recuperado de um arquivo.
 
-```{r, eval=FALSE}
+```{r}
 # Converter árvore do formato nexus para newick
 trfn <- write.tree(phylogeny, file = "dadosbiogeo/phy_phyllomedusinae_nwk.nwk")
 # Importar o caminho para ele
@@ -230,7 +231,7 @@ trfn = np("dadosbiogeo/phy_phyllomedusinae_nwk.nwk")
 
 Rodar BioGeoBEARS. Esta é uma função que o autor criou para otimizar o processo. Ela usa parâmetros padrão para todos os seis modelos, roda eles, compara eles, e retorna os resultados do melhor modelo. Por favor, use com cautela, eu recomendo fortemente consultar as páginas de ajuda do BioGeoBEARS, referências, páginas na wiki, etc. para entender as premissas dos modelos e personalizar as análises para os seus objetivos.
 
-```{r, eval=FALSE}
+```{r}
 source("dadosbiogeo/R_function_BioGeoBEARS_on_empirical_data.R")
 
 bgb_results <- run_empirical_biogeobears(geogfn,
@@ -245,7 +246,7 @@ save(bgb_res, file = "dadosbiogeo/bgb_res.RData")
 
 Plotar os resultados do BioGeoBEARS.
 
-```{r, eval=FALSE}
+```{r}
 # Plotagem simples
 plot_BioGeoBEARS_results(bgb_res)
 
@@ -259,7 +260,7 @@ plot_BioGeoBEARS_results(bgb_res, label.offset=0.35, tipcex=0.3, statecex=0.5, s
 
 Mapear lado a lado com as evorregiões.
 
-```{r, eval=FALSE}
+```{r}
 par(mfrow = c(1, 2))
 # Plotar Resultados BGB
 plot_BioGeoBEARS_results(bgb_res)
@@ -285,7 +286,7 @@ A idade das assembleias corresponde ao tempo médio de chegada de cada espécie 
 
 Se você conseguiu rodar o BioGeoBEARS, ótimo. Se não, não se preocupe, ensinar o BioGeoBEARS não é o foco aqui, então vamos carregar os resultados da pasta.
 
-```{r, eval=FALSE}
+```{r}
 # convertendo números para caracteres
 biogeo_area <- data.frame(biogeo = chartr("12345", "ABCDE", site_region))
 
@@ -312,7 +313,7 @@ node_area <-
 
 A função `calc_age_arrival` retorna um objeto contendo a idade média para cada assembleia.
 
-```{r, eval=FALSE}
+```{r}
 age_comm <- calc_age_arrival(W = occurrence.spp,
                              tree = phy_nwk,
                              ancestral.area = node_area,
@@ -322,7 +323,7 @@ head(age_comm$mean_age_per_assemblage)
 
 Mapear a idade das assembleias.
 
-```{r, eval=FALSE}
+```{r}
 map_grid(coords[,1], coords[,2], age_comm$mean_age_per_assemblage[,1],
          worldmap = epm:::worldmap,
          palette = colorRampPalette(c("lightsalmon", "darkred")),

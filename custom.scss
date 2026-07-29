@@ -1,2 +1,26 @@
 /*-- scss:defaults --*/
 $primary: #096B72;
+$font-family-sans-serif: 'Inter', sans-serif;
+$body-bg: #fdfdfd;
+
+/*-- scss:rules --*/
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap');
+
+/* Style the callouts */
+.callout-note {
+  background-color: #f0f7f9 !important;
+  border-left-color: #096B72 !important;
+}
+
+.callout-tip {
+  background-color: #f1f8ed !important;
+  border-left-color: #2e7d32 !important;
+}
+
+/* Add shadow to main content card for modern look */
+main {
+  background: white;
+  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+}

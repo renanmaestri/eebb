@@ -6,7 +6,7 @@ Este tutorial é para o cálculo de métricas de diversificação in-situ, event
 
 Certifique-se de instalar a versão do github do Herodotools.
 
-```{r, eval=FALSE}
+```{r}
 if (!requireNamespace("devtools", quietly = TRUE)){
   install.packages("devtools")
 }
@@ -16,13 +16,14 @@ devtools::install_github("GabrielNakamura/Herodotools")
 As dependências também são importantes.
 Instale também `daee` para as métricas nas pontas.
 
-```{r, eval=FALSE}
+```{r}
 require(devtools)
 install_github("vanderleidebastiani/daee")
 ```
 
-```{r, eval=FALSE}
+```{r}
 library(ape)
+library(sf)
 library(geiger)
 library(dplyr)
 library(SYNCSA)
@@ -40,7 +41,7 @@ source("dadosbiogeo/map_grid_function.R")
 
 Os dados geográficos para roedores sigmodontíneos.
 
-```{r, eval=FALSE}
+```{r}
 occurrence.spp <- read.table("dadosbiogeo/occurrence.sig.txt", header=TRUE)
 coords <- read.table("dadosbiogeo/coords.sig.txt", header=TRUE)
 dim(occurrence.spp) # 1579 locais, 384 espécies
@@ -50,13 +51,13 @@ colnames(occurrence.spp) <- gsub("\\.", "_", colnames(occurrence.spp))
 
 Uma hipótese filogenética para roedores sigmodontíneos.
 
-```{r, eval=FALSE}
+```{r}
 phylogeny <- read.nexus("dadosbiogeo/phylogeny_sigmodontinae.tre")
 ```
 
 Cruze os dados geográficos e a filogenia.
 
-```{r, eval=FALSE}
+```{r}
 match <- treedata(phylogeny, t(occurrence.spp))
 phylogeny <- match$phy
 occurrence.spp <- match$data
@@ -79,7 +80,7 @@ colnames(occurrence.spp) == phylogeny$tip.label
 
 Vamos recalcular as evorregiões do Exercício 4.
 
-```{r, eval=FALSE}
+```{r}
 regions <- calc_evoregions(comm=as.data.frame(occurrence.spp),
                            phy=phylogeny,
                            max.n.clust=10,
@@ -93,7 +94,7 @@ names(reg_cols) <- levels(site_region)
 
 Mapear as evorregiões.
 
-```{r, eval=FALSE}
+```{r}
 map_grid(coords[,1], coords[,2], site_region, type = "categorical",
          palette = reg_cols, worldmap = epm:::worldmap,
          xlab = "Longitude", ylab = "Latitude",
@@ -102,7 +103,7 @@ map_grid(coords[,1], coords[,2], site_region, type = "categorical",
 
 Precisamos carregar de volta os resultados do BioGeoBEARS e calcular a matriz de nós por área/região e local por área/região.
 
-```{r, eval=FALSE}
+```{r}
 biogeo_area <- data.frame(biogeo = chartr("1234", "ABCD", site_region))
 load("dadosbiogeo/bgb_res_sig.RData")
 phy_nwk <- read.tree("dadosbiogeo/phy_sigmodontinae_nwk.nwk")
@@ -124,7 +125,7 @@ Métricas tradicionais de diversificação usadas em análises baseadas em assem
 
 Modificamos a métrica original DR para levar em consideração apenas a parte da história evolutiva associada à região na qual a espécie atualmente ocupa após colonização e estabelecimento (sem mais eventos de dispersão até o presente). Esse valor representa a diversificação que ocorreu devido ao processo de diversificação *in-situ*, e nós o chamamos de métrica de diversificação *in-situ*.
 
-```{r, eval=FALSE}
+```{r}
 sigmodontinae_diversification <-
   calc_insitu_diversification(W = occurrence.spp,
                               tree = phy_nwk,
@@ -137,7 +138,7 @@ insituDR <- sigmodontinae_diversification$insitu_comm_mean
 
 Mapear taxa de diversificação *in-situ* para cada assembleia.
 
-```{r, eval=FALSE}
+```{r}
 map_grid(coords[,1], coords[,2], log(insituDR), worldmap = epm:::worldmap,
          palette = colorRampPalette(c("lightsalmon", "darkred")),
          xlab = "Longitude", ylab = "Latitude",
@@ -147,7 +148,7 @@ map_grid(coords[,1], coords[,2], log(insituDR), worldmap = epm:::worldmap,
 
 Comparar com DR total.
 
-```{r, eval=FALSE}
+```{r}
 par(mfrow = c(1, 2))
 map_grid(coords[,1], coords[,2], log(insituDR), worldmap = epm:::worldmap,
          palette = colorRampPalette(c("lightsalmon", "darkred")),
@@ -167,7 +168,7 @@ par(mfrow = c(1, 1))
 
 Usando a mesma lógica de reconstrução ancestral para cada região, podemos estimar a importância e a direção dos eventos de dispersão. Usando a função `calc_dispersal_from` podemos quantificar a contribuição de uma dada região para a dispersão histórica das espécies nas assembleias atuais. Isso é feito calculando a proporção de espécies em uma assembleia que dispersaram da área de origem ancestral focal para outras regiões. Esse cálculo considera apenas as espécies que apresentam eventos de dispersão em sua linhagem ancestral, em outras palavras, espécies que apresentaram toda sua história dentro de uma única área não são consideradas nesta análise.
 
-```{r, eval=FALSE}
+```{r}
 sigmodontinae_dispersal <-
   calc_dispersal_from(W = occurrence.spp,
                       tree = phy_nwk,
@@ -179,7 +180,7 @@ O resultado é um *data frame* com as assembleias nas linhas e regiões nas colu
 
 Podemos mapear a contribuição de uma região para todas as outras regiões em relação à dispersão histórica de linhagens.
 
-```{r, eval=FALSE}
+```{r}
 sigmodontinae_dispersal[is.na(sigmodontinae_dispersal)] <- 0
 col_sums <- colSums(sigmodontinae_dispersal)
 print(col_sums)
@@ -194,7 +195,7 @@ from_top3 <- sigmodontinae_dispersal[, top3[3]]
 
 Mapear a dispersão histórica.
 
-```{r, eval=FALSE}
+```{r}
 layout_matrix <- matrix(c(0, 1, 0, 2, 3, 4), nrow = 2, byrow = TRUE)
 layout(layout_matrix)
 
@@ -227,7 +228,7 @@ par(mfrow = c(1, 1))
 
 Também podemos calcular métricas comuns de filogenia de comunidades considerando a dinâmica de diversificação *in-situ*. Essas métricas filogenéticas de comunidades permitem separar os efeitos da diversificação *in-situ* e *ex-situ* de maneira similar à métrica de diversificação *in-situ*. A saber, `PDin-situ` e `PEin-situ`, que correspondem a versões modificadas da Diversidade Filogenética (PD) (Faith, 1992) e Endemismo Filogenético (PE) (Rosauer, et al.2009), respectivamente. A diferença é que nossas métricas consideram apenas a quantidade de diversidade filogenética e endemismo que emergiram após a colonização e estabelecimento das linhagens atuais nas assembleias. Para isso usamos a função `calc_insitu_metrics`.
 
-```{r, eval=FALSE}
+```{r}
 PD_PE_insitu <- calc_insitu_metrics(W = occurrence.spp,
                                     tree = phy_nwk,
                                     ancestral.area = node_area,
@@ -238,7 +239,7 @@ PD_PE_insitu <- calc_insitu_metrics(W = occurrence.spp,
 
 Vamos mapear o endemismo filogenético (PE).
 
-```{r, eval=FALSE}
+```{r}
 PE <- PD_PE_insitu$PE
 insituPE <- PD_PE_insitu$PEinsitu
 
@@ -263,14 +264,14 @@ Desta vez, usaremos outro conjunto de dados com características categóricas re
 
 Carregar características e filogenia do pacote `Herodotools`.
 
-```{r, eval=FALSE}
+```{r}
 data("rodent_phylo")
 data("trait")
 ```
 
 Calcular *Transition rates*, *Stasis time*, e *Last transition time*.
 
-```{r, eval=FALSE}
+```{r}
 match_data <- treedata(rodent_phylo, trait)
 rodent_phylo <- match_data$phy
 
@@ -284,13 +285,13 @@ trans_rates <- calc_tip_based_trait_evo(tree = rodent_phylo,
 
 Se levar muito tempo, importe o resultado obtido usando o mesmo código acima.
 
-```{r, eval=FALSE}
+```{r}
 load(system.file("extdata", "transition_rate_res.RData", package = "Herodotools"))
 ```
 
 Agora temos as estimativas das três métricas baseadas em pontas para 214 espécies de roedores. Podemos resumir as métricas na escala das assembleias. Primeiro carregaremos dados de assembleia e geográficos cobrindo 1770 células localizadas no Neotrópico.
 
-```{r, eval=FALSE}
+```{r}
 comm_data <- read.table(
   system.file("extdata", "PresAbs_228sp_Neotropical_MainDataBase_Ordenado.txt",
               package = "Herodotools"),
@@ -305,7 +306,7 @@ geo_data <- read.table(
 
 Calcular os valores médios das métricas baseadas nas pontas para todas as espécies em cada assembleia.
 
-```{r, eval=FALSE}
+```{r}
 averaged_rates <- purrr::map_dfr(1:nrow(comm_data), function (i){
   purrr::map_dfr(trans_rates, function (sims) {
     gather_names <- names(comm_data[i,][which(comm_data[i,]>0)])
@@ -322,13 +323,13 @@ averaged_rates <- purrr::map_dfr(1:nrow(comm_data), function (i){
 
 Já que o último passo leva alguns minutos, você pode optar por ler diretamente do pacote a tabela com valores médios para todas as métricas.
 
-```{r, eval=FALSE}
+```{r}
 data("averaged_rates")
 ```
 
 Mapear *Transition Rates*, *Stasis Time*, e *Last Transition Time*.
 
-```{r, eval=FALSE}
+```{r}
 TR <- averaged_rates$prop.transitions
 ST <- averaged_rates$stasis.time
 LTT <- averaged_rates$last.transition.time
@@ -360,7 +361,7 @@ SBEARS (Duarte et al. 2025) é uma abordagem alternativa para reconstruir áreas
 
 Nós usaremos o algoritmo *single site*, que reconstrói cada local independentemente. As células usadas aqui estão a aproximadamente 1° de resolução espacial (cerca de 110 km × 110 km no equador), cobrindo todo o Neotrópico com ocorrências de roedores sigmodontíneos. Os mesmos dados de roedores sigmodontíneos (`rodent_phylo`) são usados juntamente com a sua matriz de comunidade e coordenadas associadas a partir do pacote `Herodotools`. A diferença é que estes dados estão muito "grosseiros", ou seja, as células são muito grandes; isto é feito apenas com o propósito de rodar num tempo adequado para este curso.
 
-```{r, eval=FALSE}
+```{r}
 data("comm_sbears")
 data("coords_sbears")
 data("phy_sbears")
@@ -368,7 +369,7 @@ data("phy_sbears")
 
 Rodar SBEARS com o algoritmo *single-site*.
 
-```{r, eval=FALSE}
+```{r}
 out_single_site <- calc_sbears(x = comm_sbears,
                                phy = phy_sbears,
                                coords = coords_sbears,
@@ -379,13 +380,13 @@ out_single_site <- calc_sbears(x = comm_sbears,
 
 A saída é uma lista com dois elementos: `reconstruction` (nós × locais, probabilidade de cada nó em cada local) e `site_node_composition` (locais × nós, quais nós ocorrem em quais assembleias). Vamos inspecionar os rótulos dos nós para escolher nós interessantes para visualização.
 
-```{r, eval=FALSE}
+```{r}
 head(rownames(out_single_site$reconstruction))
 ```
 
 Primeiro, vamos plotar a filogenia com os rótulos dos nós para que possamos localizar os nós selecionados na árvore.
 
-```{r, eval=FALSE}
+```{r}
 plot(ladderize(phy_sbears), cex = 0.4, label.offset = 1)
 nodelabels(text = rownames(out_single_site$reconstruction),
            cex = 0.4, frame = "none", col = "red", adj = -0.2)
@@ -393,7 +394,7 @@ nodelabels(text = rownames(out_single_site$reconstruction),
 
 Podemos selecionar alguns nós que representam linhagens distintas e mapear suas probabilidades de ocorrência reconstruídas. Aqui destacamos nós que abrangem diferentes regiões geográficas do Neotrópico. O tamanho do ponto (`cex`) é aumentado para que células adjacentes se toquem, não deixando espaços em branco.
 
-```{r, eval=FALSE}
+```{r}
 node_list <- c("Node114", "Node180", "Node88")
 par(mfrow = c(1, 3))
 
