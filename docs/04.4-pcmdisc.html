@@ -524,7 +524,7 @@ div.csl-indent {
 </header>
 
 
-<p>Sobre o ajuste de modelos evolutivos para dados discretos leia <span class="citation" data-cites="yang2006 revell-harmon2022">(<a href="#ref-yang2006" role="doc-biblioref">Yang 2006</a>; <a href="#ref-revell-harmon2022" role="doc-biblioref">Revell and Harmon 2022</a>)</span>.</p>
+<p>Sobre o ajuste de modelos evolutivos para dados discretos leia <span class="citation" data-cites="yang2006 revell-harmon2022">(<a href="07-references.html#ref-yang2006" role="doc-biblioref">Yang 2006</a>; <a href="07-references.html#ref-revell-harmon2022" role="doc-biblioref">Revell and Harmon 2022</a>)</span>.</p>
 <p>Vamos carregar os mesmos dados de primatas que usamos no capítulo anterior. Os ajustes de modelos seguem a mesma lógica. Aqui, vamos aplicar para fenótipos categóricos/discretos.</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">require</span>(ape)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -785,7 +785,7 @@ div.csl-indent {
 </div>
 <section id="mapeamento-estocástico-de-caracteres" class="level3" data-number="22.2.1">
 <h3 data-number="22.2.1" class="anchored" data-anchor-id="mapeamento-estocástico-de-caracteres"><span class="header-section-number">22.2.1</span> Mapeamento estocástico de caracteres</h3>
-<p>Existe outra alternativa às estimativas acima, que usa MCMC (Bayesiano) para amostrar histórias a partir de uma distribuição contendo muitos (milhares de) resultados (o que chamamos de distribuição posterior de probabilidades). Assim, os modelos são os mesmos usados anteriormente (ER, ARD), mas no final é obtida uma amostra de histórias que são únicas e não ambíguas, ou seja, cada etapa na árvore pode conter apenas um estado, ao invés da probabilidade de todos os estados para cada nó. Pra se aprofundar, leia <span class="citation" data-cites="huelsenbeck2003">Huelsenbeck, Nielsen, and Bollback (<a href="#ref-huelsenbeck2003" role="doc-biblioref">2003</a>)</span>, <span class="citation" data-cites="revell-harmon2022">Revell and Harmon (<a href="#ref-revell-harmon2022" role="doc-biblioref">2022</a>)</span>.</p>
+<p>Existe outra alternativa às estimativas acima, que usa MCMC (Bayesiano) para amostrar histórias a partir de uma distribuição contendo muitos (milhares de) resultados (o que chamamos de distribuição posterior de probabilidades). Assim, os modelos são os mesmos usados anteriormente (ER, ARD), mas no final é obtida uma amostra de histórias que são únicas e não ambíguas, ou seja, cada etapa na árvore pode conter apenas um estado, ao invés da probabilidade de todos os estados para cada nó. Pra se aprofundar, leia <span class="citation" data-cites="huelsenbeck2003">Huelsenbeck, Nielsen, and Bollback (<a href="07-references.html#ref-huelsenbeck2003" role="doc-biblioref">2003</a>)</span>, <span class="citation" data-cites="revell-harmon2022">Revell and Harmon (<a href="07-references.html#ref-revell-harmon2022" role="doc-biblioref">2022</a>)</span>.</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Função make.simmap do phytools</span></span>
 <span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>anc.tree<span class="ot">&lt;-</span><span class="fu">make.simmap</span>(tree,binsocial,<span class="at">model=</span><span class="st">"ER"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -834,7 +834,7 @@ div.csl-indent {
 <p>Carregue os mesmos dados: primate-data.txt primate-tree.txt Usando a variável categórica com múltiplos grupos sociais (catsocial), ajuste um modelo ordenado direcional onde o tamanho do grupo social pode aumentar mas nunca diminuir (i.e.&nbsp;Solitary&gt;Pequeno&gt;Medio&gt;Grande mas sem retorno). Compare este modelo com os quatro anteriores e descubra qual recebe maior suporte.</p>
 
 
-<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">
+<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list" style="display: none">
 <div id="ref-huelsenbeck2003" class="csl-entry" role="listitem">
 Huelsenbeck, John P., Rasmus Nielsen, and Jonathan P. Bollback. 2003. <span>“Stochastic Mapping of Morphological Characters.”</span> <em>Systematic Biology</em> 52 (2): 131–58. <a href="https://doi.org/10.1080/10635150390192780">https://doi.org/10.1080/10635150390192780</a>.
 </div>

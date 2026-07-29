@@ -517,7 +517,7 @@ div.csl-indent {
 
 
 <p>É aconselhável criar um único diretório contendo a(s) árvore(s) e os dados fenotípicos, e informar ao R de qual diretório os arquivos devem ser lidos. Árvores filogenéticas podem ser importadas facilmente para dentro do ambiente R através de funções como read.tree e read.nexus do pacote <em>ape</em>.</p>
-<p>Neste capítulo, vamos explorar algumas maneiras de representar graficamente as árvores filogenéticas e manipulá-las. Para entender mais sobre a estrutura da árvore em formato phylo volte ao <a href="#cap2">Capítulo 2</a> do manual.</p>
+<p>Neste capítulo, vamos explorar algumas maneiras de representar graficamente as árvores filogenéticas e manipulá-las. Para entender mais sobre a estrutura da árvore em formato phylo volte ao <a href="02-intro-ao-R.html">Capítulo 2</a> do manual.</p>
 <p>Vamos ler uma árvore filogenética do gênero de roedores neotropicais <em>Akodon</em> e representá-la graficamente.</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">require</span>(ape)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -755,7 +755,7 @@ Rooted; includes branch length(s).</code></pre>
 </div>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="fu">is.binary</span>(ex1)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<p>Lembre-se que ao resolver apenas 1 vez ao acaso não existe avaliação de incerteza filogenética, é preciso repetir o processo um determinado número de vezes, que vai depender de quantas instâncias de politomia estiverem presentes na árvore, e quantas espécies estiverem nas politomias. Existem outros métodos que permitem gerar múltiplas árvores com as politomias resolvidas ao acaso. Por exemplo: <a href="https://bioinfo.inf.ufg.br/sunplin/">sunplin</a>- <span class="citation" data-cites="rangel2015">Rangel et al. (<a href="#ref-rangel2015" role="doc-biblioref">2015</a>)</span>.</p>
+<p>Lembre-se que ao resolver apenas 1 vez ao acaso não existe avaliação de incerteza filogenética, é preciso repetir o processo um determinado número de vezes, que vai depender de quantas instâncias de politomia estiverem presentes na árvore, e quantas espécies estiverem nas politomias. Existem outros métodos que permitem gerar múltiplas árvores com as politomias resolvidas ao acaso. Por exemplo: <a href="https://bioinfo.inf.ufg.br/sunplin/">sunplin</a>- <span class="citation" data-cites="rangel2015">Rangel et al. (<a href="07-references.html#ref-rangel2015" role="doc-biblioref">2015</a>)</span>.</p>
 </section>
 <section id="multiplas-árvores" class="level3" data-number="19.2.2">
 <h3 data-number="19.2.2" class="anchored" data-anchor-id="multiplas-árvores"><span class="header-section-number">19.2.2</span> Multiplas árvores</h3>
@@ -796,7 +796,7 @@ Rooted; includes branch length(s).</code></pre>
 </div>
 
 
-<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">
+<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list" style="display: none">
 <div id="ref-rangel2015" class="csl-entry" role="listitem">
 Rangel, Thiago F., Robert K. Colwell, Gary R. Graves, Karolina Fučíková, Carsten Rahbek, and José Alexandre F. Diniz-Filho. 2015. <span>“Phylogenetic Uncertainty Revisited: Implications for Ecological Analyses.”</span> <em>Evolution</em> 69 (5): 1301–12. <a href="https://doi.org/10.1111/evo.12644">https://doi.org/10.1111/evo.12644</a>.
 </div>

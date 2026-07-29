@@ -591,7 +591,7 @@ div.csl-indent {
 </div>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow=</span><span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">1</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<p>Agora, vamos implementar o teste de <span class="citation" data-cites="pagel1994">Pagel (<a href="#ref-pagel1994" role="doc-biblioref">1994</a>)</span>, que compara um modelo de evolução independente entre os caracteres (ausência de correlação) com um modelo de evolução dependente (presença de correlação).</p>
+<p>Agora, vamos implementar o teste de <span class="citation" data-cites="pagel1994">Pagel (<a href="07-references.html#ref-pagel1994" role="doc-biblioref">1994</a>)</span>, que compara um modelo de evolução independente entre os caracteres (ausência de correlação) com um modelo de evolução dependente (presença de correlação).</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>fit.AS<span class="ot">&lt;-</span><span class="fu">fitPagel</span>(tree,binsocial,area,<span class="at">model=</span><span class="st">"ARD"</span>)</span>
 <span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>fit.AS</span>
@@ -625,14 +625,14 @@ div.csl-indent {
 </section>
 <section id="correlação-de-fenótipos-categóricos-multiestado" class="level2" data-number="24.2">
 <h2 data-number="24.2" class="anchored" data-anchor-id="correlação-de-fenótipos-categóricos-multiestado"><span class="header-section-number">24.2</span> Correlação de fenótipos categóricos multiestado</h2>
-<p>A correlação entre atributos categóricos multiestado pode ser feita com a estatística D de <span class="citation" data-cites="huelsenbeck2003">Huelsenbeck, Nielsen, and Bollback (<a href="#ref-huelsenbeck2003" role="doc-biblioref">2003</a>)</span>, implementada no pacote <em>phytools</em> com a função Dtest.</p>
+<p>A correlação entre atributos categóricos multiestado pode ser feita com a estatística D de <span class="citation" data-cites="huelsenbeck2003">Huelsenbeck, Nielsen, and Bollback (<a href="07-references.html#ref-huelsenbeck2003" role="doc-biblioref">2003</a>)</span>, implementada no pacote <em>phytools</em> com a função Dtest.</p>
 </section>
 <section id="exercício---correlação-de-fenótipos-discretos" class="level2" data-number="24.3">
 <h2 data-number="24.3" class="anchored" data-anchor-id="exercício---correlação-de-fenótipos-discretos"><span class="header-section-number">24.3</span> Exercício - Correlação de fenótipos discretos</h2>
 <p>Carregue os dados: Árvore: Pagel.tre Dados: Pagel.txt Teste a correlação entre os caracteres x1 e y1 usando fitPagel. Quais foram os resultados? Visualize a distribuição dos caracteres na árvore. O que isso te informa sobre os resultados?</p>
 
 
-<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">
+<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list" style="display: none">
 <div id="ref-huelsenbeck2003" class="csl-entry" role="listitem">
 Huelsenbeck, John P., Rasmus Nielsen, and Jonathan P. Bollback. 2003. <span>“Stochastic Mapping of Morphological Characters.”</span> <em>Systematic Biology</em> 52 (2): 131–58. <a href="https://doi.org/10.1080/10635150390192780">https://doi.org/10.1080/10635150390192780</a>.
 </div>

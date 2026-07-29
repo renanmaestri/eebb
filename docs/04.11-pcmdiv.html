@@ -517,7 +517,7 @@ div.csl-indent {
 
 <section id="diversificação-constante" class="level2" data-number="29.1">
 <h2 data-number="29.1" class="anchored" data-anchor-id="diversificação-constante"><span class="header-section-number">29.1</span> Diversificação constante</h2>
-<p>Primeiro, vamos carregar alguns dados e calcular uma diversificação líquida simples, esperada sobr um modelo <em>pure-birth</em> <span class="citation" data-cites="magallon2001">(<a href="#ref-magallon2001" role="doc-biblioref">Magallon and Sanderson 2001</a>)</span>.</p>
+<p>Primeiro, vamos carregar alguns dados e calcular uma diversificação líquida simples, esperada sobr um modelo <em>pure-birth</em> <span class="citation" data-cites="magallon2001">(<a href="07-references.html#ref-magallon2001" role="doc-biblioref">Magallon and Sanderson 2001</a>)</span>.</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">require</span>(ape)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stderr">
@@ -550,7 +550,7 @@ div.csl-indent {
 <span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>r1<span class="sc">*</span>stem_age</span>
 <span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a><span class="fu">log</span>(n_sp)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<p>Agora, vamos estimar extinção constante com um modelo <em>birth-death</em>. No pacote <em>ape</em>, a função birthdeath estima taxas de extinção e especiação em uma filogenia (método de <span class="citation" data-cites="nee1994">Nee, May, and Harvey (<a href="#ref-nee1994" role="doc-biblioref">1994</a>)</span>). As estimativas são confiáveis se as premissas do modelo forem reais (especiação e extinção constantes no tempo). O método também assume uma filogenia completa. <em>b</em> é a taxa de especiação e <em>d</em> é a taxa de extinção.</p>
+<p>Agora, vamos estimar extinção constante com um modelo <em>birth-death</em>. No pacote <em>ape</em>, a função birthdeath estima taxas de extinção e especiação em uma filogenia (método de <span class="citation" data-cites="nee1994">Nee, May, and Harvey (<a href="07-references.html#ref-nee1994" role="doc-biblioref">1994</a>)</span>). As estimativas são confiáveis se as premissas do modelo forem reais (especiação e extinção constantes no tempo). O método também assume uma filogenia completa. <em>b</em> é a taxa de especiação e <em>d</em> é a taxa de extinção.</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co">#nee&lt;-birthdeath(tree)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
@@ -629,7 +629,7 @@ div.csl-indent {
 </div>
 </div>
 </div>
-<p>O <em>RPANDA</em> <span class="citation" data-cites="morlon2016">(<a href="#ref-morlon2016" role="doc-biblioref">Morlon et al. 2016</a>)</span> é um pacote que permite ajustar modelos com taxas de especiação e/ou extinção variáveis, e comparar os modelos usando verossimilhança.</p>
+<p>O <em>RPANDA</em> <span class="citation" data-cites="morlon2016">(<a href="07-references.html#ref-morlon2016" role="doc-biblioref">Morlon et al. 2016</a>)</span> é um pacote que permite ajustar modelos com taxas de especiação e/ou extinção variáveis, e comparar os modelos usando verossimilhança.</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="fu">require</span>(RPANDA)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stderr">
@@ -671,7 +671,7 @@ div.csl-indent {
 </section>
 <section id="diversificação-variando-entre-clados-clade-dependent" class="level2" data-number="29.3">
 <h2 data-number="29.3" class="anchored" data-anchor-id="diversificação-variando-entre-clados-clade-dependent"><span class="header-section-number">29.3</span> Diversificação variando entre clados (<em>clade-dependent</em>)</h2>
-<p>O exemplo implementa o MEDUSA <span class="citation" data-cites="alfaro2009">(<a href="#ref-alfaro2009" role="doc-biblioref">Alfaro et al. 2009</a>)</span>.</p>
+<p>O exemplo implementa o MEDUSA <span class="citation" data-cites="alfaro2009">(<a href="07-references.html#ref-alfaro2009" role="doc-biblioref">Alfaro et al. 2009</a>)</span>.</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>mar<span class="ot">&lt;-</span><span class="fu">medusa</span>(tree)</span>
 <span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>mar</span>
@@ -765,7 +765,7 @@ div.csl-indent {
 <p>O modelo deve ser ajustado com a função fit_env do pacote RPANDA. Faça um gráfico dos resultados com plot_fit_env e interprete os resultados.</p>
 
 
-<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">
+<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list" style="display: none">
 <div id="ref-alfaro2009" class="csl-entry" role="listitem">
 Alfaro, Michael E., Francesco Santini, Chad Brock, Hugo Alamillo, Alex Dornburg, Daniel L. Rabosky, Giorgio Carnevale, and Luke J. Harmon. 2009. <span>“Nine exceptional radiations plus high turnover explain species diversity in jawed vertebrates.”</span> <em>Proceedings of the National Academy of Sciences of the United States of America</em> 106 (32): 13410–14. <a href="https://doi.org/10.1073/pnas.0811087106">https://doi.org/10.1073/pnas.0811087106</a>.
 </div>

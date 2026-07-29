@@ -23,7 +23,27 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-</style>
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 0em;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
 
 
 <script src="site_libs/quarto-nav/quarto-nav.js"></script>
@@ -425,8 +445,14 @@ ul.task-list li input[type="checkbox"] {
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-        
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#considerações-finais" id="toc-considerações-finais" class="nav-link active" data-scroll-target="#considerações-finais"><span class="header-section-number">40</span> Considerações finais</a></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
@@ -451,13 +477,22 @@ ul.task-list li input[type="checkbox"] {
 
 
 <p>Chegamos ao fim deste longo e intenso mergulho no mundo da Biologia Evolutiva, Biometria, Macroecologia e Biogeografia utilizando o ambiente R. Ao longo destas páginas, nossa jornada começou com a base fundacional do R e conceitos vitais de evolução e forma, antes de avançar para um conjunto robusto de ferramentas analíticas contemporâneas.</p>
+<section id="considerações-finais" class="level1" data-number="40">
+<h1 data-number="40"><span class="header-section-number">40</span> Considerações finais</h1>
+<p>Chegamos ao fim deste longo e intenso mergulho no mundo da Biologia Evolutiva, Biometria, Macroecologia e Biogeografia utilizando o ambiente R. Ao longo destas páginas, nossa jornada começou com a base fundacional do R e conceitos vitais de evolução e forma, antes de avançar para um conjunto robusto de ferramentas analíticas contemporâneas.</p>
 <p>Na <strong>Morfometria Geométrica</strong>, exploramos desde a digitalização de marcos anatômicos até a sobreposição de Procrustes, permitindo-nos quantificar e visualizar a disparidade morfológica e a alometria de maneira refinada. Posteriormente, ao entrarmos na <strong>Macroevolução</strong>, fundimos a forma ao tempo profundo: aprendemos a ler e manipular filogenias, medir sinais filogenéticos e ajustar modelos de evolução contínua e discreta, revelando os passos da diversificação de linhagens (PCM).</p>
 <p>Por fim, a imersão na <strong>Biogeografia e Macroecologia</strong> uniu o espaço físico e os atributos ecológicos (traços) às teias filogenéticas, capacitando a elaboração de mapas globais de diversidade e a identificação de biorregiões evolutivas através de algoritmos de agrupamento espacial e filogenético.</p>
 <p>Espero que os scripts, tutoriais e desafios propostos aqui não sirvam apenas como um manual estático, mas sim como um alicerce vivo. As metodologias (e os pacotes R) estão em constante evolução, e a chave para dominar essas análises é a experimentação constante com os seus próprios dados biológicos.</p>
-<p>Continue explorando, questionando as premissas dos modelos, plotando os seus mapas e desvendando as fascinantes histórias que a diversidade fenotípica e filogenética têm a nos contar.</p>
+<p>Continue explorando, questionando as premissas dos modelos, plotando os seus mapas e desvendando as fascinantes histórias que a diversidade fenotípica e filogenética têm a nos contar (veja também <span class="citation" data-cites="machado2025">Machado (<a href="07-references.html#ref-machado2025" role="doc-biblioref">2025</a>)</span>).</p>
 <p><em>Boa sorte nas suas análises futuras!</em></p>
 
 
+<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list" style="display: none">
+<div id="ref-machado2025" class="csl-entry" role="listitem">
+Machado, Glauco. 2025. <em>Darwin Vai Ao Cinema</em>. Editora Nauta.
+</div>
+</div>
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">

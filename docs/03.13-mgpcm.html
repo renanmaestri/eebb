@@ -517,7 +517,7 @@ div.csl-indent {
 
 
 <p>Quando as morfologias são de espécies diferentes, os dados não são independentes, já que as espécies são conectadas por uma árvore filogenética. A não-independência filogenética precisa ser levada em consideração em análises de correlação. Pra além disso, podemos entender muito sobre padrões e processos evolutivos da morfologia quando temos dados morfológicos de diferentes espécies e hipóteses filogenéticas. A parte deste manual sobre Macroevolução explora muitas perguntas/análises que podem ser feitas em um contexto comparativo. Aqui, os exemplos vão apresentar algumas análises comparativas no contexto de morfometria geométrica.</p>
-<p>Para textos abrangentes sobre macroevolução e métodos filogenéticos comparativos no contexto de morfometria geométrica, veja: <span class="citation" data-cites="zelditch2012">Zelditch, Swiderski, and Sheets (<a href="#ref-zelditch2012" role="doc-biblioref">2012</a>)</span>; <span class="citation" data-cites="monteiro2013">Monteiro (<a href="#ref-monteiro2013" role="doc-biblioref">2013</a>)</span>; <span class="citation" data-cites="adams&amp;collyer2018">Adams and Collyer (<a href="#ref-adams&amp;collyer2018" role="doc-biblioref">2018</a>)</span>.</p>
+<p>Para textos abrangentes sobre macroevolução e métodos filogenéticos comparativos no contexto de morfometria geométrica, veja: <span class="citation" data-cites="zelditch2012">Zelditch, Swiderski, and Sheets (<a href="07-references.html#ref-zelditch2012" role="doc-biblioref">2012</a>)</span>; <span class="citation" data-cites="monteiro2013">Monteiro (<a href="07-references.html#ref-monteiro2013" role="doc-biblioref">2013</a>)</span>; <span class="citation" data-cites="adams&amp;collyer2018">Adams and Collyer (<a href="07-references.html#ref-adams&amp;collyer2018" role="doc-biblioref">2018</a>)</span>.</p>
 <p>Para literatura geral, e muitas outras opções analíticas, veja o material e as referências na parte sobre Macroevolução deste manual.</p>
 <p>Vamos carregar dados morfológicos obtidos por morfometria geométrica e uma hipótese filogenética para explorar algumas análises filogenéticas comparativas.</p>
 <div class="cell">
@@ -654,7 +654,7 @@ div.csl-indent {
 </section>
 <section id="pca-filogenética" class="level2" data-number="17.2">
 <h2 data-number="17.2" class="anchored" data-anchor-id="pca-filogenética"><span class="header-section-number">17.2</span> PCA filogenética</h2>
-<p>A PCA filogenética <em>sensu</em> <span class="citation" data-cites="revell2009">Revell (<a href="#ref-revell2009" role="doc-biblioref">2009</a>)</span>.</p>
+<p>A PCA filogenética <em>sensu</em> <span class="citation" data-cites="revell2009">Revell (<a href="07-references.html#ref-revell2009" role="doc-biblioref">2009</a>)</span>.</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>phyloPCA<span class="ot">&lt;-</span><span class="fu">gm.prcomp</span>(shape.means,<span class="at">phy=</span>tree,<span class="at">GLS=</span><span class="cn">TRUE</span>)</span>
 <span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(phyloPCA)</span>
@@ -670,7 +670,7 @@ div.csl-indent {
 </section>
 <section id="sinal-filogenético-multivariado" class="level2" data-number="17.3">
 <h2 data-number="17.3" class="anchored" data-anchor-id="sinal-filogenético-multivariado"><span class="header-section-number">17.3</span> Sinal filogenético multivariado</h2>
-<p>Sinal filogenético é um padrão que mostra se espécies mais próximas filogeneticamente têm morfologias mais similares do que espécies mais distantes filogeneticamente. Existem vários métodos para o cálculo de sinal filogenético, o mais comum é a estatística K <span class="citation" data-cites="blomberg2003 adams2014">(<a href="#ref-blomberg2003" role="doc-biblioref">Blomberg, Garland JR., and Ives 2003</a>; <a href="#ref-adams2014" role="doc-biblioref">Adams 2014</a>)</span>. K=1 indica que espécies próximas são tão parecidas quanto prevê o modelo Browniano K&lt;1 indica sinal filogenético menor do que esperado pelo modelo Browniano K&gt;1 indica sinal filogenético maior do que esperado pelo modelo Browniano</p>
+<p>Sinal filogenético é um padrão que mostra se espécies mais próximas filogeneticamente têm morfologias mais similares do que espécies mais distantes filogeneticamente. Existem vários métodos para o cálculo de sinal filogenético, o mais comum é a estatística K <span class="citation" data-cites="blomberg2003 adams2014">(<a href="07-references.html#ref-blomberg2003" role="doc-biblioref">Blomberg, Garland JR., and Ives 2003</a>; <a href="07-references.html#ref-adams2014" role="doc-biblioref">Adams 2014</a>)</span>. K=1 indica que espécies próximas são tão parecidas quanto prevê o modelo Browniano K&lt;1 indica sinal filogenético menor do que esperado pelo modelo Browniano K&gt;1 indica sinal filogenético maior do que esperado pelo modelo Browniano</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Sinal Filogenético para forma do crânio</span></span>
 <span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>sinal.k<span class="ot">&lt;-</span><span class="fu">physignal</span>(shape.means,tree,<span class="at">iter=</span><span class="dv">999</span>)</span>
@@ -1116,7 +1116,7 @@ Call: procD.lm(f1 = shape.means ~ temp, iter = iter, seed = seed, RRPP = TRUE,
 <p>Carregue o arquivo .tps ‘Roedores_Digitalizados.tps’ contendo coordenadas digitalizadas na mandíbula de 143 indivíduos de 19 espécies de roedores. Carregue também a informação taxonômica de cada indivíduo (‘Roedores_classificador.txt’), e uma hipótese filogenética para as 19 espécies (‘Roedores_tree_nexus.nex’). Existe um arquivo adicional que informa a força da mordida média de cada uma das 19 espécies (‘Roedores_BiteForce.txt’). Investigue a força do sinal filogenético para o tamanho e a forma do crânio, e descubra se existe relação entre a força da mordida e a forma (e tamanho) do crânio.</p>
 
 
-<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">
+<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list" style="display: none">
 <div id="ref-adams2014" class="csl-entry" role="listitem">
 Adams, Dean C. 2014. <span>“A Generalized k Statistic for Estimating Phylogenetic Signal from Shape and Other High-Dimensional Multivariate Data.”</span> <em>Systematic Biology</em> 63 (5): 685–97. <a href="https://doi.org/10.1093/sysbio/syu030">https://doi.org/10.1093/sysbio/syu030</a>.
 </div>

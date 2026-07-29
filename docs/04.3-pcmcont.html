@@ -519,7 +519,7 @@ div.csl-indent {
 </header>
 
 
-<p>Existem vários modelos de evolução de atributos contínuos univariados. Os modelos macroevolutivos mais comuns são o Browniano (BM), o modelo de Ornstein-Uhlenbeck (OU) e o modelo Early-Burst (EB). Sobre ajuste de modelos evolutivos, leia <span class="citation" data-cites="hansen-martins1996">Butler and King (<a href="#ref-butler-king2004" role="doc-biblioref">2004</a>)</span>.</p>
+<p>Existem vários modelos de evolução de atributos contínuos univariados. Os modelos macroevolutivos mais comuns são o Browniano (BM), o modelo de Ornstein-Uhlenbeck (OU) e o modelo Early-Burst (EB). Sobre ajuste de modelos evolutivos, leia <span class="citation" data-cites="hansen-martins1996">Butler and King (<a href="07-references.html#ref-butler-king2004" role="doc-biblioref">2004</a>)</span>.</p>
 <p>No exemplo, a função fitContinuous do pacote <em>geiger</em> vai ser usada para ajustar os modelos. O método é baseado em verossimilhança (<em>likelihood</em>), e os resultados vão retornar o valor de máxima verossimilhança (<em>maximum likelihood</em>) como estimativa para os parâmetros. Diferentes modelos podem ser comparados, desde que sobre os mesmos dados. Vamos carregar vários atributos fenotípicos para 77 espécies de Primatas.</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">require</span>(phytools)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -714,7 +714,7 @@ div.csl-indent {
 <p>Carregue os dados: primate-data-erro.txt primate-tree.txt Estime o sinal filogenético com a estatística K, e ajuste e compare os modelos BM, OU e EB para os dados considerando a variação intraespecífica. O arquivo de dados contém log de massa corporal para dez indivíduos de cada espécie de primata. Faça uma média de tamanho corporal por espécie e calcule o erro padrão da média. Descubra (leia a documentação das funções ?phylosig e ?fitContinuous) como incorporar o erro padrão no cálculo de sinal filogenético e ajuste de modelos. Você pode usar a função apply para calcular a média e o desvio padrão da média (SD). O erro padrão da média (uma medida de quão precisa é a estimativa da média) pode ser obtido através da fórmula SD/√N (N=tamanho da amostra) = se&lt;-sd/sqrt(10).</p>
 
 
-<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">
+<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list" style="display: none">
 <div id="ref-butler-king2004" class="csl-entry" role="listitem">
 Butler, Marguerite&nbsp;A., and Aaron&nbsp;A. King. 2004. <span>“Phylogenetic Comparative Analysis: A Modeling Approach for Adaptive Evolution.”</span> <em>The American Naturalist</em> 164 (6): 683–95. <a href="https://doi.org/10.1086/426002">https://doi.org/10.1086/426002</a>.
 </div>

@@ -517,7 +517,7 @@ div.csl-indent {
 
 
 <p>Duas fontes de adicionais de variação, normalmente bem pequenas, podem ser quantificadas: a assimetria e os erros oridundos da obtenção de dados e da medição de indivíduos. A assimetria é o menor dos efeitos biológicos, e pode ser quantificada através da diferença entre os lados direito e esquerdo de estruturas com simetria bilateral, ou entre estruturas correspondentes em outras formas de simetria, como em asas de insetos ou pétalas de flores. Erros oriundos da obtenção de dados ou de medição dos espécimes (colocação de landmarks) devem também ser muito pequenos para que possam ser ignorados com confiança. Espera-se que esses erros sejam várias vezes menores do que variação entre indivíduos, e mesmo que sejam bastante menores do que a variação vinda da assimetria flutuante.</p>
-<p>Para se aprofundar, leia: <span class="citation" data-cites="klingenberg2002">Klingenberg, Barluenga, and Meyer (<a href="#ref-klingenberg2002" role="doc-biblioref">2002</a>)</span>; <span class="citation" data-cites="klingenberg2015">Klingenberg (<a href="#ref-klingenberg2015" role="doc-biblioref">2015</a>)</span>.</p>
+<p>Para se aprofundar, leia: <span class="citation" data-cites="klingenberg2002">Klingenberg, Barluenga, and Meyer (<a href="07-references.html#ref-klingenberg2002" role="doc-biblioref">2002</a>)</span>; <span class="citation" data-cites="klingenberg2015">Klingenberg (<a href="07-references.html#ref-klingenberg2015" role="doc-biblioref">2015</a>)</span>.</p>
 <section id="assimetria-de-objeto" class="level2" data-number="7.1">
 <h2 data-number="7.1" class="anchored" data-anchor-id="assimetria-de-objeto"><span class="header-section-number">7.1</span> Assimetria de objeto</h2>
 <p>Estruturas biológicas com assimetria de objeto, por exemplo, os lados direito e esquerdo do crânio.</p>
@@ -669,7 +669,7 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 <p>Usando os dados de asas de Drosophila já carregados (arquivo “fly wing replicates Proc.txt”) construa um modelo incluindo, além dos lados direto e esquerdo (assimetria) e da repetição das fotos entre indivíduos, também o fator imagem (3° coluna dos dados), que representa a repetição da captura de fotos, i.e.&nbsp;fotos diferentes do mesmo indivíduo. Uma maneira equivalente de representar a Procrustes ANOVA [bilat.symmetry(fly.tps,ind=fly.ind,side=fly.side,replicate=fly.rep] com modelos lineares em linguagem geomoph é usando procD.lm: procD.lm(fly.gpa$coords~fly.ind/fly.side+fly.side/fly.ind). Note que não é necessário usar o fator repetição explicitamente, uma vez que ele está dentro de indivíduos (compare os resíduos da primeira e da segunda função).</p>
 
 
-<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">
+<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list" style="display: none">
 <div id="ref-klingenberg2015" class="csl-entry" role="listitem">
 Klingenberg, Christian Peter. 2015. <span>“Analyzing Fluctuating Asymmetry with Geometric Morphometrics: Concepts, Methods, and Applications.”</span> <em>Symmetry</em> 7 (2): 843–934. <a href="https://doi.org/10.3390/sym7020843">https://doi.org/10.3390/sym7020843</a>.
 </div>
